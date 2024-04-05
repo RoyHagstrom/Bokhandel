@@ -42,7 +42,7 @@ if (isset($_GET['id'])) {
         <p>Publication Year: <?php echo $book['PublicationYear']; ?></p>
         <p>Series: <?php echo $book['Series']; ?></p>
         <p>Publisher: <?php echo $book['Publisher']; ?></p>
-        <p>Price: $<?php echo $book['Price']; ?></p>
+        <p>Price: <?php echo $book['Price']; ?>€</p>
         <p>Pages: <?php echo $book['Pages']; ?></p>
     </div>
 </div>

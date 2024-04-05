@@ -4,10 +4,21 @@ require_once 'db_connection.php';
 try {
     $searchTerm = $_GET['term'] ?? '';
 
-    $stmt = $conn->prepare("SELECT * FROM bokhandel.Book WHERE Title LIKE ? OR Author LIKE ?");
-    if (!$stmt) {
-        throw new Exception("Failed to prepare SQL statement: " . $conn->error);
+    if (!empty($searchTerm)) {
+        $stmt = $conn->prepare("SELECT * FROM bokhandel.Book WHERE (Title LIKE ? OR Author LIKE ?)LIMIT 4");
+        if (!$stmt) {
+            throw new Exception("Failed to prepare SQL statement: " . $conn->error);
+        }
+    
+        $searchTerm = '%' . $searchTerm . '%';
+        $stmt->bind_param("ss", $searchTerm, $searchTerm);
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM bokhandel.Book");
+        if (!$stmt) {
+            throw new Exception("Failed to prepare SQL statement: " . $conn->error);
+        }
     }
+
 
     $searchTerm = '%' . $searchTerm . '%';
     $stmt->bind_param("ss", $searchTerm, $searchTerm);

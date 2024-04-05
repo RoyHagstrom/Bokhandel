@@ -16,7 +16,7 @@ $conn->close();
 <?php echo $helloWorldText; ?>
 
 
-<body class="dark-mode bg-gray-900 text-white h-screen flex justify-center items-center">
+<body class="dark-mode bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center">
 
     <div class="container p-8 rounded-lg shadow-md w-full sm:w-96">
         <h1 class="text-2xl font-semibold mb-6">Book Search</h1>
@@ -39,7 +39,7 @@ $conn->close();
             fetch(`search.php?term=${searchTerm}`)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Failed to search for books');
+                        throw new Error('');
                     }
                     return response.json();
                 })
@@ -47,7 +47,7 @@ $conn->close();
                     displayBooks(data);
                 })
                 .catch(error => {
-                    bookInfo.innerHTML = 'Failed to search for books';
+                    bookInfo.innerHTML = '';
                 });
         }
 
