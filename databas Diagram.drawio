@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-04-04T14:03:45.963Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="2o8xJnprkrbZ4t8Ei8_K" version="24.1.0" type="device">
+<mxfile host="Electron" modified="2024-04-04T14:25:47.135Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="nQ6M9h2msRfaK14wIxEE" version="24.1.0" type="device">
   <diagram name="Page-1" id="M5a-r2YuhhJoXKASE0L3">
-    <mxGraphModel dx="978" dy="578" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1805" dy="578" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -78,6 +78,27 @@
         </mxCell>
         <mxCell id="fqcROgITHVkGIvnxQAqd-29" value="StatusID" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="290" y="630" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fqcROgITHVkGIvnxQAqd-31" value="Photo" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="290" y="660" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fqcROgITHVkGIvnxQAqd-32" value="table_footer" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-120" y="150" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fqcROgITHVkGIvnxQAqd-33" value="table_header" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-320" y="150" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fqcROgITHVkGIvnxQAqd-34" value="FooterID" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="270" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fqcROgITHVkGIvnxQAqd-35" value="HeaderID" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-310" y="270" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fqcROgITHVkGIvnxQAqd-36" value="FooterContent" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="300" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fqcROgITHVkGIvnxQAqd-37" value="HeaderContent" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-310" y="300" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
