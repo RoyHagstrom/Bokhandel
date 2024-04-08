@@ -2,8 +2,8 @@
 // Database connection parameters
 $host = 'novatest.ddns.net'; // DDNS hostname
 $port = 3306; // Default MySQL port
-$username = 'test';
-$password = 'test';
+$username = 'root';
+$password = 'Lolipop05';
 $database = 'bokhandel'; // Database name
 
 // Create connection
