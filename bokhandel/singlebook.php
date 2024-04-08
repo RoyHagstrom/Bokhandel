@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
     exit();
 }
 ?>
-<body class="dark-mode bg-gray-900 text-white h-screen flex justify-center items-center">
+<div class="dark-mode bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center">
 
 <div class="container p-8 rounded-lg shadow-md w-full sm:w-96">
     <h1 class="text-2xl font-semibold mb-6">Book Details</h1>
@@ -46,4 +46,7 @@ if (isset($_GET['id'])) {
         <p>Pages: <?php echo $book['Pages']; ?></p>
     </div>
 </div>
-
+</div>
+<?php
+include 'footer.php';
+?>
