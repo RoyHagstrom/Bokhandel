@@ -10,6 +10,7 @@
 </head>
 
 <body class="dark bg-gray-900 text-white full">
+    
     <header class="py-4 bg-gray-800 dark:bg-gray-900">
         <div class="container mx-auto flex justify-between items-center">
             <div>
@@ -19,13 +20,12 @@
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
                     <li><a href="index.php" class="text-white dark:text-gray-200 hover:text-gray-300">Home</a></li>
-                    <li><a href="#" class="text-white dark:text-gray-200 hover:text-gray-300">About</a></li>
+                    <li><a href="books.php" class="text-white dark:text-gray-200 hover:text-gray-300">Books</a></li>
                     <li><a href="#" class="text-white dark:text-gray-200 hover:text-gray-300">Services</a></li>
                     <li><a href="#" class="text-white dark:text-gray-200 hover:text-gray-300">Contact</a></li>
                 </ul>
             </nav>
 
-            <!-- Mobile Menu -->
             <div class="md:hidden" id="mobileMenuButton">
                 <button class="text-white dark:text-gray-200 hover:text-gray-300 focus:outline-none">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,6 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Drawer -->
     <div class="md:hidden bg-gray-800 dark:bg-gray-900 py-2 hidden" id="mobileMenuDrawer">
         <ul class="flex flex-col items-center space-y-4">
             <li><a href="index.php" class="text-white dark:text-gray-200 hover:text-gray-300">Home</a></li>
@@ -47,7 +46,6 @@
     </div>
 
     <script>
-        // Toggle mobile menu
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const mobileMenuDrawer = document.getElementById('mobileMenuDrawer');
 

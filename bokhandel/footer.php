@@ -5,7 +5,7 @@
             <nav>
                 <ul class="flex space-x-4">
                     <li><a href="index.php" class="hover:text-gray-400 text-white">Home</a></li>
-                    <li><a href="#" class="hover:text-gray-400 text-white">Link 2</a></li>
+                    <li><a href="books.php" class="hover:text-gray-400 text-white">Books</a></li>
                     <li><a href="#" class="hover:text-gray-400 text-white">Link 3</a></li>
                     <li><a href="#" class="hover:text-gray-400 text-white">Link 4</a></li>
                 </ul>

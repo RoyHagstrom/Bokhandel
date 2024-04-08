@@ -20,7 +20,7 @@ if ($featured_category_result->num_rows > 0) {
     $featured_category_image = $row['image'];
 }
 
-$new_books_sql = "SELECT * FROM Book ORDER BY PublicationYear DESC LIMIT 6";
+$new_books_sql = "SELECT * FROM Book ORDER BY PublicationYear DESC LIMIT 5";
 $new_books_result = $conn->query($new_books_sql);
 ?>
 
@@ -82,52 +82,70 @@ $new_books_result = $conn->query($new_books_sql);
         }
     </script>
 
-    <div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-        <h1 class="text-2xl font-semibold mb-6">Featured Categories:</h1>
+        <div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+            <h1 class="text-2xl font-semibold mb-6">Featured Categories:</h1>
 
-        <div class="flex flex-wrap justify-center items-center">
-            <?php
-            $featured_categories_sql = "SELECT name, image FROM categories WHERE featured = 1";
-            $featured_categories_result = $conn->query($featured_categories_sql);
+            <div class="flex flex-wrap justify-center items-center">
+                <?php
+                $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
+                $featured_categories_result = $conn->query($featured_categories_sql);
 
-            if ($featured_categories_result->num_rows > 0) {
-                while ($row = $featured_categories_result->fetch_assoc()) {
-                    $featured_category_name = $row['name'];
-                    $featured_category_image = $row['image'];
+                if ($featured_categories_result->num_rows > 0) {
+                    while ($row = $featured_categories_result->fetch_assoc()) {
+                        $featured_category_id = $row['id']; 
+                        $featured_category_name = $row['name'];
+                        $featured_category_image = $row['image'];
 
-                    echo '<div class="m-4 relative rounded-lg">';
-                    echo '<a href="books.php?id=' . $row['name'] . '">';
-                    echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
-                    echo '<div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
-                    echo '</a>';
-                    echo '</div>';
+                        echo '<div class="m-4 relative rounded-lg">';
+                        echo '<a href="books.php?id=' . $featured_category_id . '">'; 
+                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
+                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p class="text-lg text-gray-500">No featured categories available</p>';
                 }
-            } else {
-                echo '<p class="text-lg text-gray-500">No featured categories available</p>';
+                ?>
+            </div>
+        </div>
+
+
+        <div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
+    <h1 class="text-2xl font-semibold mb-6">New Books</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        <?php
+        if ($new_books_result->num_rows > 0) {
+            while ($row = $new_books_result->fetch_assoc()) {
+                echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">';
+                echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
+                echo '<div class="p-6">';
+                echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
+                echo '<p class="text-gray-700 dark:text-gray-300">Description: ' . $row['Description'] . '</p>';
+                echo '</div>';
+                echo '</a>';
             }
-            ?>
+        } else {
+            echo 'No new books available';
+        }
+        ?>
+    </div>
+</div>
+
+<div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
+    <div class="flex flex-col md:flex-row">
+        <img src="your-image-url.jpg" alt="Image" class="w-full md:w-1/2 h-auto md:h-80 object-cover rounded-lg mb-6 md:mb-0">
+        <div class="md:w-1/2 md:pl-6">
+            <h2 class="text-2xl font-semibold mb-4">Info</h2>
+            <p class="text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper felis et metus maximus auctor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum vehicula nisi et lacus scelerisque vestibulum. Donec fermentum sapien et turpis pulvinar, id efficitur sapien aliquam. Cras id enim bibendum, vestibulum erat in, tincidunt nisi. Proin id metus ac lorem efficitur venenatis. Nulla rutrum massa nec volutpat laoreet. Duis ac ex vitae ipsum ultricies convallis. Suspendisse potenti.</p>
         </div>
     </div>
+</div>
 
-    <div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
-        <h1 class="text-2xl font-semibold mb-6">New Books</h1>
 
-        <div style="display: flex; flex-wrap: wrap;">
-            <?php
-            if ($new_books_result->num_rows > 0) {
-                while ($row = $new_books_result->fetch_assoc()) {
-                    echo '<div class="book-info mb-4 mr-4" style="flex: 0 0 calc(33.33% - 20px);">';
-                    echo '<h2 class="text-xl mb-2"><a href="singlebook.php?id=' . $row['BookID'] . '">' . $row['Title'] . '</a></h2>';
-                    echo '<p style="margin-right: 10px;">Author: ' . $row['Author'] . '</p>';
-                    echo '<p>Description: ' . $row['Description'] . '</p>';
-                    echo '</div>';
-                }
-            } else {
-                echo 'No new books available';
-            }
-            ?>
-        </div>
-    </div>
+
 </div>
 
 <?php
