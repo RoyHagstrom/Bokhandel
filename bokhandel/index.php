@@ -21,7 +21,7 @@ if ($featured_category_result->num_rows > 0) {
 }
 
 
-$new_books_sql = "SELECT * FROM Book ORDER BY PublicationYear DESC LIMIT 3";
+$new_books_sql = "SELECT * FROM Book ORDER BY PublicationYear DESC LIMIT 5";
 $new_books_result = $conn->query($new_books_sql);
 ?>
 
@@ -77,23 +77,29 @@ $new_books_result = $conn->query($new_books_sql);
         }
     </script>
 
-    <div class="container p-8 rounded-lg shadow-md w-full sm:w-96 mt-8">
-        <h1 class="text-2xl font-semibold mb-6">Featured Category: 
-        <?php 
-                if ($featured_category) {
-                    echo '<div class="relative">';
-                    if ($featured_category_image) {
-                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category . '" class="w-full h-auto rounded-lg">';
-                    }
-                    echo '<div class="absolute inset-0 flex items-center justify-center">';
-                    echo '<h2 class="text-3xl text-black">' . $featured_category . '</h2>';
-                    echo '</div>'; 
-                    echo '</div>'; 
-                } else {
-                    echo '<p class="text-lg text-gray-500">No featured category</p>';
+<div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+        <h1 class="text-2xl font-semibold mb-6">Featured Categories:</h1>
+
+        <div style="display: flex; flex-wrap: nowrap;">
+            <?php
+            $featured_categories_sql = "SELECT name, image FROM categories WHERE featured = 1";
+            $featured_categories_result = $conn->query($featured_categories_sql);
+
+            if ($featured_categories_result->num_rows > 0) {
+                while ($row = $featured_categories_result->fetch_assoc()) {
+                    $featured_category_name = $row['name'];
+                    $featured_category_image = $row['image'];
+
+                    echo '<div class="m-4 relative">';
+                    echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
+                    echo '<div class="absolute inset-0 flex items-center justify-center text-black text-3xl font-semibold">' . $featured_category_name . '</div>';
+                    echo '</div>';
                 }
+            } else {
+                echo '<p class="text-lg text-gray-500">No featured categories available</p>';
+            }
             ?>
-        </h1>
+        </div>
     </div>
 
     <div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
