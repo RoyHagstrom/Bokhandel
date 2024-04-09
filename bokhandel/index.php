@@ -141,7 +141,7 @@ $new_books_result = $conn->query($new_books_sql);
 
 <div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
     <div class="flex flex-col md:flex-row">
-        <img src="images/enhanced.webp" alt="Image" class="w-full md:w-1/2 h-auto md:h-80 object-cover rounded-lg mb-6 md:mb-0">
+        <img src="images/img-02.jpg" alt="Image" class="w-full md:w-1/2 h-auto md:h-80 object-cover rounded-lg mb-6 md:mb-0">
         <div class="md:w-1/2 md:pl-6">
             <h2 class="text-2xl font-semibold mb-4">Info</h2>
             <p class="text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper felis et metus maximus auctor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum vehicula nisi et lacus scelerisque vestibulum. Donec fermentum sapien et turpis pulvinar, id efficitur sapien aliquam. Cras id enim bibendum, vestibulum erat in, tincidunt nisi. Proin id metus ac lorem efficitur venenatis. Nulla rutrum massa nec volutpat laoreet. Duis ac ex vitae ipsum ultricies convallis. Suspendisse potenti.</p>
@@ -152,7 +152,7 @@ $new_books_result = $conn->query($new_books_sql);
 
 <div class="container mx-auto py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="text-container p-6 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md">
+            <div class="text-container p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-semibold mb-4">Bokhandel</h2>
                 <address class="mt-2">
                     Pehr Sommars Gata 14,<br> 10600 Ekenäs
