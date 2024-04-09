@@ -10,39 +10,75 @@ if ($category_id) {
 }
 $sql .= " ORDER BY PublicationYear DESC";
 
-
 $result = $conn->query($sql);
 ?>
+
 <div class="bg-neutral-500 text-white rounded-lg">
-<div class="p-8">
+    <div class="p-8">          
+        <h1 class="text-2xl font-semibold mb-6 mt-6 text-center">Featured Categories:</h1>
+        <div class="flex flex-wrap justify-center items-center">
             
-<h1 class="text-2xl font-semibold mb-6 mt-6 text-center">Featured Categories:</h1>
-            <div class="flex flex-wrap justify-center items-center">
-            
-                <?php
-                $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
-                $featured_categories_result = $conn->query($featured_categories_sql);
+            <?php
+            $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
+            $featured_categories_result = $conn->query($featured_categories_sql);
 
-                if ($featured_categories_result->num_rows > 0) {
-                    while ($row = $featured_categories_result->fetch_assoc()) {
-                        $featured_category_id = $row['id']; 
-                        $featured_category_name = $row['name'];
-                        $featured_category_image = $row['image'];
+            if ($featured_categories_result->num_rows > 0) {
+                while ($row = $featured_categories_result->fetch_assoc()) {
+                    $featured_category_id = $row['id']; 
+                    $featured_category_name = $row['name'];
+                    $featured_category_image = $row['image'];
 
-                        echo '<div class="m-4 relative rounded-lg">';
-                        echo '<a href="books.php?id=' . $featured_category_id . '">'; 
-                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
-                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
-                        echo '</a>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo '<p class="text-lg text-gray-500">No featured categories available</p>';
+                    echo '<div class="m-4 relative rounded-lg">';
+                    echo '<a href="books.php?id=' . $featured_category_id . '">'; 
+                    echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
+                    echo '<div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                    echo '</a>';
+                    echo '</div>';
                 }
-                ?>
-            </div>
+            } else {
+                echo '<p class="text-lg text-gray-500">No featured categories available</p>';
+            }
+            ?>
         </div>
     </div>
+</div>
+
+
+        <?php
+        if (!$category_id) {
+            $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY Title ASC LIMIT 5";
+            $featured_books_result = $conn->query($featured_books_sql);
+            ?>
+            <div class="items-center justify-center w-full bg-white">
+            <div class="container mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+            <h1 class="text-2xl font-semibold mb-6 text-center text-black">Featured Books</h1>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+                <?php
+                if ($featured_books_result->num_rows > 0) {
+                    while ($row = $featured_books_result->fetch_assoc()) {
+                        echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
+                        echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
+                        echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
+                        echo '<div class="p-6">';
+                        echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                        echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
+                        echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
+                        echo '</div>';
+                        echo '</a>';
+                    }
+                } else {
+                    echo 'No featured books available';
+                }
+            ?>
+            </div>
+            </div>
+</div>
+        <?php
+        }
+        ?>
+    
+
 <?php
 if ($category_id) {
     $category_name_sql = "SELECT name FROM categories WHERE id = $category_id";
@@ -57,6 +93,9 @@ if ($category_id) {
     $title = "All Books";
 }
 ?>
+
+
+
 
 
 
