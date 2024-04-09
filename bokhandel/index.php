@@ -118,7 +118,8 @@ $new_books_result = $conn->query($new_books_sql);
         <?php
         if ($new_books_result->num_rows > 0) {
             while ($row = $new_books_result->fetch_assoc()) {
-                echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">';
+                echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
+                echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
                 echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
                 echo '<div class="p-6">';
                 echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
@@ -133,6 +134,7 @@ $new_books_result = $conn->query($new_books_sql);
         ?>
     </div>
 </div>
+
 
 <div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
     <div class="flex flex-col md:flex-row">
