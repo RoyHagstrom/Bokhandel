@@ -1,6 +1,6 @@
 <?php
 define('DB_HOST_PRIMARY', 'novatest.ddns.net');
-define('DB_HOST_LOCAL', 'localhost');
+define('DB_HOST_LOCAL', '192.168.1.111');
 define('DB_PORT', '3306');
 define('DB_USERNAME', 'test');
 define('DB_PASSWORD', 'test');
