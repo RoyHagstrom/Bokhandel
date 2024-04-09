@@ -33,7 +33,8 @@ if ($category_id) {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
-                    <a href="singlebook.php?id=<?= $row['BookID'] ?>" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
+                    <a href="singlebook.php?id=<?= $row['BookID'] ?>" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
+                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-bold px-2 py-1 rounded-lg"><?= $row["Price"] ?>€</span>
                         <img src="<?= $row["Image"] ?>" alt="<?= $row["Title"] ?>" class="w-full h-80 object-cover rounded-t-lg">
                         <div class="p-6">
                             <h2 class="text-xl font-semibold text-gray-900 dark:text-white"><?= $row["Title"] ?></h2>
