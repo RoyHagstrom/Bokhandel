@@ -44,6 +44,7 @@ $result = $conn->query($sql);
 </div>
 
 
+
 <?php
 if (!$category_id) {
     $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY Title ASC LIMIT 8";
