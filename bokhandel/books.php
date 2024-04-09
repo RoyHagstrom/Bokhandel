@@ -2,10 +2,8 @@
 include 'db_connection.php';
 include 'header.php'; 
 
-// Get category ID from the URL
 $category_id = $_GET['id'] ?? null;
 
-// Construct SQL query
 $sql = "SELECT * FROM Book";
 if ($category_id) {
     $sql .= " WHERE Category = '$category_id'";
@@ -14,9 +12,7 @@ $sql .= " ORDER BY PublicationYear DESC";
 
 $result = $conn->query($sql);
 
-// Set the title based on whether a category is selected
 if ($category_id) {
-    // Get the category name
     $category_name_sql = "SELECT name FROM categories WHERE id = $category_id";
     $category_name_result = $conn->query($category_name_sql);
     if ($category_name_result->num_rows > 0) {
