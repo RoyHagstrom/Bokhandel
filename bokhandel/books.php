@@ -44,16 +44,16 @@ $result = $conn->query($sql);
 </div>
 
 
-        <?php
-        if (!$category_id) {
-            $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY Title ASC LIMIT 5";
-            $featured_books_result = $conn->query($featured_books_sql);
-            ?>
-            <div class="items-center justify-center w-full bg-white">
-            <div class="container mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+<?php
+if (!$category_id) {
+    $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY Title ASC LIMIT 8";
+    $featured_books_result = $conn->query($featured_books_sql);
+    ?>
+    <div class="items-center justify-center w-full bg-white">
+        <div class="mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
             <h1 class="text-2xl font-semibold mb-6 text-center text-black">Featured Books</h1>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-<?php echo min($featured_books_result->num_rows, 3); ?> lg:grid-cols-<?php echo min($featured_books_result->num_rows, 4); ?> xl:grid-cols-<?php echo min($featured_books_result->num_rows, 8); ?> gap-4">
                 <?php
                 if ($featured_books_result->num_rows > 0) {
                     while ($row = $featured_books_result->fetch_assoc()) {
@@ -70,13 +70,14 @@ $result = $conn->query($sql);
                 } else {
                     echo 'No featured books available';
                 }
-            ?>
+                ?>
             </div>
-            </div>
-</div>
-        <?php
-        }
-        ?>
+        </div>
+    </div>
+<?php
+}
+?>
+
     
 
 <?php
