@@ -40,7 +40,7 @@ if ($category_id) {
                             <h2 class="text-xl font-semibold text-gray-900 dark:text-white"><?= $row["Title"] ?></h2>
                             <p class="text-gray-700 dark:text-gray-300">Author: <?= $row["Author"] ?></p>
                             <p class="text-gray-700 dark:text-gray-300">Published Year: <?= $row["PublicationYear"] ?></p>
-                            <p class="text-gray-700 dark:text-gray-300">Description: <?= $row["Description"] ?></p>
+                            <p class="text-gray-700 dark:text-gray-300"><?= substr($row["Description"], 0, 100) ?>...</p>
                         </div>
                     </a>
                 <?php endwhile; ?>

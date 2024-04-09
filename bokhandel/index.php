@@ -68,18 +68,20 @@ $new_books_result = $conn->query($new_books_sql);
         }
 
         function displayBooks(books) {
-            if (books.length === 0) {
-                bookInfo.innerHTML = 'No books found';
-                return;
-            }
-            bookInfo.innerHTML = books.map(book => `
-                <div class="book-info mb-4">
-                    <h2 class="text-xl mb-2"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
-                    <p>Author: ${book.Author}</p>
-                    <p>Description: ${book.Description}</p>
-                </div>
-            `).join('');
-        }
+    if (books.length === 0) {
+        bookInfo.innerHTML = 'No books found';
+        return;
+    }
+    bookInfo.innerHTML = books.map(book => `
+        <div class="book-info mb-4">
+            <h2 class="text-xl mb-2"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
+            <p>Author: ${book.Author}</p>
+            <!-- Brief description below -->
+            <p>${book.Description.substring(0, 100)}...</p>
+        </div>
+    `).join('');
+}
+
     </script>
 
         <div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
@@ -124,7 +126,7 @@ $new_books_result = $conn->query($new_books_sql);
                 echo '<div class="p-6">';
                 echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                 echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                echo '<p class="text-gray-700 dark:text-gray-300">Description: ' . $row['Description'] . '</p>';
+                echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
                 echo '</div>';
                 echo '</a>';
             }
@@ -134,6 +136,7 @@ $new_books_result = $conn->query($new_books_sql);
         ?>
     </div>
 </div>
+
 
 
 <div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">

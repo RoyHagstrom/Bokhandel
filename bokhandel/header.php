@@ -39,7 +39,7 @@
     <div class="md:hidden bg-gray-800 dark:bg-gray-900 py-2 hidden" id="mobileMenuDrawer">
         <ul class="flex flex-col items-center space-y-4">
             <li><a href="index.php" class="text-white dark:text-gray-200 hover:text-gray-300">Home</a></li>
-            <li><a href="#" class="text-white dark:text-gray-200 hover:text-gray-300">About</a></li>
+            <li><a href="books.php" class="text-white dark:text-gray-200 hover:text-gray-300">Books</a></li>
             <li><a href="#" class="text-white dark:text-gray-200 hover:text-gray-300">Services</a></li>
             <li><a href="#" class="text-white dark:text-gray-200 hover:text-gray-300">Contact</a></li>
         </ul>
