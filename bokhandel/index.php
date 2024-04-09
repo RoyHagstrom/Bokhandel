@@ -113,7 +113,7 @@ $new_books_result = $conn->query($new_books_sql);
         </div>
 
 
-        <div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
+        <div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">New Books</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">

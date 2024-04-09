@@ -10,8 +10,40 @@ if ($category_id) {
 }
 $sql .= " ORDER BY PublicationYear DESC";
 
-$result = $conn->query($sql);
 
+$result = $conn->query($sql);
+?>
+<div class="bg-neutral-500 text-white rounded-lg">
+<div class="p-8">
+            
+<h1 class="text-2xl font-semibold mb-6 mt-6 text-center">Featured Categories:</h1>
+            <div class="flex flex-wrap justify-center items-center">
+            
+                <?php
+                $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
+                $featured_categories_result = $conn->query($featured_categories_sql);
+
+                if ($featured_categories_result->num_rows > 0) {
+                    while ($row = $featured_categories_result->fetch_assoc()) {
+                        $featured_category_id = $row['id']; 
+                        $featured_category_name = $row['name'];
+                        $featured_category_image = $row['image'];
+
+                        echo '<div class="m-4 relative rounded-lg">';
+                        echo '<a href="books.php?id=' . $featured_category_id . '">'; 
+                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
+                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p class="text-lg text-gray-500">No featured categories available</p>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+<?php
 if ($category_id) {
     $category_name_sql = "SELECT name FROM categories WHERE id = $category_id";
     $category_name_result = $conn->query($category_name_sql);
@@ -25,6 +57,8 @@ if ($category_id) {
     $title = "All Books";
 }
 ?>
+
+
 
 <div class="bg-white text-black">
     <div class="container p-8 mx-auto">
