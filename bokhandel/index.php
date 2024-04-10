@@ -31,7 +31,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 <div class="dark bg-gray-900 text-gray-900 min-h-screen flex flex-col justify-center items-center">
 
-        <div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
+<div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
             <h1 class=" text-white text-2xl font-semibold mb-6">Book Search</h1>
             <div class="relative mb-4">
                 <input type="text" id="searchInput" class="appearance-none border border-gray-300 rounded-md py-2 px-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 w-full" placeholder="Search for books">
@@ -41,7 +41,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                     </svg>
                 </div>
             </div>
-            <div id="bookInfo" class="mt-4"></div>
+            <div id="bookInfo" class="mt-4 grid grid-cols-3 gap-4" style="z-index: 1;"></div>
         </div>
 
 
@@ -76,22 +76,25 @@ $featured_books_result = $conn->query($featured_books_sql);
         return;
     }
     bookInfo.innerHTML = books.map(book => `
-    <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg shadow-md">
-    <img src="${book.Image}" alt="${book.Title}" class="h-24 object-cover mr-4 rounded-sm shadow-md">
-    <div class="flex-grow">
-        <h2 class="text-xl mb-2"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
-        <p>Author: ${book.Author}</p>
-        <p>${book.Description.substring(0, 100)}...</p>
-    </div>
-</div>
+
+        <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="window.location='singlebook.php?id=${book.BookID}';">
+            <img src="${book.Image}" alt="${book.Title}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
+            <div class="flex-grow">
+                <h2 class="text-xl mb-2"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
+                <p>Author: ${book.Author}</p>
+                <p>${book.Description.substring(0, 100)}...</p>
+            </div>
+            
+        </div>
+
 
     `).join('');
 }
 
     </script>
 
-        <div class="bg-gray-200 p-8 w-full rounded-lg sm:w-130 mt-8">
-            <h1 class="text-center text-2xl font-semibold mb-6 text-black">Featured Categories:</h1>
+        <div class="bg-gray-800 p-8 w-full rounded-lg sm:w-130 mt-8">
+            <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
 
             <div class="flex flex-wrap justify-center items-center">
                 <?php
