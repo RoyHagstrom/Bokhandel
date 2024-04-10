@@ -29,10 +29,10 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 <?php echo $test; ?>
 
-<div class="dark bg-gray-900 text-gray-900 min-h-screen flex flex-col justify-center items-center">
+<div class="dark bg-white text-gray-900 min-h-screen flex flex-col justify-center items-center">
 
 <div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
-            <h1 class=" text-white text-2xl font-semibold mb-6">Book Search</h1>
+            <h1 class=" text-black text-2xl font-semibold mb-6">Book Search</h1>
             <div class="relative mb-4">
                 <input type="text" id="searchInput" class="appearance-none border border-gray-300 rounded-md py-2 px-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 w-full" placeholder="Search for books">
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -41,7 +41,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                     </svg>
                 </div>
             </div>
-            <div id="bookInfo" class="mt-4 grid grid-cols-3 gap-4" style="z-index: 1;"></div>
+            <div id="bookInfo" class="w-full mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-4" style="z-index: 1;"></div>
         </div>
 
 
@@ -82,7 +82,10 @@ $featured_books_result = $conn->query($featured_books_sql);
             <div class="flex-grow">
                 <h2 class="text-xl mb-2"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
                 <p>Author: ${book.Author}</p>
-                <p>${book.Description.substring(0, 100)}...</p>
+                <p style="overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;">${book.Description}...</p>
             </div>
             
         </div>
@@ -93,7 +96,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
     </script>
 
-        <div class="bg-gray-800 p-8 w-full rounded-lg sm:w-130 mt-8">
+        <div class="bg-gray-800 p-8 w-full sm:w-130 mt-8">
             <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
 
             <div class="flex flex-wrap justify-center items-center">

@@ -13,7 +13,7 @@ $sql .= " ORDER BY PublicationYear DESC";
 $result = $conn->query($sql);
 ?>
 
-<div class="bg-neutral-500 text-white rounded-lg">
+<div class="bg-neutral-700 text-white rounded-lg">
     <div class="p-8">          
         <h1 class="text-2xl font-semibold mb-6 mt-6 text-center">Featured Categories:</h1>
         <div class="flex flex-wrap justify-center items-center">

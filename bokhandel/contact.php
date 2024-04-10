@@ -5,7 +5,7 @@ include 'header.php';
 <div class="bg-white text-black min-h-screen flex flex-col justify-center items-center">
     <h1 class="text-2xl font-bold mb-4">Contact Us</h1>
 
-    <div class="container mx-auto p-8 rounded-lg shadow-md flex">
+    <div class=" mx-auto p-8 rounded-lg flex">
         <div class="w-1/2 pr-4">
             <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
             <p><strong>Email:</strong> roy@gmail.com</p>

@@ -9,7 +9,7 @@
     <title>Bokhandel</title>
 </head>
 
-<body class="dark bg-gray-900 text-white full">
+<body class="full">
     
     <header class="py-4 bg-gray-800 dark:bg-gray-900">
         <div class="container mx-auto flex justify-between items-center">
