@@ -5,7 +5,7 @@ try {
     $searchTerm = $_GET['term'] ?? '';
 
     if (!empty($searchTerm)) {
-        $stmt = $conn->prepare("SELECT * FROM bokhandel.Book WHERE (Title LIKE ? OR Author LIKE ?) LIMIT 12");
+        $stmt = $conn->prepare("SELECT * FROM bokhandel.Book WHERE (Title LIKE ? OR Author LIKE ?) LIMIT 16");
         if (!$stmt) {
             throw new Exception("Failed to prepare SQL statement: " . $conn->error);
         }

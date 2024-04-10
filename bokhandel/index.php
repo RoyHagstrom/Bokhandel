@@ -41,7 +41,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                     </svg>
                 </div>
             </div>
-            <div id="bookInfo" class="w-full mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-2" style="z-index: 1;"></div>
+            <div id="bookInfo" class="shadow-md w-full mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-2" style="z-index: 1;"></div>
         </div>
 
 
@@ -77,7 +77,7 @@ $featured_books_result = $conn->query($featured_books_sql);
     }
     bookInfo.innerHTML = books.map(book => `
 
-        <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="window.location='singlebook.php?id=${book.BookID}';">
+        <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${book.BookID}';">
             <img src="${book.Image}" alt="${book.Title}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
             <div style="overflow: hidden;
   display: -webkit-box;
