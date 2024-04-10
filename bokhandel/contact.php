@@ -2,7 +2,7 @@
 include 'header.php'; 
 ?>
 
-<div class="bg-white text-black min-h-screen flex flex-col justify-center items-center">
+<div class="bg-white text-black pt-20 pb-20 flex flex-col justify-center items-center">
     <h1 class="text-2xl font-bold mb-4">Contact Us</h1>
 
     <div class=" mx-auto p-8 rounded-lg flex">
