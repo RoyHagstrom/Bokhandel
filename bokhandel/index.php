@@ -23,7 +23,7 @@ if ($featured_category_result->num_rows > 0) {
 $new_books_sql = "SELECT * FROM Book ORDER BY BookID DESC LIMIT 5";
 $new_books_result = $conn->query($new_books_sql);
 
-$featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY Title ASC LIMIT 5";
+$featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY RAND() LIMIT 5";
 $featured_books_result = $conn->query($featured_books_sql);
 ?>
 

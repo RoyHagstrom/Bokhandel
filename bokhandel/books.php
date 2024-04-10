@@ -47,37 +47,55 @@ $result = $conn->query($sql);
 
 <?php
 if (!$category_id) {
-    $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY Title ASC LIMIT 8";
+    $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY RAND() LIMIT 7";
     $featured_books_result = $conn->query($featured_books_sql);
-    ?>
-    <div class="items-center justify-center w-full bg-white">
-        <div class="mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-            <h1 class="text-2xl font-semibold mb-6 text-center text-black">Featured Books</h1>
+?>
+<div class="w-full bg-white">
+    <div class="mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+        <h1 class="text-2xl font-semibold mb-6 text-center text-black">Featured Books</h1>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-<?php echo min($featured_books_result->num_rows, 3); ?> lg:grid-cols-<?php echo min($featured_books_result->num_rows, 4); ?> xl:grid-cols-<?php echo min($featured_books_result->num_rows, 8); ?> gap-4">
-                <?php
-                if ($featured_books_result->num_rows > 0) {
-                    while ($row = $featured_books_result->fetch_assoc()) {
-                        echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
-                        echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
-                        echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
-                        echo '<div class="p-6">';
-                        echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
-                        echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                        echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
-                        echo '</div>';
-                        echo '</a>';
-                    }
-                } else {
-                    echo 'No featured books available';
+        <div id="carousel" class="daisy-carousel grid grid-cols-1 sm:grid-cols-2 md:grid-cols-<?php echo min($featured_books_result->num_rows, 3); ?> lg:grid-cols-<?php echo min($featured_books_result->num_rows, 4); ?> xl:grid-cols-<?php echo min($featured_books_result->num_rows, 7); ?> gap-4">
+            <?php
+            if ($featured_books_result->num_rows > 0) {
+                while ($row = $featured_books_result->fetch_assoc()) {
+                    echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
+                    echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
+                    echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
+                    echo '<div class="p-6">';
+                    echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                    echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
+                    echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
+                    echo '</div>';
+                    echo '</a>';
                 }
-                ?>
-            </div>
+            } else {
+                echo 'No featured books available';
+            }
+            ?>
         </div>
     </div>
+</div>
 <?php
 }
 ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const carousel = document.getElementById('carousel');
+        new Glider(carousel, {
+            slidesToShow: 'auto',
+            slidesToScroll: 1,
+            draggable: true,
+            dots: '.dots',
+            arrows: {
+                prev: '.glider-prev',
+                next: '.glider-next'
+            }
+        });
+    });
+</script>
+
+
 
     
 
