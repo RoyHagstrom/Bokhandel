@@ -41,7 +41,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                     </svg>
                 </div>
             </div>
-            <div id="bookInfo" class="shadow-md w-full mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-2" style="z-index: 1;"></div>
+            <div id="bookInfo" class="shadow-md rounded-lg w-full mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-2" style="z-index: 1;"></div>
         </div>
 
 
