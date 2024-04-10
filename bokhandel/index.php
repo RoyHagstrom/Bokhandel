@@ -29,10 +29,10 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 <?php echo $test; ?>
 
-<div class="light-mode bg-white text-gray-900 min-h-screen flex flex-col justify-center items-center">
+<div class="dark bg-gray-900 text-gray-900 min-h-screen flex flex-col justify-center items-center">
 
-        <div class="container p-8 rounded-lg shadow-md w-full sm:w-135 mt-8">
-            <h1 class="text-2xl font-semibold mb-6">Book Search</h1>
+        <div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
+            <h1 class=" text-white text-2xl font-semibold mb-6">Book Search</h1>
             <div class="relative mb-4">
                 <input type="text" id="searchInput" class="appearance-none border border-gray-300 rounded-md py-2 px-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 w-full" placeholder="Search for books">
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -72,23 +72,26 @@ $featured_books_result = $conn->query($featured_books_sql);
 
         function displayBooks(books) {
     if (books.length === 0) {
-        bookInfo.innerHTML = 'No books found';
+        bookInfo.innerHTML = '';
         return;
     }
     bookInfo.innerHTML = books.map(book => `
-        <div class="book-info mb-4">
-            <h2 class="text-xl mb-2"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
-            <p>Author: ${book.Author}</p>
-            <!-- Brief description below -->
-            <p>${book.Description.substring(0, 100)}...</p>
-        </div>
+    <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg shadow-md">
+    <img src="${book.Image}" alt="${book.Title}" class="h-24 object-cover mr-4 rounded-sm shadow-md">
+    <div class="flex-grow">
+        <h2 class="text-xl mb-2"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
+        <p>Author: ${book.Author}</p>
+        <p>${book.Description.substring(0, 100)}...</p>
+    </div>
+</div>
+
     `).join('');
 }
 
     </script>
 
-        <div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-            <h1 class="text-2xl font-semibold mb-6">Featured Categories:</h1>
+        <div class="bg-gray-200 p-8 w-full rounded-lg sm:w-130 mt-8">
+            <h1 class="text-center text-2xl font-semibold mb-6 text-black">Featured Categories:</h1>
 
             <div class="flex flex-wrap justify-center items-center">
                 <?php
@@ -116,7 +119,7 @@ $featured_books_result = $conn->query($featured_books_sql);
         </div>
 
 
-        <div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+        <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">New Books</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
@@ -141,7 +144,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 </div>
 
 
-<div class="container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+<div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">Featured Books</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
@@ -167,7 +170,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 
 
-<div class="container p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
+<div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-116 mt-8">
     <div class="flex flex-col md:flex-row">
         <img src="images/img-02.jpg" alt="Image" class="w-full md:w-1/2 h-auto md:h-80 object-cover rounded-lg mb-6 md:mb-0">
         <div class="md:w-1/2 md:pl-6">
@@ -180,7 +183,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 <div class="container mx-auto py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="text-container p-6 rounded-lg shadow-md">
+            <div class="text-container bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-semibold mb-4">Bokhandel</h2>
                 <address class="mt-2">
                     Pehr Sommars Gata 14,<br> 10600 Ekenäs
