@@ -1,14 +1,6 @@
 <?php
 include 'Includes/header.php';
 
-$sql = "SELECT text FROM messages";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $test = $row['text'];
-}
-
 $featured_category = "";
 $featured_category_sql = "SELECT name, image FROM categories WHERE featured = 1";
 $featured_category_result = $conn->query($featured_category_sql);
@@ -26,7 +18,6 @@ $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY RAND() LIM
 $featured_books_result = $conn->query($featured_books_sql);
 ?>
 
-<?php echo $test; ?>
 
 <div class="dark bg-white text-gray-900 min-h-screen flex flex-col justify-center items-center">
 

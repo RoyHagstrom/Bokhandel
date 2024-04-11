@@ -1,3 +1,4 @@
+
 <?php
 include 'class.user.php';
 
@@ -71,4 +72,4 @@ include 'db_connection.php';
         mobileMenuButton.addEventListener('click', () => {
             mobileMenuDrawer.classList.toggle('hidden');
         });
-    </script>
+    </script> 
