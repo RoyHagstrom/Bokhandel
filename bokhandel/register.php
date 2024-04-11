@@ -2,10 +2,7 @@
 include 'header.php';
 
 if (isset($_POST['register-submit'])) {
-    $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-    /*if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+    if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -15,7 +12,7 @@ if (isset($_POST['register-submit'])) {
         echo $registerReturn;
     } else {
         echo "All fields are required";
-    }*/
+    }
 }
 
 ?>

@@ -21,6 +21,7 @@ include 'db_connection.php';
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <a href="index.php" class="text-3xl font-bold">Bokhandel</a>
+                <?php if(isset($_SESSION["uname"])){ echo $_SESSION["uname"];}?>
             </div>
 
 
@@ -33,7 +34,9 @@ include 'db_connection.php';
                     <li><a href="books.php" class="text-white dark:text-gray-200 hover:text-gray-300">Books</a></li>
                     <li><a href="#" class="text-white dark:text-gray-200 hover:text-gray-300">Services</a></li>
                     <li><a href="contact.php" class="text-white dark:text-gray-200 hover:text-gray-300">Contact</a></li>
-                    <li><a href="login.php" class="bg-blue-900 text-white dark:text-gray-200 hover:bg-blue-800 dark:hover:bg-blue-400 px-4 py-2 rounded-md">Login</a></li>
+                    <?php if(isset($_SESSION["uname"])){echo '<li><a href="logout.php" class="bg-blue-900 text-white dark:text-gray-200 hover:bg-blue-800 dark:hover:bg-blue-400 px-4 py-2 rounded-md">Logout</a></li>';}
+                    else
+                    { echo ' <li><a href="login.php" class="bg-blue-900 text-white dark:text-gray-200 hover:bg-blue-800 dark:hover:bg-blue-400 px-4 py-2 rounded-md">Login</a></li>';}?>
 
                 </ul>
             </nav>
