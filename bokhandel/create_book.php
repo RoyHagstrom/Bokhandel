@@ -5,26 +5,41 @@ if (!isset($_SESSION["uid"])) {
     $user->redirect("login.php");
 }
 
+$stmt = $conn->prepare("SELECT UserID FROM User WHERE Username = ?");
+$stmt->bind_param("s", $_SESSION["uname"]);
+$stmt->execute();
+$userInfo = $stmt->get_result()->fetch_assoc();
+$author = $_SESSION["uname"];
+
+$stmt = $conn->prepare("SELECT id, name FROM categories");
+$stmt->execute();
+$categories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+$stmt = $conn->prepare("SELECT StatusID, StatusName FROM Status");
+$stmt->execute();
+$statuses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST["title"] ?? null;
-    $description = $_POST["description"] ?? null;
-    $illustrator = $_POST["illustrator"] ?? null;
-    $ageRecommendation = $_POST["AgeRecommendation"] ?? null;
-    $categoryID = $_POST["category"] ?? null;
-    $genre = $_POST["Genre"] ?? null;
-    $publicationYear = !empty($_POST["PublicationYear"]) ? intval($_POST["PublicationYear"]) : null;
-    $series = $_POST["Series"] ?? null;
-    $publisher = $_POST["Publisher"] ?? null;
-    $price = $_POST["Price"] ?? null;
-    $pages = $_POST["Pages"] ?? null;
-    $statusID = intval($_POST["status"]) ?? null;
-    $featured = isset($_POST["featured"]) ? 1 : 0;
+$title = isset($_POST["title"]) ? $_POST["title"] : null;
+$description = isset($_POST["description"]) ? $_POST["description"] : null;
+$illustrator = isset($_POST["illustrator"]) ? $_POST["illustrator"] : null;
+$ageRecommendation = isset($_POST["AgeRecommendation"]) ? $_POST["AgeRecommendation"] : null;
+$categoryID = isset($_POST["category"]) ? $_POST["category"] : null;
+$genre = isset($_POST["Genre"]) ? $_POST["Genre"] : null;
+$publicationYear = !empty($_POST["PublicationYear"]) ? intval($_POST["PublicationYear"]) : null;
+$series = isset($_POST["Series"]) ? $_POST["Series"] : null;
+$publisher = isset($_POST["Publisher"]) ? $_POST["Publisher"] : null;
+$price = isset($_POST["Price"]) ? $_POST["Price"] : null;
+$pages = isset($_POST["Pages"]) ? $_POST["Pages"] : null;
+$statusID = isset($_POST["status"]) ? intval($_POST["status"]) : null;
+$featured = isset($_POST["featured"]) ? 1 : 0;
+
 
     if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
         die("File upload failed with error code " . $_FILES['image']['error']);
     }
 
-    $targetDir = "F:/xampp/htdocs/bokhandel/bokhandel/images/";
+    $targetDir = "F:/xampp/htdocs/bokhandel/bokhandel/images/"; 
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
