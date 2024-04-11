@@ -5,7 +5,7 @@ if (isset($_POST['article-submit'])) {
     $loginReturn = $user->login();
 
     if ($loginReturn == "success") {
-        $user->redirect("index.php");
+        $user->redirect("account.php");
     }
 }
 
