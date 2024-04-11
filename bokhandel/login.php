@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'Includes/header.php';
 
 if (isset($_POST['article-submit'])) {
     $loginReturn = $user->login();
@@ -50,5 +50,5 @@ if($user->checkLoginStatus()){
 
 
 <?php
-include 'footer.php';
+include 'Includes/footer.php';
 ?>

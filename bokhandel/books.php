@@ -1,5 +1,5 @@
 <?php
-include 'header.php'; 
+include 'Includes/header.php'; 
 
 $category_id = $_GET['id'] ?? null;
 
@@ -145,5 +145,5 @@ if ($category_id) {
 
 <?php
 $conn->close();
-include 'footer.php';
+include 'Includes/footer.php';
 ?>

@@ -1,5 +1,5 @@
 <?php
-include 'header.php'; 
+include 'Includes/header.php'; 
 
 if (isset($_GET['id'])) {
     $bookID = $conn->real_escape_string($_GET['id']);
@@ -141,5 +141,5 @@ $new_books_result = $conn->query($new_books_sql);
 
 
 <?php
-include 'footer.php';
+include 'Includes/footer.php';
 ?>

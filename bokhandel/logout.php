@@ -1,7 +1,7 @@
 <?php
-include 'class.user.php';
+include 'Includes/class.user.php';
 
-include 'db_connection.php';
+include 'Includes/db_connection.php';
 
 session_destroy();
 

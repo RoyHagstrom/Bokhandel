@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'Includes/header.php';
 
 if (isset($_POST['register-submit'])) {
     if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
@@ -55,5 +55,5 @@ if (isset($_POST['register-submit'])) {
 </section>
 
 <?php
-include 'footer.php';
+include 'Includes/footer.php';
 ?>

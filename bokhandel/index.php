@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'Includes/header.php';
 
 $sql = "SELECT text FROM messages";
 $result = $conn->query($sql);
@@ -31,69 +31,62 @@ $featured_books_result = $conn->query($featured_books_sql);
 <div class="dark bg-white text-gray-900 min-h-screen flex flex-col justify-center items-center">
 
 <div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
-            <h1 class=" text-black text-2xl font-semibold mb-6">Book Search</h1>
-            <div class="relative mb-4">
-                <input type="text" id="searchInput" class="appearance-none border border-gray-300 rounded-md py-2 px-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 w-full" placeholder="Search for books">
-                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                    <svg class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
+    <h1 class="text-black text-2xl font-semibold mb-6">Book Search</h1>
+    <div class="relative mb-4">
+        <input type="text" id="searchInput" class="appearance-none border border-gray-300 rounded-md py-2 px-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 w-full" placeholder="Search for books">
+        <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+            <svg class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+        </div>
+    </div>
+    <div id="bookInfo" class="shadow-md rounded-lg w-full mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-2" style="z-index: 1;"></div>
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const bookInfo = document.getElementById('bookInfo');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.trim().toLowerCase();
+        searchBooks(searchTerm);
+    });
+
+    function searchBooks(searchTerm) {
+        fetch(`Includes/search.php?term=${searchTerm}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayBooks(data);
+            })
+            .catch(error => {
+                bookInfo.innerHTML = 'Failed to search for books. Please try again later.';
+            });
+    }
+
+    function displayBooks(books) {
+        if (books.length === 0) {
+            bookInfo.innerHTML = '';
+            return;
+        }
+        bookInfo.innerHTML = books.map(book => `
+            <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${book.BookID}';">
+                <img src="${book.Image}" alt="${book.Title}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
+                <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow">
+                    <h2 style="overflow: hidden" class="text-xl mb-1"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
+                    <p>Author: ${book.Author}</p>
+                    <p>${book.Description}...</p>
                 </div>
             </div>
-            <div id="bookInfo" class="shadow-md rounded-lg w-full mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-2" style="z-index: 1;"></div>
-        </div>
-
-
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const bookInfo = document.getElementById('bookInfo');
-
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.trim().toLowerCase();
-            searchBooks(searchTerm);
-        });
-
-        function searchBooks(searchTerm) {
-            fetch(`search.php?term=${searchTerm}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    displayBooks(data);
-                })
-                .catch(error => {
-                    bookInfo.innerHTML = '';
-                });
-        }
-
-        function displayBooks(books) {
-    if (books.length === 0) {
-        bookInfo.innerHTML = '';
-        return;
+        `).join('');
     }
-    bookInfo.innerHTML = books.map(book => `
-
-        <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${book.BookID}';">
-            <img src="${book.Image}" alt="${book.Title}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
-            <div style="overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;" class="flex-grow">
-                <h2 style="overflow: hidden" class="text-xl mb-1"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
-                <p>Author: ${book.Author}</p>
-                <p>${book.Description}...</p>
-            </div>
-            
-        </div>
+</script>
 
 
-    `).join('');
-}
-
-    </script>
 
         <div class="bg-gray-800 p-8 w-full sm:w-130 mt-8">
             <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
@@ -205,5 +198,5 @@ $featured_books_result = $conn->query($featured_books_sql);
 </div>
 
 <?php
-include 'footer.php';
+include 'Includes/footer.php';
 ?>
