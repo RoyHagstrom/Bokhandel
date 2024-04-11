@@ -1,5 +1,4 @@
 <?php
-include 'db_connection.php';
 include 'header.php';
 
 $sql = "SELECT text FROM messages";

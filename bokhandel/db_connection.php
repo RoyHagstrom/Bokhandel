@@ -21,4 +21,12 @@ try {
         die("Failed to connect to database: " . $e->getMessage());
     }
 }
+
+if(!isset($_SESSION)){
+    session_start();
+  }
+
+$user = new USER($conn);
+
+
 ?>
