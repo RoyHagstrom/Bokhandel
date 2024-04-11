@@ -31,7 +31,7 @@ public function searchBooks($searchTerm)
     {
         try {
             if (!empty($searchTerm)) {
-                $stmt = $this->conn->prepare("SELECT * FROM bokhandel.Book WHERE (Title LIKE ? OR Author LIKE ?) LIMIT 16");
+                $stmt = $this->conn->prepare("SELECT * FROM bokhandel.Book WHERE (Title LIKE ? OR Author LIKE ?) LIMIT 4");
                 if (!$stmt) {
                     throw new Exception("Failed to prepare SQL statement: " . $this->conn->error);
                 }

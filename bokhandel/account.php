@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-<div class="dark bg-white text-gray-900 min-h-screen flex flex-col justify-center items-center">
+<div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
 
 <div class="container mx-auto p-8">
     <h2 class="text-3xl font-bold mb-4">Welcome, <?php echo $_SESSION["uname"]; ?></h2>
@@ -41,10 +41,19 @@ if ($result->num_rows > 0) {
                     <span class="font-semibold mr-2">Email:</span>
                     <span><?php echo $userData['Email']; ?></span>
                 </div>
+                <div class="flex items-center">
+                    <span class="font-semibold mr-2">Role:</span>
+                    <span><?php echo $userData['Role']; ?></span>
+                </div>
+            </div>
+            <div class="mt-4 flex gap-2">
+                <a href="create_book.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create Book</a>
+                <a href="view_books.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">View Books</a>
             </div>
         </div>
     </div>
 </div>
 </div>
+
 
 <?php include 'Includes/footer.php'; ?>
