@@ -69,6 +69,7 @@ public function register($username, $email, $password)
 
     if ($stmt->execute()) {
         return "User registered successfully";
+
     } else {
         return "Registration failed";
     }
