@@ -15,23 +15,21 @@ class USER
     }
 
     public function redirect($url)
-{
-    header("Location: $url");
-    exit(); 
-}
-
-
+    {
+        header("Location: $url");
+        exit();
+    }
 
     public function checkLoginStatus()
-{
-    return isset($_SESSION["UserID"]);
-}
+    {
+        return isset($_SESSION["uid"]);
+    }
 
-public function searchBooks($searchTerm)
+    public function searchBooks($searchTerm)
     {
         try {
             if (!empty($searchTerm)) {
-                $stmt = $this->conn->prepare("SELECT * FROM bokhandel.Book WHERE (Title LIKE ? OR Author LIKE ?) ORDER BY RAND() LIMIT 4");
+                $stmt = $this->conn->prepare("SELECT * FROM Book WHERE (Title LIKE ? OR Author LIKE ?) ORDER BY RAND() LIMIT 4");
                 if (!$stmt) {
                     throw new Exception("Failed to prepare SQL statement: " . $this->conn->error);
                 }
@@ -39,7 +37,7 @@ public function searchBooks($searchTerm)
                 $stmt->bind_param("ss", $searchTerm, $searchTerm);
             } else {
                 echo json_encode([]);
-                exit; 
+                exit;
             }
 
             if (!$stmt->execute()) {
@@ -57,60 +55,50 @@ public function searchBooks($searchTerm)
         }
     }
 
+    public function register($username, $email, $password)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+        $stmt = $this->conn->prepare("INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, 'Regular')");
 
-public function register($username, $email, $password)
-{
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $stmt->bind_param('sss', $username, $email, $hashedPassword);
 
-    $stmt = $this->conn->prepare("INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, 'Regular')");
-
-    $stmt->bind_param('sss', $username, $email, $hashedPassword);
-
-    if ($stmt->execute()) {
-        return "User registered successfully";
-
-    } else {
-        return "Registration failed";
-    }
-}
-
-
-
-
-public function login()
-{
-    $cleanname = $this->cleanInput($_POST["Username"]);
-
-    $stmt_getUser = $this->conn->prepare(
-        "SELECT * FROM User WHERE Username = ? OR Email = ?"
-    );
-
-    $stmt_getUser->bind_param('ss', $cleanname, $cleanname);
-
-    $stmt_getUser->execute();
-
-    $result = $stmt_getUser->get_result();
-
-    $user = $result->fetch_assoc();
-
-    if (!$user) {
-        return "No such user or email in database";
+        if ($stmt->execute()) {
+            return "User registered successfully";
+        } else {
+            return "Registration failed";
+        }
     }
 
-    $verify = password_verify($_POST["Password"], $user["Password"]);
+    public function login()
+    {
+        $cleanname = $this->cleanInput($_POST["Username"]);
 
-    if ($verify) {
-        $_SESSION["uname"] = $user["Username"];
-        $_SESSION["urole"] = $user["Role"];
-        $_SESSION["uid"] = $user["UserID"];
-        return "success";
-    } else {
-        return "Incorrect password!";
+        $stmt_getUser = $this->conn->prepare("SELECT * FROM User WHERE Username = ? OR Email = ?");
+
+        $stmt_getUser->bind_param('ss', $cleanname, $cleanname);
+
+        $stmt_getUser->execute();
+
+        $result = $stmt_getUser->get_result();
+
+        $user = $result->fetch_assoc();
+
+        if (!$user) {
+            return "No such user or email in database";
+        }
+
+        $verify = password_verify($_POST["Password"], $user["Password"]);
+
+        if ($verify) {
+            $_SESSION["uname"] = $user["Username"];
+            $_SESSION["urole"] = $user["Role"];
+            $_SESSION["uid"] = $user["UserID"];
+            return "success";
+        } else {
+            return "Incorrect password!";
+        }
     }
-}
-
-    
 }
 
 ?>
