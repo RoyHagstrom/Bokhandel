@@ -54,10 +54,16 @@ $new_books_result = $conn->query($new_books_sql);
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
         <div class="book-info">
             <div class="flex flex-col">
+
                 <div class="max-h-48 overflow-hidden">
                     <p><span class="font-semibold">Description:</span> <?php echo $book['Description']; ?></p>
                 </div>
+            
             </div>
+            <div class="mt-4 flex gap-2">
+                <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
+            </div>
+
         </div>
     </div>
     <div class="md:w-3/12 pl-4">
