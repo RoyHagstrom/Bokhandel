@@ -11,10 +11,10 @@ if ($featured_category_result->num_rows > 0) {
     $featured_category_image = $row['image'];
 }
 
-$new_books_sql = "SELECT * FROM Book ORDER BY BookID DESC LIMIT 5";
+$new_books_sql = "SELECT * FROM Book ORDER BY BookID DESC LIMIT 10";
 $new_books_result = $conn->query($new_books_sql);
 
-$featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY RAND() LIMIT 5";
+$featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY RAND() LIMIT 10";
 $featured_books_result = $conn->query($featured_books_sql);
 ?>
 
@@ -93,10 +93,10 @@ $featured_books_result = $conn->query($featured_books_sql);
                         $featured_category_name = $row['name'];
                         $featured_category_image = $row['image'];
 
-                        echo '<div class="m-4 relative rounded-lg">';
+                        echo '<div class="m-2 md:m-4 relative rounded-lg">';
                         echo '<a href="books.php?id=' . $featured_category_id . '">'; 
-                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
-                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
+                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
                         echo '</a>';
                         echo '</div>';
                     }
