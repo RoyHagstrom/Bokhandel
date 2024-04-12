@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
     $book = $result->fetch_assoc();
     
     if (!$book) {
-        die("Book not found"); 
+        $user->redirect("index.php");
     }
 } else {
     header("Location: index.php");
@@ -60,9 +60,17 @@ $new_books_result = $conn->query($new_books_sql);
                 </div>
             
             </div>
-            <div class="mt-4 flex gap-2">
+            <?php if (isset($_SESSION["uname"]) && $_SESSION["uname"] == $book['Author']){  ?>
+                <div class="mt-4 flex gap-2">
+                    <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
+                    <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
+                </div>
+            <?php } elseif(isset($_SESSION["uname"]) && $_SESSION["urole"] == "Admin"){ ?>
+                <div class="mt-4 flex gap-2">
                 <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
+                <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
             </div>
+            <?php } ?>
 
         </div>
     </div>

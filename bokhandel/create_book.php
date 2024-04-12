@@ -1,9 +1,11 @@
 <?php
 include 'Includes/header.php';
 
+
 if (!isset($_SESSION["uid"])) {
     $user->redirect("login.php");
 }
+
 
 $stmt = $conn->prepare("SELECT UserID FROM User WHERE Username = ?");
 $stmt->bind_param("s", $_SESSION["uname"]);
@@ -40,31 +42,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $targetDir = "images/";
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-    if ($_FILES["image"]["size"] > 10000000) {
-        die("Sorry, your file is too large.");
-    }
-
-    $allowedFormats = ["jpg", "jpeg", "png", "gif"];
-    if (!in_array($imageFileType, $allowedFormats)) {
-        die("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-    }
 
     if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
         die("Error uploading image.");
     }
 
     $sql = "INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommendation, Category, Genre, PublicationYear, Series, Publisher, Price, Pages, Image, StatusID, Featured) 
-    VALUES ('$title', '$description', '$author', '$illustrator', '$ageRecommendation', '$categoryID', '$genre', '$publicationYear', '$series', '$publisher', '$price', '$pages', '$targetFile', '$statusID', '$featured')";
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    if ($conn->query($sql) === TRUE) {
-    } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssssssssssi", $title, $description, $author, $illustrator, $ageRecommendation, $categoryID, $genre, $publicationYear, $series, $publisher, $price, $pages, $targetFile, $statusID, $featured);
 
     if ($stmt->execute()) {
         echo "Book created successfully.";
+        $user->redirect("books.php");
+
     } else {
         echo "Error creating book: " . $stmt->error;
     }
@@ -82,21 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="description">Description:</label>
+
                     <textarea id="description" name="description" class="appearance-none border rounded-md py-2 px-4 w-full" rows="4" required></textarea>
-                    <script>
-                    tinymce.init({
-                        selector: 'textarea',
-                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                        tinycomments_mode: 'embedded',
-                        tinycomments_author: 'Author name',
-                        mergetags_list: [
-                        { value: 'First.Name', title: 'First Name' },
-                        { value: 'Email', title: 'Email' },
-                        ],
-                        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-                    });
-                    </script>
+
+
+
+
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="illustrator">Illustrator:</label>

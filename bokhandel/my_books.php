@@ -21,7 +21,7 @@ $result = $stmt->get_result();
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <?php
-                echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
+                echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
                 echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
                 echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
                 echo '<div class="p-6">';

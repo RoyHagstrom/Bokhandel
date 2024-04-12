@@ -7,7 +7,7 @@ $sql = "SELECT * FROM Book";
 if ($category_id) {
     $sql .= " WHERE Category = '$category_id'";
 }
-$sql .= " ORDER BY PublicationYear DESC";
+$sql .= " ORDER BY BookID DESC";
 
 $result = $conn->query($sql);
 ?>
