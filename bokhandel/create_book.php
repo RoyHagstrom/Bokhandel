@@ -20,30 +20,29 @@ $stmt->execute();
 $statuses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$title = isset($_POST["title"]) ? $_POST["title"] : null;
-$description = isset($_POST["description"]) ? $_POST["description"] : null;
-$illustrator = isset($_POST["illustrator"]) ? $_POST["illustrator"] : null;
-$ageRecommendation = isset($_POST["AgeRecommendation"]) ? $_POST["AgeRecommendation"] : null;
-$categoryID = isset($_POST["category"]) ? $_POST["category"] : null;
-$genre = isset($_POST["Genre"]) ? $_POST["Genre"] : null;
-$publicationYear = !empty($_POST["PublicationYear"]) ? intval($_POST["PublicationYear"]) : null;
-$series = isset($_POST["Series"]) ? $_POST["Series"] : null;
-$publisher = isset($_POST["Publisher"]) ? $_POST["Publisher"] : null;
-$price = isset($_POST["Price"]) ? $_POST["Price"] : null;
-$pages = isset($_POST["Pages"]) ? $_POST["Pages"] : null;
-$statusID = isset($_POST["status"]) ? intval($_POST["status"]) : null;
-$featured = isset($_POST["featured"]) ? 1 : 0;
-
+    $title = isset($_POST["title"]) ? $_POST["title"] : null;
+    $description = isset($_POST["description"]) ? $_POST["description"] : null;
+    $illustrator = isset($_POST["illustrator"]) ? $_POST["illustrator"] : null;
+    $ageRecommendation = isset($_POST["AgeRecommendation"]) ? $_POST["AgeRecommendation"] : null;
+    $categoryID = isset($_POST["category"]) ? $_POST["category"] : null;
+    $genre = isset($_POST["Genre"]) ? $_POST["Genre"] : null;
+    $publicationYear = isset($_POST["PublicationYear"]) ? intval($_POST["PublicationYear"]) : null;
+    $series = isset($_POST["Series"]) ? $_POST["Series"] : null;
+    $publisher = isset($_POST["Publisher"]) ? $_POST["Publisher"] : null;
+    $price = isset($_POST["Price"]) ? $_POST["Price"] : null;
+    $pages = isset($_POST["Pages"]) ? $_POST["Pages"] : null;
+    $statusID = isset($_POST["status"]) ? intval($_POST["status"]) : null;
+    $featured = isset($_POST["featured"]) ? 1 : 0;
 
     if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
         die("File upload failed with error code " . $_FILES['image']['error']);
     }
 
-    $targetDir = "F:/xampp/htdocs/bokhandel/bokhandel/images/"; 
+    $targetDir = "images/";
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    if ($_FILES["image"]["size"] > 500000) {
+    if ($_FILES["image"]["size"] > 10000000) {
         die("Sorry, your file is too large.");
     }
 
@@ -56,13 +55,13 @@ $featured = isset($_POST["featured"]) ? 1 : 0;
         die("Error uploading image.");
     }
 
-    $stmt = $conn->prepare("INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommendation, Category, Genre, PublicationYear, Series, Publisher, Price, Pages, Image, StatusID, Featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $sql = "INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommendation, Category, Genre, PublicationYear, Series, Publisher, Price, Pages, Image, StatusID, Featured) 
+    VALUES ('$title', '$description', '$author', '$illustrator', '$ageRecommendation', '$categoryID', '$genre', '$publicationYear', '$series', '$publisher', '$price', '$pages', '$targetFile', '$statusID', '$featured')";
 
-    if (!$stmt) {
-        die("Error preparing statement: " . $conn->error);
+    if ($conn->query($sql) === TRUE) {
+    } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
-    $stmt->bind_param('ssisssssdsdsids', $title, $description, $author, $illustrator, $ageRecommendation, $categoryID, $genre, $publicationYear, $series, $publisher, $price, $pages, $targetFile, $statusID, $featured);
 
     if ($stmt->execute()) {
         echo "Book created successfully.";
