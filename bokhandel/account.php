@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="mt-4 flex gap-2">
                 <a href="create_book.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create Book</a>
-                <a href="view_books.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">View Books</a>
+                <a href="my_books.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">View Books</a>
             </div>
         </div>
     </div>

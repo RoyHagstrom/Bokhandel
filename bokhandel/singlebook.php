@@ -39,8 +39,8 @@ $new_books_result = $conn->query($new_books_sql);
 <h1 class="text-3xl font-bold mt-8"><?php echo $book['Title']; ?></h1>
 <p class=""><span class="font-semibold mb-4">Author:</span> <?php echo $book['Author']; ?></p>
 
-<div class="container p-4 lg:p-8 rounded-lg shadow-lg flex flex-col lg:flex-row">
-    <div class="lg:w-3/12 mb-4 lg:mb-0 lg:pr-4">
+<div class="container p-4 lg:p-8 sm:p-4 rounded-lg shadow-lg flex flex-col md:flex-row">
+    <div class="md:w-3/12 mb-4 lg:mb-0 lg:pr-4">
         <div class="relative">
             <?php if ($book['Image']): ?>
                 <div class="mb-8 relative">
@@ -51,7 +51,7 @@ $new_books_result = $conn->query($new_books_sql);
             <?php endif; ?>
         </div>
     </div>
-    <div class="lg:w-7/12 mb-4 lg:mb-0 lg:pl-4">
+    <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
         <div class="book-info">
             <div class="flex flex-col">
                 <div class="max-h-48 overflow-hidden">
@@ -60,7 +60,7 @@ $new_books_result = $conn->query($new_books_sql);
             </div>
         </div>
     </div>
-    <div class="lg:w-3/12 pl-4">
+    <div class="md:w-3/12 pl-4">
         <div class="book-info">
             <p><span class="font-semibold">Illustrator:</span> <?php echo $book['Illustrator']; ?></p>
             <p><span class="font-semibold">Age Recommendation:</span> <?php echo $book['AgeRecommendation']; ?></p>
