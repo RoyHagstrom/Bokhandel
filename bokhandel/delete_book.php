@@ -18,6 +18,8 @@ $stmt->bind_param("i", $bookid);
 $stmt->execute();
 $result = $stmt->get_result();
 $bookData = $result->fetch_assoc();
+//$file = $bookData['Image'];
+
 
 if (!$bookData) {
     header("Location: index.php");
@@ -30,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("i", $bookid);
 
     if ($stmt->execute()) {
+        //unlink($file);
         header("Location: index.php");
         exit();
     } else {

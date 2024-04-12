@@ -6,7 +6,6 @@ if (!isset($_SESSION["uid"])) {
 }
 
 if (!isset($_GET["bookid"])) {
-    // Redirect if no book id is provided
     header("Location: index.php");
     exit();
 } 

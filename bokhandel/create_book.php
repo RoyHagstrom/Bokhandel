@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pages = isset($_POST["Pages"]) ? $_POST["Pages"] : null;
     $statusID = isset($_POST["status"]) ? intval($_POST["status"]) : null;
     $featured = isset($_POST["featured"]) ? 1 : 0;
+    
 
     if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
         die("File upload failed with error code " . $_FILES['image']['error']);
