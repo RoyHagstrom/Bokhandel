@@ -12,35 +12,33 @@ $sql .= " ORDER BY BookID DESC";
 $result = $conn->query($sql);
 ?>
 
-<div class="bg-neutral-700 text-white rounded-lg">
-    <div class="p-8">          
-        <h1 class="text-2xl font-semibold mb-6 mt-6 text-center">Featured Categories:</h1>
-        <div class="flex flex-wrap justify-center items-center">
-            
-            <?php
-            $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
-            $featured_categories_result = $conn->query($featured_categories_sql);
+<div class="bg-gray-800 p-2 md:p-8 w-full sm:w-130 mt-8">
+            <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
 
-            if ($featured_categories_result->num_rows > 0) {
-                while ($row = $featured_categories_result->fetch_assoc()) {
-                    $featured_category_id = $row['id']; 
-                    $featured_category_name = $row['name'];
-                    $featured_category_image = $row['image'];
+            <div class="flex flex-wrap justify-center items-center">
+                <?php
+                $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
+                $featured_categories_result = $conn->query($featured_categories_sql);
 
-                    echo '<div class="m-4 relative rounded-lg">';
-                    echo '<a href="books.php?id=' . $featured_category_id . '">'; 
-                    echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-64 h-64 object-cover rounded-lg opacity-70">';
-                    echo '<div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
-                    echo '</a>';
-                    echo '</div>';
+                if ($featured_categories_result->num_rows > 0) {
+                    while ($row = $featured_categories_result->fetch_assoc()) {
+                        $featured_category_id = $row['id']; 
+                        $featured_category_name = $row['name'];
+                        $featured_category_image = $row['image'];
+
+                        echo '<div class="m-2 md:m-4 relative rounded-lg">';
+                        echo '<a href="books.php?id=' . $featured_category_id . '">'; 
+                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
+                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p class="text-lg text-gray-500">No featured categories available</p>';
                 }
-            } else {
-                echo '<p class="text-lg text-gray-500">No featured categories available</p>';
-            }
-            ?>
+                ?>
+            </div>
         </div>
-    </div>
-</div>
 
 
 
@@ -53,15 +51,15 @@ if (!$category_id) {
     <div class="mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
         <h1 class="text-2xl font-semibold mb-6 text-center text-black">Featured Books</h1>
 
-        <div id="carousel" class="daisy-carousel grid grid-cols-1 sm:grid-cols-2 md:grid-cols-<?php echo min($featured_books_result->num_rows, 3); ?> lg:grid-cols-<?php echo min($featured_books_result->num_rows, 4); ?> xl:grid-cols-<?php echo min($featured_books_result->num_rows, 7); ?> gap-4">
+        <div id="carousel" class="daisy-carousel grid grid-cols-2 sm:grid-cols-2 md:grid-cols-<?php echo min($featured_books_result->num_rows, 3); ?> lg:grid-cols-<?php echo min($featured_books_result->num_rows, 4); ?> xl:grid-cols-<?php echo min($featured_books_result->num_rows, 7); ?> gap-2 md:gap-4">
             <?php
             if ($featured_books_result->num_rows > 0) {
                 while ($row = $featured_books_result->fetch_assoc()) {
                     echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
                     echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
-                    echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
+                    echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-30 md:w-full h-30 md:h-80 object-cover">';
                     echo '<div class="p-6">';
-                    echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                    echo '<h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                     echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
                     echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
                     echo '</div>';
@@ -122,17 +120,16 @@ if ($category_id) {
     <div class="container p-8 mx-auto">
         <h1 class="text-3xl font-bold mb-6"><?= $title ?></h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <a href="singlebook.php?id=<?= $row['BookID'] ?>" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
-                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-bold px-2 py-1 rounded-lg"><?= $row["Price"] ?>€</span>
-                        <img src="<?= $row["Image"] ?>" alt="<?= $row["Title"] ?>" class="w-full h-80 object-cover rounded-t-lg">
-                        <div class="p-6">
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white"><?= $row["Title"] ?></h2>
+                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-bold md:px-2 md:py-1 rounded-lg text-sm md:text-md"><?= $row["Price"] ?>€</span>
+                        <img src="<?= $row["Image"] ?>" alt="<?= $row["Title"] ?>" class="w-30 md:w-full h-30 md:h-80 object-cover rounded-t-lg">
+                        <div class="p-2 md:p-6">
+                            <h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white"><?= $row["Title"] ?></h2>
                             <p class="text-gray-700 dark:text-gray-300">Author: <?= $row["Author"] ?></p>
-                            <p class="text-gray-700 dark:text-gray-300">Published Year: <?= $row["PublicationYear"] ?></p>
-                            <p class="text-gray-700 dark:text-gray-300"><?= substr($row["Description"], 0, 100) ?>...</p>
+                            <p class="text-gray-700 dark:text-gray-300"><?= substr($row["Description"], 0, 50) ?>...</p>
                         </div>
                     </a>
                 <?php endwhile; ?>
