@@ -108,18 +108,21 @@ $featured_books_result = $conn->query($featured_books_sql);
         </div>
 
 
-        <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-    <h1 class="text-2xl font-semibold mb-6">New Books</h1>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+
+
+<div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+    <h1 class="text-2xl font-semibold mb-6">Featured Books</h1>
+
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
-        if ($new_books_result->num_rows > 0) {
-            while ($row = $new_books_result->fetch_assoc()) {
+        if ($featured_books_result->num_rows > 0) {
+            while ($row = $featured_books_result->fetch_assoc()) {
                 echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
                 echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
-                echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
-                echo '<div class="p-6">';
-                echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-30 md:w-full h-30 md:h-80 object-cover">';
+                echo '<div class="p-3 md:p-6 text-sm md:text-md">';
+                echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                 echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
                 echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
                 echo '</div>';
@@ -132,19 +135,18 @@ $featured_books_result = $conn->query($featured_books_sql);
     </div>
 </div>
 
+<div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+    <h1 class="text-2xl font-semibold mb-6">New Books</h1>
 
-<div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-    <h1 class="text-2xl font-semibold mb-6">Featured Books</h1>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
-        if ($featured_books_result->num_rows > 0) {
-            while ($row = $featured_books_result->fetch_assoc()) {
+        if ($new_books_result->num_rows > 0) {
+            while ($row = $new_books_result->fetch_assoc()) {
                 echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
                 echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
-                echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
-                echo '<div class="p-6">';
-                echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-30 md:w-full h-30 md:h-80 object-cover">';
+                echo '<div class="p-3 md:p-6 text-sm md:text-md">';
+                echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                 echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
                 echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
                 echo '</div>';
