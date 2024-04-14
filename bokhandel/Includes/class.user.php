@@ -28,26 +28,17 @@ class USER
     public function searchBooks($searchTerm)
     {
         try {
-            if (!empty($searchTerm)) {
-                $stmt = $this->conn->prepare("SELECT * FROM Book WHERE (Title LIKE ? OR Author LIKE ?) ORDER BY RAND() LIMIT 4");
-                if (!$stmt) {
-                    throw new Exception("Failed to prepare SQL statement: " . $this->conn->error);
-                }
-                $searchTerm = '%' . $searchTerm . '%';
-                $stmt->bind_param("ss", $searchTerm, $searchTerm);
-            } else {
+            if (empty($searchTerm)) {
                 echo json_encode([]);
                 exit;
             }
 
-            if (!$stmt->execute()) {
-                throw new Exception("Failed to execute SQL statement: " . $stmt->error);
-            }
-
+            $searchTerm = '%' . $searchTerm . '%';
+            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4");
+            $stmt->bind_param("ss", $searchTerm, $searchTerm);
+            $stmt->execute();
             $result = $stmt->get_result();
-
             $books = $result->fetch_all(MYSQLI_ASSOC);
-
             header('Content-Type: application/json');
             echo json_encode($books);
         } catch (Exception $e) {
@@ -58,11 +49,8 @@ class USER
     public function register($username, $email, $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
         $stmt = $this->conn->prepare("INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, 'Regular')");
-
         $stmt->bind_param('sss', $username, $email, $hashedPassword);
-
         if ($stmt->execute()) {
             return "User registered successfully";
         } else {
@@ -73,23 +61,15 @@ class USER
     public function login()
     {
         $cleanname = $this->cleanInput($_POST["Username"]);
-
         $stmt_getUser = $this->conn->prepare("SELECT * FROM User WHERE Username = ? OR Email = ?");
-
         $stmt_getUser->bind_param('ss', $cleanname, $cleanname);
-
         $stmt_getUser->execute();
-
         $result = $stmt_getUser->get_result();
-
         $user = $result->fetch_assoc();
-
         if (!$user) {
             return "No such user or email in database";
         }
-
         $verify = password_verify($_POST["Password"], $user["Password"]);
-
         if ($verify) {
             $_SESSION["uname"] = $user["Username"];
             $_SESSION["urole"] = $user["Role"];
