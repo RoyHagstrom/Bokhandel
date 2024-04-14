@@ -52,26 +52,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container mx-auto p-8">
         <h2 class="text-3xl font-bold mb-4">Edit Book</h2>
         <?php if (!empty($updateMessage)) : ?>
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-4" role="alert">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-4 rounded-md" role="alert">
                 <?php echo $updateMessage; ?>
             </div>
         <?php endif; ?>
         <?php if (!empty($updateError)) : ?>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4" role="alert">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4 rounded-md" role="alert">
                 <?php echo $updateError; ?>
             </div>
         <?php endif; ?>
-        <form class="bg-white shadow-md rounded-lg overflow-hidden" method="POST" action="" enctype="multipart/form-data">
-            <div class="p-6">
 
+        <form id="editBookForm" class="bg-white shadow-md rounded-lg overflow-hidden" method="POST" action="" enctype="multipart/form-data">
+            <div id="step1" class="p-6">
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="title">Title:</label>
                     <input type="text" id="title" name="title" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo htmlspecialchars($bookData['Title']); ?>">
                 </div>
+        <script>
+                tinymce.init({
+                    selector: '#description',
+                    height: 500,
+                    plugins: 'advlist lists link image preview',
+                    toolbar: 'undo redo | formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat',
+                    content_style: "body { padding: 10px; }"
+                });
+        </script>
+
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="description">Description:</label>
                     <textarea id="description" name="description" class="appearance-none border rounded-md py-2 px-4 w-full" rows="4" required><?php echo htmlspecialchars($bookData['Description']); ?></textarea>
                 </div>
+
+                <button type="button" onclick="nextStep(2)" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Next</button>
+            </div>
+
+            <div id="step2" class="p-6" style="display: none;">
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="illustrator">Illustrator:</label>
                     <input type="text" id="illustrator" name="illustrator" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['illustrator']) ? htmlspecialchars($_POST['illustrator']) : htmlspecialchars($bookData['Illustrator']); ?>">
@@ -81,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" id="AgeRecommendation" name="AgeRecommendation" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['AgeRecommendation']) ? htmlspecialchars($_POST['AgeRecommendation']) : htmlspecialchars($bookData['AgeRecommendation']); ?>">
                 </div>
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="category">Category:</label>
+                    <label class="block text-sm font-semibold mb-2" for="category">Category:</label>
                     <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option>Select Category</option>
                         <?php foreach ($categories as $category): ?>
@@ -93,6 +108,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block text-sm font-semibold mb-2" for="Genre">Genre:</label>
                     <input type="text" id="Genre" name="Genre" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['Genre']) ? htmlspecialchars($_POST['Genre']) : htmlspecialchars($bookData['Genre']); ?>">
                 </div>
+                <button type="button" onclick="prevStep(1)" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">Previous</button>
+                <button type="button" onclick="nextStep(3)" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Next</button>
+            </div>
+
+            <div id="step3" class="p-6" style="display: none;">
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="PublicationYear">Publication Year:</label>
                     <input type="number" id="PublicationYear" name="PublicationYear" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['PublicationYear']) ? htmlspecialchars($_POST['PublicationYear']) : htmlspecialchars($bookData['PublicationYear']); ?>">
@@ -116,18 +136,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mb-4">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="status">Status:</label>
                     <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="">Select Status</option>
+                        <option value="">Select Status</option>
                         <?php foreach ($statuses as $status): ?>
                             <option value="<?php echo $status['StatusID']; ?>" <?php echo isset($_POST['status']) && $_POST['status'] == $status['StatusID'] ? 'selected' : ($bookData['StatusID'] == $status['StatusID'] ? 'selected' : ''); ?>><?php echo $status['StatusName']; ?></option>
-                        <?php endforeach; ?>                    </select>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
-
-                <div class="mt-4">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Update</button>
+                <button type="button" onclick="prevStep(2)" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">Previous</button>
             </div>
+            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md float-right m-4">Update</button>
         </form>
     </div>
 </div>
+
+<script>
+    function nextStep(step) {
+        document.getElementById('step' + step).style.display = 'block';
+        document.getElementById('step' + (step - 1)).style.display = 'none';
+    }
+
+    function prevStep(step) {
+        document.getElementById('step' + step).style.display = 'block';
+        document.getElementById('step' + (step + 1)).style.display = 'none';
+    }
+</script>
+
 
 <?php
 include 'Includes/footer.php';

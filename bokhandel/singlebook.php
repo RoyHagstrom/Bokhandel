@@ -47,6 +47,9 @@ $new_books_result = $conn->query($new_books_sql);
                     <span class="absolute top-0 left-0 m-2 px-3 py-1 bg-gray-800 text-white rounded-lg"><?= $book['StatusName'] ?></span>
                     <img id="bookImage" src="<?= $book['Image'] ?>" alt="<?= $book['Title'] ?>" class="w-full h-auto rounded-lg">
                     <span class="absolute top-0 right-0 m-2 px-3 py-1 bg-green-500 text-white rounded-lg font-bold"><?= $book['Price'] ?>€</span>
+                    <?php if (isset($book['AgeRecommendation'])){  ?>
+                    <span class="absolute bottom-0 right-0 m-2 px-3 py-1 bg-red-900 text-white rounded-lg font-black"><?= $book['AgeRecommendation'] ?></span>
+                    <?php } ?>
                 </div>
             <?php endif; ?>
         </div>
@@ -92,7 +95,7 @@ $new_books_result = $conn->query($new_books_sql);
 
     <div class="w-full container rounded-b-lg p-8 shadow-md flex">
         <div class="book-info">
-            <p><span class="font-semibold"></span> <?php echo $book['Description']; ?></p>
+            <p><?php echo $book['Description']; ?></p>
         </div>
     </div>
 

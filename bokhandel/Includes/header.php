@@ -1,11 +1,10 @@
 
 <?php
+
+
 include 'class.user.php';
 
 include 'db_connection.php';
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +19,9 @@ ini_set('display_errors', 1);
 
     <title>Bokhandel</title>
 </head>
+
+
+
 
 <body class="full bg-gray-800 dark:bg-gray-900">
     
@@ -85,4 +87,5 @@ ini_set('display_errors', 1);
         mobileMenuButton.addEventListener('click', () => {
             mobileMenuDrawer.classList.toggle('hidden');
         });
+
     </script> 
