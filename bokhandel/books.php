@@ -61,7 +61,7 @@ if (!$category_id) {
                     echo '<div class="p-6">';
                     echo '<h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                     echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                    echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
+                    echo '<p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) . '...</p>';
                     echo '</div>';
                     echo '</a>';
                 }
@@ -115,23 +115,24 @@ if ($category_id) {
 
 
 
-
 <div class="bg-white text-black">
     <div class="container p-8 mx-auto">
-        <h1 class="text-3xl font-bold mb-6"><?= $title ?></h1>
+        <h1 class="text-3xl font-bold mb-6"><?= htmlspecialchars($title) ?></h1>
 
-        <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
-                    <a href="singlebook.php?id=<?= $row['BookID'] ?>" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
-                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-bold md:px-2 md:py-1 rounded-lg text-sm md:text-md"><?= $row["Price"] ?>€</span>
-                        <img src="<?= $row["Image"] ?>" alt="<?= $row["Title"] ?>" class="w-30 md:w-full h-30 md:h-80 object-cover rounded-t-lg">
-                        <div class="p-2 md:p-6">
-                            <h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white"><?= $row["Title"] ?></h2>
-                            <p class="text-gray-700 dark:text-gray-300">Author: <?= $row["Author"] ?></p>
-                            <p class="text-gray-700 dark:text-gray-300"><?= substr($row["Description"], 0, 50) ?>...</p>
-                        </div>
-                    </a>
+                    <div class="book-entry bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
+                        <a href="singlebook.php?id=<?= htmlspecialchars($row['BookID']) ?>" class="block">
+                            <span class="absolute top-2 right-2 bg-white text-gray-900 font-bold md:px-2 md:py-1 rounded-lg text-sm md:text-md"><?= htmlspecialchars($row["Price"]) ?>€</span>
+                            <img src="<?= htmlspecialchars($row["Image"]) ?>" alt="<?= htmlspecialchars($row["Title"]) ?>" class="w-30 md:w-full h-30 md:h-80 object-cover rounded-t-lg">
+                            <div class="p-2 md:p-6">
+                                <h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars($row["Title"]) ?></h2>
+                                <p class="text-gray-700 dark:text-gray-300">Author: <?= htmlspecialchars($row["Author"]) ?></p>
+                                <p class="text-gray-700 dark:text-gray-300"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) ?>...</p>
+                            </div>
+                        </a>
+                    </div>
                 <?php endwhile; ?>
             <?php else: ?>
                 <p class='text-lg text-gray-700 dark:text-white'>No books found</p>
@@ -139,6 +140,13 @@ if ($category_id) {
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
 
 <?php
 $conn->close();

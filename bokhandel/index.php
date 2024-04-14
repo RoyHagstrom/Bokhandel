@@ -70,7 +70,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                 <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow">
                     <h2 style="overflow: hidden" class="text-xl mb-1"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
                     <p>Author: ${book.Author}</p>
-                    <p>${book.Description}...</p>
+                    <p>${book.Description.slice(0, 100)}...</p>
                 </div>
             </div>
         `).join('');
@@ -79,7 +79,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 
 
-        <div class="bg-gray-800 p-8 w-full sm:w-130 mt-8">
+        <div class="bg-gray-800 py-8 w-full sm:w-130 mt-8">
             <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
 
             <div class="flex flex-wrap justify-center items-center">
@@ -95,8 +95,8 @@ $featured_books_result = $conn->query($featured_books_sql);
 
                         echo '<div class="m-2 md:m-4 relative rounded-lg">';
                         echo '<a href="books.php?id=' . $featured_category_id . '">'; 
-                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
-                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-20 h-20 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
+                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-xs sm:text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
                         echo '</a>';
                         echo '</div>';
                     }
@@ -124,7 +124,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                 echo '<div class="p-3 md:p-6 text-sm md:text-md">';
                 echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                 echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
+                echo '<p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) . '...</p>';
                 echo '</div>';
                 echo '</a>';
             }
@@ -148,7 +148,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                 echo '<div class="p-3 md:p-6 text-sm md:text-md">';
                 echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                 echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
+                echo '<p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 50)) . '...</p>';
                 echo '</div>';
                 echo '</a>';
             }
