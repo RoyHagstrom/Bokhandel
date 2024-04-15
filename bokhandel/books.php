@@ -1,63 +1,41 @@
 <?php
 include 'Includes/header.php'; 
 
-$category_id = $_GET['id'] ?? null;
-$search_term = $_GET['search'] ?? null;
+$search_term = trim($_GET['search'] ?? ''); 
+$category_id = $_GET['id'] ?? '';
 
-$sql = "SELECT * FROM `Book` WHERE ";
 $conditions = [];
 
-if ($category_id) {
-    $conditions[] = "`Category` = '$category_id'";
-}
-
-if ($search_term) {
+if (!empty($search_term)) {
     $search_term = str_replace(' ', '|', $search_term);
     $conditions[] = "`Title` REGEXP '^(.*)(" . $search_term . ")(.*)$'";
 }
 
-if (!empty($conditions)) {
-    $sql .= implode(' AND ', $conditions);
-} else {
-    $sql .= "1=1";
+if (!empty($category_id)) {
+    $conditions[] = "`Category` = '$category_id'";
 }
+
+$sql = "SELECT * FROM `Book` ";
+$conditions_string = implode(' AND ', $conditions);
+$sql .= !empty($conditions_string) ? "WHERE $conditions_string" : "WHERE 1=1";
 
 $order = $_GET['sort'] ?? null;
 if ($order) {
-    $sql .= " ORDER BY ";
-    switch ($order) {
-        case 'title_asc':
-            $sql .= "`Title` ASC";
-            break;
-        case 'title_desc':
-            $sql .= "`Title` DESC";
-            break;
-        case 'pub_year_asc':
-            $sql .= "`PublicationYear` ASC";
-            break;
-        case 'pub_year_desc':
-            $sql .= "`PublicationYear` DESC";
-            break;
-        case 'added_asc':
-            $sql .= "`BookID` ASC";
-            break;
-        case 'added_desc':
-            $sql .= "`BookID` DESC";
-            break;
-        case 'Price_asc':
-            $sql .= "`Price` ASC";
-            break;
-        case 'Price_desc':
-            $sql .= "`Price` DESC";
-            break;
-        default:
-            $sql .= "`BookID` DESC";
-    }
+    $orderMappings = [
+        'title_asc' => '`Title` ASC',
+        'title_desc' => '`Title` DESC',
+        'pub_year_asc' => '`PublicationYear` ASC',
+        'pub_year_desc' => '`PublicationYear` DESC',
+        'added_asc' => '`BookID` ASC',
+        'added_desc' => '`BookID` DESC',
+        'Price_asc' => '`Price` ASC',
+        'Price_desc' => '`Price` DESC',
+    ];
+    $sql .= " ORDER BY " . ($orderMappings[$order] ?? '`BookID` DESC');
 } else {
     $sql .= " ORDER BY `BookID` DESC";
 }
 
-$result = $conn->query($sql) or die($conn->error); 
 $result = $conn->query($sql) or die($conn->error); 
 ?>
 
@@ -203,15 +181,37 @@ if ($category_id) {
         </form>
     </div>
 
-    <div class="mt-8 flex justify-center sm:justify-start items-center gap-4">
-        <form method="get" class="w-full max-w-xs flex flex-col sm:flex-row items-center">
-            <label for="search" class="sr-only">Search</label>
-            <input type="text" name="search" id="search" placeholder="Search by title, author, or ISBN" class="appearance-none bg-transparent border-none w-full text-gray-900 text-sm rounded-tl-lg rounded-bl-lg px-4 py-2 outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50">
-            <button type="submit" class="px-4 py-2 bg-blue-500 text-white font-medium hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50 rounded-lg rounded-tr-none rounded-br-none sm:rounded-r-lg text-sm">
-                Search
-            </button>
-        </form>
-    </div>
+    <div id="search-form" class="daisy-form my-8 flex gap-4 dark w-full">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="get" class="flex justify-between w-96 items-center gap-1">
+        <input type="text" name="search" id="search-input" placeholder="Search" class="border border-gray-300 px-4 py-2 rounded-lg text-sm bg-gray-100 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:bg-gray-700 w-full"
+               style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);">
+        <button type="submit" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700 dark:focus:bg-blue-700"
+                style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);">
+            Search
+        </button>
+        <button type="button" id="clear-search" class="px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);">
+            Clear
+        </button>
+    </form>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            var searchTerm = document.getElementById('search-input').value;
+            if (searchTerm !== '') {
+                e.preventDefault();
+                var url = new URL(window.location.href);
+                url.searchParams.set('search', encodeURIComponent(searchTerm)); 
+                window.location.href = url.toString(); 
+            }
+        });
+        document.getElementById('clear-search').addEventListener('click', function(e) {
+            var url = new URL(window.location.href);
+            url.searchParams.delete('search');
+            window.location.href = url.toString(); 
+        });
+    </script>
+</div>
+
+    
         <h1 class="text-3xl font-bold mb-6"><?= htmlspecialchars($title) ?></h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
@@ -247,4 +247,5 @@ if ($category_id) {
 $conn->close();
 include 'Includes/footer.php';
 ?>
+
 
