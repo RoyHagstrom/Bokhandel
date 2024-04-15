@@ -19,7 +19,7 @@ if(isset($_SESSION["uname"]) && $_SESSION["urole"] != "Admin"){
     }
 
 
-$stmt = $conn->prepare("SELECT * FROM Book WHERE Author = ?");
+$stmt = $conn->prepare("SELECT * FROM Book WHERE Author = ? ORDER BY BookID DESC");
 $stmt->bind_param("s", $author);
 $stmt->execute();
 $result = $stmt->get_result();
