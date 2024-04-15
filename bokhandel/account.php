@@ -14,6 +14,9 @@ $userID = $_GET["uid"];
 elseif(isset($_GET["uid"])){
     $userID = $_SESSION["uid"];
 }
+else{
+    $userID = $_SESSION["uid"];
+}
 
 $stmt = $conn->prepare("SELECT * FROM User WHERE UserID = ?");
 $stmt->bind_param("i", $userID);
@@ -57,10 +60,11 @@ if ($result->num_rows > 0) {
                 <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">View Books</a>
 
                 <?php if($userData['Role'] == "Admin"){ ?>
-
-
-                <a href="register.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">Create User</a>
-                <a href="manage_users.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">Manage Users</a>
+                    <a href="register.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">Create User</a>
+                    <a href="manage_users.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">Manage Users</a>
+                <?php } ?>
+                <?php if($_SESSION['urole'] == "Admin"){ ?>
+                    <a href="delete_user.php?userid=<?php echo $userData['UserID']; ?>" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md">Delete Users</a>
                 <?php } ?>
 
             </div>

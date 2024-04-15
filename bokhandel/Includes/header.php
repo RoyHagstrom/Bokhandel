@@ -29,8 +29,6 @@ include 'db_connection.php';
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <a href="index.php" class="text-3xl font-bold">Bokhandel</a>
-                <?php if(isset($_SESSION["uname"])){ echo $_SESSION["uname"];}?>
-                <?php if(isset($_SESSION["urole"])){ echo $_SESSION["urole"];}?>
             </div>
 
 

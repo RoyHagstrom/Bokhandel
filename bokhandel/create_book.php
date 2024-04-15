@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Book created successfully.";
-        $user->redirect("my_books.php");
+        header("Location: my_books.php");
     } else {
         echo "Error creating book: " . $stmt->error;
     }

@@ -98,7 +98,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
                         echo '<div class="m-2 md:m-4 relative rounded-lg">';
                         echo '<a href="books.php?id=' . $featured_category_id . '">'; 
-                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-20 h-20 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
+                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
                         echo '<div class="absolute inset-0 flex items-center justify-center text-white text-xs sm:text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
                         echo '</a>';
                         echo '</div>';
