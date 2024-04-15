@@ -71,24 +71,24 @@ $result = $conn->query($sql) or die($conn->error);
 
 <?php
 if (!$category_id) {
-    $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY RAND() LIMIT 7";
+    $featured_books_sql = "SELECT * FROM Book WHERE Featured = 1 ORDER BY RAND() LIMIT 6";
     $featured_books_result = $conn->query($featured_books_sql);
 ?>
 <div class="w-full bg-white">
     <div class="mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
         <h1 class="text-2xl font-semibold mb-6 text-center text-black">Featured Books</h1>
 
-        <div id="carousel" class="daisy-carousel grid grid-cols-2 sm:grid-cols-2 md:grid-cols-<?php echo min($featured_books_result->num_rows, 3); ?> lg:grid-cols-<?php echo min($featured_books_result->num_rows, 4); ?> xl:grid-cols-<?php echo min($featured_books_result->num_rows, 7); ?> gap-2 md:gap-4">
+        <div id="carousel" class="daisy-carousel grid grid-cols-3 sm:grid-cols-3 md:grid-cols-<?php echo min($featured_books_result->num_rows, 3); ?> lg:grid-cols-<?php echo min($featured_books_result->num_rows, 4); ?> xl:grid-cols-<?php echo min($featured_books_result->num_rows, 7); ?> gap-2 md:gap-4">
             <?php
             if ($featured_books_result->num_rows > 0) {
                 while ($row = $featured_books_result->fetch_assoc()) {
                     echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
                     echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
-                    echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-30 md:w-full h-30 md:h-80 object-cover">';
-                    echo '<div class="p-6">';
-                    echo '<h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
-                    echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                    echo '<p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) . '...</p>';
+                    echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full object-cover md:h-64">';
+                    echo '<div class="p-4 md:p-6">';
+                    echo '<h2 class="text-sm md:text-base font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                    echo '<p class="text-sm text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
+                    echo '<p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-2 md:line-clamp-3">' . htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 50)) . '...</p>';
                     echo '</div>';
                     echo '</a>';
                 }
@@ -119,13 +119,6 @@ if (!$category_id) {
     });
 </script>
 
-
-
-    
-
-
-
-
 <?php
 if ($category_id) {
     $category_name_sql = "SELECT name FROM categories WHERE id = $category_id";
@@ -141,19 +134,13 @@ if ($category_id) {
 }
 ?>
 
-
-
-
-
 <div class="bg-white text-black">
-
-    <div class="container p-8 mx-auto">
-
-
-    <div class="mb-8 flex items-center">
-        <form method="get" class="flex items-center">
-            <label for="category-select" class="text-sm font-medium mr-2">Category:</label>
-            <select id="category-select" name="id" onchange="this.form.submit()" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
+    <div class="container p-8 mx-auto ">
+        <div style="overflow: auto" class="mx-auto m-8 p-8 border border-gray-300 rounded-lg shadow-md w-full sm:w-130 mt-8">
+        <div class="mx-auto mb-8 p-8 flex flex-wrap items-center justify-center gap-4">
+        <form method="get" class="flex flex-col sm:flex-row items-center">
+            <label for="category-select" class="text-sm font-medium mx-2 mb-2 sm:mb-0 sm:ml-2">Category:</label>
+            <select id="category-select" name="id" onchange="this.form.submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
                 <option value="">All Books</option>
                 <?php
                 $categories_sql = "SELECT id, name FROM categories ORDER BY name";
@@ -165,9 +152,9 @@ if ($category_id) {
                 ?>
             </select>
         </form>
-        <form id="sort-form" method="get" class="flex items-center">
-            <label for="sort-select" class="text-sm font-medium mx-2">Sort By:</label>
-            <select id="sort-select" name="sort" onchange="document.getElementById('sort-form').submit()" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
+        <form id="sort-form" method="get" class="flex flex-col sm:flex-row items-center">
+            <label for="sort-select" class="text-sm font-medium mx-2 mb-2 sm:mb-0 sm:ml-2">Sort:</label>
+            <select id="sort-select" name="sort" onchange="document.getElementById('sort-form').submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
                 <option value="">Default</option>
                 <option value="title_asc" <?php echo ($_GET['sort'] ?? '') == 'title_asc' ? 'selected' : '' ?>>Title (A-Z)</option>
                 <option value="title_desc" <?php echo ($_GET['sort'] ?? '') == 'title_desc' ? 'selected' : '' ?>>Title (Z-A)</option>
@@ -180,51 +167,49 @@ if ($category_id) {
             </select>
         </form>
     </div>
-
-    <div id="search-form" class="daisy-form my-8 flex gap-4 dark w-full">
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="get" class="flex justify-between w-96 items-center gap-1">
-        <input type="text" name="search" id="search-input" placeholder="Search" class="border border-gray-300 px-4 py-2 rounded-lg text-sm bg-gray-100 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:bg-gray-700 w-full"
-               style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);">
-        <button type="submit" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700 dark:focus:bg-blue-700"
-                style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);">
-            Search
-        </button>
-        <button type="button" id="clear-search" class="px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" style="box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);">
-            Clear
-        </button>
-    </form>
-    <script>
-        document.getElementById('search-form').addEventListener('submit', function(e) {
-            var searchTerm = document.getElementById('search-input').value;
-            if (searchTerm !== '') {
-                e.preventDefault();
+    <div id="search-form" class="flex justify-center w-full mt-8">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="get" class="flex items-center gap-2 max-w-xl">
+            <input type="text" name="search" id="search-input" placeholder="Search" class="w-full border border-gray-300 px-4 py-2 rounded-lg text-sm bg-gray-100 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:bg-gray-700">
+            <button type="submit" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700 dark:focus:bg-blue-700">
+                Search
+            </button>
+            <button type="button" id="clear-search" class="px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Clear
+            </button>
+        </form>
+        <script>
+            document.getElementById('search-form').addEventListener('submit', function(e) {
+                var searchTerm = document.getElementById('search-input').value;
+                if (searchTerm !== '') {
+                    e.preventDefault();
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('search', encodeURIComponent(searchTerm)); 
+                    window.location.href = url.toString(); 
+                }
+            });
+            document.getElementById('clear-search').addEventListener('click', function(e) {
                 var url = new URL(window.location.href);
-                url.searchParams.set('search', encodeURIComponent(searchTerm)); 
+                url.searchParams.delete('search');
                 window.location.href = url.toString(); 
-            }
-        });
-        document.getElementById('clear-search').addEventListener('click', function(e) {
-            var url = new URL(window.location.href);
-            url.searchParams.delete('search');
-            window.location.href = url.toString(); 
-        });
-    </script>
-</div>
+            });
+        </script>
+    </div>
+        </div>
 
-    
+
         <h1 class="text-3xl font-bold mb-6"><?= htmlspecialchars($title) ?></h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="book-entry bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
                         <a href="singlebook.php?id=<?= htmlspecialchars($row['BookID']) ?>" class="block">
-                            <span class="absolute top-2 right-2 bg-white text-gray-900 font-bold md:px-2 md:py-1 rounded-lg text-sm md:text-md"><?= htmlspecialchars($row["Price"]) ?>€</span>
-                            <img src="<?= htmlspecialchars($row["Image"]) ?>" alt="<?= htmlspecialchars($row["Title"]) ?>" class="w-30 md:w-full h-30 md:h-80 object-cover rounded-t-lg">
-                            <div class="p-2 md:p-6">
-                                <h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Title"])), 0, 100)) ?></h2>
-                                <p class="text-gray-700 dark:text-gray-300">Author: <?= htmlspecialchars($row["Author"]) ?></p>
-                                <p class="text-gray-700 dark:text-gray-300"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) ?>...</p>
+                            <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg"><?= htmlspecialchars($row["Price"]) ?>€</span>
+                            <img src="<?= htmlspecialchars($row["Image"]) ?>" alt="<?= htmlspecialchars($row["Title"]) ?>" class="w-full h-48 object-cover rounded-t-lg sm:h-64 md:h-80 lg:h-96 xl:h-112">
+                            <div class="p-2 sm:p-4 md:p-6">
+                                <h2 class="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Title"])), 0, 100)) ?></h2>
+                                <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300">Author: <?= htmlspecialchars($row["Author"]) ?></p>
+                                <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) ?>...</p>
                             </div>
                         </a>
                     </div>
@@ -235,13 +220,6 @@ if ($category_id) {
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 
 <?php
 $conn->close();
