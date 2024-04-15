@@ -66,12 +66,13 @@ $featured_books_result = $conn->query($featured_books_sql);
         }
         bookInfo.innerHTML = books.map(book => `
             <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${book.BookID}';">
-                <img src="${book.Image}" alt="${book.Title}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
+            <img src="${book.Image}" alt="${book.Title}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
                 <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow">
                     <h2 style="overflow: hidden" class="text-xl mb-1"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
                     <p>Author: ${book.Author}</p>
-                    <p>${book.Description.slice(0, 100)}...</p>
+                    <p class="line-clamp-3">${book.Description.toString().split(' ').slice(0, 30).join(' ') + '...'}</p>
                 </div>
+            </div>
             </div>
         `).join('');
     }

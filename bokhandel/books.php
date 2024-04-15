@@ -3,11 +3,10 @@ include 'Includes/header.php';
 
 $category_id = $_GET['id'] ?? null;
 
-$sql = "SELECT * FROM Book";
+$sql = "SELECT * FROM Book ORDER BY BookID DESC";
 if ($category_id) {
     $sql .= " WHERE Category = '$category_id'";
 }
-$sql .= " ORDER BY BookID DESC";
 
 $result = $conn->query($sql);
 ?>
@@ -127,7 +126,7 @@ if ($category_id) {
                             <span class="absolute top-2 right-2 bg-white text-gray-900 font-bold md:px-2 md:py-1 rounded-lg text-sm md:text-md"><?= htmlspecialchars($row["Price"]) ?>€</span>
                             <img src="<?= htmlspecialchars($row["Image"]) ?>" alt="<?= htmlspecialchars($row["Title"]) ?>" class="w-30 md:w-full h-30 md:h-80 object-cover rounded-t-lg">
                             <div class="p-2 md:p-6">
-                                <h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars($row["Title"]) ?></h2>
+                                <h2 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Title"])), 0, 100)) ?></h2>
                                 <p class="text-gray-700 dark:text-gray-300">Author: <?= htmlspecialchars($row["Author"]) ?></p>
                                 <p class="text-gray-700 dark:text-gray-300"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) ?>...</p>
                             </div>

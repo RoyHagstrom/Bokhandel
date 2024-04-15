@@ -2,11 +2,18 @@
 
 <?php
 if (!isset($_SESSION["uname"])) {
-    header("Location: login.php");
-    exit();
+    $user->redirect("login.php");
 }
 
+if(isset($_SESSION["uid"]) && $_SESSION["urole"] != "Admin"){
 $userID = $_SESSION["uid"];
+} 
+elseif($_SESSION["urole"] == "Admin" && isset($_GET["uid"])){
+$userID = $_GET["uid"];
+}
+elseif(isset($_GET["uid"])){
+    $userID = $_SESSION["uid"];
+}
 
 $stmt = $conn->prepare("SELECT * FROM User WHERE UserID = ?");
 $stmt->bind_param("i", $userID);
@@ -16,15 +23,14 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $userData = $result->fetch_assoc();
 } else {
-    header("Location: index.php");
-    exit();
+    $user->redirect("index.php");
 }
 ?>
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
 
 <div class="container mx-auto p-8">
-    <h2 class="text-3xl font-bold mb-4">Welcome, <?php echo $_SESSION["uname"]; ?></h2>
+    <h2 class="text-3xl font-bold mb-4">Welcome, <?php echo $userData["Username"]; ?></h2>
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <div class="p-6">
             <h3 class="text-xl font-semibold mb-2">Your Account Information:</h3>
@@ -48,12 +54,13 @@ if ($result->num_rows > 0) {
             </div>
             <div class="mt-4 flex gap-2">
                 <a href="create_book.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create Book</a>
-                <a href="my_books.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">View Books</a>
+                <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">View Books</a>
 
-                <?php if($_SESSION["urole"] == "Admin"){ ?>
+                <?php if($userData['Role'] == "Admin"){ ?>
 
 
                 <a href="register.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">Create User</a>
+                <a href="manage_users.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">Manage Users</a>
                 <?php } ?>
 
             </div>
