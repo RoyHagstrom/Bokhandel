@@ -34,6 +34,7 @@ $featured_books_result = $conn->query($featured_books_sql);
     <div id="bookInfo" class="shadow-md rounded-lg w-full mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<?php echo min($new_books_result->num_rows, 3); ?> xl:grid-cols-<?php echo min($new_books_result->num_rows, 4); ?> gap-2" style="z-index: 1;"></div>
 </div>
 
+
 <script>
     const searchInput = document.getElementById('searchInput');
     const bookInfo = document.getElementById('bookInfo');
@@ -64,13 +65,14 @@ $featured_books_result = $conn->query($featured_books_sql);
             bookInfo.innerHTML = '';
             return;
         }
+
         bookInfo.innerHTML = books.map(book => `
             <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${book.BookID}';">
             <img src="${book.Image}" alt="${book.Title}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
-                <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow">
-                    <h2 style="overflow: hidden" class="text-xl mb-1"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
-                    <p>Author: ${book.Author}</p>
-                    <p class="line-clamp-3">${book.Description.toString().split(' ').slice(0, 30).join(' ') + '...'}</p>
+                <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow text-xs">
+                    <h2 style="overflow: hidden" class="text-lg mb-1 leading-5"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
+                    <p class="text-xs">Author: ${book.Author}</p>
+                    <p class="line-clamp-2">${book.Description.toString().split(' ').slice(0, 30).join(' ') + '...'}</p>
                 </div>
             </div>
             </div>
