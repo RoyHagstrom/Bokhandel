@@ -3,12 +3,16 @@ include 'Includes/header.php';
 
 $category_id = $_GET['id'] ?? null;
 
-$sql = "SELECT * FROM Book ORDER BY BookID DESC";
+$sql = "SELECT * FROM `Book` WHERE ";
 if ($category_id) {
-    $sql .= " WHERE Category = '$category_id'";
+    $sql .= "`Category` = '$category_id'";
+} else {
+    $sql .= "1=1";
 }
 
-$result = $conn->query($sql);
+$sql .= " ORDER BY `BookID` DESC"; 
+
+$result = $conn->query($sql) or die($conn->error); 
 ?>
 
 <div class="bg-gray-800 p-2 md:p-8 w-full sm:w-130 mt-8">

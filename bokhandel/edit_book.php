@@ -29,33 +29,34 @@ $updateMessage = $updateError = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['illustrator']) && isset($_POST['AgeRecommendation']) && isset($_POST['category']) && isset($_POST['Genre']) && isset($_POST['PublicationYear']) && isset($_POST['Publisher']) && isset($_POST['Price']) && isset($_POST['Pages']) && isset($_POST['status'])) {
-
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
-        } elseif ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $targetDir = "images/";
             $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+        
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
 
-            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                $stmt = $conn->prepare("UPDATE Book SET Image=? WHERE BookID=?");
+                $stmt->bind_param("si", $targetFile, $_GET["bookid"]);
+                if (!$stmt->execute()) {
+                    $updateError = "Error updating image path in the database.";
+                }
+            } else {
                 $updateError = "Error uploading image.";
             }
-        } else {
-            $updateError = "File upload failed error: " . $_FILES['image']['error'];
         }
 
-        if (isset($targetFile)) {
-            $stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Publisher=?, Price=?, Pages=?, StatusID=?, Image=? WHERE BookID=?");
-            $stmt->bind_param("ssssisssdsssi", $_POST['title'], $_POST['description'], $_POST['illustrator'], $_POST['AgeRecommendation'], $_POST['category'], $_POST['Genre'], $_POST['PublicationYear'], $_POST['Publisher'], $_POST['Price'], $_POST['Pages'], $_POST['status'], $targetFile, $_GET["bookid"]);
-            
-            if ($stmt->execute()) {
-                $stmt = $conn->prepare("SELECT * FROM Book WHERE BookID = ?");
-                $stmt->bind_param("i", $_GET["bookid"]);
-                $stmt->execute();
-                $bookData = $stmt->get_result()->fetch_assoc();
+        $stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Publisher=?, Price=?, Pages=?, StatusID=? WHERE BookID=?");
+        $stmt->bind_param("ssssisssdiii", $_POST['title'], $_POST['description'], $_POST['illustrator'], $_POST['AgeRecommendation'], $_POST['category'], $_POST['Genre'], $_POST['PublicationYear'], $_POST['Publisher'], $_POST['Price'], $_POST['Pages'], $_POST['status'], $_GET["bookid"]);
 
-                $updateMessage = "Book updated successfully.";
-            } else {
-                $updateError = "Error updating book: " . $stmt->error;
-            }
+        if ($stmt->execute()) {
+            $stmt = $conn->prepare("SELECT * FROM Book WHERE BookID = ?");
+            $stmt->bind_param("i", $_GET["bookid"]);
+            $stmt->execute();
+            $bookData = $stmt->get_result()->fetch_assoc();
+
+            $updateMessage = "Book updated successfully.";
+        } else {
+            $updateError = "Error updating book: " . $stmt->error;
         }
     } else {
         $updateError = "Form data missing.";
