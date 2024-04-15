@@ -2,10 +2,22 @@
 include 'Includes/header.php'; 
 
 $category_id = $_GET['id'] ?? null;
+$search_term = $_GET['search'] ?? null;
 
 $sql = "SELECT * FROM `Book` WHERE ";
+$conditions = [];
+
 if ($category_id) {
-    $sql .= "`Category` = '$category_id'";
+    $conditions[] = "`Category` = '$category_id'";
+}
+
+if ($search_term) {
+    $search_term = str_replace(' ', '|', $search_term);
+    $conditions[] = "`Title` REGEXP '^(.*)(" . $search_term . ")(.*)$'";
+}
+
+if (!empty($conditions)) {
+    $sql .= implode(' AND ', $conditions);
 } else {
     $sql .= "1=1";
 }
@@ -26,6 +38,18 @@ if ($order) {
         case 'pub_year_desc':
             $sql .= "`PublicationYear` DESC";
             break;
+        case 'added_asc':
+            $sql .= "`BookID` ASC";
+            break;
+        case 'added_desc':
+            $sql .= "`BookID` DESC";
+            break;
+        case 'Price_asc':
+            $sql .= "`Price` ASC";
+            break;
+        case 'Price_desc':
+            $sql .= "`Price` DESC";
+            break;
         default:
             $sql .= "`BookID` DESC";
     }
@@ -33,6 +57,7 @@ if ($order) {
     $sql .= " ORDER BY `BookID` DESC";
 }
 
+$result = $conn->query($sql) or die($conn->error); 
 $result = $conn->query($sql) or die($conn->error); 
 ?>
 
@@ -148,39 +173,45 @@ if ($category_id) {
 
 
     <div class="mb-8 flex items-center">
-    <form method="get" class="flex items-center">
-        <label for="category-select" class="text-sm font-medium mr-2">Category:</label>
-        <select id="category-select" name="id" onchange="this.form.submit()" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            <option value="">All Books</option>
-            <?php
-            $categories_sql = "SELECT id, name FROM categories ORDER BY name";
-            $categories_result = $conn->query($categories_sql);
-            while ($category_row = $categories_result->fetch_assoc()) {
-                $selected = $category_row['id'] == $category_id ? 'selected' : '';
-                echo '<option value="' . $category_row['id'] . '" ' . $selected . '>' . $category_row['name'] . '</option>';
-            }
-            ?>
-        </select>
-    </form>
+        <form method="get" class="flex items-center">
+            <label for="category-select" class="text-sm font-medium mr-2">Category:</label>
+            <select id="category-select" name="id" onchange="this.form.submit()" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                <option value="">All Books</option>
+                <?php
+                $categories_sql = "SELECT id, name FROM categories ORDER BY name";
+                $categories_result = $conn->query($categories_sql);
+                while ($category_row = $categories_result->fetch_assoc()) {
+                    $selected = $category_row['id'] == ($_GET['id'] ?? '') ? 'selected' : '';
+                    echo '<option value="' . $category_row['id'] . '" ' . $selected . '>' . htmlspecialchars($category_row['name']) . '</option>';
+                }
+                ?>
+            </select>
+        </form>
         <form id="sort-form" method="get" class="flex items-center">
             <label for="sort-select" class="text-sm font-medium mx-2">Sort By:</label>
-            <select id="sort-select" name="sort" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <select id="sort-select" name="sort" onchange="document.getElementById('sort-form').submit()" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option value="">Default</option>
                 <option value="title_asc" <?php echo ($_GET['sort'] ?? '') == 'title_asc' ? 'selected' : '' ?>>Title (A-Z)</option>
                 <option value="title_desc" <?php echo ($_GET['sort'] ?? '') == 'title_desc' ? 'selected' : '' ?>>Title (Z-A)</option>
                 <option value="pub_year_asc" <?php echo ($_GET['sort'] ?? '') == 'pub_year_asc' ? 'selected' : '' ?>>Publication Year (Oldest First)</option>
                 <option value="pub_year_desc" <?php echo ($_GET['sort'] ?? '') == 'pub_year_desc' ? 'selected' : '' ?>>Publication Year (Newest First)</option>
+                <option value="added_asc" <?php echo ($_GET['sort'] ?? '') == 'added_asc' ? 'selected' : '' ?>>Added (Oldest First)</option>
+                <option value="added_desc" <?php echo ($_GET['sort'] ?? '') == 'added_desc' ? 'selected' : '' ?>>Added (Newest First)</option>
+                <option value="Price_asc" <?php echo ($_GET['sort'] ?? '') == 'Price_asc' ? 'selected' : '' ?>>Price (Cheapest First)</option>
+                <option value="Price_desc" <?php echo ($_GET['sort'] ?? '') == 'Price_desc' ? 'selected' : '' ?>>Price (Expensive First)</option>
             </select>
         </form>
-        <script>
-            document.getElementById('sort-select').addEventListener('change', function() {
-                var form = document.getElementById('sort-form');
-                form.submit();
-            });
-        </script>
     </div>
 
-
+    <div class="mt-8 flex justify-center sm:justify-start items-center gap-4">
+        <form method="get" class="w-full max-w-xs flex flex-col sm:flex-row items-center">
+            <label for="search" class="sr-only">Search</label>
+            <input type="text" name="search" id="search" placeholder="Search by title, author, or ISBN" class="appearance-none bg-transparent border-none w-full text-gray-900 text-sm rounded-tl-lg rounded-bl-lg px-4 py-2 outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50">
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white font-medium hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50 rounded-lg rounded-tr-none rounded-br-none sm:rounded-r-lg text-sm">
+                Search
+            </button>
+        </form>
+    </div>
         <h1 class="text-3xl font-bold mb-6"><?= htmlspecialchars($title) ?></h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
@@ -216,3 +247,4 @@ if ($category_id) {
 $conn->close();
 include 'Includes/footer.php';
 ?>
+

@@ -28,21 +28,24 @@ class USER
     public function searchBooks($searchTerm)
     {
         try {
-            if (empty($searchTerm)) {
+            if (empty(trim($searchTerm))) {
+                http_response_code(400);
                 echo json_encode([]);
                 exit;
             }
 
-            $searchTerm = '%' . $searchTerm . '%';
+            $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
             $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4");
             $stmt->bind_param("ss", $searchTerm, $searchTerm);
-            $stmt->execute();
+            $stmt->execute() or die($this->conn->error);
             $result = $stmt->get_result();
             $books = $result->fetch_all(MYSQLI_ASSOC);
+
+            http_response_code(200);
             header('Content-Type: application/json');
             echo json_encode($books);
         } catch (Exception $e) {
-            echo "Failed to search for books. Please try again later.";
+            http_response_code(500);
         }
     }
 

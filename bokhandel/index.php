@@ -56,7 +56,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                 displayBooks(data);
             })
             .catch(error => {
-                bookInfo.innerHTML = 'Failed to search for books. Please try again later.';
+                bookInfo.innerHTML = '';
             });
     }
 
