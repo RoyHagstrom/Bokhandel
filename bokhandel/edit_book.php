@@ -55,6 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bookData = $stmt->get_result()->fetch_assoc();
 
             $updateMessage = "Book updated successfully.";
+            //sleep(2);
+            //$user->redirect("singlebook.php?id=" . $_GET["bookid"]);
         } else {
             $updateError = "Error updating book: " . $stmt->error;
         }
@@ -69,7 +71,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2 class="text-3xl font-bold mb-4">Edit Book</h2>
         <?php if (!empty($updateMessage)) : ?>
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-4 rounded-md" role="alert">
-                <?php echo $updateMessage; ?>
+            <?php echo $updateMessage ?>    
+            <button 
+                type="button" 
+                onclick="window.location.href='singlebook.php?id=<?php echo $_GET["bookid"]; ?>'"
+                class="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    Go to book
+                </button>
             </div>
         <?php endif; ?>
         <?php if (!empty($updateError)) : ?>

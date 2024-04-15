@@ -10,7 +10,28 @@ if ($category_id) {
     $sql .= "1=1";
 }
 
-$sql .= " ORDER BY `BookID` DESC"; 
+$order = $_GET['sort'] ?? null;
+if ($order) {
+    $sql .= " ORDER BY ";
+    switch ($order) {
+        case 'title_asc':
+            $sql .= "`Title` ASC";
+            break;
+        case 'title_desc':
+            $sql .= "`Title` DESC";
+            break;
+        case 'pub_year_asc':
+            $sql .= "`PublicationYear` ASC";
+            break;
+        case 'pub_year_desc':
+            $sql .= "`PublicationYear` DESC";
+            break;
+        default:
+            $sql .= "`BookID` DESC";
+    }
+} else {
+    $sql .= " ORDER BY `BookID` DESC";
+}
 
 $result = $conn->query($sql) or die($conn->error); 
 ?>
@@ -99,6 +120,9 @@ if (!$category_id) {
 
     
 
+
+
+
 <?php
 if ($category_id) {
     $category_name_sql = "SELECT name FROM categories WHERE id = $category_id";
@@ -119,7 +143,44 @@ if ($category_id) {
 
 
 <div class="bg-white text-black">
+
     <div class="container p-8 mx-auto">
+
+
+    <div class="mb-8 flex items-center">
+    <form method="get" class="flex items-center">
+        <label for="category-select" class="text-sm font-medium mr-2">Category:</label>
+        <select id="category-select" name="id" onchange="this.form.submit()" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <option value="">All Books</option>
+            <?php
+            $categories_sql = "SELECT id, name FROM categories ORDER BY name";
+            $categories_result = $conn->query($categories_sql);
+            while ($category_row = $categories_result->fetch_assoc()) {
+                $selected = $category_row['id'] == $category_id ? 'selected' : '';
+                echo '<option value="' . $category_row['id'] . '" ' . $selected . '>' . $category_row['name'] . '</option>';
+            }
+            ?>
+        </select>
+    </form>
+        <form id="sort-form" method="get" class="flex items-center">
+            <label for="sort-select" class="text-sm font-medium mx-2">Sort By:</label>
+            <select id="sort-select" name="sort" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                <option value="">Default</option>
+                <option value="title_asc" <?php echo ($_GET['sort'] ?? '') == 'title_asc' ? 'selected' : '' ?>>Title (A-Z)</option>
+                <option value="title_desc" <?php echo ($_GET['sort'] ?? '') == 'title_desc' ? 'selected' : '' ?>>Title (Z-A)</option>
+                <option value="pub_year_asc" <?php echo ($_GET['sort'] ?? '') == 'pub_year_asc' ? 'selected' : '' ?>>Publication Year (Oldest First)</option>
+                <option value="pub_year_desc" <?php echo ($_GET['sort'] ?? '') == 'pub_year_desc' ? 'selected' : '' ?>>Publication Year (Newest First)</option>
+            </select>
+        </form>
+        <script>
+            document.getElementById('sort-select').addEventListener('change', function() {
+                var form = document.getElementById('sort-form');
+                form.submit();
+            });
+        </script>
+    </div>
+
+
         <h1 class="text-3xl font-bold mb-6"><?= htmlspecialchars($title) ?></h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
