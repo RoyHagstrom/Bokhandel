@@ -9,7 +9,7 @@ $bind_params = [];
 $bind_types = '';
 
 if (!empty($search_term)) {
-    $search_term = str_replace('%20', ' ', $search_term); // Replace %20 with space
+    $search_term = str_replace('%20', ' ', $search_term); 
     $conditions[] = "`Title` LIKE ?";
     $bind_types .= "s";
     $bind_params[] = '%' . $search_term . '%';

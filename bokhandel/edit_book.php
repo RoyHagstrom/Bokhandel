@@ -143,7 +143,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="Publisher">Publisher:</label>
-                    <input type="text" id="Publisher" name="Publisher" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['Publisher']) ? htmlspecialchars($_POST['Publisher']) : htmlspecialchars($bookData['Publisher']); ?>">
+                    <select id="Publisher" name="Publisher" class="appearance-none border rounded-md py-2 px-4 w-full">
+                        <?php
+                        $publisherQuery = $conn->query("SELECT PublisherID, Name FROM Publisher");
+                        $publishers = $publisherQuery->fetch_all(MYSQLI_ASSOC);
+                        ?><option value="">Select Publisher</option><?php
+                        foreach ($publishers as $publisher) {
+                            $selected = ($publisher['PublisherID'] == $bookData['Publisher']) ? 'selected' : '';
+                            echo "<option value='{$publisher['Name']}' {$selected}>{$publisher['Name']}</option>";
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="Price">Price:</label>
