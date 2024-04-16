@@ -59,6 +59,8 @@ if ($result->num_rows > 0) {
             <a href="manage_publishers.php" class="btn btn-success w-full sm:w-auto">Manage Publishers</a>
             <a href="manage_categories.php" class="btn btn-success w-full sm:w-auto">Manage Categories</a>
             <a href="create_category.php" class="btn btn-success w-full sm:w-auto">Create Category</a>
+            <a href="create_age_recommendation.php" class="btn btn-success w-full sm:w-auto">Create Age Recommendation</a>
+            <a href="manage_age_recommendations.php" class="btn btn-success w-full sm:w-auto">Manage Age Recommendations</a>
         
         <?php } ?>
         <?php if($_SESSION['urole'] == "Admin"){ ?>
