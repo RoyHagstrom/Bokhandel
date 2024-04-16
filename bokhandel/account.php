@@ -60,6 +60,7 @@ if ($result->num_rows > 0) {
             <a href="manage_categories.php" class="btn w-full sm:w-auto">Manage Categories</a>
             <a href="manage_age_recommendations.php" class="btn w-full sm:w-auto">Manage Age Recommendations</a>
             <a href="manage_series.php" class="btn w-full sm:w-auto">Manage Series</a>
+            <a href="manage_genre.php" class="btn w-full sm:w-auto">Manage Genre</a>
         
         <?php } ?>
         <?php if($_SESSION['urole'] == "Admin"){ ?>

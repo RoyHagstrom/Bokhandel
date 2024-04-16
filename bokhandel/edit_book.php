@@ -25,6 +25,9 @@ $ageRecommendations = $ageRecommendationsQuery->fetch_all(MYSQLI_ASSOC);
 $categoriesQuery = $conn->query("SELECT id, name FROM categories");
 $categories = $categoriesQuery->fetch_all(MYSQLI_ASSOC);
 
+$seriesQuery = $conn->query("SELECT SeriesID, SeriesName FROM Series");
+$series = $seriesQuery->fetch_all(MYSQLI_ASSOC);
+
 $statusesQuery = $conn->query("SELECT StatusID, StatusName FROM Status");
 $statuses = $statusesQuery->fetch_all(MYSQLI_ASSOC);
 
@@ -143,29 +146,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block text-sm font-semibold mb-2" for="Genre">Genre:</label>
                     <input type="text" id="Genre" name="Genre" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['Genre']) ? htmlspecialchars($_POST['Genre']) : htmlspecialchars($bookData['Genre']); ?>">
                 </div>
-<<<<<<<<<<<<<<  ✨ Codeium Command 🌟 >>>>>>>>>>>>>>>>
                 <div class="mb-4">
-                    <label class="block text-sm font-semibold mb-2" for="Series">Series:</label>
-+                    <select id="Series" name="Series" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-+                        <option value="" selected>Select Series</option>
-+                        <?php foreach ($series as $seriesOption) : ?>
-+                            <option value="<?php echo $seriesOption['series']; ?>" <?php echo isset($_POST['Series']) && $_POST['Series'] == $seriesOption['series'] ? 'selected' : ($bookData['Series'] == $seriesOption['series'] ? 'selected' : ''); ?>>
-+                                <?php echo $seriesOption['series']; ?>
-+                            </option>
-+                        <?php endforeach; ?>
-+                    </select>
-+                    <!-- Add search input for series -->
-+                    <div class="relative mt-1 mb-4 w-full">
-+                        <input type="text" id="series-search" name="series-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Series">
-+                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-+                            <svg class="w-4 h-4 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-+                            </svg>
-+                        </div>
-+                    </div>
--                    <input type="text" id="Series" name="Series" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['Series']) ? htmlspecialchars($_POST['Series']) : htmlspecialchars($bookData['Series']); ?>">
+                    <label class="block text-sm font-semibold mb-2" for="Series">Select Series (or add new):</label>
+                    <select id="Series" name="Series" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="" selected>Select a Series</option>
+                        <?php foreach ($series as $seriesOption) : ?>
+                            <option value="<?php echo $seriesOption['SeriesName']; ?>" <?php echo isset($_POST['Series']) && $_POST['Series'] == $seriesOption['SeriesName'] ? 'selected' : ($bookData['Series'] == $seriesOption['SeriesName'] ? 'selected' : ''); ?>>
+                                <?php echo $seriesOption['SeriesName']; ?>
+                            </option>
+                        <?php endforeach; ?>  
+                    </select>
+                    <input type="text" id="newSeries" name="newSeries" class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add new Series">
+                    <button type="button" onclick="toggleInput()" class="inline-flex justify-center items-center px-3 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-2">Add new Series</button>
+                    <script>
+                        function toggleInput() {
+                            const select = document.querySelector("#Series");
+                            const input = document.querySelector("#newSeries");
+                            select.style.display = 'none';
+                            input.classList.remove('hidden');
+                            input.focus();
+                        }
+                    </script>
                 </div>
-<<<<<<<  2443f04f-b034-4c7b-9d22-174a5fbf589d  >>>>>>>
                 <button type="button" onclick="prevStep(1)" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">Previous</button>
                 <button type="button" onclick="nextStep(3)" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Next</button>
             </div>
