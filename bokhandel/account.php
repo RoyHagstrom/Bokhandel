@@ -28,6 +28,9 @@ if ($result->num_rows > 0) {
 ?>
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center p-8">
+    
+
+    
 <div class="container mx-auto bg-white shadow-md rounded-lg p-8">
     <h2 class="text-3xl font-bold mb-4">Welcome, <?php echo $userData["Username"]; ?></h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4">
@@ -48,26 +51,58 @@ if ($result->num_rows > 0) {
             <span class="text-lg"><?php echo $userData['Role']; ?></span>
         </div>
     </div>
-    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <a href="create_book.php" class="btn btn-primary w-full sm:w-auto">Create Book</a>
-        <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="btn btn-primary w-full sm:w-auto">View Books</a>
+    <h3 class="text-2xl font-bold mb-2 mt-8">Actions:</h3>
+    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <a href="create_book.php" class="btn btn-primary w-full sm:w-auto">Create a book</a>
+        <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="btn btn-primary w-full sm:w-auto">View my books</a>
 
         <?php if($userData['Role'] == "Admin"){ ?>
-            <a href="register.php" class="btn btn-success w-full sm:w-auto">Create User</a>
-            <a href="manage_users.php" class="btn btn-success w-full sm:w-auto">Manage Users</a>
-            <a href="create_publisher.php" class="btn btn-yellow-500 w-full sm:w-auto">Create Publisher</a>
-            <a href="manage_publishers.php" class="btn btn-yellow-500 w-full sm:w-auto">Manage Publishers</a>
-            <a href="manage_categories.php" class="btn w-full sm:w-auto">Manage Categories</a>
-            <a href="manage_age_recommendations.php" class="btn w-full sm:w-auto">Manage Age Recommendations</a>
-            <a href="manage_series.php" class="btn w-full sm:w-auto">Manage Series</a>
-            <a href="manage_genre.php" class="btn w-full sm:w-auto">Manage Genre</a>
-        
+            <a href="register.php" class="btn btn-success w-full sm:w-auto">Add a user</a>
+            <a href="manage_users.php" class="btn btn-success w-full sm:w-auto">Manage users</a>
+            <a href="create_publisher.php" class="btn btn-yellow-500 w-full sm:w-auto">Add a publisher</a>
+            <a href="manage_publishers.php" class="btn btn-yellow-500 w-full sm:w-auto">Manage publishers</a>
+            <a href="manage_categories.php" class="btn w-full sm:w-auto">Manage categories</a>
+            <a href="manage_age_recommendations.php" class="btn w-full sm:w-auto">Manage age recommendations</a>
+            <a href="manage_series.php" class="btn w-full sm:w-auto">Manage series</a>
+            <a href="manage_genre.php" class="btn w-full sm:w-auto">Manage genre</a>
         <?php } ?>
+        
         <?php if($_SESSION['urole'] == "Admin"){ ?>
-            <a href="delete_user.php?userid=<?php echo $userData['UserID']; ?>" class="btn btn-error w-full sm:w-auto">Delete User</a>
+            <a href="delete_user.php?userid=<?php echo $userData['UserID']; ?>" class="btn btn-error w-full sm:w-auto" onclick="return confirm('Are you sure you want to delete this user? This action cannot be undone.')">Delete user</a>
         <?php } ?>
 
     </div>
+
+
+
+<?php
+$stmt = $conn->query("SELECT BookID, Title, Price, C.Name AS Category FROM Book B JOIN categories C ON B.Category = C.ID WHERE Author = '".$userData["Username"]."'");
+if($stmt && $stmt->num_rows > 0){
+    echo '<h3 class="text-2xl font-bold my-4">Author\'s Books:</h3>
+    <table class="w-full text-left border-collapse mt-2">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 bg-gray-100">Book ID</th>
+                <th class="py-2 px-4 bg-gray-100">Title</th>
+                <th class="py-2 px-4 bg-gray-100">Category</th>
+                <th class="py-2 px-4 bg-gray-100">Price</th>
+            </tr>
+        </thead>
+        <tbody>';
+    while($book = $stmt->fetch_assoc()){
+        echo '<tr>
+                <td class="py-2 px-4 border-b">'.$book['BookID'].'</td>
+                <td class="py-2 px-4 border-b"><a href="singlebook.php?id='.$book['BookID'].'" class="text-blue-500">'.$book['Title'].'</a></td>
+                <td class="py-2 px-4 border-b">'.$book['Category'].'</td>
+                <td class="py-2 px-4 border-b">'.$book['Price'].'€</td>
+            </tr>';
+    }
+    echo '</tbody></table>';
+}else{
+    echo '<p class="text-lg my-4 italic">No books found for this author.</p>';
+}
+?>
+
 </div>
 </div>
 <?php include 'Includes/footer.php'; ?>

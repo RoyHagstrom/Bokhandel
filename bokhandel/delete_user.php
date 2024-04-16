@@ -5,6 +5,10 @@ include 'Includes/header.php';
 if (!isset($_SESSION["uid"])) {
     $user->redirect("login.php");
 }
+elseif($_SESSION["urole"] != "Admin"){
+    $user->redirect("login.php");
+
+}
 
 if (!isset($_GET["userid"])) {
     $user->redirect("index.php");

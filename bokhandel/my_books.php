@@ -32,24 +32,28 @@ $result = $stmt->get_result();
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <?php
-                echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
-                echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
-                echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-full h-80 object-cover">';
-                echo '<div class="p-6">';
-                echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
-                echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
-                echo '</div>';
-                echo '</a>';
-                ?>
+                <a href="singlebook.php?id=<?php echo $row['BookID']; ?>" class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
+                <div class="relative h-80">
+                    <img src="<?php echo $row['Image']; ?>" alt="<?php echo $row['Title']; ?>" class="object-cover w-full h-full">
+                    <div class="absolute top-0 right-0 p-2">
+                        <span class="bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg"><?php echo $row['Price']; ?>€</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Title']; ?></h2>
+                        <p class="text-gray-700 dark:text-gray-300">Author: <?php echo $row['Author']; ?></p>
+                        <p class="text-gray-700 dark:text-gray-300"><?php echo substr($row['Description'], 0, 50) . '...'; ?></p>
+                    </div>
+                </a>
             </div>
         <?php endwhile; ?>
     </div>
+    <div class="mt-4 flex gap-2">
+        <a href="create_book.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create Book</a>
+    </div>
 </div>
-<div class="mt-4 flex gap-2">
-                <a href="create_book.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create Book</a>
-            </div>
+</div>
+</div>
 </div>
 
 <?php

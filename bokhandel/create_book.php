@@ -23,6 +23,20 @@ $ageRecommendationsQuery = $conn->query("SELECT AgeRecommendationID, AgeRange FR
 if ($ageRecommendationsQuery === false) {
     throw new mysqli_sql_exception($conn->error, $conn->errno);
 }
+
+$categoriesQuery = $conn->query("SELECT id, name FROM categories");
+$categories = $categoriesQuery->fetch_all(MYSQLI_ASSOC);
+
+$seriesQuery = $conn->query("SELECT SeriesID, SeriesName FROM Series");
+$series = $seriesQuery->fetch_all(MYSQLI_ASSOC);
+
+$statusesQuery = $conn->query("SELECT StatusID, StatusName FROM Status");
+$statuses = $statusesQuery->fetch_all(MYSQLI_ASSOC);
+
+$genreQuery = $conn->query("SELECT GenreID, GenreName FROM Genres ORDER BY GenreID ASC");
+$genres = $genreQuery->fetch_all(MYSQLI_ASSOC);
+
+
 $ageRecommendations = $ageRecommendationsQuery->fetch_all(MYSQLI_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -114,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <select id="AgeRecommendation" name="AgeRecommendation" class="appearance-none border rounded-md py-2 px-4 w-full">
                           <option value="">Select Age</option>
                             <?php foreach ($ageRecommendations as $ageRecommendation) : ?>
-                                <option value="<?php echo $ageRecommendation['AgeRecommendationID']; ?>"><?php echo htmlspecialchars($ageRecommendation['AgeRange']); ?></option>
+                                <option value="<?php echo $ageRecommendation['AgeRange']; ?>"><?php echo htmlspecialchars($ageRecommendation['AgeRange']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -128,6 +142,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <?php endforeach; ?>
                         </select>
                     </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2" for="Genre">Genre:</label>
+                    <select id="Genre" name="Genre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select Genre</option>
+                        <?php foreach($genres as $genre): ?>
+                            <option value="<?=$genre['GenreName']?>" <?=$bookData['GenreID'] ?? '' == $genre['GenreID'] ? 'selected' : ''?>><?=$genre['GenreName']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2" for="Series">Select Series (or add new):</label>
+                    <select id="Series" name="Series" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="" selected>Select a Series</option>
+                        <?php foreach ($series as $seriesOption): ?>
+                            <option value="<?php echo $seriesOption['SeriesID']; ?>" <?php echo isset($_POST['Series']) && $_POST['Series'] == $seriesOption['SeriesID'] ? 'selected' : (isset($bookData['SeriesID']) && $bookData['SeriesID'] == $seriesOption['SeriesID'] ? 'selected' : ''); ?>>
+                                <?php echo htmlspecialchars($seriesOption['SeriesName']); ?>
+                            </option>
+                        <?php endforeach; ?> 
+                    </select>
+                    <input type="text" id="newSeries" name="newSeries" class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add new Series">
+                    <button type="button" onclick="toggleInput()" class="inline-flex justify-center items-center px-3 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-2">Add new Series</button>
+                    <script>
+                        function toggleInput() {
+                            const select = document.querySelector("#Series");
+                            const input = document.querySelector("#newSeries");
+                            select.style.display = 'none';
+                            input.classList.remove('hidden');
+                            input.focus();
+                        }
+                    </script>
+                </div>
                     <div class="mb-4">
                         <button type="button" onclick="prevStep(1)" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">Previous</button>
                         <button type="button" onclick="nextStep(3)" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Next</button>
@@ -137,10 +182,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div id="step3" class="bg-white shadow-md rounded-lg overflow-hidden" style="display: none;">
                 <div class="p-6">
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-2" for="Genre">Genre:</label>
-                        <input type="text" id="Genre" name="Genre" class="appearance-none border rounded-md py-2 px-4 w-full">
-                    </div>
                     <div class="mb-4">
                         <label class="block text-sm font-semibold mb-2" for="PublicationYear">Publication Year:</label>
                         <input type="number" id="PublicationYear" name="PublicationYear" class="appearance-none border rounded-md py-2 px-4 w-full">

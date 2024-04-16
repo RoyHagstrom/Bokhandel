@@ -1,10 +1,22 @@
-
 <?php
 
 
 include 'class.user.php';
 
 include 'db_connection.php';
+
+
+
+
+if (!isset($_SESSION["uid"])) {
+    $user->redirect("login.php");
+}
+elseif($_SESSION["urole"] != "Admin"){
+    $user->redirect("login.php");
+
+}
+
+
 
 ?>
 <!DOCTYPE html>

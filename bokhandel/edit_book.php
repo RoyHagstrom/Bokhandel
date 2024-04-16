@@ -28,41 +28,49 @@ $categories = $categoriesQuery->fetch_all(MYSQLI_ASSOC);
 $seriesQuery = $conn->query("SELECT SeriesID, SeriesName FROM Series");
 $series = $seriesQuery->fetch_all(MYSQLI_ASSOC);
 
+$genreQuery = $conn->query("SELECT GenreID, GenreName FROM Genres ORDER BY GenreID ASC");
+$genres = $genreQuery->fetch_all(MYSQLI_ASSOC);
+
 $statusesQuery = $conn->query("SELECT StatusID, StatusName FROM Status");
 $statuses = $statusesQuery->fetch_all(MYSQLI_ASSOC);
 
 $updateMessage = $updateError = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['illustrator']) && isset($_POST['AgeRecommendation']) && isset($_POST['category']) && isset($_POST['Genre']) && isset($_POST['PublicationYear']) && isset($_POST['Publisher']) && isset($_POST['Price']) && isset($_POST['Pages']) && isset($_POST['status'])) {
+    if (isset($_POST['title'], $_POST['description'], $_POST['illustrator'], $_POST['AgeRecommendation'], $_POST['category'], $_POST['Genre'], $_POST['PublicationYear'], $_POST['Publisher'], $_POST['Price'], $_POST['Pages'], $_POST['status'])) {
+        $title = trim($_POST['title']);
+        $description = $_POST['description'];
+        $ageRecommendation = $_POST['AgeRecommendation'];
+        $category = $_POST['category'];
+        $genre = $_POST['Genre'];
+        $publicationYear = $_POST['PublicationYear'];
+        $publisher = $_POST['Publisher'];
+        $price = $_POST['Price'];
+        $pages = $_POST['Pages'];
+        $statusID = $_POST['status'];
+        $series = trim($_POST['newSeries']);
+        $illustrator = isset($_POST['illustrator']) ? trim($_POST['illustrator']) : ''; 
+
+        $author = $bookData['Author'];
+
+$series = trim($_POST['SeriesID']); 
+
+$stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Author=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Series=?, Publisher=?, Price=?, Pages=?, StatusID=? WHERE BookID=?");
+$stmt->bind_param("ssssssssssdsii", $title, $description, $author, $illustrator, $ageRecommendation, $category, $genre, $publicationYear, $series, $publisher, $price, $pages, $statusID, $_GET["bookid"]);
+        
         if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $targetDir = "images/";
             $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-        
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
 
-                $stmt = $conn->prepare("UPDATE Book SET Image=? WHERE BookID=?");
-                $stmt->bind_param("si", $targetFile, $_GET["bookid"]);
-                if (!$stmt->execute()) {
-                    $updateError = "Error updating image path in the database.";
-                }
-            } else {
-                $updateError = "Error uploading image.";
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                $stmtImage = $conn->prepare("UPDATE Book SET Image=? WHERE BookID=?");
+                $stmtImage->bind_param("si", $targetFile, $_GET["bookid"]);
+                $stmtImage->execute() or die($stmtImage->error);
             }
         }
 
-        $stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Publisher=?, Price=?, Pages=?, StatusID=? WHERE BookID=?");
-        $stmt->bind_param("ssssisssdiii", $_POST['title'], $_POST['description'], $_POST['illustrator'], $_POST['AgeRecommendation'], $_POST['category'], $_POST['Genre'], $_POST['PublicationYear'], $_POST['Publisher'], $_POST['Price'], $_POST['Pages'], $_POST['status'], $_GET["bookid"]);
-
         if ($stmt->execute()) {
-            $stmt = $conn->prepare("SELECT * FROM Book WHERE BookID = ?");
-            $stmt->bind_param("i", $_GET["bookid"]);
-            $stmt->execute();
-            $bookData = $stmt->get_result()->fetch_assoc();
-
             $updateMessage = "Book updated successfully.";
-            //sleep(2);
-            //$user->redirect("singlebook.php?id=" . $_GET["bookid"]);
         } else {
             $updateError = "Error updating book: " . $stmt->error;
         }
@@ -71,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
     <div class="container mx-auto p-8">
@@ -123,11 +132,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="AgeRecommendation">Age Recommendation:</label>
-                    <select id="AgeRecommendation" name="AgeRecommendation" class="appearance-none border rounded-md py-2 px-4 w-full">
-                    <option value="">Select Age</option>
+                    <select id="AgeRecommendation" name="AgeRecommendation" class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select Age</option>
                         <?php foreach ($ageRecommendations as $ageRecommendation) : ?>
-                            <option value="<?php echo $ageRecommendation['AgeRange']; ?>" <?php echo isset($_POST['AgeRecommendation']) && $_POST['AgeRecommendation'] == $ageRecommendation['AgeRecommendationID'] ? 'selected' : ($bookData['AgeRecommendation'] == $ageRecommendation['AgeRecommendationID'] ? 'selected' : ''); ?>>
-                                <?php echo $ageRecommendation['AgeRange']; ?>
+                            <option value="<?php echo htmlspecialchars($ageRecommendation['AgeRange']); ?>"
+                                <?php echo isset($_POST['AgeRecommendation']) && $_POST['AgeRecommendation'] == $ageRecommendation['AgeRange'] ? 'selected' :
+                                    ($bookData['AgeRecommendation'] == $ageRecommendation['AgeRange'] ? 'selected' : ''); ?>>
+                                <?php echo htmlspecialchars($ageRecommendation['AgeRange']); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -144,30 +155,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="Genre">Genre:</label>
-                    <input type="text" id="Genre" name="Genre" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['Genre']) ? htmlspecialchars($_POST['Genre']) : htmlspecialchars($bookData['Genre']); ?>">
+                    <select id="Genre" name="Genre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select Genre</option>
+                        <?php foreach ($genres as $genre): ?>
+
+
+                            <option value="<?php echo $genre['GenreName']; ?>" <?php echo isset($_POST['genre']) && $_POST['genre'] == $genre['GenreID'] ? 'selected' : (isset($bookData['Genre']) && $bookData['Genre'] == $genre['GenreName'] ? 'selected' : ''); ?>>
+                                <?php echo $genre['GenreName']; ?>
+                            </option>
+
+
+                        <?php endforeach; ?>
+
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="Series">Select Series (or add new):</label>
-                    <select id="Series" name="Series" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="" selected>Select a Series</option>
-                        <?php foreach ($series as $seriesOption) : ?>
-                            <option value="<?php echo $seriesOption['SeriesName']; ?>" <?php echo isset($_POST['Series']) && $_POST['Series'] == $seriesOption['SeriesName'] ? 'selected' : ($bookData['Series'] == $seriesOption['SeriesName'] ? 'selected' : ''); ?>>
-                                <?php echo $seriesOption['SeriesName']; ?>
+                    <select id="Series" name="SeriesID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select Series</option>
+                        <?php foreach ($series as $s): ?>
+                            <option value="<?php echo $s['SeriesName']; ?>" <?php echo isset($bookData['Series']) && $s['SeriesName'] == $bookData['Series'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($s['SeriesName'], ENT_QUOTES); ?>
                             </option>
-                        <?php endforeach; ?>  
+                        <?php endforeach; ?> 
                     </select>
+
                     <input type="text" id="newSeries" name="newSeries" class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add new Series">
                     <button type="button" onclick="toggleInput()" class="inline-flex justify-center items-center px-3 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-2">Add new Series</button>
-                    <script>
-                        function toggleInput() {
-                            const select = document.querySelector("#Series");
-                            const input = document.querySelector("#newSeries");
-                            select.style.display = 'none';
-                            input.classList.remove('hidden');
-                            input.focus();
-                        }
-                    </script>
                 </div>
+
+                <script>
+                    function toggleInput() {
+                        const select = document.querySelector("#Series");
+                        const input = document.querySelector("#newSeries");
+                        select.style.display = 'none';
+                        input.classList.remove('hidden');
+                        input.focus();
+                    }
+                </script>
                 <button type="button" onclick="prevStep(1)" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">Previous</button>
                 <button type="button" onclick="nextStep(3)" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Next</button>
             </div>
@@ -181,13 +206,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="Publisher">Publisher:</label>
-                    <select id="Publisher" name="Publisher" class="appearance-none border rounded-md py-2 px-4 w-full">
+                    <select id="Publisher" name="Publisher" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <?php
                         $publisherQuery = $conn->query("SELECT PublisherID, Name FROM Publisher");
                         $publishers = $publisherQuery->fetch_all(MYSQLI_ASSOC);
                         ?><option value="">Select Publisher</option><?php
                         foreach ($publishers as $publisher) {
-                            $selected = ($publisher['PublisherID'] == $bookData['Publisher']) ? 'selected' : '';
+                            $selected = ($publisher['Name'] == $bookData['Publisher']) ? 'selected' : '';
                             echo "<option value='{$publisher['Name']}' {$selected}>{$publisher['Name']}</option>";
                         }
                         ?>

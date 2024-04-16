@@ -140,7 +140,7 @@ $new_books_result = $conn->query($new_books_sql);
                 echo '<div class="p-6">';
                 echo '<h2 class="text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
                 echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
-                echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 50) . '...</p>';
+                echo '<p class="text-gray-700 dark:text-gray-300">' . substr($row['Description'], 0, 20) . '...</p>';
                 echo '</div>';
                 echo '</a>';
             }

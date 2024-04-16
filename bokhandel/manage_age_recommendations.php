@@ -1,8 +1,13 @@
 <?php
 include 'Includes/header.php';
 
-if (!isset($_SESSION["uid"]) || $_SESSION["urole"] != "Admin") {
-    redirectToIndex();
+
+if (!isset($_SESSION["uid"])) {
+    $user->redirect("login.php");
+}
+elseif($_SESSION["urole"] != "Admin"){
+    $user->redirect("login.php");
+
 }
 
 $ageRecommendationsQuery = $conn->query("SELECT * FROM AgeRecommendation ORDER BY CAST(AgeRange AS UNSIGNED) ASC");

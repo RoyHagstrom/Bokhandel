@@ -1,10 +1,16 @@
 <?php
 include 'Includes/header.php';
 
+if (!isset($_SESSION["uid"])) {
+    $user->redirect("login.php");
+}
+elseif($_SESSION["urole"] != "Admin"){
+    $user->redirect("login.php");
+
+}
 
 $result = $conn->query("SELECT * FROM Publisher");
 $publishers = $result->fetch_all(MYSQLI_ASSOC);
-
 ?>
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
@@ -24,7 +30,11 @@ $publishers = $result->fetch_all(MYSQLI_ASSOC);
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                <?php foreach ($publishers as $publisher) : ?>
+                <?php
+                $result = $conn->query("SELECT * FROM Publisher");
+                $publishers = $result->fetch_all(MYSQLI_ASSOC);
+                foreach ($publishers as $publisher) :
+                ?>
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap"><?php echo $publisher['PublisherID']; ?></td>
                         <td class="px-6 py-4 whitespace-nowrap"><?php echo $publisher['Name']; ?></td>
@@ -42,9 +52,9 @@ $publishers = $result->fetch_all(MYSQLI_ASSOC);
             </tbody>
         </table>
     </div>
-</div>
-</div>
+    <a href="create_publisher.php" class="m-4 bg-blue-500 text-white rounded px-4 py-2">Add Publisher</a>
 
+</div>
 <?php
 include 'Includes/footer.php';
 ?>
