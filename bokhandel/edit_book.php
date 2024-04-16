@@ -19,6 +19,9 @@ if (!$bookData) {
     redirectToIndex();
 }
 
+$ageRecommendationsQuery = $conn->query("SELECT AgeRecommendationID, AgeRange FROM AgeRecommendation ORDER BY CAST(AgeRange AS UNSIGNED) ASC");
+$ageRecommendations = $ageRecommendationsQuery->fetch_all(MYSQLI_ASSOC);
+
 $categoriesQuery = $conn->query("SELECT id, name FROM categories");
 $categories = $categoriesQuery->fetch_all(MYSQLI_ASSOC);
 
@@ -117,8 +120,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="AgeRecommendation">Age Recommendation:</label>
-                    <input type="text" id="AgeRecommendation" name="AgeRecommendation" class="appearance-none border rounded-md py-2 px-4 w-full" value="<?php echo isset($_POST['AgeRecommendation']) ? htmlspecialchars($_POST['AgeRecommendation']) : htmlspecialchars($bookData['AgeRecommendation']); ?>">
+                    <select id="AgeRecommendation" name="AgeRecommendation" class="appearance-none border rounded-md py-2 px-4 w-full">
+                    <option value="">Select Age</option>
+                        <?php foreach ($ageRecommendations as $ageRecommendation) : ?>
+                            <option value="<?php echo $ageRecommendation['AgeRange']; ?>" <?php echo isset($_POST['AgeRecommendation']) && $_POST['AgeRecommendation'] == $ageRecommendation['AgeRecommendationID'] ? 'selected' : ($bookData['AgeRecommendation'] == $ageRecommendation['AgeRecommendationID'] ? 'selected' : ''); ?>>
+                                <?php echo $ageRecommendation['AgeRange']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
+
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="category">Category:</label>
                     <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -167,6 +178,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Image:</label>
                     <input type="file" id="image" name="image" accept="images/*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
+                <div class="mb-4">
+                        <img id="image-preview" src="" alt="Image preview" class="max-h-48 w-full object-contain" style="display: none;">
+                    </div>
+                    <script>
+                        document.getElementById('image').addEventListener('change', function() {
+                            const preview = document.getElementById('image-preview');
+                            const file = this.files[0];
+                            const reader = new FileReader();
+                            reader.addEventListener('load', function() {
+                                preview.src = reader.result;
+                                preview.style.display = 'block';
+                            });
+                            if (file) {
+                                reader.readAsDataURL(file);
+                            } else {
+                                preview.style.display = 'none';
+                            }
+                        });
+                    </script>
                 <div class="mb-4">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="status">Status:</label>
                     <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

@@ -50,17 +50,15 @@ if ($result->num_rows > 0) {
     </div>
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2">
         <a href="create_book.php" class="btn btn-primary w-full sm:w-auto">Create Book</a>
-        <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="btn btn-success w-full sm:w-auto">View Books</a>
+        <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="btn btn-primary w-full sm:w-auto">View Books</a>
 
         <?php if($userData['Role'] == "Admin"){ ?>
             <a href="register.php" class="btn btn-success w-full sm:w-auto">Create User</a>
             <a href="manage_users.php" class="btn btn-success w-full sm:w-auto">Manage Users</a>
-            <a href="create_publisher.php" class="btn btn-success w-full sm:w-auto">Create Publisher</a>
-            <a href="manage_publishers.php" class="btn btn-success w-full sm:w-auto">Manage Publishers</a>
-            <a href="manage_categories.php" class="btn btn-success w-full sm:w-auto">Manage Categories</a>
-            <a href="create_category.php" class="btn btn-success w-full sm:w-auto">Create Category</a>
-            <a href="create_age_recommendation.php" class="btn btn-success w-full sm:w-auto">Create Age Recommendation</a>
-            <a href="manage_age_recommendations.php" class="btn btn-success w-full sm:w-auto">Manage Age Recommendations</a>
+            <a href="create_publisher.php" class="btn btn-yellow-500 w-full sm:w-auto">Create Publisher</a>
+            <a href="manage_publishers.php" class="btn btn-yellow-500 w-full sm:w-auto">Manage Publishers</a>
+            <a href="manage_categories.php" class="btn w-full sm:w-auto">Manage Categories</a>
+            <a href="manage_age_recommendations.php" class="btn w-full sm:w-auto">Manage Age Recommendations</a>
         
         <?php } ?>
         <?php if($_SESSION['urole'] == "Admin"){ ?>
@@ -71,3 +69,4 @@ if ($result->num_rows > 0) {
 </div>
 </div>
 <?php include 'Includes/footer.php'; ?>
+
