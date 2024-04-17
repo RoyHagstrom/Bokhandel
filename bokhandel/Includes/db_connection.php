@@ -10,12 +10,9 @@ define('DB_PASSWORD', 'test');
 define('DB_DATABASE', 'bokhandel');
 
 function connectToDb($host) {
-    static $conn = null;
-    if ($conn === null) {
-        $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
-        if ($conn->connect_error) {
-            throw new Exception("Connection failed: " . $conn->connect_error);
-        }
+    $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+    if ($conn->connect_error) {
+        throw new Exception("Connection failed: " . $conn->connect_error);
     }
     return $conn;
 }
