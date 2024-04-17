@@ -44,6 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block text-sm font-semibold mb-1" for="email">Email:</label>
                     <input type="email" id="email" name="email" class="border border-gray-400 p-2 w-full rounded-md" value="<?php echo htmlspecialchars($userInfo['Email']); ?>" required>
                 </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1" for="role">Role:</label>
+                    <input type="text" id="role" name="role" class="border border-gray-400 p-2 w-full rounded-md" value="<?php echo htmlspecialchars($userInfo['Role']); ?>" readonly>
+                </div>
             </div>
 
             <div class="text-center mt-6">
