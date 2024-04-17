@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = isset($_POST["role"]) ? htmlspecialchars($_POST["role"]) : $userInfo["Role"]; 
 
 
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID != ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID = ?");
     $stmt->bind_param("si", $username, $userid); 
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
     <div class="container mx-auto p-8">
         <h2 class="text-3xl font-bold mb-4 text-center">Edit Profile</h2>
-        <form class="bg-white shadow-md rounded-lg p-8 mt-8" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form class="bg-white shadow-md rounded-lg p-8 mt-8" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?userid=<?php echo $userid; ?>">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
                 <div>
                     <label class="block text-sm font-semibold mb-1" for="username">Username:</label>
@@ -85,3 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 include 'Includes/footer.php';
 ?>
+
+
+
