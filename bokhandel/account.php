@@ -50,14 +50,17 @@ if ($result->num_rows > 0) {
             <span class="font-semibold mr-2 text-lg">Role:</span>
 
             
-            <?php if ($_SESSION['urole'] == "Admin") { ?>
-    <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md" onchange="updateUserRole()">
-        <option value="Regular" <?php echo ($userData['Role'] == 'Regular') ? 'selected' : ''; ?>>Regular</option>
-        <option value="Admin" <?php echo ($userData['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
-    </select>
+            <?php if ($_SESSION['urole'] == "Admin") { 
+                $role = $userData['Role'];
+                echo "<span class=\"text-lg\" id=\"role\">$role</span>";
+                echo "<select name=\"role\" id=\"role-select\" class=\"text-lg p-2 border border-gray-300 rounded-md hidden\" onchange=\"updateUserRole()\">";
+                echo "<option value=\"Regular\" " . ($role == 'Regular' ? 'selected' : '') . ">Regular</option>";
+                echo "<option value=\"Admin\" " . ($role == 'Admin' ? 'selected' : '') . ">Admin</option>";
+                echo "</select>";
+            ?>
     <script>
         function updateUserRole() {
-            const role = document.getElementById('role').value;
+            const role = document.getElementById('role-select').value;
             const userId = <?= $userData['UserID'] ?>;
             fetch('updateUserRole.php', {
                 method: 'POST',
@@ -68,8 +71,9 @@ if ($result->num_rows > 0) {
             })
             .then(response => {
                 if (response.ok) {
+                    document.getElementById('role-select').classList.add('hidden');
+                    document.getElementById('role').innerText = role;
                     alert('Role updated');
-                    location.reload();
                 } else {
                     throw new Error('Error updating role');
                 }
@@ -79,9 +83,10 @@ if ($result->num_rows > 0) {
             });
         }
     </script>
-<?php } else { ?>
-    <span class="text-lg"><?php echo $userData['Role']; ?></span>
-<?php } ?>
+<?php } else { 
+                echo "<span class=\"text-lg\">" . $userData['Role'] . "</span>";
+            } ?>
+            
 
 
         </div>
