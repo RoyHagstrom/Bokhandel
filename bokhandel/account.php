@@ -92,6 +92,7 @@ if ($result->num_rows > 0) {
                     });
                 </script>
                    
+                   
             <?php } else { ?>
                 <span class="text-lg"><?php echo $userData['Role']; ?></span>
             <?php } ?>
