@@ -16,7 +16,7 @@ class USER
 
     public function redirect($url)
     {
-        header("Location: $url");
+        header("Location: $url", true, 303);
         exit();
     }
 
