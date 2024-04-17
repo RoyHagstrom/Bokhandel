@@ -9,30 +9,42 @@ if(!isset($_GET["userid"])){
     $user->redirect("account.php");
 }
 
+$userid = $_GET["userid"]; 
+
 
 $stmt = $conn->prepare("SELECT * FROM User WHERE UserID = ?");
-$stmt->bind_param("i", $_GET["userid"]);
+$stmt->bind_param("i", $userid);
 $stmt->execute();
-$userInfo = $stmt->get_result()->fetch_assoc();
+$result = $stmt->get_result();
+
+
+if($result->num_rows === 0) {
+    echo "User not found";
+    exit();
+}
+
+$userInfo = $result->fetch_assoc();
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = isset($_POST["username"]) ? htmlspecialchars($_POST["username"]) : $userInfo["Username"];
     $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : $userInfo["Email"];
+    $role = isset($_POST["role"]) ? htmlspecialchars($_POST["role"]) : $userInfo["Role"]; 
+
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID != ?");
-    $stmt->bind_param("si", $username, $_GET["UserID"]);
+    $stmt->bind_param("si", $username, $userid); 
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
-
 
     if ($result[0] > 0) {
         echo "Username already exists";
         exit();
     }
 
-    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ? WHERE UserID = ?");
-    $stmt->bind_param("ssi", $username, $email, $_GET["UserID"]);
 
+    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ? WHERE UserID = ?");
+    $stmt->bind_param("sssi", $username, $email, $role, $userid); 
     if ($stmt->execute()) {
         $user->redirect("account.php");
     } else {
