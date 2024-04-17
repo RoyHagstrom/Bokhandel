@@ -25,6 +25,7 @@ class USER
         return isset($_SESSION["uid"]);
     }
 
+    
     public function searchBooks($searchTerm)
     {
         try {
