@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssi", $username, $email, $_SESSION["uid"]);
 
     if ($stmt->execute()) {
-        $user->redirect("profile.php");
+        $user->redirect("account.php?uid=" . $_GET["userid"]);
     } else {
         echo "Error updating user information: " . $stmt->error;
     }
