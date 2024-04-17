@@ -37,17 +37,19 @@ class USER
 
     public function searchBooks($searchTerm)
     {
-        try {
-            if (empty(trim($searchTerm))) {
-                http_response_code(400);
-                echo json_encode([]);
-                exit;
-            }
+        if (empty(trim($searchTerm))) {
+            http_response_code(400);
+            echo json_encode([]);
+            return;
+        }
 
-            $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
-            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4");
-            $stmt->bind_param("ss", $searchTerm, $searchTerm);
-            $stmt->execute() or die($this->conn->error);
+        $searchTerm = $this->conn->real_escape_string(trim($searchTerm));
+        $query = "SELECT * FROM Book WHERE MATCH(Title, Author) AGAINST (? IN BOOLEAN MODE) LIMIT 4";
+
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $searchTerm);
+            $stmt->execute();
             $result = $stmt->get_result();
             $books = $result->fetch_all(MYSQLI_ASSOC);
 
