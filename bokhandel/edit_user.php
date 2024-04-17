@@ -5,7 +5,7 @@ if (!isset($_SESSION["uid"])) {
     $user->redirect("login.php");
 }
 
-if(!isset($_GET["UserID"])){
+if(!isset($_GET["userid"])){
     $user->redirect("account.php");
 }
 
