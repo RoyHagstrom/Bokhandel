@@ -23,7 +23,7 @@ if (isset($_POST['register-submit'])) {
         echo "All fields are required";
     }
 }
-}
+
 
 ?>
 
