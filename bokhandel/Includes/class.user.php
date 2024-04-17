@@ -14,9 +14,8 @@ class USER
         return htmlspecialchars(stripslashes(trim($data)));
     }
 
-    public function redirect($url)
-    {
-        header("Location: $url", true, 303);
+    public function redirect($url) {
+        header("Location: $url");
         exit();
     }
 
@@ -25,7 +24,6 @@ class USER
         return isset($_SESSION["uid"]);
     }
 
-    
     public function searchBooks($searchTerm)
     {
         try {

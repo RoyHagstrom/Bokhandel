@@ -1,10 +1,5 @@
 <?php
 
-
-if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] === '127.0.0.1' && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'http://novatest.ddns.net') === 0) {
-    http_response_code(403);
-    die('Error: Too many redirects');
-}
     define('DB_HOSTS', [
         'primary' => 'novatest.ddns.net',
         'local' => '192.168.1.111',
