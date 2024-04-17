@@ -9,11 +9,8 @@ class USER
         $this->conn = $pdo;
     }
 
-    private function cleanInput($data)
-    {
-        $data = filter_var($data, FILTER_SANITIZE_STRING);
-        
-        return filter_var($data, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH, FILTER_FLAG_STRIP_BACKTICK);
+    private function cleanInput($data) {
+        return filter_var($data, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
     }
 
     public function redirect($url)
