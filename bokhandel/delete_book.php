@@ -32,8 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         //unlink($file);
-        header("Location: my_books.php");
-        exit();
+        $user->redirect("my_books.php");
     } else {
         echo "Error deleting book: " . $stmt->error;
     }
