@@ -11,7 +11,7 @@ elseif($_SESSION["urole"] != "Admin"){
 
 
 if (isset($_POST['register-submit'])) {
-    if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+    if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['role'])) {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -74,3 +74,5 @@ if (isset($_POST['register-submit'])) {
 <?php
 include 'Includes/footer.php';
 ?>
+
+
