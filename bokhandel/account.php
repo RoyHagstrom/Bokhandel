@@ -49,36 +49,44 @@ if ($result->num_rows > 0) {
         <div class="flex items-center">
             <span class="font-semibold mr-2 text-lg">Role:</span>
             <?php if ($_SESSION['urole'] == "Admin") { ?>
-                <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md" onchange="this.form.submit()">
-                    <option value="Regular" <?php echo ($userData['Role'] == 'Regular') ? 'selected' : ''; ?>>Regular</option>
-                    <option value="Admin" <?php echo ($userData['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
-                </select>
-                <form method="POST" action="">
-                    <input type="hidden" name="roleUpdate" value="<?= $userData['UserID'] ?>">
-                    <input type="hidden" name="roleValue" value="">
-                </form>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const f = d => document.querySelector(d);
-        const [s,f0] = [f('#role'),f('form')];
-        s.addEventListener('change', () => f('[name=roleValue]').value = s.value);
-        f0.addEventListener('submit', e => {
-            e.preventDefault();
-            const x = new XMLHttpRequest();
-            x.onload = () => { alert(x.status === 200 ? 'Role updated' : 'Error updating role'); location.reload(); };
-            x.open('POST', '');
-            x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            x.send(`roleUpdate=${encodeURIComponent(f('[name=roleUpdate]').value)}&roleValue=${encodeURIComponent(s.value)}`);
-            const stmt = db.prepare('UPDATE User SET Role = ? WHERE UserID = ?');
-            stmt.run(s.value, f('[name=roleUpdate]').value);
+    <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md" onchange="this.form.submit()">
+        <option value="Regular" <?php echo ($userData['Role'] == 'Regular') ? 'selected' : ''; ?>>Regular</option>
+        <option value="Admin" <?php echo ($userData['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
+    </select>
+    <form id="roleUpdateForm" method="POST" action="">
+        <input type="hidden" name="roleUpdate" value="<?= $userData['UserID'] ?>">
+        <input type="hidden" name="roleValue" value="">
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const f = d => document.querySelector(d);
+            const [s, f0] = [f('#role'), f('#roleUpdateForm')];
+            s.addEventListener('change', () => f('[name=roleValue]').value = s.value);
+            f0.addEventListener('submit', e => {
+                e.preventDefault();
+                const formData = new FormData(f0);
+                fetch('', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Role updated');
+                        location.reload();
+                    } else {
+                        throw new Error('Error updating role');
+                    }
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+            });
         });
-    });
-</script>
-                   
+    </script>
+<?php } else { ?>
+    <span class="text-lg"><?php echo $userData['Role']; ?></span>
+<?php } ?>
 
-            <?php } else { ?>
-                <span class="text-lg"><?php echo $userData['Role']; ?></span>
-            <?php } ?>
         </div>
     </div>
     <h3 class="text-2xl font-bold mb-2 mt-8">Actions:</h3>
