@@ -15,7 +15,7 @@ include 'db_connection.php';
     <link href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <title>Bokhandel test</title>
+    <title>Bokhandel</title>
 </head>
 
 
@@ -26,7 +26,7 @@ include 'db_connection.php';
     <header class="py-4 bg-gray-800 dark:bg-gray-900">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <a href="index.php" class="text-3xl font-bold">Bokhandel</a>
+                <a href="index.php" class="text-3xl font-bold">Bokhandel test</a>
             </div>
 
 
