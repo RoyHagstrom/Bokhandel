@@ -49,10 +49,14 @@ if ($result->num_rows > 0) {
         <div class="flex items-center">
             <span class="font-semibold mr-2 text-lg">Role:</span>
             <?php if ($_SESSION['urole'] == "Admin") { ?>
-                <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md">
-                    <option value="Regular" <?php echo ($userData['Role'] == 'Regular') ? 'selected' : ''; ?>>Regular</option>
-                    <option value="Admin" <?php echo ($userData['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
-                </select>
+                <form method="POST" action="">
+                    <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md">
+                        <option value="Regular" <?= $userData['Role'] == 'Regular' ? 'selected' : '' ?>>Regular</option>
+                        <option value="Admin" <?= $userData['Role'] == 'Admin' ? 'selected' : '' ?>>Admin</option>
+                    </select>
+                    <input type="hidden" name="uid" value="<?= $userData['UserID'] ?>">
+                    <button type="submit" class="btn bg-blue-500 text-white">Update role</button>
+                </form>
             <?php } else { ?>
                 <span class="text-lg"><?php echo $userData['Role']; ?></span>
             <?php } ?>
