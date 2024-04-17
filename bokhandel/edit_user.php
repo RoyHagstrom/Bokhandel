@@ -6,7 +6,7 @@ if (!isset($_SESSION["uid"])) {
 }
 
 if(!isset($_GET["userid"])){
-    $user->redirect("account.php?userid=" . urlencode($_GET["userid"]));
+    echo "<script>alert('Please provide userid');</script>";
 }
 
 $userid = $_GET["userid"]; 
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ? WHERE UserID = ?");
     $stmt->bind_param("sssi", $username, $email, $role, $userid); 
     if ($stmt->execute()) {
-        echo "<script>alert('User information updated successfully');</script>";
+        $user->redirect("account.php?userid=" . urlencode($_GET["userid"]));
     } else {
         echo "Error updating user information: " . $stmt->error;
     }
