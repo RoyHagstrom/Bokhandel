@@ -1,7 +1,7 @@
 <?php
 define('DB_HOSTS', [
-    'primary' => 'novatest.ddns.net',
-    'local' => '192.168.1.111',
+    'primary' => '192.168.128.2',
+    'local' => '192.168.128.2',
     'localhost' => '192.168.128.2'
 ]);
 define('DB_PORT', '3306');
@@ -10,7 +10,7 @@ define('DB_PASSWORD', 'test');
 define('DB_DATABASE', 'bokhandel');
 
 function connectToDb($host) {
-    $conn = @new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+    $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
     if ($conn->connect_error) {
         throw new Exception("Connection failed: " . $conn->connect_error);
     }
@@ -29,16 +29,7 @@ function getDatabaseConnection() {
     }
 }
 
-$conn = null;
-try {
-    $conn = getDatabaseConnection();
-} catch (Exception $e) {
-    die('Could not connect to database: ' . $e->getMessage());
-}
-
-if (!$conn instanceof mysqli) {
-    die('Class "mysqli" not found');
-} else {
-    $user = new USER($conn);
-}
+session_start();
+$conn = getDatabaseConnection();
+$user = new USER($conn);
 
