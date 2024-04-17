@@ -68,9 +68,11 @@ if ($result->num_rows > 0) {
         <?php } ?>
         
         <?php if($_SESSION['urole'] == "Admin"){ ?>
+            <div class="mt-8">
             <a href="edit_user.php?userid=<?php echo $userData['UserID']; ?>" class="btn bg-green-500 text-white w-full sm:w-auto">Edit user</a>
             <a href="delete_user.php?userid=<?php echo $userData['UserID']; ?>" class="btn bg-red-500 text-white w-full sm:w-auto" onclick="return confirm('Are you sure you want to delete this user? This action cannot be undone.')">Delete user</a>
-        <?php } ?>
+            </div>
+            <?php } ?>
 
     </div>
 
