@@ -1,6 +1,6 @@
 <?php
 if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
-    die('We don\'t have mysqli!!!');
+    die('We don\'t have mysqli!!! test');
 }
 
 define('DB_HOSTS', [
