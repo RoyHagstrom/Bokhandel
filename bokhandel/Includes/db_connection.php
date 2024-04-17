@@ -2,7 +2,7 @@
 define('DB_HOSTS', [
     'primary' => 'novatest.ddns.net',
     'local' => '192.168.1.111',
-    'localhost' => 'mysql-db-1'
+    'localhost' => '192.168.128.2'
 ]);
 define('DB_PORT', '3306');
 define('DB_USERNAME', 'test');
