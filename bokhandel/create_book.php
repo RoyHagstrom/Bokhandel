@@ -63,12 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $targetDir = "images/";
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
 
-    if (!is_writable(dirname($targetDir))) {
-        die(dirname($targetDir) . " is not writable");
-    }
     if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-        $error = error_get_last();
-        die("Error uploading image. " . $error['message']);
+        die("Error uploading image.");
     }
 
     $sql = "INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommendation, Category, Genre, PublicationYear, Series, Publisher, Price, Pages, Image, StatusID, Featured) 
