@@ -49,14 +49,39 @@ if ($result->num_rows > 0) {
         <div class="flex items-center">
             <span class="font-semibold mr-2 text-lg">Role:</span>
             <?php if ($_SESSION['urole'] == "Admin") { ?>
+                <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md" onchange="this.form.submit()">
+                    <option value="Regular" <?php echo ($userData['Role'] == 'Regular') ? 'selected' : ''; ?>>Regular</option>
+                    <option value="Admin" <?php echo ($userData['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
+                </select>
                 <form method="POST" action="">
-                    <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md">
-                        <option value="Regular" <?= $userData['Role'] == 'Regular' ? 'selected' : '' ?>>Regular</option>
-                        <option value="Admin" <?= $userData['Role'] == 'Admin' ? 'selected' : '' ?>>Admin</option>
-                    </select>
-                    <input type="hidden" name="uid" value="<?= $userData['UserID'] ?>">
-                    <button type="submit" class="btn bg-blue-500 text-white">Update role</button>
+                    <input type="hidden" name="roleUpdate" value="<?= $userData['UserID'] ?>">
+                    <input type="hidden" name="roleValue" value="">
                 </form>
+                <script>
+                    document.querySelector('#role').addEventListener('change', function() {
+                        document.querySelector('[name=roleValue]').value = this.value;
+                    });
+                    document.querySelector('form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        let xhr = new XMLHttpRequest();
+                        xhr.open('POST', '');
+                        xhr.onload = function() {
+                            if(xhr.status === 200) {
+                                alert('Role updated');
+                                location.reload();
+                            } else {
+                                alert('Error updating role');
+                            }
+                        }
+                        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                        xhr.send('roleUpdate=' + document.querySelector('[name=roleUpdate]').value + '&roleValue=' + encodeURIComponent(document.querySelector('[name=roleValue]').value)); // Encode the role value to handle special characters
+                        
+                        let sql = 'UPDATE User SET Role = ? WHERE UserID = ?';
+                        let statement = db.prepare(sql);
+                        statement.run(document.querySelector('[name=roleValue]').value, document.querySelector('[name=roleUpdate]').value);
+                    });
+                </script>
+                   
             <?php } else { ?>
                 <span class="text-lg"><?php echo $userData['Role']; ?></span>
             <?php } ?>
