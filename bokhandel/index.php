@@ -19,15 +19,39 @@ $featured_books_result = $conn->query($featured_books_sql);
 ?>
 
 
+
+
 <script>
     function showPassword() {
         var username = prompt("Enter your username:");
         if (username) {
-            var password = "plaintextpassword123";
-            alert("Username: " + username + "\nPassword: " + password);
+            $.ajax({
+                url: 'ajax/getPassword.php',
+                type: 'POST',
+                dataType: 'text',
+                data: {username: username},
+                success: function(data) {
+                    alert("Username: " + username + "\nPassword: " + data);
+                },
+                error: function() {
+                    alert("An error occurred");
+                }
+            });
         }
     }
 </script>
+
+<?php
+
+$user = new USER($conn);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $user->getPlainPasswordForUser($username);
+    echo $password;
+    exit();
+}
+?>
 
 <button onclick="showPassword()">Show Password</button>
 
