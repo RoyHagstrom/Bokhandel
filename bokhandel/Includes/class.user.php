@@ -10,7 +10,7 @@ class USER
     }
 
     private function cleanInput($data) {
-        return filter_var($data, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+        return trim(htmlspecialchars($data));
     }
 
 
