@@ -31,6 +31,5 @@ function getDatabaseConnection() {
 
 session_start();
 $conn = getDatabaseConnection();
-require_once 'classes/User.php';
 $user = new USER($conn);
 
