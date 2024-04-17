@@ -13,29 +13,6 @@ include 'db_connection.php';
 <html lang="en">
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var lazyImages = document.querySelectorAll("img.lazy");
-  
-  var lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var image = entry.target;
-        image.src = image.dataset.src;
-        image.classList.remove("lazy");
-        lazyImageObserver.unobserve(image);
-      }
-    });
-  });
-
-  lazyImages.forEach(function(image) {
-    image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYVy2bCQAAAH/VJWgAA/AAAABQAAAFgAWAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="; // a transparent 1x1 png as a placeholder
-    lazyImageObserver.observe(image);
-  });
-});
-</script>
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
