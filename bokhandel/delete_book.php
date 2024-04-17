@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         //unlink($file);
-        $user->redirect("my_books.php");
+        $user->redirect("my_books.php?uid=" . $_SESSION["uid"]); 
     } else {
         echo "Error deleting book: " . $stmt->error;
     }
