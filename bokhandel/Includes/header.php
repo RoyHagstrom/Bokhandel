@@ -4,10 +4,13 @@ include 'class.user.php';
 
 include 'db_connection.php';
 
-if(basename(__FILE__) == "header.php"){
-    die("ööööööööööööööööööööööööö");
+
+if(basename(__FILE__) == basename(__FILE__)){
+    die("You shall not pass!");
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
