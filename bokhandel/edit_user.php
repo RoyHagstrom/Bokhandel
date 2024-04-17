@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ? WHERE UserID = ?");
     $stmt->bind_param("sssi", $username, $email, $role, $userid); 
     if ($stmt->execute()) {
-        $user->redirect("account.php?userid=" . urlencode($_GET["userid"]));
+        $user->redirect("account.php?uid=" . urlencode($_GET["userid"]));
     } else {
         echo "Error updating user information: " . $stmt->error;
     }
