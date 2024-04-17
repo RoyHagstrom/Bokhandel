@@ -8,7 +8,7 @@ if (!isset($_SESSION["uid"])) {
 
 
 $stmt = $conn->prepare("SELECT * FROM User WHERE UserID = ?");
-$stmt->bind_param("i", $_SESSION["uid"]);
+$stmt->bind_param("i", $_GET["userid"]);
 $stmt->execute();
 $userInfo = $stmt->get_result()->fetch_assoc();
 
