@@ -48,57 +48,7 @@ if ($result->num_rows > 0) {
         </div>
         <div class="flex items-center">
             <span class="font-semibold mr-2 text-lg">Role:</span>
-
-            
-            <?php if ($_SESSION['urole'] == "Admin") { 
-                echo '<div class="relative">';
-                echo '<select class="w-full px-4 py-2 border border-gray-300 rounded-md" id="user-role-select" onchange="updateUserRole()">';
-                echo '<option value="Regular" ' . ($userData['Role'] == 'Regular' ? 'selected' : '') . '>Regular</option>';
-                echo '<option value="Admin" ' . ($userData['Role'] == 'Admin' ? 'selected' : '') . '>Admin</option>';
-                echo '</select>';
-                echo '</div>';
-                
-                ?>
-    <script>
-        function updateUserRole() {
-            const userId = <?= $userData['UserID'] ?>;
-            const selectElement = document.getElementById('user-role-select');
-            const selectedRole = selectElement.value;
-
-            fetch('updateUserRole.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ userId, selectedRole })
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Error updating role');
-                }
-            })
-            .then(data => {
-                if (data.success) {
-                    selectElement.classList.add('hidden');
-                    const roleElement = document.getElementById('role');
-                    roleElement.innerText = selectedRole;
-                } else {
-                    throw new Error(data.message);
-                }
-            })
-            .catch(error => {
-                alert(error.message);
-            });
-        }
-    </script>
-<?php } else { 
-                echo "<span class=\"text-lg\">" . $userData['Role'] . "</span>";
-            } ?>
-
-
-
+            <span class="text-lg"><?php echo $userData['Role']; ?></span>
         </div>
     </div>
     <h3 class="text-2xl font-bold mb-2 mt-8">Actions:</h3>
