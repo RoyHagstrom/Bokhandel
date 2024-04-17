@@ -48,7 +48,11 @@ if ($result->num_rows > 0) {
         </div>
         <div class="flex items-center">
             <span class="font-semibold mr-2 text-lg">Role:</span>
-            <span class="text-lg"><?php echo $userData['Role']; ?></span>
+            <?php if ($_SESSION['urole'] == "Admin") { echo 'Admin';?>
+                <input type="text" name="role" id="role" value="<?php echo $userData['Role']; ?>" class="text-lg p-2 border border-gray-300 rounded-md">
+            <?php } else { echo 'else';?>
+                <span class="text-lg"><?php echo $userData['Role']; ?></span>
+            <?php } ?>
         </div>
     </div>
     <h3 class="text-2xl font-bold mb-2 mt-8">Actions:</h3>
