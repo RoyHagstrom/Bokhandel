@@ -63,8 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $targetDir = "images/";
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
 
-    if (!is_writable($targetDir)) {
-        die("{$targetDir} is not writable");
+    if (!is_writable(dirname($targetDir))) {
+        die(dirname($targetDir) . " is not writable");
     }
     if (!move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
         $error = error_get_last();
