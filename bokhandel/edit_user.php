@@ -6,7 +6,7 @@ if (!isset($_SESSION["uid"])) {
 }
 
 if(!isset($_GET["userid"])){
-    echo "<script>alert('Please provide userid');</script>";
+    $user->redirect("account.php?userid=" . urlencode($_GET["userid"]));
 }
 
 $userid = $_GET["userid"]; 
