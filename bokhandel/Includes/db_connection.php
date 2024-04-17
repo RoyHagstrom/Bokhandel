@@ -1,7 +1,7 @@
 <?php
 define('DB_HOSTS', [
-    'primary' => 'mysql-db-1',
-    'local' => 'mysql-db-1',
+    'primary' => 'novatest.ddns.net',
+    'local' => '192.168.1.111',
     'localhost' => 'mysql-db-1'
 ]);
 define('DB_PORT', '3306');
