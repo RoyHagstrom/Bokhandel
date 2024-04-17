@@ -1,9 +1,7 @@
 <?php
 
 if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
-    echo 'We don\'t have mysqli!!!';
-} else {
-    echo 'Phew we have it!';
+    die('We don\'t have mysqli!!!' . PHP_EOL);
 }
 
 define('DB_HOSTS', [
@@ -36,6 +34,7 @@ function getDatabaseConnection() {
     }
 }
 
+ob_start();
 session_start();
 $conn = getDatabaseConnection();
 $user = new USER($conn);
