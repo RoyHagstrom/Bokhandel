@@ -74,12 +74,18 @@ if ($result->num_rows > 0) {
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Role updated');
+                    return response.json();
+                } else {
+                    throw new Error('Error updating role');
+                }
+            })
+            .then(data => {
+                if (data.success) {
                     selectElement.classList.add('hidden');
                     const roleElement = document.getElementById('role');
                     roleElement.innerText = selectedRole;
                 } else {
-                    throw new Error('Error updating role');
+                    throw new Error(data.message);
                 }
             })
             .catch(error => {
