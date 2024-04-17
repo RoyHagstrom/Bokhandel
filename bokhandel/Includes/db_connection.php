@@ -10,8 +10,8 @@ define('DB_HOSTS', [
     'localhost' => '192.168.128.2'
 ]);
 define('DB_PORT', '3306');
-define('DB_USERNAME', 'test');
-define('DB_PASSWORD', 'test');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'Lolipop05');
 define('DB_DATABASE', 'bokhandel');
 
 function connectToDb($host) {
