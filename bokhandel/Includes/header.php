@@ -48,7 +48,7 @@ include 'db_connection.php';
                         </div>
                         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a href="account.php?uid=<?= $_SESSION["uid"] ?>" class="text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">Account</a></li>
-                            <li><a href="my_books.php" class="text-gray-400 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">My books</a></li>
+                            <li><a href="my_books.php?uid=<?= $_SESSION["uname"] ?>" class="text-gray-400 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">My books</a></li>
                         </ul>
                     </div>
                     <a href="logout.php" class="bg-black-900 text-white dark:text-gray-200 hover:bg-black-800 dark:hover:bg-black-400 px-4 py-2 rounded-md">Logout</a>
