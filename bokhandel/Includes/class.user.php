@@ -13,7 +13,7 @@ class USER
     {
         $data = filter_var($data, FILTER_SANITIZE_STRING);
         
-        return htmlspecialchars(addslashes($data), ENT_QUOTES, 'UTF-8');
+        return filter_var($data, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH, FILTER_FLAG_STRIP_BACKTICK);
     }
 
     public function redirect($url)
