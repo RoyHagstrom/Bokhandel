@@ -70,19 +70,6 @@ class USER
             return "Registration failed";
         }
     }
-    
-    public function getPlainPasswordForUser($userID, $hashedPassword)
-    {
-        $stmt = $this->conn->prepare("SELECT Password FROM User WHERE UserID = ?");
-        $stmt->bind_param('i', $userID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
-        if (!$user || !password_verify($hashedPassword, $user['Password'])) {
-            return password_hash($hashedPassword, PASSWORD_DEFAULT);
-        }
-        return $hashedPassword;
-    }
 
     public function login()
     {
