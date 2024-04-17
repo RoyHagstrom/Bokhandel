@@ -15,7 +15,7 @@ include 'db_connection.php';
     <link href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <title>Bokhandel</title>
+    <title>Bokhandel test</title>
 </head>
 
 
