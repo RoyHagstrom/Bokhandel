@@ -58,27 +58,37 @@ if ($result->num_rows > 0) {
                     <input type="hidden" name="roleValue" value="">
                 </form>
                 <script>
-                    document.querySelector('#role').addEventListener('change', function() {
-                        document.querySelector('[name=roleValue]').value = this.value;
-                    });
-                    document.querySelector('form').addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        let xhr = new XMLHttpRequest();
-                        xhr.open('POST', '');
-                        xhr.onload = function() {
-                            if(xhr.status === 200) {
-                                alert('Role updated');
-                                location.reload();
-                            } else {
-                                alert('Error updating role');
-                            }
-                        }
-                        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                        xhr.send('roleUpdate=' + document.querySelector('[name=roleUpdate]').value + '&roleValue=' + encodeURIComponent(document.querySelector('[name=roleValue]').value)); // Encode the role value to handle special characters
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const roleSelect = document.querySelector('#role');
+                        const roleForm = document.querySelector('form');
+                        const roleUpdateInput = document.querySelector('[name=roleUpdate]');
+                        const roleValueInput = document.querySelector('[name=roleValue]');
                         
-                        let sql = 'UPDATE User SET Role = ? WHERE UserID = ?';
-                        let statement = db.prepare(sql);
-                        statement.run(document.querySelector('[name=roleValue]').value, document.querySelector('[name=roleUpdate]').value);
+                        roleSelect.addEventListener('change', function() {
+                            roleValueInput.value = this.value;
+                        });
+                        
+                        roleForm.addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            const xhr = new XMLHttpRequest();
+                            
+                            xhr.open('POST', '');
+                            xhr.onload = function() {
+                                if(xhr.status === 200) {
+                                    alert('Role updated');
+                                    location.reload();
+                                } else {
+                                    alert('Error updating role');
+                                }
+                            };
+                            
+                            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                            xhr.send(`roleUpdate=${encodeURIComponent(roleUpdateInput.value)}&roleValue=${encodeURIComponent(roleValueInput.value)}`);
+                            
+                            const sql = 'UPDATE User SET Role = ? WHERE UserID = ?';
+                            const statement = db.prepare(sql);
+                            statement.run(roleValueInput.value, roleUpdateInput.value);
+                        });
                     });
                 </script>
                    
