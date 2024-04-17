@@ -5,6 +5,11 @@ if (!isset($_SESSION["uid"])) {
     $user->redirect("login.php");
 }
 
+if(!isset($_GET["userid"])){
+    $user->redirect("account.php");
+}
+
+
 $stmt = $conn->prepare("SELECT * FROM User WHERE UserID = ?");
 $stmt->bind_param("i", $_GET["userid"]);
 $stmt->execute();
