@@ -15,12 +15,14 @@ if (isset($_POST['register-submit'])) {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $role = $_POST['role']; 
 
-        $registerReturn = $user->register($username, $email, $password);
+        $registerReturn = $user->register($username, $email, $password, $role);
 
     } else {
         echo "All fields are required";
     }
+}
 }
 
 ?>
