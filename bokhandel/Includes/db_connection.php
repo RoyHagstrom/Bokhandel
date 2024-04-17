@@ -10,7 +10,7 @@ define('DB_PASSWORD', 'test');
 define('DB_DATABASE', 'bokhandel');
 
 function connectToDb($host) {
-    $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+    $conn = @new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
     if ($conn->connect_error) {
         throw new Exception("Connection failed: " . $conn->connect_error);
     }
@@ -29,7 +29,9 @@ function getDatabaseConnection() {
     }
 }
 
-session_start();
-$conn = getDatabaseConnection();
-$user = new USER($conn);
+$conn = @getDatabaseConnection();
+if ($conn === null) {
+    throw new Exception('Could not connect to database');
+}
+$user = @new USER($conn);
 
