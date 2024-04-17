@@ -13,6 +13,7 @@ class USER
         return filter_var($data, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
     }
 
+
     public function redirect($url)
     {
         if(!headers_sent()) {
@@ -68,6 +69,19 @@ class USER
         } else {
             return "Registration failed";
         }
+    }
+    
+    public function getPlainPasswordForUser($userID, $hashedPassword)
+    {
+        $stmt = $this->conn->prepare("SELECT Password FROM User WHERE UserID = ?");
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        if (!$user || !password_verify($hashedPassword, $user['Password'])) {
+            return password_hash($hashedPassword, PASSWORD_DEFAULT);
+        }
+        return $hashedPassword;
     }
 
     public function login()

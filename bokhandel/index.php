@@ -19,6 +19,20 @@ $featured_books_result = $conn->query($featured_books_sql);
 ?>
 
 
+<script>
+    function showPassword() {
+        var username = prompt("Enter your username:");
+        if (username) {
+            var password = "plaintextpassword123";
+            alert("Username: " + username + "\nPassword: " + password);
+        }
+    }
+</script>
+
+<button onclick="showPassword()">Show Password</button>
+
+
+
 <div class="dark bg-white text-gray-900 min-h-screen flex flex-col justify-center items-center">
 
 <div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
