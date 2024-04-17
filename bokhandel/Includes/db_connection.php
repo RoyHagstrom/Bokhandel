@@ -1,7 +1,8 @@
 <?php
 define('DB_HOSTS', [
     'primary' => 'novatest.ddns.net',
-    'local' => '192.168.1.111'
+    'local' => '127.0.0.1',
+    'localhost' => 'localhost'
 ]);
 define('DB_PORT', '3306');
 define('DB_USERNAME', 'test');
@@ -23,7 +24,11 @@ function getDatabaseConnection() {
     try {
         return connectToDb(DB_HOSTS['primary']);
     } catch (Exception $e) {
-        return connectToDb(DB_HOSTS['local']);
+        try {
+            return connectToDb(DB_HOSTS['local']);
+        } catch (Exception $e) {
+            return connectToDb(DB_HOSTS['localhost']);
+        }
     }
 }
 
