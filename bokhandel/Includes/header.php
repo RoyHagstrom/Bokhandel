@@ -4,6 +4,9 @@ include 'class.user.php';
 
 include 'db_connection.php';
 
+if(basename(__FILE__) == "header.php"){
+    die("ööööööööööööööööööööööööö");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

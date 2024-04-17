@@ -174,7 +174,7 @@ $stmt->bind_param("ssssssssssdsii", $title, $description, $author, $illustrator,
                     <select id="Series" name="SeriesID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="">Select Series</option>
                         <?php foreach ($series as $s): ?>
-                            <option value="<?php echo $s['SeriesName']; ?>" <?php echo isset($bookData['Series']) && $s['SeriesName'] == $bookData['Series'] ? 'selected' : ''; ?>>
+                            <option value="<?php echo $s['SeriesName']; ?>" <?php echo isset($bookData['SeriesID']) && $s['SeriesName'] == $bookData['SeriesID'] ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($s['SeriesName'], ENT_QUOTES); ?>
                             </option>
                         <?php endforeach; ?> 
@@ -192,6 +192,15 @@ $stmt->bind_param("ssssssssssdsii", $title, $description, $author, $illustrator,
                         input.classList.remove('hidden');
                         input.focus();
                     }
+
+                    document.querySelector("#newSeries").addEventListener('blur', function() {
+                        const select = document.querySelector("#Series");
+                        const input = document.querySelector("#newSeries");
+                        select.style.display = 'block';
+                        input.classList.add('hidden');
+                        input.value = '';
+                    });
+                </script>
                 </script>
                 <button type="button" onclick="prevStep(1)" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">Previous</button>
                 <button type="button" onclick="nextStep(3)" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Next</button>

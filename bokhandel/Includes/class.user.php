@@ -11,8 +11,15 @@ class USER
 
     private function cleanInput($data)
     {
-        return htmlspecialchars(stripslashes(trim($data)));
+        $data = html_entity_decode($data, ENT_QUOTES, "UTF-8");
+        $data = strip_tags($data);
+        $data = preg_replace('/\s+/', ' ', $data);
+        $data = stripslashes($data);
+        $data = $this->conn->quote($data);
+
+        return $data;
     }
+
 
     public function redirect($url)
     {
