@@ -48,44 +48,41 @@ if ($result->num_rows > 0) {
         </div>
         <div class="flex items-center">
             <span class="font-semibold mr-2 text-lg">Role:</span>
+
+            
             <?php if ($_SESSION['urole'] == "Admin") { ?>
-    <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md" onchange="this.form.submit()">
+    <select name="role" id="role" class="text-lg p-2 border border-gray-300 rounded-md" onchange="updateUserRole()">
         <option value="Regular" <?php echo ($userData['Role'] == 'Regular') ? 'selected' : ''; ?>>Regular</option>
         <option value="Admin" <?php echo ($userData['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
     </select>
-    <form id="roleUpdateForm" method="POST" action="">
-        <input type="hidden" name="roleUpdate" value="<?= $userData['UserID'] ?>">
-        <input type="hidden" name="roleValue" value="">
-    </form>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const f = d => document.querySelector(d);
-            const [s, f0] = [f('#role'), f('#roleUpdateForm')];
-            s.addEventListener('change', () => f('[name=roleValue]').value = s.value);
-            f0.addEventListener('submit', e => {
-                e.preventDefault();
-                const formData = new FormData(f0);
-                fetch('', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        alert('Role updated');
-                        location.reload();
-                    } else {
-                        throw new Error('Error updating role');
-                    }
-                })
-                .catch(error => {
-                    alert(error.message);
-                });
+        function updateUserRole() {
+            const role = document.getElementById('role').value;
+            const userId = <?= $userData['UserID'] ?>;
+            fetch('updateUserRole.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId, role })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Role updated');
+                    location.reload();
+                } else {
+                    throw new Error('Error updating role');
+                }
+            })
+            .catch(error => {
+                alert(error.message);
             });
-        });
+        }
     </script>
 <?php } else { ?>
     <span class="text-lg"><?php echo $userData['Role']; ?></span>
 <?php } ?>
+
 
         </div>
     </div>
