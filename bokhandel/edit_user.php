@@ -5,7 +5,7 @@ if (!isset($_SESSION["uid"])) {
     $user->redirect("login.php");
 }
 
-if(!isset($_GET["userid"])){
+if(!isset($_GET["UserID"])){
     $user->redirect("account.php");
 }
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : $userInfo["Email"];
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID != ?");
-    $stmt->bind_param("si", $username, $_SESSION["uid"]);
+    $stmt->bind_param("si", $username, $_GET["UserID"]);
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
 
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ? WHERE UserID = ?");
-    $stmt->bind_param("ssi", $username, $email, $_SESSION["uid"]);
+    $stmt->bind_param("ssi", $username, $email, $_GET["UserID"]);
 
     if ($stmt->execute()) {
         $user->redirect("account.php");
