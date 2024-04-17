@@ -37,10 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
 
-    if ($result[0] > 0) {
-        echo "Username already exists";
-        exit();
-    }
 
 
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ? WHERE UserID = ?");
