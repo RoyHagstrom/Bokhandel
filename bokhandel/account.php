@@ -51,29 +51,33 @@ if ($result->num_rows > 0) {
 
             
             <?php if ($_SESSION['urole'] == "Admin") { 
-                $role = $userData['Role'];
-                echo "<span class=\"text-lg\" id=\"role\">$role</span>";
-                echo "<select name=\"role\" id=\"role-select\" class=\"text-lg p-2 border border-gray-300 rounded-md hidden\" onchange=\"updateUserRole()\">";
-                echo "<option value=\"Regular\" " . ($role == 'Regular' ? 'selected' : '') . ">Regular</option>";
-                echo "<option value=\"Admin\" " . ($role == 'Admin' ? 'selected' : '') . ">Admin</option>";
-                echo "</select>";
-            ?>
+                echo '<div class="relative">';
+                echo '<select class="w-full px-4 py-2 border border-gray-300 rounded-md" id="user-role-select" onchange="updateUserRole()">';
+                echo '<option value="Regular" ' . ($userData['Role'] == 'Regular' ? 'selected' : '') . '>Regular</option>';
+                echo '<option value="Admin" ' . ($userData['Role'] == 'Admin' ? 'selected' : '') . '>Admin</option>';
+                echo '</select>';
+                echo '</div>';
+                
+                ?>
     <script>
         function updateUserRole() {
-            const role = document.getElementById('role-select').value;
             const userId = <?= $userData['UserID'] ?>;
+            const selectElement = document.getElementById('user-role-select');
+            const selectedRole = selectElement.value;
+
             fetch('updateUserRole.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ userId, role })
+                body: JSON.stringify({ userId, selectedRole })
             })
             .then(response => {
                 if (response.ok) {
-                    document.getElementById('role-select').classList.add('hidden');
-                    document.getElementById('role').innerText = role;
                     alert('Role updated');
+                    selectElement.classList.add('hidden');
+                    const roleElement = document.getElementById('role');
+                    roleElement.innerText = selectedRole;
                 } else {
                     throw new Error('Error updating role');
                 }
@@ -86,7 +90,7 @@ if ($result->num_rows > 0) {
 <?php } else { 
                 echo "<span class=\"text-lg\">" . $userData['Role'] . "</span>";
             } ?>
-            
+
 
 
         </div>
