@@ -2,9 +2,7 @@
 require_once 'class.user.php';
 require_once 'db_connection.php';
 
-if(basename(__FILE__) == basename(__FILE__)){
-    die("You shall not pass!");
-}
+
 
 if (!isset($_SESSION["uid"])) {
     $user->redirect("login.php");

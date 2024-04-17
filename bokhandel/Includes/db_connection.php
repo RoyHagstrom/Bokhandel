@@ -33,10 +33,6 @@
         }
     }
     
-    if(basename(__FILE__) == basename(__FILE__)){
-        die("You shall not pass!");
-    }
-
     session_start();
     $conn = getDatabaseConnection();
     $user = new USER($conn);
