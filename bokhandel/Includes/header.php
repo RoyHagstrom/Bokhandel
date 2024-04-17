@@ -5,9 +5,35 @@ include 'class.user.php';
 include 'db_connection.php';
 
 
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = document.querySelectorAll("img.lazy");
+  
+  var lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var image = entry.target;
+        image.src = image.dataset.src;
+        image.classList.remove("lazy");
+        lazyImageObserver.unobserve(image);
+      }
+    });
+  });
+
+  lazyImages.forEach(function(image) {
+    lazyImageObserver.observe(image);
+  });
+});
+</script>
+
 
 <head>
     <meta charset="UTF-8">
