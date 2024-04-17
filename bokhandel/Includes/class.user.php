@@ -11,7 +11,7 @@ class USER
 
     private function cleanInput($data)
     {
-        $data = filter_var($data, FILTER_SANITIZE_FULL);
+        $data = filter_var($data, FILTER_SANITIZE_STRING);
         
         return htmlspecialchars(addslashes($data), ENT_QUOTES, 'UTF-8');
     }
