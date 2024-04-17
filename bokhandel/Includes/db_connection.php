@@ -1,11 +1,7 @@
 <?php
-
 if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
     die('We don\'t have mysqli!!!');
 }
-
-// Start the session after checking for mysqli
-session_start();
 
 define('DB_HOSTS', [
     'primary' => 'novatest.ddns.net',
@@ -37,6 +33,7 @@ function getDatabaseConnection() {
     }
 }
 
+session_start();
 $conn = getDatabaseConnection();
 $user = new USER($conn);
 
