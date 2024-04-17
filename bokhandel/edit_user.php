@@ -46,7 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-1" for="role">Role:</label>
-                    <input type="text" id="role" name="role" class="border border-gray-400 p-2 w-full rounded-md" value="<?php echo htmlspecialchars($userInfo['Role']); ?>" readonly>
+                    <select id="role" name="role" class="border border-gray-400 p-2 w-full rounded-md">
+                        <option value="Admin" <?php echo $userInfo['Role'] == 'Admin' ? 'selected' : ''; ?>>Admin</option>
+                        <option value="Regular" <?php echo $userInfo['Role'] == 'Regular' ? 'selected' : ''; ?>>Regular</option>
+                    </select>
                 </div>
             </div>
 
