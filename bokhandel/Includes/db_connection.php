@@ -5,6 +5,8 @@ if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
 } else {
     echo 'Phew we have it!';
 }
+session_start();
+
 define('DB_HOSTS', [
     'primary' => 'novatest.ddns.net',
     'local' => '192.168.1.111',
@@ -35,7 +37,6 @@ function getDatabaseConnection() {
     }
 }
 
-session_start();
 $conn = getDatabaseConnection();
 $user = new USER($conn);
 
