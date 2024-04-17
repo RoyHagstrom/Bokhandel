@@ -61,11 +61,11 @@ class USER
         }
     }
 
-    public function register($username, $email, $password)
+    public function register($username, $email, $password, $role = "Regular")
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->conn->prepare("INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, 'Regular')");
-        $stmt->bind_param('sss', $username, $email, $hashedPassword);
+        $stmt = $this->conn->prepare("INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param('ssss', $username, $email, $hashedPassword, $role);
         if ($stmt->execute()) {
             return "User registered successfully";
         } else {
