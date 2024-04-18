@@ -20,6 +20,7 @@ class USER
             http_response_code(303);
         }
         header("Location: $url");
+        ob_end_flush(); 
         exit;
     }
 
