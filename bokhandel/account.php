@@ -81,8 +81,9 @@ if ($result->num_rows > 0) {
 <?php
 $stmt = $conn->query("SELECT BookID, Title, Price, C.Name AS Category FROM Book B JOIN categories C ON B.Category = C.ID WHERE Author = '".$userData["Username"]."'");
 if($stmt && $stmt->num_rows > 0){
-    echo '<h3 class="text-2xl font-bold my-4">Author\'s Books:</h3>
-    <table class="w-full text-left border-collapse mt-2 text-black">
+    echo '<h3 class="text-2xl font-bold my-4 sm:mb-8 md:mb-12">Author\'s Books:</h3>
+    <div class="overflow-x-auto md:overflow-x-visible">
+    <table class="w-full text-sm sm:text-base border-collapse mt-2 text-black">
         <thead>
             <tr>
                 <th class="py-2 px-4 bg-gray-100">Book ID</th>
@@ -100,9 +101,10 @@ if($stmt && $stmt->num_rows > 0){
                 <td class="py-2 px-4 border-b">'.$book['Price'].'€</td>
             </tr>';
     }
-    echo '</tbody></table>';
+    echo '</tbody></table>
+    </div>';
 }else{
-    echo '<p class="text-lg my-4 italic">No books found for this author.</p>';
+    echo '<p class="text-lg my-4 sm:my-8 md:my-12 italic">No books found for this author.</p>';
 }
 ?>
 

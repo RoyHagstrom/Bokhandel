@@ -21,7 +21,41 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 <div class="dark bg-white text-gray-900 min-h-screen flex flex-col justify-center items-center">
 
-<div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
+
+
+
+
+        <div class="bg-gray-800 py-8 w-full sm:w-130">
+            <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
+
+            <div class="flex flex-wrap justify-center items-center">
+                <?php
+                $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
+                $featured_categories_result = $conn->query($featured_categories_sql);
+
+                if ($featured_categories_result->num_rows > 0) {
+                    while ($row = $featured_categories_result->fetch_assoc()) {
+                        $featured_category_id = $row['id']; 
+                        $featured_category_name = $row['name'];
+                        $featured_category_image = $row['image'];
+
+                        echo '<div class="m-2 md:m-4 relative rounded-lg">';
+                        echo '<a href="books.php?id=' . $featured_category_id . '">'; 
+                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
+                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-xs sm:text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p class="text-lg text-gray-500">No featured categories available</p>';
+                }
+                ?>
+            </div>
+        </div>
+
+
+
+        <div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
     <h1 class="text-black text-2xl font-semibold mb-6">Book Search</h1>
     <div class="relative mb-4">
         <input type="text" id="searchInput" class="appearance-none border border-gray-300 rounded-md py-2 px-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 w-full" placeholder="Search for books">
@@ -79,36 +113,6 @@ $featured_books_result = $conn->query($featured_books_sql);
         `).join('');
     }
 </script>
-
-
-
-        <div class="bg-gray-800 py-8 w-full sm:w-130 mt-8">
-            <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
-
-            <div class="flex flex-wrap justify-center items-center">
-                <?php
-                $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
-                $featured_categories_result = $conn->query($featured_categories_sql);
-
-                if ($featured_categories_result->num_rows > 0) {
-                    while ($row = $featured_categories_result->fetch_assoc()) {
-                        $featured_category_id = $row['id']; 
-                        $featured_category_name = $row['name'];
-                        $featured_category_image = $row['image'];
-
-                        echo '<div class="m-2 md:m-4 relative rounded-lg">';
-                        echo '<a href="books.php?id=' . $featured_category_id . '">'; 
-                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
-                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-xs sm:text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
-                        echo '</a>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo '<p class="text-lg text-gray-500">No featured categories available</p>';
-                }
-                ?>
-            </div>
-        </div>
 
 
 

@@ -27,22 +27,22 @@ $result = $stmt->get_result();
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
 
-<div class="container mx-auto p-8 max-w-6xl">
+<div class="container mx-auto sm:p-8 w-full md:max-w-6xl">
     <h2 class="text-3xl font-bold mb-4"><?php echo $author; ?>'s books</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <a href="singlebook.php?id=<?php echo $row['BookID']; ?>" class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
-                <div class="relative h-80">
-                    <img src="<?php echo $row['Image']; ?>" alt="<?php echo $row['Title']; ?>" class="object-cover w-full h-full">
+                <div class="relative h-auto">
+                    <img src="<?php echo $row['Image']; ?>" alt="<?php echo $row['Title']; ?>" class="object-cover w-full h-auto max-h-80">
                     <div class="absolute top-0 right-0 p-2">
                         <span class="bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg"><?php echo $row['Price']; ?>€</span>
                     </div>
                 </div>
-                <div class="p-6">
-                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Title']; ?></h2>
-                        <p class="text-gray-700 dark:text-gray-300">Author: <?php echo $row['Author']; ?></p>
-                        <p class="text-gray-700 dark:text-gray-300"><?php echo substr($row['Description'], 0, 50) . '...'; ?></p>
+                <div class="p-2 sm:p-6">
+                        <h2 class="sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Title']; ?></h2>
+                        <p class="text-sm md:text-base text-gray-700 dark:text-gray-300">Author: <?php echo $row['Author']; ?></p>
+                        <p class="text-sm md:text-base text-gray-700 dark:text-gray-300"><?php echo substr($row['Description'], 0, 50) . '...'; ?></p>
                     </div>
                 </a>
             </div>
