@@ -20,7 +20,9 @@ class USER
             header("Location: $url", true, 303);
             exit;
         } else {
-            echo '<p>Warning: Cannot modify header information - headers already sent<br>Redirecting to ' . htmlspecialchars($url) . '</p>';
+            $message = 'Warning: Cannot modify header information - headers already sent<br>Redirecting to ' . htmlspecialchars($url);
+            error_log($message);
+            echo 'A problem occurred. Please try again later.';
         }
     }
 
