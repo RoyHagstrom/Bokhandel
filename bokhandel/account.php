@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-<div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center p-8">
+<div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center p-8 text-black">
     
 
     
