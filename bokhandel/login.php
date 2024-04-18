@@ -10,9 +10,7 @@ if (isset($_POST['article-submit'])) {
 
 }
 
-if($user->checkLoginStatus()){
-    $user->redirect("account.php");
-}
+
 
 
 ?>
