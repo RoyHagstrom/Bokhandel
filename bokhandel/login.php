@@ -1,18 +1,24 @@
 <?php
 include 'Includes/header.php';
 
-if (isset($_POST['article-submit'])) {
-    $loginReturn = $user->login();
+try {
+    if (isset($_POST['article-submit'])) {
+        $loginReturn = $user->login();
 
-    if ($loginReturn == "success") {
-        $user->redirect("account.php");
+        if ($loginReturn == "success") {
+            $user->redirect("account.php");
+        }
+
     }
 
+    if($user->checkLoginStatus()){
+        $user->redirect("index.php");
+    }
+}
+catch(Exception $e) {
+    $loginReturn = "A problem occurred. Please try again later.";
 }
 
-if($user->checkLoginStatus()){
-    $user->redirect("index.php");
-}
 
 
 ?>
