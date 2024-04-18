@@ -61,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
 
 
-<div class="flex">
-    <div class="w-1/2 mr-4">
+<div class="grid grid-cols-1 xl:grid-cols-2 items-center justify-center w-full lg:contained">
+    <div class="w-full mr-4">
         <div class="bg-white p-8 rounded-lg shadow-md">
             <h2 class="text-3xl font-medium text-center text-gray-900 mb-4">Add New Publisher</h2>
             <?php if ($successMessage) : ?><div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-4 rounded-md" role="alert"><?php echo $successMessage; ?></div><?php endif; ?>
@@ -93,11 +93,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
             </form>
         </div>
     </div>
-    <div class="w-1/2">
+    <div class="w-full">
         <div class="bg-white p-8 rounded-lg shadow-md">
             <h2 class="text-3xl font-medium text-center text-gray-900 mb-4">Manage Publishers</h2>
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
+            <div class="shadow overflow-auto border-b border-gray-200 sm:rounded-lg">
+                <table class=" divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
@@ -141,6 +141,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
         </div>
     </div>
 </div>
+
+
+
+
 </div>
 
 

@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
-    <div class="container mx-auto p-8">
+    <div class="container mx-auto p-8 rounded-lg shadow-md">
         <h2 class="text-3xl font-bold mb-4">Manage Age Recommendations</h2>
  
 

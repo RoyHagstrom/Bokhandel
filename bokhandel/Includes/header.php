@@ -90,7 +90,7 @@ include 'db_connection.php';
 
         <?php if(isset($_SESSION['urole']) && $_SESSION['urole'] == "Admin"){ ?>
 
-            <header class="invisible lg:visible bg-gray-700 dark:bg-gray-700 py-4 text-sm xl:text-base sticky top-0 z-10">
+            <header class="xl:block hidden bg-gray-700 dark:bg-gray-700 py-4 text-sm xl:text-base sticky top-0 z-10">
             
 
                 <nav class="text-sm md:flex justify-center items-center">
