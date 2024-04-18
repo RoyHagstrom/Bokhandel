@@ -53,10 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $author = $bookData['Author'];
 
-$series = trim($_POST['SeriesID']); 
+        $series = trim($_POST['SeriesID']); 
 
-$stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Author=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Series=?, Publisher=?, Price=?, Pages=?, StatusID=? WHERE BookID=?");
-$stmt->bind_param("ssssssssssdsii", $title, $description, $author, $illustrator, $ageRecommendation, $category, $genre, $publicationYear, $series, $publisher, $price, $pages, $statusID, $_GET["bookid"]);
+        $stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Author=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Series=?, Publisher=?, Price=?, Pages=?, StatusID=? WHERE BookID=?");
+        $stmt->bind_param("ssssssssssdsii", $title, $description, $author, $illustrator, $ageRecommendation, $category, $genre, $publicationYear, $series, $publisher, $price, $pages, $statusID, $_GET["bookid"]);
         
         if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $targetDir = "images/";
