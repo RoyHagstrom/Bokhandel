@@ -72,7 +72,7 @@ if ($category_id) {
 
 
 
-<div class="bg-gray-800 p-2 md:p-8 w-full sm:w-130 mt-8">
+<div class="bg-gray-800 p-2 md:p-8 w-full sm:w-130">
     <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
 
     <div class="flex flex-wrap justify-center items-center">
