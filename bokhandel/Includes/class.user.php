@@ -16,14 +16,9 @@ class USER
 
     public function redirect($url)
     {
-        if (!headers_sent()) {
-            header("Location: $url", true, 303);
-            exit;
-        } else {
-            $message = 'Warning: Cannot modify header information - headers already sent<br>Redirecting to ' . htmlspecialchars($url);
-            error_log($message);
-            echo 'A problem occurred. Please try again later.';
-        }
+        http_response_code(303);
+        header("Location: $url");
+        exit;
     }
 
     public function checkLoginStatus()
