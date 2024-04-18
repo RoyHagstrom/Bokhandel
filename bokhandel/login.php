@@ -1,6 +1,10 @@
 <?php
 include 'Includes/header.php';
 
+if($user->checkLoginStatus()){
+    $user->redirect("account.php");
+}
+
 if (isset($_POST['article-submit'])) {
     $loginReturn = $user->login();
 
@@ -10,9 +14,7 @@ if (isset($_POST['article-submit'])) {
 
 }
 
-if($user->checkLoginStatus()){
-    $user->redirect("account.php");
-}
+
 
 
 ?>

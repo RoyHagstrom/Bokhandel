@@ -56,13 +56,17 @@ class USER
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->conn->prepare("INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, ?)");
+        if (!$stmt) {
+            return "Registration failed. Please try again later.";
+        }
         $stmt->bind_param('ssss', $username, $email, $hashedPassword, $role);
         if ($stmt->execute()) {
             return "User registered successfully";
         } else {
-            return "Registration failed";
+            return "Registration failed. Please try again later.";
         }
     }
+    
 
     public function login()
     {
