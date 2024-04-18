@@ -95,44 +95,44 @@ include 'db_connection.php';
                 <nav class="text-sm md:flex justify-center items-center">
                     <ul class="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
                         <li>
-                            <a href="register.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-3 0v-3m0 0v-3m3 0h3"></path></svg>
+                            <a href="register.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/532379/user-plus.svg" alt="Register" class="w-6 h-6 mr-2 inline-block">
                                 Add user
                             </a>
                         </li>
                         <li>
-                            <a href="manage_users.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 0h6m6 0v-2m6 0h-6"></path></svg>
+                            <a href="manage_users.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/532376/user-pen.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block">
                                 Manage users
                             </a>
                         </li>
                         <li>
-                            <a href="manage_publishers.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 0h6m6 0v-2m6 0h-6"></path></svg>
+                            <a href="manage_publishers.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/487780/shipping-box.svg" alt="Manage Publishers" class="w-6 h-6 mr-2 inline-block">
                                 Manage publishers
                             </a>
                         </li>
                         <li>
-                            <a href="manage_categories.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17h-4v-4m0 0V5m0 4v4m4-4h4"></path></svg>
+                            <a href="manage_categories.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/339889/categories.svg" alt="Manage Categories" class="w-6 h-6 mr-2 inline-block">
                                 Manage categories
                             </a>
                         </li>
                         <li>
-                            <a href="manage_age_recommendations.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3h-4m0 0V5m0 4v4m4-4h4"></path></svg>
+                            <a href="manage_age_recommendations.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/521448/age-18.svg" alt="Manage Age Recommendations" class="w-6 h-6 mr-2 inline-block">
                                 Manage age recommendations
                             </a>
                         </li>
                         <li>
-                            <a href="manage_series.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            <a href="manage_series.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/343094/episodes.svg" alt="Manage Series" class="w-6 h-6 mr-2 inline-block">
                                 Manage series
                             </a>
                         </li>
                         <li>
-                            <a href="manage_genre.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            <a href="manage_genre.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/422119/game-gaming-3.svg" alt="Manage Genre" class="w-6 h-6 mr-2 inline-block">
                                 Manage genre
                             </a>
                         </li>
@@ -145,38 +145,38 @@ include 'db_connection.php';
                 <nav class="text-sm md:flex justify-center items-center">
                 <ul class="flex justify-center space-x-0 md:space-x-8 lg:space-x-10">
                         <li>
-                            <a href="register.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-3 0v-3m0 0v-3m3 0h3"></path></svg>
+                            <a href="register.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/532379/user-plus.svg" alt="Register" class="w-6 h-6 mr-2 inline-block fill-white">
                             </a>
                         </li>
                         <li>
-                            <a href="manage_users.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 0h6m6 0v-2m6 0h-6"></path></svg>
+                            <a href="manage_users.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/532376/user-pen.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block fill-white">
                             </a>
                         </li>
                         <li>
-                            <a href="manage_publishers.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 0h6m6 0v-2m6 0h-6"></path></svg>
+                            <a href="manage_publishers.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/487780/shipping-box.svg" alt="Manage Publishers" class="w-6 h-6 mr-2 inline-block fill-white">
                             </a>
                         </li>
                         <li>
-                            <a href="manage_categories.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17h-4v-4m0 0V5m0 4v4m4-4h4"></path></svg>
+                            <a href="manage_categories.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/339889/categories.svg" alt="Manage Categories" class="w-6 h-6 mr-2 inline-block fill-white">
                             </a>
                         </li>
                         <li>
-                            <a href="manage_age_recommendations.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3h-4m0 0V5m0 4v4m4-4h4"></path></svg>
+                            <a href="manage_age_recommendations.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/521448/age-18.svg" alt="Manage Age Recommendations" class="w-6 h-6 mr-2 inline-block fill-white">
                             </a>
                         </li>
                         <li>
-                            <a href="manage_series.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            <a href="manage_series.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/343094/episodes.svg" alt="Manage Series" class="w-6 h-6 mr-2 inline-block fill-white">
                             </a>
                         </li>
                         <li>
-                            <a href="manage_genre.php" class="inline-flex items-center text-white dark:text-gray-200 hover:text-gray-300 block px-4 py-2">
-                                <svg class="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            <a href="manage_genre.php" class="text-white">
+                                <img src="https://www.svgrepo.com/show/422119/game-gaming-3.svg" alt="Manage Genre" class="w-6 h-6 mr-2 inline-block fill-white">
                             </a>
                         </li>
                 </nav>
