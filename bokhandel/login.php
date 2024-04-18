@@ -2,17 +2,16 @@
 include 'Includes/header.php';
 
 if (isset($_POST['article-submit'])) {
-    ob_start(); 
     $loginReturn = $user->login();
 
     if ($loginReturn == "success") {
-        header("Location: account.php");
-        exit();
-    } elseif ($user->checkLoginStatus()) {
-        header("Location: index.php");
-        exit();
+        $user->redirect("account.php");
     }
-    ob_end_flush(); 
+
+}
+
+if($user->checkLoginStatus()){
+    $user->redirect("account.php");
 }
 
 
