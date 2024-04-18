@@ -16,7 +16,7 @@ $result = $conn->query($sql);
 
 ?>
 
-<div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
+<div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center lg:p-8">
 
 <div class="container mx-auto p-8 max-w-6xl">
     <h2 class="text-3xl font-bold mb-4">Manage Users</h2>
