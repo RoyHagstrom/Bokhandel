@@ -6,12 +6,9 @@ if (isset($_POST['article-submit'])) {
 
     if ($loginReturn == "success") {
         $user->redirect("account.php");
+    } elseif ($user->checkLoginStatus()) {
+        $user->redirect("index.php");
     }
-
-}
-
-if($user->checkLoginStatus()){
-    $user->redirect("index.php");
 }
 
 

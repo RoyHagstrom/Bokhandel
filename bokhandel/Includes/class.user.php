@@ -16,7 +16,9 @@ class USER
 
     public function redirect($url)
     {
-        http_response_code(303);
+        if (!headers_sent()) {
+            http_response_code(303);
+        }
         header("Location: $url");
         exit;
     }
