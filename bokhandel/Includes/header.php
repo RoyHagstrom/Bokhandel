@@ -143,7 +143,7 @@ include 'db_connection.php';
                 <header class="block xl:hidden bg-gray-700 dark:bg-gray-700 py-4 text-sm xl:text-base sticky top-0 z-10">
 
                 <nav class="text-sm md:flex justify-center items-center">
-                <ul class="flex justify-center space-x-2 md:space-x-8 lg:space-x-10">
+                <ul class="flex justify-center space-x-4 md:space-x-8 lg:space-x-10">
                         <li>
                             <a href="register.php" class="text-white">
                                 <img src="https://www.svgrepo.com/show/532379/user-plus.svg" alt="Register" class="w-6 h-6 mr-2 inline-block fill-white">
