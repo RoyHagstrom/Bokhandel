@@ -89,4 +89,6 @@ include 'db_connection.php';
             mobileMenuDrawer.classList.toggle('hidden');
         });
 
+        
+
     </script> 
