@@ -82,7 +82,7 @@ if ($result->num_rows > 0) {
 $stmt = $conn->query("SELECT BookID, Title, Price, C.Name AS Category FROM Book B JOIN categories C ON B.Category = C.ID WHERE Author = '".$userData["Username"]."'");
 if($stmt && $stmt->num_rows > 0){
     echo '<h3 class="text-2xl font-bold my-4">Author\'s Books:</h3>
-    <table class="w-full text-left border-collapse mt-2">
+    <table class="w-full text-left border-collapse mt-2 text-black">
         <thead>
             <tr>
                 <th class="py-2 px-4 bg-gray-100">Book ID</th>
