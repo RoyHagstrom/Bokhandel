@@ -18,9 +18,12 @@ class USER
     {
         if (!headers_sent()) {
             http_response_code(303);
+            header("Location: $url");
+            exit;
+        } else {
+            echo "Unable to redirect. Headers already sent in " . debug_backtrace()[0]['file'] . ' on line ' . debug_backtrace()[0]['line'] . PHP_EOL;
+            echo "Cannot modify header information - redirecting to $url" . PHP_EOL;
         }
-        header("Location: $url");
-        exit;
     }
 
     public function checkLoginStatus()

@@ -1,15 +1,17 @@
 <?php
 
-    define('DB_HOSTS', [
-        'primary' => 'novatest.ddns.net',
-        'local' => '192.168.1.111',
-        'network' => '172.22.0.2'
-    ]);
-    define('DB_PORT', '3306');
-    define('DB_USERNAME', 'test');
-    define('DB_PASSWORD', 'test');
-    define('DB_DATABASE', 'bokhandel');
-    
+    if (!defined('DB_HOSTS')) {
+        define('DB_HOSTS', [
+            'primary' => 'novatest.ddns.net',
+            'local' => '192.168.1.111',
+            'network' => '172.22.0.2'
+        ]);
+        define('DB_PORT', '3306');
+        define('DB_USERNAME', 'test');
+        define('DB_PASSWORD', 'test');
+        define('DB_DATABASE', 'bokhandel');
+    }
+
     function connectToDb($host) {
         static $conn = null;
         if ($conn === null) {
@@ -20,7 +22,7 @@
         }
         return $conn;
     }
-    
+
     function getDatabaseConnection() {
         try {
             return connectToDb(DB_HOSTS['primary']);
@@ -32,7 +34,12 @@
             }
         }
     }
-    
-    session_start();
+
+    if (!session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
     $conn = getDatabaseConnection();
     $user = new USER($conn);
+
+

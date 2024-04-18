@@ -59,7 +59,6 @@ if ($result->num_rows > 0) {
         <?php if($userData['Role'] == "Admin"){ ?>
             <a href="register.php" class="btn bg-green-500 text-white w-full sm:w-auto">Add a user</a>
             <a href="manage_users.php" class="btn bg-green-500 text-white w-full sm:w-auto">Manage users</a>
-            <a href="create_publisher.php" class="btn bg-yellow-500 text-black w-full sm:w-auto">Add a publisher</a>
             <a href="manage_publishers.php" class="btn bg-yellow-500 text-black w-full sm:w-auto">Manage publishers</a>
             <a href="manage_categories.php" class="btn bg-white text-gray-900 w-full sm:w-auto">Manage categories</a>
             <a href="manage_age_recommendations.php" class="btn bg-white text-gray-900 w-full sm:w-auto">Manage age recommendations</a>
