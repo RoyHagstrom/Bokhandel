@@ -24,18 +24,20 @@ $result = $conn->query($sql);
 
 <div class="container mx-auto p-8 max-w-6xl">
     <h2 class="text-3xl font-bold mb-4">Manage Users</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <?php while ($row = $result->fetch_assoc()): ?>
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <a href="account.php?uid=<?php echo $row['UserID']; ?>" class="block p-6 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
-                    <span class="text-xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Username']; ?></span>
-                    <p class="text-gray-700 dark:text-gray-300">Email: <?php echo $row['Email']; ?></p>
-                    <p class="text-gray-700 dark:text-gray-300">Role: <?php echo $row['Role']; ?></p>
+            <div class="bg-white rounded-md shadow-md p-4 sm:p-6 lg:p-8 w-full flex flex-col justify-between gap-4">
+                <a href="account.php?uid=<?php echo $row['UserID']; ?>" class="flex flex-col justify-between h-full">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Username']; ?></h3>
+                        <p class="text-gray-700 dark:text-gray-300">Email: <?php echo $row['Email']; ?></p>
+                        <p class="text-gray-700 dark:text-gray-300">Role: <?php echo $row['Role']; ?></p>
+                    </div>
+                    <span class="text-xs self-end"><?php echo $row['UserID']; ?></span>
                 </a>
             </div>
         <?php endwhile; ?>
     </div>
-</div>
 </div>
 <div class="mt-4 flex gap-2">
                 <a href="register.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create User</a>
