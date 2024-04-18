@@ -6,7 +6,7 @@ include 'Includes/header.php';
 
 if($user->checkLoginStatus()){
     $user->redirect("account.php");
-    echo "test";
+    echo "Redirect to account.php";
 }
 
 if (isset($_POST['article-submit'])) {
