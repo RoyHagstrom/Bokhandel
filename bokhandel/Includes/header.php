@@ -1,14 +1,8 @@
 <?php
-
 include 'class.user.php';
-
 include 'db_connection.php';
-
-
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,6 +83,6 @@ include 'db_connection.php';
             mobileMenuDrawer.classList.toggle('hidden');
         });
 
-        
+
 
     </script> 
