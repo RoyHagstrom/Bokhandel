@@ -191,6 +191,7 @@ if ($category_id) {
         <h1 class="text-3xl font-bold mb-6"><?= htmlspecialchars($title) ?></h1>
 
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
+            
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="book-entry bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
@@ -208,7 +209,9 @@ if ($category_id) {
             <?php else: ?>
                 <p class='text-lg text-gray-700 dark:text-white'>No books found</p>
             <?php endif; ?>
+
         </div>
+
     </div>
 </div>
 
