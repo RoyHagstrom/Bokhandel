@@ -95,7 +95,7 @@ $new_books_result = $conn->query($new_books_sql);
 
     <div class="w-full container rounded-b-lg p-8 shadow-md flex">
         <div class="book-info">
-        <?php echo $book['Description']; ?>
+        <p><?php echo $book['Description']; ?></p>
         </div>
     </div>
 
