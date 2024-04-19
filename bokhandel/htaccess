@@ -1,3 +1,4 @@
+<IfModule mod_rewrite.c>
 RewriteEngine On
 
 # Unless directory, remove trailing slash
@@ -10,3 +11,4 @@ RewriteRule ^(.+)\.php$ http://example.com/folder/$1 [R=301,L]
 
 # Resolve .php file for extensionless PHP URLs
 RewriteRule ^([^/.]+)$ $1.php [L]
+</IfModule>
