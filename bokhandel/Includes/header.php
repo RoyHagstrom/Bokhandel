@@ -183,8 +183,13 @@ include 'db_connection.php';
 
 
             </header>
+
+
+            <?php } ?>
+
+
+
             <body class="full bg-gray-800 dark:bg-gray-900">
 
 
-        <?php } ?>
 
