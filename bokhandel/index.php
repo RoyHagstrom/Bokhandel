@@ -25,29 +25,29 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 
 
-        <div class="bg-gray-800 py-8 w-full sm:w-130">
-            <h1 class="text-center text-2xl font-semibold mb-6 text-white">Featured Categories:</h1>
+        <div class="mx-auto p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+            <h1 class="text-2xl font-semibold mb-6 text-center text-black">Featured Books</h1>
 
-            <div class="flex flex-wrap justify-center items-center">
+            <div id="carousel" class="daisy-carousel grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-4">
                 <?php
-                $featured_categories_sql = "SELECT id, name, image FROM categories WHERE featured = 1";
-                $featured_categories_result = $conn->query($featured_categories_sql);
+                $featured_books_sql = "SELECT * FROM `Book` WHERE `Featured` = 1 ORDER BY RAND() LIMIT 6";
+                $featured_books_result = $conn->query($featured_books_sql);
 
-                if ($featured_categories_result->num_rows > 0) {
-                    while ($row = $featured_categories_result->fetch_assoc()) {
-                        $featured_category_id = $row['id']; 
-                        $featured_category_name = $row['name'];
-                        $featured_category_image = $row['image'];
-
-                        echo '<div class="m-2 md:m-4 relative rounded-lg">';
-                        echo '<a href="books.php?id=' . $featured_category_id . '">'; 
-                        echo '<img src="' . $featured_category_image . '" alt="' . $featured_category_name . '" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
-                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-xs sm:text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . $featured_category_name . '</div>';
+                if ($featured_books_result && $featured_books_result->num_rows > 0) {
+                    while ($row = $featured_books_result->fetch_assoc()) {
+                        echo '<a href="singlebook.php?id=' . htmlspecialchars($row['BookID']) . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
+                            <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . htmlspecialchars($row['Price']) . '€</span>
+                            <img src="' . htmlspecialchars($row['Image']) . '" alt="' . htmlspecialchars($row['Title']) . '" class="w-full object-cover md:h-72">
+                            <div class="p-4 sm:p-4 md:p-6">
+                                <h2 class="text-sm md:text-base font-semibold text-gray-900 dark:text-white">' . htmlspecialchars(mb_substr(strip_tags(html_entity_decode($row["Title"])), 0, 50)) . '</h2>
+                                <p class="text-sm text-gray-700 dark:text-gray-300">Author: ' . htmlspecialchars($row['Author']) . '</p>
+                                <p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-2 md:line-clamp-3">' . htmlspecialchars(mb_substr(strip_tags(html_entity_decode($row["Description"])), 0, 50)) . '...</p>
+                            </div>
+                        </a>';
                         echo '</a>';
-                        echo '</div>';
                     }
                 } else {
-                    echo '<p class="text-lg text-gray-500">No featured categories available</p>';
+                    echo 'No featured books available';
                 }
                 ?>
             </div>
