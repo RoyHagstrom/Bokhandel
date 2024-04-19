@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['category_name'])) {
+        ob_start();
         $categoryName = $_POST['category_name'];
         $featured = $_POST['featured'];
         $image = $_POST['image']; 
@@ -49,7 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sis", $categoryName, $featured, $image);
         }
         if ($stmt->execute()) {
-            $user->redirect("manage_categories.php");
+            if (ob_get_clean() === false) {
+                header('Location: manage_categories.php');
+                exit();
+            }
         } else {
             echo "Error adding/editing category: " . $stmt->error;
         }
@@ -130,4 +134,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endforeach; endif; ?>
     </div>
 </div>
-<?php include 'includes/footer.php'; ?>
+<?php 
+
+$includePath = 'Includes/footer.php';
+if (!file_exists($includePath)) {
+    die("The file '$includePath' was not found.");
+}
+include $includePath; 
+?>
