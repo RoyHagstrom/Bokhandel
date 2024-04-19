@@ -105,7 +105,79 @@ if($stmt && $stmt->num_rows > 0){
 }else{
     echo '<p class="text-lg my-4 sm:my-8 md:my-12 italic">No books found for this author.</p>';
 }
-?>
+    
+    if($userData['Role'] == "Admin"){ ?>
+
+
+    <?php
+    error_log("Start of toggle feature code");
+    if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])) {
+        error_log("Request method is POST and submit button was clicked");
+        if (!isset($books) || !is_array($books)) {
+            $books = array();
+            error_log("Variable books is not set or is not an array, initializing it as an empty array");
+        }
+
+        foreach ($books as $book) {
+            error_log("Looping through books");
+            $bookID = $book['BookID'];
+            if (isset($_POST['featured'][$bookID])) {
+                error_log("Book " . $bookID . " is set to featured");
+                $featured = 1;
+            } else {
+                error_log("Book " . $bookID . " is not set to featured");
+                $featured = 0;
+            }
+            
+            $stmtFeature = $conn->prepare("UPDATE Book SET Featured = ? WHERE BookID = ?");
+            error_log("Preparing statement to update book " . $bookID . " to " . ($featured == 1 ? "featured" : "not featured"));
+            $stmtFeature->bind_param("ii", $featured, $bookID);
+            $stmtFeature->execute();
+            error_log("Statement executed");
+            $stmtFeature->close();
+        }
+    }
+    
+    
+    $stmt = $conn->query("SELECT Book.BookID, Title, Price, C.Name AS Category, Book.Featured FROM Book JOIN categories C ON Book.Category = C.ID");
+    if ($stmt->num_rows > 0) {
+        error_log("Found " . $stmt->num_rows . " books");
+        echo '<h3 class="text-2xl font-bold my-4 sm:mb-8 md:mb-12 mt-8">All Books:</h3>
+        <form method="post" action="?action=toggle">
+            <div class="overflow-x-auto md:overflow-x-visible mt-2">
+            <table class="w-full text-sm sm:text-base border-collapse mt-2 text-black">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-4 bg-gray-100">Book ID</th>
+                        <th class="py-2 px-4 bg-gray-100">Title</th>
+                        <th class="py-2 px-4 bg-gray-100">Category</th>
+                        <th class="py-2 px-4 bg-gray-100">Price</th>
+                        <th class="py-2 px-4 bg-gray-100">Featured</th>
+                    </tr>
+                </thead>
+                <tbody>';
+        while ($book = $stmt->fetch_assoc()) {
+            error_log("Looping through book " . $book['BookID']);
+            echo '<tr>
+                    <td class="py-2 px-4 border-b">' . $book['BookID'] . '</td>
+                    <td class="py-2 px-4 border-b"><a href="singlebook.php?id=' . $book['BookID'] . '" class="text-blue-500">' . $book['Title'] . '</a></td>
+                    <td class="py-2 px-4 border-b">' . $book['Category'] . '</td>
+                    <td class="py-2 px-4 border-b">' . $book['Price'] . '€</td>
+                    <td class="py-2 px-4 border-b"><input type="checkbox" name="featured[' . $book['BookID'] . ']" value="1" ' . ($book['Featured'] == 1 ? 'checked' : '') . '></td></tr>';
+        }
+        echo '</tbody></table></div>
+            <button type="submit" class="btn mt-2" name="submit">Submit</button>
+        </form>';
+    } else {
+        error_log("Did not find any books");
+        echo '<p class="text-lg my-4 sm:my-8 md:my-12 italic">No featured books found.</p>';
+    }
+    error_log("End of toggle feature code");
+    ?>
+
+
+    <?php } ?>
+    
 
 </div>
 </div>

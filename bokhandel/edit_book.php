@@ -55,9 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $series = trim($_POST['SeriesID']); 
 
-        $stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Author=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Series=?, Publisher=?, Price=?, Pages=?, StatusID=? WHERE BookID=?");
-        $stmt->bind_param("ssssssssssdsii", $title, $description, $author, $illustrator, $ageRecommendation, $category, $genre, $publicationYear, $series, $publisher, $price, $pages, $statusID, $_GET["bookid"]);
-        
+        $featured = isset($_POST['featured']) ? 1 : 0; 
+        $stmt = $conn->prepare("UPDATE Book SET Title=?, Description=?, Author=?, Illustrator=?, AgeRecommendation=?, Category=?, Genre=?, PublicationYear=?, Series=?, Publisher=?, Price=?, Pages=?, StatusID=?, Featured=? WHERE BookID=?");
+        $stmt->bind_param("ssssssssssdisii", $title, $description, $author, $illustrator, $ageRecommendation, $category, $genre, $publicationYear, $series, $publisher, $price, $pages, $statusID, $featured, $_GET["bookid"]);
+
         if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $targetDir = "images/";
             $targetFile = $targetDir . basename($_FILES["image"]["name"]);
@@ -121,7 +122,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block text-sm font-semibold mb-2" for="description">Description:</label>
                     <textarea id="description" name="description" class="appearance-none border rounded-md py-2 px-4 w-full" rows="4" required><?php echo htmlspecialchars($bookData['Description']); ?></textarea>
                 </div>
-
+                <?php if($_SESSION["urole"] == "Admin"){ ?>
+                <div class="mb-4">
+                    <input type="checkbox" id="featured" name="featured" <?php if($bookData['Featured'] == 1){ echo 'checked'; } else { echo 'unchecked'; } ?>>
+                    <label class="ml-2" for="featured">Featured</label>
+                </div>
+                <?php } ?>
                 <button type="button" onclick="nextStep(2)" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Next</button>
             </div>
 
