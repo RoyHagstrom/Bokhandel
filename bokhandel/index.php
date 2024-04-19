@@ -30,8 +30,6 @@ $featured_books_result = $conn->query($featured_books_sql);
 
             <div id="carousel" class="daisy-carousel grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-4">
                 <?php
-                $featured_books_sql = "SELECT * FROM `Book` WHERE `Featured` = 1 ORDER BY RAND() LIMIT 6";
-                $featured_books_result = $conn->query($featured_books_sql);
 
                 if ($featured_books_result && $featured_books_result->num_rows > 0) {
                     while ($row = $featured_books_result->fetch_assoc()) {
