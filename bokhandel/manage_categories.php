@@ -18,7 +18,7 @@ $category = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['edit_category'])) {
         $categoryId = $_POST['edit_category'];
-        $stmt = $conn->prepare("SELECT * FROM categories WHERE id = ?");
+        $stmt = $conn->prepare("SELECT * FROM categories WHERE id = ? sort by name ASC");
         $stmt->bind_param("i", $categoryId);
         $stmt->execute();
         $category = $stmt->get_result()->fetch_assoc();

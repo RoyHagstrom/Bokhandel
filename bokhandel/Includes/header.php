@@ -9,11 +9,21 @@ include 'db_connection.php';
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="google-site-verification" content="google-site-verification=OeRmKrBSYFfoOcLtFa8JUzeNRagyLFA1Qaxb2FnGxBI">
+
+    <meta property="og:title" content="Bokhandel">
+    <meta property="og:description" content="A simple bookstore">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.novatest.ddns.net">
+    <meta property="og:image" content="https://www.novatest.ddns.net/images/bokhandel.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" rel="stylesheet">
+
+    <script src="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Bokhandel</title>
 </head>
 

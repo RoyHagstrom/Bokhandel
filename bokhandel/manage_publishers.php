@@ -9,7 +9,7 @@ elseif($_SESSION["urole"] != "Admin"){
 
 }
 
-$result = $conn->query("SELECT * FROM Publisher");
+$result = $conn->query("SELECT * FROM Publisher ORDER BY Name ASC");
 $publishers = $result->fetch_all(MYSQLI_ASSOC);
 
 

@@ -72,10 +72,10 @@ if ($result->num_rows > 0) {
             <table class="w-full text-sm sm:text-base border-collapse mt-2 text-black">
                 <thead>
                     <tr>
-                        <th class="py-2 px-4 bg-gray-100">Book ID</th>
-                        <th class="py-2 px-4 bg-gray-100">Title</th>
-                        <th class="py-2 px-4 bg-gray-100">Category</th>
-                        <th class="py-2 px-4 bg-gray-100">Price</th>
+                        <th class="py-2 px-4 bg-gray-100 text-left">Book ID</th>
+                        <th class="py-2 px-4 bg-gray-100 text-left">Title</th>
+                        <th class="py-2 px-4 bg-gray-100 text-left">Category</th>
+                        <th class="py-2 px-4 bg-gray-100 text-left">Price</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -151,11 +151,11 @@ if ($result->num_rows > 0) {
                 <table class="w-full text-sm sm:text-base border-collapse mt-2 text-black">
                     <thead>
                         <tr>
-                            <th class="py-2 px-4 bg-gray-100">Book ID</th>
-                            <th class="py-2 px-4 bg-gray-100">Title</th>
-                            <th class="py-2 px-4 bg-gray-100">Category</th>
-                            <th class="py-2 px-4 bg-gray-100">Price</th>
-                            <th class="py-2 px-4 bg-gray-100">Featured</th>
+                            <th class="py-2 px-4 bg-gray-100 text-left">Book ID</th>
+                            <th class="py-2 px-4 bg-gray-100 text-left">Title</th>
+                            <th class="py-2 px-4 bg-gray-100 text-left">Category</th>
+                            <th class="py-2 px-4 bg-gray-100 text-left">Price</th>
+                            <th class="py-2 px-4 bg-gray-100 text-left">Featured</th>
                         </tr>
                     </thead>
                     <tbody>';

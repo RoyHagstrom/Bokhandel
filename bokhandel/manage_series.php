@@ -9,7 +9,7 @@ if ($_SESSION["urole"] != "Admin") {
     $user->redirect("index.php");
 }
 
-$stmt = $conn->prepare("SELECT * FROM Series");
+$stmt = $conn->prepare("SELECT * FROM Series ORDER BY SeriesName ASC");
 $stmt->execute();
 $series = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
