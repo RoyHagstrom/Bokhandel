@@ -4,7 +4,11 @@ if (!isset($_SESSION["uname"])) {
     $user->redirect("login.php");
 }
 
-$userID = isset($_SESSION["uid"]) ? $_SESSION["uid"] : (isset($_GET["uid"]) ? $_GET["uid"] : $_SESSION["uid"]);
+if ($_SESSION["urole"] == "Admin") {
+    $userID = isset($_GET["uid"]) ? $_GET["uid"] : $_SESSION["uid"];
+} else {
+    $userID = $_SESSION["uid"];
+}
 
 $stmt = $conn->prepare("SELECT * FROM User WHERE UserID = ?");
 $stmt->bind_param("i", $userID);
