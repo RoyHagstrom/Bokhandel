@@ -8,6 +8,29 @@ include 'db_connection.php';
 
 
 <head>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" as="style">
+    <link rel="preload" href="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" as="script">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="preconnect" href="https://www.googleapis.com">
+    <link rel="preconnect" href="https://www.google.com">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +48,42 @@ include 'db_connection.php';
 
     <script src="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Bokhandel</title>
+
+    
+    <meta name="description" content="A simple bookstore">
+    <meta name="keywords" content="bookstore, books, literature">
+    <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta name="expires" content="never">
+    <meta name="distribution" content="worldwide">
+    <meta name="rating" content="General">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://www.novatest.ddns.net",
+        "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.novatest.ddns.net/search_results.php?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    
+
+
+
+
+    
 </head>
+
 
 
 
