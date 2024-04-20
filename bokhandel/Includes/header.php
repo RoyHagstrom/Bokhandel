@@ -1,4 +1,7 @@
 <?php
+
+header("Cache-Control: public, max-age=31536000");
+
 include 'class.user.php';
 include 'db_connection.php';
 ?>
@@ -6,8 +9,26 @@ include 'db_connection.php';
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
+
+
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <meta http-equiv="x-preferred-color-scheme" content="dark">
+    <meta http-equiv="x-color-scheme" content="dark">
+    <meta http-equiv="x-color-scheme-dark" content="dark">
+
+    <meta http-equiv="x-content-type-options" content="nosniff">
+
+    <meta http-equiv="x-xss-protection" content="1; mode=block">
+    <meta http-equiv="x-frame-options" content="deny">
+    <meta http-equiv="x-permitted-cross-domain-policies" content="none">
+
+    <meta http-equiv="x-referrer-policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="x-strict-transport-security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="x-content-security-policy" content="default-src 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
