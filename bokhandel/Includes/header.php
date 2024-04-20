@@ -12,6 +12,9 @@ include 'db_connection.php';
 <head>
 
 
+<meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate">
+
+
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -98,9 +101,6 @@ include 'db_connection.php';
     </script>
 
     
-
-
-
 
     
 </head>
