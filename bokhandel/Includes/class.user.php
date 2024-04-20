@@ -1,8 +1,11 @@
 <?php
 
+
 class USER
 {
+
     private $conn;
+
 
     public function __construct($pdo)
     {
@@ -16,14 +19,22 @@ class USER
 
     public function redirect($url)
     {
-        if (!headers_sent()) {
-            http_response_code(303);
-            header("Location: $url");
-            exit;
-        } else {
-            echo "Unable to redirect. Headers already sent in " . debug_backtrace()[0]['file'] . ' on line ' . debug_backtrace()[0]['line'] . PHP_EOL;
+
+        if (headers_sent()) {
+            $errorMsg = "Unable to redirect. Headers already sent in " . 
+                debug_backtrace()[0]['file'] . ' on line ' . 
+                debug_backtrace()[0]['line'];
+            trigger_error($errorMsg, E_USER_WARNING);
             echo "Cannot modify header information - redirecting to $url" . PHP_EOL;
+            return;
         }
+
+
+        http_response_code(303);
+        header("Location: $url", true, 303);
+
+
+        exit;
     }
 
     public function checkLoginStatus()
