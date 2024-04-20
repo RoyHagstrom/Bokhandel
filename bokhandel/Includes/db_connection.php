@@ -13,15 +13,16 @@
     }
 
     function connectToDb($host) {
-        static $conn = null;
-        if ($conn === null) {
-            $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
-            if ($conn->connect_error) {
-                throw new Exception("Connection failed: " . $conn->connect_error);
+        static $conn_cache = []; 
+        if (!isset($conn_cache[$host])) {
+            $conn_cache[$host] = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+            if ($conn_cache[$host]->connect_error) {
+                throw new Exception("Connection failed: " . $conn_cache[$host]->connect_error);
             }
         }
-        return $conn;
+        return $conn_cache[$host];
     }
+
 
     function getDatabaseConnection() {
         try {
