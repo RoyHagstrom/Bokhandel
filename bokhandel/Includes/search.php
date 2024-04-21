@@ -10,10 +10,12 @@ require_once 'db_connection.php';
 $user = new USER($conn);
 
 if (isset($_GET['term'])) {
-    $searchTerm = $_GET['term'];
-    $user->searchBooks($searchTerm);
+    $searchTerm = trim(strip_tags($_GET['term'])); 
+    $searchTerm = $conn->real_escape_string($searchTerm); 
+    $result = $user->searchBooks($searchTerm); 
+    echo json_encode($result, JSON_UNESCAPED_UNICODE);
 } else {
-    echo json_encode([]);
+    echo json_encode([]); 
 }
 
 ?>
