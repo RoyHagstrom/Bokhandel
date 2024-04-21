@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 ini_set('opcache.enable_cli', 1);
