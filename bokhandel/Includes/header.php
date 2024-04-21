@@ -1,6 +1,6 @@
 <?php
 
-header("Cache-Control: public, max-age=31536000");
+header("Cache-Control: public, max-age=31536000, immutable");
 
 include 'class.user.php';
 include 'db_connection.php';
@@ -9,9 +9,9 @@ include 'db_connection.php';
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <head>
-
-
 
 <meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate">
 
@@ -77,8 +77,8 @@ include 'db_connection.php';
     <title>Bokhandel</title>
 
     
-    <meta name="description" content="A simple bookstore">
-    <meta name="keywords" content="bookstore, books, literature">
+    <meta name="description" content="Bookstore">
+    <meta name="keywords" content="bookstore">
     <meta name="robots" content="index,follow">
     <meta name="revisit-after" content="1 days">
     <meta name="expires" content="never">
