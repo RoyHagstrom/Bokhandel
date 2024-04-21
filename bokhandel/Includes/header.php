@@ -8,40 +8,6 @@ include 'db_connection.php';
 
 
 
-// Content Security Policy (CSP)
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-// Example policies:
-//  1. default-src 'self';
-//  2. script-src 'self' 'unsafe-inline' https://apis.google.com;
-//  3. img-src 'self' https://*;
-//  4. style-src 'self' 'unsafe-inline'
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self'; style-src 'self' 'unsafe-inline';");
-
-// Strict Transport Security (HSTS)
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
-// Example policies:
-//  1. max-age=31536000; includeSubDomains
-//  2. max-age=31536000; preload
-header("Strict-Transport-Security: max-age=31536000;");
-
-// X-Content-Type-Options
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
-header("X-Content-Type-Options: nosniff");
-
-// Referrer-Policy
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
-header("Referrer-Policy: no-referrer");
-
-// X-XSS-Protection
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
-header("X-XSS-Protection: 1; mode=block");
-
-// Expect-CT
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT
-// Example policies:
-//  1. max-age=86400; enforce
-//  2. max-age=86400; report-uri="https://example.com/report"
-
 
 ?>
 
