@@ -7,7 +7,6 @@ require_once 'db_connection.php';
 
 
 
-$user = new USER($conn);
 
 if (isset($_GET['term'])) {
     $searchTerm = trim(strip_tags($_GET['term'])); 
