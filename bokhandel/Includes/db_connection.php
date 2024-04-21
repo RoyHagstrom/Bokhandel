@@ -25,7 +25,7 @@ function connectToDb($host) {
         return $conns[$host];
     }
 
-    $mysqli = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+    $mysqli = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, (int) DB_PORT);
 
     if ($mysqli->connect_error) {
 
