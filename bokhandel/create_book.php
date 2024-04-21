@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Book created successfully.";
-        $user->redirect("my_books.php");
+        $user->redirect("my_books.php?uid=" . $_SESSION["uname"]);
     } else {
         echo "Error creating book: " . $stmt->error;
     }
