@@ -1,13 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-ini_set('opcache.enable_cli', 1);
-ini_set('opcache.validate_timestamps', 1);
-ini_set('opcache.save_comments', 0);
-ini_set('opcache.enable_file_override', 0);
-ini_set('opcache.fast_shutdown', 1);
-
 define('DB_HOSTS', [
     'primary' => '172.22.0.2',
     'local' => '192.168.1.111',
@@ -25,7 +17,7 @@ function connectToDb($host) {
         return $conns[$host];
     }
 
-    $mysqli = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, (int) DB_PORT);
+    $mysqli = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
 
     if ($mysqli->connect_error) {
 
