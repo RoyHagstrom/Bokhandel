@@ -2,12 +2,10 @@
     RewriteEngine On
     RewriteBase /
 
-    # Redirect if not running on localhost
     RewriteCond %{HTTP_HOST} !^localhost(:[0-9]+)?$ [NC]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ - [R=404,L]
 
-    # Redirect external .php requests to extensionless URL
     RewriteCond %{REQUEST_FILENAME}.php -f
     RewriteRule ^(.*)$ $1.php [L]
 </IfModule>
