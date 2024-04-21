@@ -1,39 +1,27 @@
 <?php
 
-
 class USER
 {
-
     private $conn;
-
 
     public function __construct($pdo)
     {
         $this->conn = $pdo;
     }
 
-    private function cleanInput($data) {
+    private function cleanInput($data)
+    {
         return trim(htmlspecialchars($data));
     }
 
-
     public function redirect($url)
     {
-
         if (headers_sent()) {
-            $errorMsg = "Unable to redirect. Headers already sent in " . 
-                debug_backtrace()[0]['file'] . ' on line ' . 
-                debug_backtrace()[0]['line'];
-            trigger_error($errorMsg, E_USER_WARNING);
-            echo "Cannot modify header information - redirecting to $url" . PHP_EOL;
-            return;
+            throw new RuntimeException("Headers already sent");
         }
-
 
         http_response_code(303);
         header("Location: $url", true, 303);
-
-
         exit;
     }
 
@@ -44,54 +32,55 @@ class USER
 
     public function searchBooks($searchTerm)
     {
-        try {
-            if (empty(trim($searchTerm))) {
-                http_response_code(400);
-                echo json_encode([]);
-                exit;
-            }
-
-            $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
-            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4");
-            $stmt->bind_param("ss", $searchTerm, $searchTerm);
-            $stmt->execute() or die($this->conn->error);
-            $result = $stmt->get_result();
-            $books = $result->fetch_all(MYSQLI_ASSOC);
-
-            http_response_code(200);
-            header('Content-Type: application/json');
-            echo json_encode($books);
-        } catch (Exception $e) {
-            http_response_code(500);
+        if (empty(trim($searchTerm))) {
+            http_response_code(400);
+            echo json_encode([]);
+            exit;
         }
+
+        $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4"
+        );
+        $stmt->bind_param("ss", $searchTerm, $searchTerm);
+        $stmt->execute() or die($this->conn->error);
+        $result = $stmt->get_result();
+        $books = $result->fetch_all(MYSQLI_ASSOC);
+
+        http_response_code(200);
+        header('Content-Type: application/json');
+        echo json_encode($books);
     }
 
     public function register($username, $email, $password, $role = "Regular")
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->conn->prepare("INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, ?)");
+        $stmt = $this->conn->prepare(
+            "INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, ?)"
+        );
         if (!$stmt) {
-            return "Registration failed. Please try again later.";
+            throw new RuntimeException("Registration failed. Please try again later.");
         }
         $stmt->bind_param('ssss', $username, $email, $hashedPassword, $role);
         if ($stmt->execute()) {
             return "User registered successfully";
         } else {
-            return "Registration failed. Please try again later.";
+            throw new RuntimeException("Registration failed. Please try again later.");
         }
     }
-    
 
     public function login()
     {
         $cleanname = $this->cleanInput($_POST["Username"]);
-        $stmt_getUser = $this->conn->prepare("SELECT * FROM User WHERE Username = ? OR Email = ?");
+        $stmt_getUser = $this->conn->prepare(
+            "SELECT * FROM User WHERE Username = ? OR Email = ?"
+        );
         $stmt_getUser->bind_param('ss', $cleanname, $cleanname);
         $stmt_getUser->execute();
         $result = $stmt_getUser->get_result();
         $user = $result->fetch_assoc();
         if (!$user) {
-            return "No such user or email in database";
+            throw new RuntimeException("No such user or email in database");
         }
         $verify = password_verify($_POST["Password"], $user["Password"]);
         if ($verify) {
@@ -100,9 +89,8 @@ class USER
             $_SESSION["uid"] = $user["UserID"];
             return "success";
         } else {
-            return "Incorrect password!";
+            throw new RuntimeException("Incorrect password!");
         }
     }
 }
 
-?>
