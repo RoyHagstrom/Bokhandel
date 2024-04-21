@@ -1,17 +1,14 @@
 <IfModule mod_rewrite.c>
-    # Check if mod_rewrite is enabled
     RewriteEngine On
     RewriteBase /
 
     # Redirect if not running on localhost
     RewriteCond %{HTTP_HOST} !^localhost(:[0-9]+)?$ [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ - [R=404,L]
 
     # Redirect external .php requests to extensionless URL
-    RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
-    RewriteRule ^(.+)\.php$ /folder/$1 [R=301,L]
-
-    # Resolve .php file for extensionless PHP URLs
-    RewriteRule ^([^/.]+)$ $1.php [L]
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
 </IfModule>
 
