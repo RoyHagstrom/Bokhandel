@@ -53,6 +53,8 @@ include 'db_connection.php';
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://www.googleapis.com">
     <link rel="preconnect" href="https://www.google.com">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0">
 
 
     <meta charset="UTF-8">
