@@ -118,7 +118,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
             return `
                 <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${encodeURIComponent(book.BookID)}';">
-                <img src="${encodeURIComponent(book.Image)}" alt="${encodeURI(title)}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
+                <img src="${(book.Image)}" alt="${encodeURI(title)}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
                     <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow text-xs">
                         <h2 style="overflow: hidden" class="text-lg mb-1 leading-5"><a href="singlebook.php?id=${encodeURIComponent(book.BookID)}">${title}</a></h2>
                         <p class="text-xs">Author: ${author}</p>
