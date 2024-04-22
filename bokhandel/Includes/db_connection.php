@@ -16,13 +16,14 @@
         $startTime = time();
         foreach (DB_HOSTS as $host) {
             $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
-            if (!$conn->connect_error) {
-                $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
-                if ($conn->connect_error && (time() - $startTime < DB_CONNECTION_TIMEOUT)) {
+            if ($conn->connect_error) {
+                if (time() - $startTime < DB_CONNECTION_TIMEOUT) {
                     continue;
                 }
-                return $conn;
+                throw new mysqli_sql_exception($conn->connect_error);
             }
+            $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
+            return $conn;
         }
         throw new Exception("All database hosts failed to connect");
     }
