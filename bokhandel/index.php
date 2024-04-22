@@ -139,12 +139,14 @@ $featured_books_result = $conn->query($featured_books_sql);
     <?php
     $stmt = $conn->query("SELECT * FROM Series");
     while ($series = $stmt->fetch_assoc()) { ?>
+    <a href="series.php?id=<?= $series['SeriesID'] ?>" class="w-full h-full">
         <div class="relative text-white">
             <div class="absolute inset-0 flex flex-col justify-center items-center">
                 <h2 class="text-2xl font-semibold mb-2"><?= $series['SeriesName'] ?></h2>
             </div>
             <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg" />
         </div>
+    </a>
     <?php } if (!$stmt->num_rows) { ?>
         <div class="text-center">
             <p class="text-gray-700 dark:text-gray-300">No book series available</p>
