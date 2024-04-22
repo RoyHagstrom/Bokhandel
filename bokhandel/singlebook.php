@@ -74,38 +74,23 @@ $new_books_result = $conn->query($new_books_sql);
                 <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
             </div>
             <?php } ?>
-            <?php
-            $authorID_sql = "SELECT AuthorID FROM Book WHERE Author = ? LIMIT 1";
-            $authorID_stmt = $conn->prepare($authorID_sql);
-            $authorID_stmt->bind_param("s", $book['Author']);
-            $authorID_stmt->execute();
-            $authorID_result = $authorID_stmt->get_result();
-            $authorID = $authorID_result->fetch_assoc();
-
-            $otherbooks_sql = "SELECT * FROM Book WHERE AuthorID = ? AND BookID != ? ORDER BY RAND() LIMIT 4";
-            $otherbooks_stmt = $conn->prepare($otherbooks_sql);
-            $otherbooks_stmt->bind_param("ii", $authorID['AuthorID'], $book['BookID']);
-            $otherbooks_stmt->execute();
-            $otherbooks_result = $otherbooks_stmt->get_result();
-            ?>
-            <?php if ($otherbooks_result->num_rows > 0): ?>
-                <div class="mt-8">
-                    <h2 class="text-2xl font-bold mb-4">Other books by <?php echo $book['Author']; ?>:</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <?php while($otherbook = $otherbooks_result->fetch_assoc()): ?>
-                            <a href="singlebook.php?id=<?php echo $otherbook['BookID']; ?>" class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                                <img src="<?php echo $otherbook['Image']; ?>" alt="<?php echo $otherbook['Title']; ?>" class="w-full h-64 object-cover object-center transition duration-500 ease-in-out transform group-hover:scale-110">
-                                <div class="p-4">
-                                    <h3 class="mb-2 text-2xl font-bold"><?php echo $otherbook['Title']; ?></h3>
-                                    <p class="text-gray-500 text-base mb-4"><?php echo $otherbook['Author']; ?></p>
-                                    <p class="text-gray-900 font-semibold text-lg"><?php echo $otherbook['Price']; ?>€</p>
-                                </div>
+            <?php if (isset($_SESSION["uname"]) && $_SESSION["uname"] == $book['Author']){  ?>
+                <h2 class="mt-8 font-semibold">Other books by <?php echo $book['Author']; ?>:</h2>
+                <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <?php 
+                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY Title LIMIT 6";
+                    $other_books_result = $conn->query($other_books_sql);
+                    while($other_book = $other_books_result->fetch_assoc()){
+                    ?>
+                        <div class="relative">
+                            <a href="singlebook.php?id=<?php echo $other_book['BookID']; ?>" class="group block w-full overflow-hidden aspect-h-1 aspect-w-1 rounded-lg bg-gray-100">
+                                <img src="<?php echo $other_book['Image']; ?>" alt="<?php echo $other_book['Title']; ?>" class="group-hover:opacity-75 scale-75 absolute inset-0 transition duration-200 ease-in-out object-cover object-center"/>
                             </a>
-                        <?php endwhile; ?>
-                    </div>
+                            <a href="singlebook.php?id=<?php echo $other_book['BookID']; ?>" class="block mt-4 text-gray-900 font-medium text-sm"> <?php echo $other_book['Title']; ?></a>
+                        </div>
+                    <?php } ?>
                 </div>
-            <?php endif; ?>
-
+            <?php } ?>
 
         </div>
     </div>
