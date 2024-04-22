@@ -285,6 +285,21 @@ include 'db_connection.php';
 
 
 
-            <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white transition-colors duration-300">
-
+            <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white transition-colors duration-300 ease-in-out animate-fade-in animate-fade-in-slow">
+            <style>
+                @keyframes fade-in {
+                    0% {
+                        opacity: 0;
+                    }
+                    100% {
+                        opacity: 1;
+                    }
+                }
+                .animate-fade-in {
+                    animation: fade-in 0.5s linear;
+                }
+                .animate-fade-in-slow {
+                    animation: fade-in 1s linear;
+                }
+            </style>
 
