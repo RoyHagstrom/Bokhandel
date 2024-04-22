@@ -139,12 +139,12 @@ $featured_books_result = $conn->query($featured_books_sql);
     <?php
     $stmt = $conn->query("SELECT * FROM Series");
     while ($series = $stmt->fetch_assoc()) { ?>
-        <div class="text-center relative text-black">
-            <div class="text-center absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center">
+        <div class="relative text-white">
+            <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50">
                 <h2 class="text-2xl font-semibold mb-2"><?= $series['SeriesName'] ?></h2>
-                <p class="text-gray-700 dark:text-gray-300"><?= $series['SeriesID'] ?></p>
+                <p class="text-gray-200"><?= $series['SeriesID'] ?></p>
             </div>
-            <img src="<?= $series['Image'] ?>" alt="Series Image" class="w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70" loading="lazy"/>
+            <img src="<?= $series['Image'] ?>" alt="Series Image" class="w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg filter grayscale brightness-75"/>
         </div>
     <?php } if (!$stmt->num_rows) { ?>
         <div class="text-center">
