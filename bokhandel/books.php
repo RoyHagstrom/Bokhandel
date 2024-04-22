@@ -2,23 +2,23 @@
 include 'Includes/header.php'; 
 
 $search_term = $_GET['search'] ?? ''; 
-$category_id = $_GET['id'] ?? '';
+$category_id = $_GET['id'] ?? ''; 
 
-$conditions = [];
-$bind_params = [];
-$bind_types = '';
+$conditions = []; 
+$bind_params = []; 
+$bind_types = ''; 
 
-if (!empty($search_term)) {
+if (!empty($search_term)) { 
     $search_term = str_replace('%20', ' ', $search_term); 
-    $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR (SELECT `Series` FROM `Series` WHERE `Series` LIKE ?)";
-    $bind_types .= "sss";
-    $bind_params[] = '%' . $search_term . '%';
-    $bind_params[] = '%' . $search_term . '%';
-    $bind_params[] = '%' . $search_term . '%';
+    $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR (SELECT `Series` FROM `Series` WHERE `Series` LIKE ? LIMIT 1)"; 
+    $bind_types .= "sss"; 
+    $bind_params[] = '%' . $search_term . '%'; 
+    $bind_params[] = '%' . $search_term . '%'; 
+    $bind_params[] = '%' . $search_term . '%'; 
 }
 
-if (!empty($category_id)) {
-    $conditions[] = "`Category` = '$category_id'";
+if (!empty($category_id)) { 
+    $conditions[] = "`Category` = '$category_id'"; 
 }
 
 $sql = "SELECT * FROM `Book` ";
