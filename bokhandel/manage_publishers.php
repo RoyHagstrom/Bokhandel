@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
                     <input type="url" id="website" name="website" class="border border-gray-300 px-4 py-2 rounded-md w-full">
                 </div>
 
-                <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-md w-full">Add Publisher</button>
+                <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md w-full">Add Publisher</button>
             </form>
         </div>
     </div>
