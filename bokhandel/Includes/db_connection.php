@@ -33,7 +33,7 @@
             DB_PASSWORD,
             DB_DATABASE,
             DB_PORT,
-            null,
+            NULL,
             MYSQLI_CLIENT_FOUND_ROWS
         );
         if ($conn->connect_error) {
