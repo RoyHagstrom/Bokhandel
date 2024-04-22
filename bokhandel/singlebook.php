@@ -119,7 +119,7 @@ $new_books_result = $conn->query($new_books_sql);
 
         <?php if (isset($_SESSION["uname"]) && $_SESSION["uname"] == $book['Author']){  ?>
                 <h2 class="mt-8 font-semibold">Other books by <?php echo $book['Author']; ?>:</h2>
-                <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="mt-4 grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-6">
                     <?php 
                     $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY Title LIMIT 6";
                     $other_books_result = $conn->query($other_books_sql);
