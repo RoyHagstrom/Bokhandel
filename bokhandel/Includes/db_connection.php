@@ -2,9 +2,9 @@
 
     if (!defined('DB_HOSTS')) {
         define('DB_HOSTS', [
-            'primary' => 'novatest.ddns.net',
+            'primary' => '172.22.0.2',
             'local' => '192.168.1.111',
-            'network' => '172.22.0.2'
+            'network' => 'novatest.ddns.net'
         ]);
         define('DB_PORT', '3306');
         define('DB_USERNAME', 'test');
