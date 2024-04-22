@@ -139,7 +139,7 @@ if ($result->num_rows > 0) {
             }
             
 
-            $stmt = $conn->query("SELECT B.BookID, B.Title, B.Price, C.Name AS Category, B.Featured FROM Book B JOIN categories C ON B.Category = C.ID");
+            $stmt = $conn->query("SELECT B.BookID, B.Title, B.Price, C.Name AS Category, B.Featured FROM Book B JOIN categories C ON B.Category = C.ID ORDER BY B.BookID DESC");
             
             
             
