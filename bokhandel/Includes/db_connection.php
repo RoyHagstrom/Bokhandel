@@ -7,7 +7,7 @@
     ]);
     define('DB_PORT', '3306');
     define('DB_USERNAME', 'test');
-    define('DB_PASSWORD', 'test');
+    define('DB_PASSWORD', new SensitiveParameterValue('test'));
     define('DB_DATABASE', 'bokhandel');
     define('DB_CONNECTION_TIMEOUT', 5);
 
@@ -20,6 +20,9 @@
                 break;
             }
         }
+        if (!$conn) {
+            throw new Exception("Could not get database connection");
+        }
         return $conn;
     }
 
@@ -27,14 +30,15 @@
         $conn = new mysqli(
             $host,
             DB_USERNAME,
-            DB_PASSWORD,
+            DB_PASSWORD->value(),
             DB_DATABASE,
-            DB_PORT
+            DB_PORT,
+            null,
+            MYSQLI_CLIENT_FOUND_ROWS
         );
         if ($conn->connect_error) {
-            return null;
+            throw new mysqli_sql_exception($conn->connect_error);
         }
-        $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
         $conn->set_charset('utf8mb4');
         return $conn;
     }
@@ -46,9 +50,5 @@
 
 
     $conn = getDatabaseConnection();
-    if (!$conn) {
-        throw new Exception("Could not get database connection");
-    }
     $user = new USER($conn);
-
 
