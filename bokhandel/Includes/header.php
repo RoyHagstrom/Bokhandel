@@ -288,10 +288,13 @@ include 'db_connection.php';
             <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white transition-colors duration-300 ease-in-out">
             <style>
 
-                    @keyframes fade-in {
+                @keyframes fade-in {
                     0% {
                         opacity: 0;
                         transform: scale(0.9);
+                    }
+                    50% {
+                        opacity: 0.5;
                     }
                     100% {
                         opacity: 1;
@@ -299,7 +302,7 @@ include 'db_connection.php';
                     }
                 }
                 .animate-fade-in {
-                    animation: fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    animation: fade-in 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
                 }
                 
                 @keyframes slide-in-from-top {
@@ -311,11 +314,11 @@ include 'db_connection.php';
                     }
                 }
                 .animate-slide-in-from-top {
-                    animation: slide-in-from-top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    animation: slide-in-from-top 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
                 }
                 
                 .animate-spin {
-                    animation: spin 2s linear infinite;
+                    animation: spin 1.5s linear infinite;
                 }
                 @keyframes spin {
                     0% {
