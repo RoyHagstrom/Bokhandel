@@ -126,13 +126,13 @@ $new_books_result = $conn->query($new_books_sql);
                     while($other_book = $other_books_result->fetch_assoc()){
 
 
-                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '" class="relative block overflow-hidden h-auto w-64 rounded-lg bg-gray-100 group">';
-                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="group-hover:opacity-75 scale-75 absolute inset-0 transition duration-200 ease-in-out object-cover object-center"/>';
+                echo '<div class="relative group w-full overflow-hidden aspect-video md:aspect-[3/4]">';
+                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="group-hover:opacity-75 scale-75 absolute inset-0 h-full w-full object-cover object-center transition duration-200 ease-in-out"/>';
                 echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
-                echo '<div class="p-3 md:p-6 text-sm md:text-md">';
-                echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $other_book['Title'] . '</h2>';
+                echo '<div class="absolute inset-0 bg-gray-100 group-hover:opacity-0 transition duration-200 ease-in-out"></div>';
+                echo '<div class="absolute inset-0 flex flex-col justify-center p-4 md:p-6 text-sm md:text-md">';
+                echo '<h2 class="break-words md:text-xl font-semibold text-gray-900 dark:text-white">' . $other_book['Title'] . '</h2>';
                 echo '</div>';
-                echo '</a>';
 
 
                      } ?>
