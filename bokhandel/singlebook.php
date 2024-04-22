@@ -114,6 +114,8 @@ $new_books_result = $conn->query($new_books_sql);
         <div class="book-info">
         <p><?php echo $book['Description']; ?></p>
         </div>
+        </div>
+
 
         <?php if (isset($_SESSION["uname"]) && $_SESSION["uname"] == $book['Author']){  ?>
                 <h2 class="mt-8 font-semibold">Other books by <?php echo $book['Author']; ?>:</h2>
@@ -137,8 +139,7 @@ $new_books_result = $conn->query($new_books_sql);
                 </div>
             <?php } ?>
 
-            
-    </div>
+
 
 
     <div class="p-8 rounded-lg w-full sm:w-116 mt-8">
