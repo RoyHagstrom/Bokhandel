@@ -137,8 +137,16 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 <div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 place-content-center">
     <?php
-    $series_query = "SELECT * FROM Series";
-    $series_result = $conn->query($series_query);
+    $stmt = $conn->prepare("SELECT * FROM Series");
+    if (!$stmt) {
+        die("Failed to prepare SQL statement: " . $conn->error);
+    }
+
+    if (!$stmt->execute()) {
+        die("Failed to execute SQL statement: " . $stmt->error);
+    }
+
+    $series_result = $stmt->get_result();
 
     if ($series_result->num_rows > 0) {
         while ($series = $series_result->fetch_assoc()) {
@@ -146,16 +154,28 @@ $featured_books_result = $conn->query($featured_books_sql);
             <div class=\"text-center\">
                 <h2 class=\"text-2xl font-semibold mb-2\">{$series['SeriesName']}</h2>
                 <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesID']}</p>
-                <img src=\"{$series['Image']}\" alt=\"Series Image\" class=\"w-20 h-20 object-cover\"/>
+                <img src=\"{$series['Image']}\" alt=\"Series Image\" class=\"w-20 h-20 object-cover\" loading=\"lazy\"/>
             </div>
             <div class=\"mt-4\">
-";
+            ";
 
-                $series_name_escaped = $conn->real_escape_string($series['SeriesName']);
-                $book_series_query = "SELECT * FROM Book WHERE Series = '{$series_name_escaped}'";
-                $book_series_result = $conn->query($book_series_query) or die($conn->error);
+            $stmt2 = $conn->prepare("SELECT * FROM Book WHERE Series = ?");
+            if (!$stmt2) {
+                die("Failed to prepare SQL statement: " . $conn->error);
+            }
 
-                
+            $stmt2->bind_param("s", $series['SeriesName']);
+            if (!$stmt2->execute()) {
+                die("Failed to execute SQL statement: " . $stmt2->error);
+            }
+
+            $book_series_result = $stmt2->get_result();
+
+            if ($book_series_result->num_rows > 0) {
+                while ($book = $book_series_result->fetch_assoc()) {
+                }
+            }
+
             echo "</div>";
         }
     } else {
