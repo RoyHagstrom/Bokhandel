@@ -149,7 +149,7 @@ $stmt = $conn->query("SELECT b.*, s.SeriesName
         <div class="relative overflow-hidden rounded-lg shadow-md">
             <img src="<?= $book['Image'] ?>" alt="<?= $book['Title'] ?>" class="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" />
             <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-70 group-hover:bg-opacity-75 transition-opacity duration-200 ease-in-out">
-                <h2 class="text-2xl font-semibold text-white mb-2 group-hover:opacity-100 transition-opacity duration-200 ease-in-out underline decoration-black"><?= $book['Title'] ?></h2>
+                <h2 class="text-2xl font-semibold text-white mb-2 group-hover:opacity-100 transition-opacity duration-200 ease-in-out underline decoration-black"><?= $book['SeriesName'] ?></h2>
             </div>
         </div>
     </a>
