@@ -148,7 +148,7 @@ $featured_books_result = $conn->query($featured_books_sql);
             <div class=\"mt-8\">
                 <h1 class=\"text-2xl font-semibold mb-6\">{$series['SeriesName']} Books</h1>";
 
-                $book_series_query = "SELECT * FROM Book WHERE SeriesID = {$series['SeriesID']}";
+                $book_series_query = "SELECT * FROM Book WHERE SeriesID = {$series['SeriesName']}";
                 $book_series_result = $conn->query($book_series_query);
 
                 if ($book_series_result->num_rows > 0) {
