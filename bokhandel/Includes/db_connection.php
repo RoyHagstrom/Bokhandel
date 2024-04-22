@@ -24,7 +24,13 @@
     }
 
     function connectToDatabase($host) {
-        $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT, null, MYSQLI_CLIENT_FOUND_ROWS | MYSQLI_CLIENT_SSL);
+        $conn = new mysqli(
+            $host,
+            DB_USERNAME,
+            DB_PASSWORD,
+            DB_DATABASE,
+            DB_PORT
+        );
         if ($conn->connect_error) {
             return null;
         }
