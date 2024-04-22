@@ -151,19 +151,20 @@ $featured_books_result = $conn->query($featured_books_sql);
                 $series_name_escaped = $conn->real_escape_string($series['SeriesName']);
                 $book_series_query = "SELECT * FROM Book WHERE Series = '{$series_name_escaped}'";
                 $book_series_result = $conn->query($book_series_query) or die($conn->error);
-                
+
                 if ($book_series_result->num_rows > 0) {
                     while ($bookseries = $book_series_result->fetch_assoc()) {
                         echo '
-                        <a href="singlebook.php?id='.$bookseries['BookID'].'" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
-                            <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">'.$bookseries['Price'].'€</span>
-                            <img src="'.$bookseries['Image'].'" alt="'.$bookseries['Title'].'" class="w-30 md:w-full h-30 md:h-80 object-cover">
-                            <div class="p-3 md:p-6 text-sm md:text-md">
-                                <h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">'.$bookseries['Title'].'</h2>
-                                <p class="text-gray-700 dark:text-gray-300">Author: '.$bookseries['Author'].'</p>
-                                <p class="text-gray-700 dark:text-gray-300">'.htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 50)).'...</p>
-                            </div>
+                        <a href="singlebook.php?id=' . $bookseries['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
+                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $bookseries['Price'] . '€</span>
+                        <img src="' . htmlspecialchars($bookseries['Image']) . '" alt="' . htmlspecialchars($bookseries['Title']) . '" class="w-30 md:w-full h-30 md:h-80 object-cover">
+                        <div class="p-3 md:p-6 text-sm md:text-md">
+                            <h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . htmlspecialchars($bookseries['Title']) . '</h2>
+                            <p class="text-gray-700 dark:text-gray-300">Author: ' . htmlspecialchars($bookseries['Author']) . '</p>
+                            <p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 100)) . '...</p>
+                        </div>
                         </a>';
+                    
                     }
                 } else {
                     echo 'No books in this series';
