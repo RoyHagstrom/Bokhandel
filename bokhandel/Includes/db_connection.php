@@ -26,19 +26,23 @@
 
     function getDatabaseConnection() {
         try {
-            return connectToDb(DB_HOSTS['primary']);
+            $conn = connectToDb(DB_HOSTS['primary']);
         } catch (Exception $e) {
             try {
-                return connectToDb(DB_HOSTS['local']);
+                $conn = connectToDb(DB_HOSTS['local']);
             } catch (Exception $e) {
-                return connectToDb(DB_HOSTS['network']);
+                $conn = connectToDb(DB_HOSTS['network']);
             }
         }
+        return $conn;
     }
 
-    if (!session_status() !== PHP_SESSION_ACTIVE) {
+    if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
     }
 
     $conn = getDatabaseConnection();
+    if (!$conn) {
+        throw new Exception("Could not get database connection");
+    }
     $user = new USER($conn);
