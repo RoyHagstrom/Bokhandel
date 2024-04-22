@@ -10,9 +10,8 @@ $bind_types = '';
 
 if (!empty($search_term)) {
     $search_term = str_replace('%20', ' ', $search_term); 
-    $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR `Series`.`SeriesName` LIKE ?";
-    $bind_types .= "sss";
-    $bind_params[] = '%' . $search_term . '%';
+    $conditions[] = "`Title` LIKE ? OR `Author` LIKE ?";
+    $bind_types .= "ss";
     $bind_params[] = '%' . $search_term . '%';
     $bind_params[] = '%' . $search_term . '%';
 }
