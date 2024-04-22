@@ -151,32 +151,14 @@ $featured_books_result = $conn->query($featured_books_sql);
     if ($series_result->num_rows > 0) {
         while ($series = $series_result->fetch_assoc()) {
             echo "
-            <div class=\"text-center\">
-                <h2 class=\"text-2xl font-semibold mb-2\">{$series['SeriesName']}</h2>
-                <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesID']}</p>
+            <div class=\"text-center relative\">
+                <div class=\"text-center absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center\">
+                    <h2 class=\"text-2xl font-semibold mb-2\">{$series['SeriesName']}</h2>
+                    <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesID']}</p>
+                </div>
                 <img src=\"{$series['Image']}\" alt=\"Series Image\" class=\"w-20 h-20 object-cover\" loading=\"lazy\"/>
             </div>
-            <div class=\"mt-4\">
-            ";
-
-            $stmt2 = $conn->prepare("SELECT * FROM Book WHERE Series = ?");
-            if (!$stmt2) {
-                die("Failed to prepare SQL statement: " . $conn->error);
-            }
-
-            $stmt2->bind_param("s", $series['SeriesName']);
-            if (!$stmt2->execute()) {
-                die("Failed to execute SQL statement: " . $stmt2->error);
-            }
-
-            $book_series_result = $stmt2->get_result();
-
-            if ($book_series_result->num_rows > 0) {
-                while ($book = $book_series_result->fetch_assoc()) {
-                }
-            }
-
-            echo "</div>";
+            ";        
         }
     } else {
         echo '
