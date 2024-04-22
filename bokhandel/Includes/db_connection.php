@@ -15,7 +15,7 @@
     function getDatabaseConnection() {
         $startTime = time();
         foreach (DB_HOSTS as $host) {
-            $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT, null, MYSQLI_CLIENT_FOUND_ROWS);
+            $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
             if (!$conn->connect_error) {
                 $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
                 if ($conn->connect_error && (time() - $startTime < DB_CONNECTION_TIMEOUT)) {
@@ -37,3 +37,4 @@
         throw new Exception("Could not get database connection");
     }
     $user = new USER($conn);
+
