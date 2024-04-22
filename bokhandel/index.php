@@ -141,7 +141,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 $stmt = $conn->query("SELECT b.*, s.SeriesName 
                           FROM Book b 
-                          JOIN Series s ON b.SeriesID = s.SeriesID 
+                          JOIN Series s ON b.Series = s.SeriesName
                           ORDER BY b.BookID DESC 
                           LIMIT 4");
     while ($book = $stmt->fetch_assoc()) { ?>
