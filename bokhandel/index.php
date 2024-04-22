@@ -1,5 +1,5 @@
 <?php
-include 'Includes/header.php';
+//include 'Includes/header.php';
 
 $featured_category = "";
 $featured_category_sql = "SELECT name, image FROM categories WHERE featured = 1";
