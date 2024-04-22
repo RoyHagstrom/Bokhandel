@@ -285,7 +285,6 @@ include 'db_connection.php';
 
 
 
-            <body class="full bg-gray-800 dark:bg-gray-900">
-
+            <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white transition-colors duration-300">
 
 
