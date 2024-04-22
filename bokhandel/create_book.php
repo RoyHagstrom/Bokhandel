@@ -158,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <select id="Series" name="Series" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="" selected>Select a Series</option>
                         <?php foreach ($series as $seriesOption): ?>
-                            <option value="<?php echo $seriesOption['SeriesID']; ?>" <?php echo isset($_POST['Series']) && $_POST['Series'] == $seriesOption['SeriesID'] ? 'selected' : (isset($bookData['SeriesID']) && $bookData['SeriesID'] == $seriesOption['SeriesID'] ? 'selected' : ''); ?>>
+                            <option value="<?php echo $seriesOption['SeriesName']; ?>" <?php echo isset($_POST['Series']) && $_POST['Series'] == $seriesOption['SeriesID'] ? 'selected' : (isset($bookData['SeriesID']) && $bookData['SeriesID'] == $seriesOption['SeriesID'] ? 'selected' : ''); ?>>
                                 <?php echo htmlspecialchars($seriesOption['SeriesName']); ?>
                             </option>
                         <?php endforeach; ?> 
