@@ -13,21 +13,16 @@
 
     function getDatabaseConnection() {
         foreach (DB_HOSTS as $host) {
-            $conn = mysqli_init();
-            mysqli_options($conn, MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
-            mysqli_real_connect($conn, $host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
-            if (mysqli_connect_errno() === 0) {
-                $socket = mysqli_get_socket($conn);
-                if (socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => 3, 'usec' => 0])) {
-                    return $conn;
-                }
-                mysqli_close($conn);
+            $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+            if (!$conn->connect_error) {
+                $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
+                return $conn;
+            } else {
+                $conn->close();
             }
-            mysqli_close($conn);
         }
         return null;
     }
-
 
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
