@@ -1,7 +1,7 @@
 <?php
 
     define('DB_HOSTS', [
-        'primary' => '172.22.0.2',
+        'primary' => '172.22.0.3',
         'local' => '192.168.1.111',
         'network' => 'novatest.ddns.net'
     ]);
