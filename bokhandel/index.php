@@ -105,7 +105,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                 ?.toString()
                 ?.trim()
                 ?.replace(/<[^>]*>|[\p{Z}\p{C}]+/gu, ' ')
-                ?.slice(0, 30)
+                ?.slice(0, 50)
                 ?.replace(/\s+/gu, ' ');
             const title = book.Title
                 ?.toString()
