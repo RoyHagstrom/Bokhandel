@@ -35,28 +35,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (isset($_POST['series_name']) && isset($_FILES['series_image']) && $_FILES['series_image']['error'] == UPLOAD_OK) {
+    if (isset($_POST['series_name']) && isset($_FILES['series_image'])) {
         $seriesName = $_POST['series_name'];
-        $image = $_FILES['series_image'];
-        $tmpName = $image['tmp_name'];
-        $imageType = $image['type'];
-        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
-
-        if (isset($_POST['edit_series'])) {
-            $seriesId = $_POST['edit_series'];
-            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
-            $stmt->bind_param("ssi", $seriesName, $imageName, $seriesId);
+        $imageFile = $_FILES['series_image'];
+        if ($imageFile['error'] === UPLOAD_ERR_OK) {
+            $tmpName = $imageFile['tmp_name'];
+            $ext = pathinfo($imageFile['name'], PATHINFO_EXTENSION);
+            $fileName = basename($imageFile['name'], "." . $ext) . '_' . time() . "." . $ext;
+            $targetPath = __DIR__ . "/images/$fileName";
+            if (move_uploaded_file($tmpName, $targetPath)) {
+                if (isset($_POST['edit_series'])) {
+                    $seriesId = $_POST['edit_series'];
+                    $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
+                    $stmt->bind_param("ssi", $seriesName, $fileName, $seriesId);
+                } else {
+                    $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
+                    $stmt->bind_param("ss", $seriesName, $fileName);
+                }
+                if ($stmt->execute()) {
+                    $user->redirect("manage_series.php");
+                } else {
+                    echo "Error adding/editing series: " . $stmt->error;
+                }
+            } else {
+                echo "Error uploading image";
+            }
         } else {
-            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
-            $stmt->bind_param("ss", $seriesName, $imageName);
-        }
-
-        $imageName = uniqid() . '.' . $ext;
-        $target = '/images' . $imageName;
-        if (move_uploaded_file($tmpName, $target)) {
-            $stmt->execute() ? $user->redirect("manage_series.php") : $user->redirect("manage_series.php?error=file_upload");
-        } else {
-            $user->redirect("manage_series.php?error=file_upload");
+            echo "Error uploading image";
         }
     }
 }
