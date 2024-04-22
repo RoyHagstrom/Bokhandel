@@ -6,7 +6,7 @@ if (!isset($_SESSION["uid"])) {
 }
 
 if (!isset($_GET["bookid"])) {
-    $user->redirect("index.php");
+    $user->redirect("my_books.php?uid=" . $_SESSION["uid"]);
 
 }
 
