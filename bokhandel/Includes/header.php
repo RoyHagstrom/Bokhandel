@@ -123,8 +123,8 @@ include 'db_connection.php';
             align-items: center; 
             font-size: 24px; 
             font-weight: bold; 
-            opacity: 1; 
-            transition: opacity 0.1s ease-in-out; 
+            opacity: 0.4; 
+            transition: opacity 0.2s ease-in-out; 
         }
     </style>
 
