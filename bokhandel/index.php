@@ -143,12 +143,14 @@ $featured_books_result = $conn->query($featured_books_sql);
 
     if ($series_result->num_rows > 0) {
         while ($series = $series_result->fetch_assoc()) {
-            echo "
-            <h2 class=\"text-xl font-semibold mb-2\">{$series['Series']}</h2>";
+            echo "<h2 class=\"text-xl font-semibold mb-2\">{$series['Series']}</h2>";
             $series_name = $series['Series'];
 
-            $book_series_query = "SELECT * FROM Book WHERE Series = '$series_name'";
-            $book_series_result = $conn->query($book_series_query);
+            $book_series_query = "SELECT * FROM Book WHERE Series = ?";
+            $book_series_stmt = $conn->prepare($book_series_query);
+            $book_series_stmt->bind_param("s", $series_name);
+            $book_series_stmt->execute();
+            $book_series_result = $book_series_stmt->get_result();
 
             if ($book_series_result->num_rows > 0) {
                 while ($bookseries = $book_series_result->fetch_assoc()) {
@@ -166,6 +168,7 @@ $featured_books_result = $conn->query($featured_books_sql);
             } else {
                 echo 'No books in this series';
             }
+            $book_series_stmt->close();
         }
     } else {
         echo 'No book series available';
