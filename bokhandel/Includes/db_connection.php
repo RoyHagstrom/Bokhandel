@@ -9,7 +9,7 @@
     define('DB_USERNAME', 'test');
     define('DB_PASSWORD', 'test');
     define('DB_DATABASE', 'bokhandel');
-    define('DB_CONNECTION_TIMEOUT', 3);
+    define('DB_CONNECTION_TIMEOUT', 5);
 
     function getDatabaseConnection() {
         $hosts = array_reverse(DB_HOSTS);
