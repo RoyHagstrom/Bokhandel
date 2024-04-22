@@ -128,7 +128,7 @@ include 'db_connection.php';
         }
     </style>
 
-    <div id="placeholder">Loading...</div>
+    <div id="placeholder">Bokhandel</div>
 
     <script>
         window.addEventListener('load', function() {
