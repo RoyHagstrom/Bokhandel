@@ -156,12 +156,12 @@ $featured_books_result = $conn->query($featured_books_sql);
                     while ($bookseries = $book_series_result->fetch_assoc()) {
                         echo '
                         <a href="singlebook.php?id=' . $bookseries['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
-                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $bookseries['Price'] . '€</span>
-                        <img src="' . htmlspecialchars($bookseries['Image']) . '" alt="' . htmlspecialchars($bookseries['Title']) . '" class="w-30 md:w-full h-30 md:h-80 object-cover">
-                        <div class="p-3 md:p-6 text-sm md:text-md">
-                            <h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . htmlspecialchars($bookseries['Title']) . '</h2>
+                        <span class="absolute top-1 right-1 bg-white text-gray-900 font-medium px-1 py-0.5 rounded-sm">' . $bookseries['Price'] . '€</span>
+                        <img src="' . htmlspecialchars($bookseries['Image']) . '" alt="' . htmlspecialchars($bookseries['Title']) . '" class="w-20 md:w-30 h-20 md:h-30 object-cover">
+                        <div class="p-2 md:p-3 text-xs md:text-sm">
+                            <h3 class="text-gray-900 dark:text-white">' . htmlspecialchars($bookseries['Title']) . '</h3>
                             <p class="text-gray-700 dark:text-gray-300">Author: ' . htmlspecialchars($bookseries['Author']) . '</p>
-                            <p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 100)) . '...</p>
+                            <p class="text-gray-700 dark:text-gray-300 line-clamp-2">' . htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 50)) . '...</p>
                         </div>
                         </a>';
                     
