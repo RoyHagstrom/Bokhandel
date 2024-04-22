@@ -118,7 +118,7 @@ $new_books_result = $conn->query($new_books_sql);
 
 
         <?php if (isset($book['Author'])){  ?>
-                <div class="p-8 rounded-lg w-full sm:w-116 mt-8">
+                <div class="p-8 rounded-lg w-full sm:w-116 mt-8 container">
                 <h2 class="mt-8 font-semibold">Other books by <?php echo $book['Author']; ?>:</h2>
 
                     <div class="flex justify-center items-center grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-6">
