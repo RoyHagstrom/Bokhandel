@@ -134,17 +134,18 @@ $featured_books_result = $conn->query($featured_books_sql);
     }
 </script>
 
+
 <h1 class="text-2xl font-semibold mb-6 text-center text-black">Book Series</h1>
-<div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-8 place-content-center items-center rounded-lg shadow-md">
+<div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-8 place-content-center items-center">
     <?php
     $stmt = $conn->query("SELECT * FROM Series LIMIT 4");
     while ($series = $stmt->fetch_assoc()) { ?>
-    <a href="series.php?id=<?= $series['SeriesID'] ?>" class="w-full h-full">
-        <div class="relative text-white">
-            <div class="absolute inset-0 flex flex-col justify-center items-center">
-                <h2 class="text-2xl font-semibold mb-2"><?= $series['SeriesName'] ?></h2>
+    <a href="series.php?id=<?= $series['SeriesID'] ?>" class="group w-full h-full">
+        <div class="relative overflow-hidden rounded-lg shadow-md">
+            <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" />
+            <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-40 group-hover:bg-opacity-75 transition-opacity duration-200 ease-in-out">
+                <h2 class="text-2xl font-semibold text-white mb-2 group-hover:opacity-100 transition-opacity duration-200 ease-in-out"><?= $series['SeriesName'] ?></h2>
             </div>
-            <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-28 sm:w-full sm:h-40 lg:w-full lg:h-64 object-cover rounded-lg" />
         </div>
     </a>
     <?php } if (!$stmt->num_rows) { ?>
