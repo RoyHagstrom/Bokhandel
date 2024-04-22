@@ -39,45 +39,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $seriesName = $_POST['series_name'];
         $image = $_FILES['series_image']['tmp_name'];
         $image_name = $_FILES['series_image']['name'];
-        
+        $target_file = '';
 
-        if ($image !== '') {
+        if (!empty($image_name)) {
             $target_dir = "images/";
             $target_file = $target_dir . basename($image_name);
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        } else {
-            $image = '';
-            $image_name = '';
+
+            if (move_uploaded_file($image, $target_file)) {
+
+            } else {
+                echo "Error uploading image";
+                exit;
+            }
         }
 
-        if ($image && $image_name !== '') {
-
-            if (getimagesize($image)) {
-
-                if (move_uploaded_file($image, $target_file)) {
-                    if (isset($_POST['edit_series'])) {
-                        $seriesId = $_POST['edit_series'];
-                        $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Image = ? WHERE SeriesID = ?");
-                        $stmt->bind_param("ssi", $seriesName, $target_file, $seriesId);
-                    } else {
-                        $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Image) VALUES (?, ?)");
-                        $stmt->bind_param("ss", $seriesName, $target_file);
-                    }
-                } else {
-                    echo "Error uploading image";
-                }
-            } else {
-                echo "File is not an image";
-            }
+        if (isset($_POST['edit_series'])) {
+            $seriesId = $_POST['edit_series'];
+            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Image = ? WHERE SeriesID = ?");
+            $stmt->bind_param("ssi", $seriesName, $target_file, $seriesId);
         } else {
-            if (isset($_POST['edit_series'])) {
-                $seriesId = $_POST['edit_series'];
-                $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
-                $stmt->bind_param("si", $seriesName, $seriesId);
-            } else {
-                $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
-                $stmt->bind_param("s", $seriesName);
-            }
+            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Image) VALUES (?, ?)");
+            $stmt->bind_param("ss", $seriesName, $target_file);
         }
 
 
@@ -98,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
 ?>
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
