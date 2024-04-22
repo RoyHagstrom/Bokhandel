@@ -29,23 +29,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("DELETE FROM Series WHERE SeriesID = ?");
         $stmt->bind_param("i", $seriesId);
         if ($stmt->execute()) {
+            $user->deleteImage("uploads/{$seriesData['SeriesImage']}");
             $user->redirect("manage_series.php");
         } else {
             echo "Error deleting series: " . $stmt->error;
         }
     }
 
-    if (isset($_POST['series_name'])) {
+    if (isset($_POST['series_name']) && isset($_FILES['series_image'])) {
         $seriesName = $_POST['series_name'];
+        $image = $_FILES['series_image'];
+
+        if ($image['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = "uploads/";
+            $imageName = $user->uploadImage($image, $uploadDir);
+        } else {
+            $imageName = $seriesData['SeriesImage'];
+        }
+
         if (isset($_POST['edit_series'])) {
             $seriesId = $_POST['edit_series'];
-            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
-            $stmt->bind_param("si", $seriesName, $seriesId);
+            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
+            $stmt->bind_param("ssi", $seriesName, $imageName, $seriesId);
         } else {
-            $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
-            $stmt->bind_param("s", $seriesName);
+            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
+            $stmt->bind_param("ss", $seriesName, $imageName);
         }
+
         if ($stmt->execute()) {
+            if (isset($_POST['edit_series'])) {
+                $user->deleteImage("uploads/{$seriesData['SeriesImage']}");
+            }
             $user->redirect("manage_series.php");
         } else {
             echo "Error adding/editing series: " . $stmt->error;
@@ -64,9 +78,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="hidden" name="edit_series" value="<?php echo $seriesData['SeriesID']; ?>">
                     <h3 class="text-xl font-semibold mb-2">Edit Series</h3>
 
+                    <div class="flex items-center justify-center mb-4">
+                        <?php if ($seriesData['SeriesImage']): ?>
+                            <img src="/uploads/<?php echo $seriesData['SeriesImage']; ?>" alt="<?php echo $seriesData['SeriesName']; ?>" class="w-24 h-24 object-cover">
+                        <?php endif; ?>
+                    </div>
+
                     <div>
                         <label for="series_name" class="block text-sm font-semibold mb-2">Series Name:</label>
                         <input type="text" id="series_name" name="series_name" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="<?php echo $seriesData['SeriesName']; ?>" required>
+                    </div>
+
+                    <div>
+                        <label for="series_image" class="block text-sm font-semibold mb-2">Series Image:</label>
+                        <input type="file" id="series_image" name="series_image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     </div>
                 <?php else: ?>
                     <h3 class="text-xl font-semibold mb-2">Add New Series</h3>
@@ -74,7 +99,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div>
                         <label for="series_name" class="block text-sm font-semibold mb-2">Series Name:</label>
                         <input type="text" id="series_name" name="series_name" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter Series Name" required>
-                    
+                    </div>
+
+                    <div>
+                        <label for="series_image" class="block text-sm font-semibold mb-2">Series Image:</label>
+                        <input type="file" id="series_image" name="series_image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     </div>
                 <?php endif; ?>
 
