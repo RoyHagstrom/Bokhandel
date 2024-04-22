@@ -154,25 +154,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                 $book_series_query = "SELECT * FROM Book WHERE Series = '{$series_name_escaped}'";
                 $book_series_result = $conn->query($book_series_query) or die($conn->error);
 
-                if ($book_series_result->num_rows > 0) {
-                    while ($bookseries = $book_series_result->fetch_assoc()) {
-                        echo '
-                        <a href="singlebook.php?id=' . $bookseries['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
-                            <img src="' . htmlspecialchars($bookseries['Image']) . '" alt="' . htmlspecialchars($bookseries['Title']) . '" class="w-20 md:w-30 h-20 md:h-30 object-cover mx-auto">
-                            <div class="p-2 md:p-3 text-center text-xs md:text-sm">
-                                <h3 class="text-gray-900 dark:text-white">' . htmlspecialchars($bookseries['Title']) . '</h3>
-                                <p class="text-gray-700 dark:text-gray-300">Author: ' . htmlspecialchars($bookseries['Author']) . '</p>
-                                <p class="text-gray-700 dark:text-gray-300 line-clamp-2">' . htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 50)) . '...</p>
-                            </div>
-                        </a>';
-                    
-                    }
-                } else {
-                    echo '
-                    <div class="text-center">
-                        <p class="text-gray-700 dark:text-gray-300">No books in this series</p>
-                    </div>';
-                }
+                
             echo "</div>";
         }
     } else {
