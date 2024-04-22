@@ -285,10 +285,7 @@ include 'db_connection.php';
 
 
 
-            <body class="full bg-gray-800 dark:bg-gray-900" onload="document.body.classList.remove('full')">
-                <div id="placeholder" class="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-gray-800 to-gray-700 dark:from-gray-900 dark:to-gray-800 opacity-100 flex flex-col justify-center items-center transition-opacity duration-300">
-                    <div class="spinner"></div>
-                    <span class="text-center text-white text-lg">Test...</span>
-                </div>
+            <body class="full bg-gray-800 dark:bg-gray-900">
+
 
 
