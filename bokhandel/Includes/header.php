@@ -154,7 +154,7 @@ include 'db_connection.php';
 
 
     
-    <header class="py-4 bg-gray-800 dark:bg-gray-900">
+    <header class="py-4 bg-gray-800 dark:bg-gray-900" style="z-index: 99999;">
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <a href="index.php" class="text-3xl font-bold text-white">Bokhandel</a> 
