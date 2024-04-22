@@ -50,9 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $target_file = $target_dir . basename($image_name);
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-            if (move_uploaded_file($image, $target_file)) {
-                $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Image = ? WHERE SeriesID = ?");
-                $stmt->bind_param("sii", $seriesName, $target_file, $seriesId);
+            if ($image && $image_name !== '') {
+                if (move_uploaded_file($image, $target_file)) {
+                    $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Image = ? WHERE SeriesID = ?");
+                    $stmt->bind_param("sii", $seriesName, $target_file, $seriesId);
+                } else {
+                    echo "Error uploading image";
+                }
             } else {
                 $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
                 $stmt->bind_param("si", $seriesName, $seriesId);
@@ -64,9 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $target_file = $target_dir . basename($image_name);
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-            if (move_uploaded_file($image, $target_file)) {
-                $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Image) VALUES (?, ?)");
-                $stmt->bind_param("si", $seriesName, $target_file);
+            if ($image && $image_name !== '') {
+                if (move_uploaded_file($image, $target_file)) {
+                    $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Image) VALUES (?, ?)");
+                    $stmt->bind_param("si", $seriesName, $target_file);
+                } else {
+                    echo "Error uploading image";
+                }
             } else {
                 $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
                 $stmt->bind_param("s", $seriesName);
