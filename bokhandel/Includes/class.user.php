@@ -16,14 +16,18 @@ class USER
 
     public function redirect($url)
     {
+        ob_start(); 
         if (headers_sent()) {
+            ob_end_clean(); 
             throw new RuntimeException("Headers already sent");
         }
-
+    
         http_response_code(303);
         header("Location: $url", true, 303);
+        ob_end_flush(); 
         exit;
     }
+    
 
     public function checkLoginStatus()
     {
