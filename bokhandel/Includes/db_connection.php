@@ -12,33 +12,16 @@
     define('DB_CONNECTION_TIMEOUT', 3);
 
     function getDatabaseConnection() {
-        $hosts = array_reverse(DB_HOSTS);
-        $conn = null;
-        foreach ($hosts as $host) {
-            $conn = connectToDatabase($host);
-            if ($conn) {
-                break;
+        foreach (DB_HOSTS as $host) {
+            $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+            if (!$conn->connect_error) {
+                $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
+                return $conn;
             }
+            $conn->close();
         }
-        return $conn;
+        return null;
     }
-
-    function connectToDatabase($host) {
-        $conn = new mysqli(
-            $host,
-            DB_USERNAME,
-            DB_PASSWORD,
-            DB_DATABASE,
-            DB_PORT
-        );
-        if ($conn->connect_error) {
-            return null;
-        }
-        $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
-        $conn->set_charset('utf8mb4');
-        return $conn;
-    }
-
 
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
