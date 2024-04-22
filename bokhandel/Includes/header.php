@@ -124,11 +124,11 @@ include 'db_connection.php';
             font-size: 24px; 
             font-weight: bold; 
             opacity: 0.4; 
-            transition: opacity 0.1s ease-in-out; 
+            transition: opacity 0.3s ease-in-out; 
         }
     </style>
 
-    <div id="placeholder">Bokhandel</div>
+    <div id="placeholder"></div>
 
     <script>
         window.addEventListener('load', function() {
