@@ -101,9 +101,9 @@ $featured_books_result = $conn->query($featured_books_sql);
         }
 
         const html = books.map(book => {
-            const description = book.Description.toString().split(' ').slice(0, 30).join(' ');
-            const title = book.Title.toString().replace(/[^\w\s]/g, '');
-            const author = book.Author.toString().replace(/[^\w\s]/g, '');
+            const description = book.Description.toString().trim().replace(/<[^>]+>/g, '').slice(0, 30).replace(/[<>]+/g, '');
+            const title = book.Title.toString().trim().replace(/[^\w\s]+/g, '');
+            const author = book.Author.toString().trim().replace(/[^\w\s]+/g, '');
 
             return `
                 <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${encodeURIComponent(book.BookID)}';">
