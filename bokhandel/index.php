@@ -106,6 +106,11 @@ $featured_books_result = $conn->query($featured_books_sql);
                 <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow text-xs">
                     <h2 style="overflow: hidden" class="text-lg mb-1 leading-5"><a href="singlebook.php?id=${book.BookID}">${book.Title}</a></h2>
                     <p class="text-xs">Author: ${book.Author}</p>
+                    <p class="line-clamp-2">
+                        <?php
+                        echo htmlspecialchars(mb_substr(strip_tags(html_entity_decode($book["Description"])), 0, 50));
+                        ?>
+                    </p>
                     <p class="line-clamp-2">${book.Description.toString().split(' ').slice(0, 30).join(' ') + '...'}</p>
                 </div>
             </div>
