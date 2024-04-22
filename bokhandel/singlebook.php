@@ -81,14 +81,18 @@ $new_books_result = $conn->query($new_books_sql);
                     $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY Title LIMIT 6";
                     $other_books_result = $conn->query($other_books_sql);
                     while($other_book = $other_books_result->fetch_assoc()){
-                    ?>
-                        <div class="relative">
-                            <a href="singlebook.php?id=<?php echo $other_book['BookID']; ?>" class="group block w-full overflow-hidden aspect-h-1 aspect-w-1 rounded-lg bg-gray-100">
-                                <img src="<?php echo $other_book['Image']; ?>" alt="<?php echo $other_book['Title']; ?>" class="group-hover:opacity-75 scale-75 absolute inset-0 transition duration-200 ease-in-out object-cover object-center"/>
-                            </a>
-                            <a href="singlebook.php?id=<?php echo $other_book['BookID']; ?>" class="block mt-4 text-gray-900 font-medium text-sm"> <?php echo $other_book['Title']; ?></a>
-                        </div>
-                    <?php } ?>
+
+
+                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '" class="relative block w-full overflow-hidden aspect-h-1 aspect-w-1 rounded-lg bg-gray-100 group">';
+                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="group-hover:opacity-75 scale-75 absolute inset-0 transition duration-200 ease-in-out object-cover object-center"/>';
+                echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
+                echo '<div class="p-3 md:p-6 text-sm md:text-md">';
+                echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $other_book['Title'] . '</h2>';
+                echo '</div>';
+                echo '</a>';
+
+
+                     } ?>
                 </div>
             <?php } ?>
 
