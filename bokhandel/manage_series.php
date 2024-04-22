@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
             if (move_uploaded_file($image, $target_file)) {
-                $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
+                $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Series.Image) VALUES (?, ?)");
                 $stmt->bind_param("si", $seriesName, $target_file);
             } else {
                 $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
