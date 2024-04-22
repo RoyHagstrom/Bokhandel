@@ -15,9 +15,9 @@ $series = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 $seriesData = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Handle form submission
+
     if (isset($_POST['edit_series'])) {
-        // Edit series
+
         $seriesId = $_POST['edit_series'];
         $stmt = $conn->prepare("SELECT * FROM Series WHERE SeriesID = ?");
         $stmt->bind_param("i", $seriesId);
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['delete_series'])) {
-        // Delete series
+
         $seriesId = $_POST['delete_series'];
         $stmt = $conn->prepare("DELETE FROM Series WHERE SeriesID = ?");
         $stmt->bind_param("i", $seriesId);
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['series_name'])) {
-        // Add or edit series
+
         $seriesName = $_POST['series_name'];
         if (isset($_POST['edit_series'])) {
             $seriesId = $_POST['edit_series'];
