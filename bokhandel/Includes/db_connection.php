@@ -15,10 +15,7 @@ define('DB_DATABASE', 'bokhandel');
 
 function connectToDb(string $host): mysqli
 {
-    $timeout = 5; 
-    $mysqli = mysqli_init();
-    mysqli_options($mysqli, MYSQLI_OPT_CONNECT_TIMEOUT, $timeout);
-    mysqli_real_connect($mysqli, $host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, (int) DB_PORT, null, MYSQLI_CLIENT_FOUND_ROWS);
+    $mysqli = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, (int) DB_PORT);
 
     if ($mysqli->connect_error) {
         throw new Exception('Could not connect to the database: ' . $mysqli->connect_error);
@@ -26,6 +23,7 @@ function connectToDb(string $host): mysqli
 
     $mysqli->set_charset('utf8mb4');
     $mysqli->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, true);
+    $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 1);
 
     return $mysqli;
 }
