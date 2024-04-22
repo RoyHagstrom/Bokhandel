@@ -115,9 +115,8 @@ $featured_books_result = $conn->query($featured_books_sql);
             const author = book.Author
                 ?.toString()
                 ?.trim()
-                ?.replace(/<[^>]*>|[\p{Z}\p{C}]+/gu, '');
-                ?.replace(/ +/g, ' '); 
-
+                ?.replace(/<[^>]*>|[\p{Z}\p{C}]+/gu, ' ')
+                ?.replace(/ +/g, ' ');
 
             return `
                 <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${encodeURIComponent(book.BookID)}';">
