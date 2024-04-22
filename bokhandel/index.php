@@ -143,10 +143,10 @@ $featured_books_result = $conn->query($featured_books_sql);
     if ($series_result->num_rows > 0) {
         while ($series = $series_result->fetch_assoc()) {
             echo "
-            <h2 class=\"text-xl font-semibold mb-2\">{$series['Name']}</h2>
-            <p class=\"text-gray-700 dark:text-gray-300\">{$series['Info']}</p>
+            <h2 class=\"text-xl font-semibold mb-2\">{$series['SeriesName']}</h2>
+            <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesName']}</p>
             <div class=\"mt-8\">
-                <h1 class=\"text-2xl font-semibold mb-6\">{$series['Name']} Books</h1>";
+                <h1 class=\"text-2xl font-semibold mb-6\">{$series['SeriesName']} Books</h1>";
 
                 $book_series_query = "SELECT * FROM Book WHERE SeriesID = {$series['SeriesID']}";
                 $book_series_result = $conn->query($book_series_query);
