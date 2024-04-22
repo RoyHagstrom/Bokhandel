@@ -148,9 +148,10 @@ $featured_books_result = $conn->query($featured_books_sql);
             <div class=\"mt-8\">
                 <h1 class=\"text-2xl font-semibold mb-6\">{$series['SeriesName']} Books</h1>";
 
-                $book_series_query = "SELECT * FROM Book WHERE Series = {$series['SeriesName']}";
-                $book_series_result = $conn->query($book_series_query);
-
+                $series_name_escaped = $conn->real_escape_string($series['SeriesName']);
+                $book_series_query = "SELECT * FROM Book WHERE Series = '{$series_name_escaped}'";
+                $book_series_result = $conn->query($book_series_query) or die($conn->error);
+                
                 if ($book_series_result->num_rows > 0) {
                     while ($bookseries = $book_series_result->fetch_assoc()) {
                         echo '
