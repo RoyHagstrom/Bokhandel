@@ -124,7 +124,7 @@ include 'db_connection.php';
             font-size: 24px; 
             font-weight: bold; 
             opacity: 1; 
-            transition: opacity 0.5s ease-in-out; 
+            transition: opacity 0.1s ease-in-out; 
         }
     </style>
 
@@ -154,7 +154,7 @@ include 'db_connection.php';
 
 
     
-    <header class="py-4 bg-gray-800 dark:bg-gray-900" style="z-index: 99999;">
+    <header class="py-4 bg-gray-800 dark:bg-gray-900">
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <a href="index.php" class="text-3xl font-bold text-white">Bokhandel</a> 
