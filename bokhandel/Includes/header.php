@@ -296,10 +296,10 @@ include 'db_connection.php';
                     }
                 }
                 .animate-fade-in {
-                    animation: fade-in 0.5s linear;
+                    animation: fade-in 0.2s linear;
                 }
                 .animate-fade-in-slow {
-                    animation: fade-in 1s linear;
+                    animation: fade-in 0.5s linear;
                 }
             </style>
 
