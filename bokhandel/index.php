@@ -156,7 +156,7 @@ $featured_books_result = $conn->query($featured_books_sql);
                     <h2 class=\"text-2xl font-semibold mb-2\">{$series['SeriesName']}</h2>
                     <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesID']}</p>
                 </div>
-                <img src=\"{$series['Image']}\" alt=\"Series Image\" class=\"w-20 h-20 object-cover\" loading=\"lazy\"/>
+                <img src=\"{$series['Image']}\" alt=\"Series Image\" class=\"w-full h-48 object-cover\" loading=\"lazy\"/>
             </div>
             ";        
         }
