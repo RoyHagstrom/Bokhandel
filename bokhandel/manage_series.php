@@ -37,31 +37,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST['series_name']) && isset($_FILES['series_image'])) {
         $seriesName = $_POST['series_name'];
-        $imageFile = $_FILES['series_image'];
-        if ($imageFile['error'] === UPLOAD_ERR_OK) {
-            $tmpName = $imageFile['tmp_name'];
-            $ext = pathinfo($imageFile['name'], PATHINFO_EXTENSION);
-            $fileName = basename($imageFile['name'], "." . $ext) . '_' . time() . "." . $ext;
-            $targetPath = __DIR__ . "/images/$fileName";
-            if (move_uploaded_file($tmpName, $targetPath)) {
-                if (isset($_POST['edit_series'])) {
-                    $seriesId = $_POST['edit_series'];
-                    $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
-                    $stmt->bind_param("ssi", $seriesName, $fileName, $seriesId);
-                } else {
-                    $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
-                    $stmt->bind_param("ss", $seriesName, $fileName);
-                }
-                if ($stmt->execute()) {
-                    $user->redirect("manage_series.php");
-                } else {
-                    echo "Error adding/editing series: " . $stmt->error;
-                }
-            } else {
-                echo "Error uploading image";
-            }
+        $image = $_FILES['series_image'];
+        if ($image['error'] != 4) {
+            $imageName = uniqid() . '-' . $image['name'];
+            $imagePath = 'images/' . $imageName;
+            move_uploaded_file($image['tmp_name'], $imagePath);
         } else {
-            echo "Error uploading image";
+            $imagePath = $seriesData['SeriesImage'];
+        }
+
+        if (isset($_POST['edit_series'])) {
+            $seriesId = $_POST['edit_series'];
+            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
+            $stmt->bind_param("ssi", $seriesName, $imagePath, $seriesId);
+        } else {
+            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
+            $stmt->bind_param("ss", $seriesName, $imagePath);
+        }
+        if ($stmt->execute()) {
+            $user->redirect("manage_series.php");
+        } else {
+            echo "Error adding/editing series: " . $stmt->error;
         }
     }
 }
