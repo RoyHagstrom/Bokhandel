@@ -43,11 +43,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $seriesName = $_POST['series_name'];
         if (isset($_POST['edit_series'])) {
             $seriesId = $_POST['edit_series'];
-            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
-            $stmt->bind_param("sbi", $seriesName, $_FILES['series_image']['tmp_name'], $seriesId);
+
+            $image = $_FILES['series_image']['tmp_name'] ?? '';
+            $image_name = $_FILES['series_image']['name'] ?? '';
+            $target_dir = "Uploads/series/";
+            $target_file = $target_dir . basename($image_name);
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+            if (move_uploaded_file($image, $target_file)) {
+                $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
+                $stmt->bind_param("sii", $seriesName, $target_file, $seriesId);
+            } else {
+                $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
+                $stmt->bind_param("si", $seriesName, $seriesId);
+            }
         } else {
-            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
-            $stmt->bind_param("sb", $seriesName, $_FILES['series_image']['tmp_name']);
+            $image = $_FILES['series_image']['tmp_name'] ?? '';
+            $image_name = $_FILES['series_image']['name'] ?? '';
+            $target_dir = "Uploads/series/";
+            $target_file = $target_dir . basename($image_name);
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+            if (move_uploaded_file($image, $target_file)) {
+                $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
+                $stmt->bind_param("si", $seriesName, $target_file);
+            } else {
+                $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
+                $stmt->bind_param("s", $seriesName);
+            }
         }
         if ($stmt->execute()) {
             $user->redirect("manage_series.php");
@@ -70,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div>
                         <label for="series_name" class="block text-sm font-semibold mb-2">Series Name:</label>
-                        <input type="text" id="series_name" name="series_name" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="<?php echo $seriesData['SeriesName']; ?>" required>
+                        <input type="text" id="series_name" name="series_name" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="<?php echo htmlspecialchars($seriesData['SeriesName'], ENT_QUOTES); ?>" required>
                     </div>
                 <?php else: ?>
                     <h3 class="text-xl font-semibold mb-2">Add New Series</h3>
