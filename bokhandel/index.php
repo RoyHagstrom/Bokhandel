@@ -135,7 +135,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 </script>
 
 
-<div class="container mt-8">
+<div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 place-content-center">
     <?php
     $series_query = "SELECT * FROM Series";
     $series_result = $conn->query($series_query);
@@ -143,10 +143,12 @@ $featured_books_result = $conn->query($featured_books_sql);
     if ($series_result->num_rows > 0) {
         while ($series = $series_result->fetch_assoc()) {
             echo "
-            <h2 class=\"text-xl font-semibold mb-2\">{$series['SeriesName']}</h2>
-            <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesName']}</p>
-            <div class=\"mt-8\">
-                <h1 class=\"text-2xl font-semibold mb-6\">{$series['SeriesName']} Books</h1>";
+            <div class=\"text-center\">
+                <h2 class=\"text-2xl font-semibold mb-2\">{$series['SeriesName']}</h2>
+                <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesName']}</p>
+            </div>
+            <div class=\"mt-4\">
+";
 
                 $series_name_escaped = $conn->real_escape_string($series['SeriesName']);
                 $book_series_query = "SELECT * FROM Book WHERE Series = '{$series_name_escaped}'";
@@ -155,24 +157,29 @@ $featured_books_result = $conn->query($featured_books_sql);
                 if ($book_series_result->num_rows > 0) {
                     while ($bookseries = $book_series_result->fetch_assoc()) {
                         echo '
-                        <a href="singlebook.php?id=' . $bookseries['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
-                        <span class="absolute top-1 right-1 bg-white text-gray-900 font-medium px-1 py-0.5 rounded-sm">' . $bookseries['Price'] . '€</span>
-                        <img src="' . htmlspecialchars($bookseries['Image']) . '" alt="' . htmlspecialchars($bookseries['Title']) . '" class="w-20 md:w-30 h-20 md:h-30 object-cover">
-                        <div class="p-2 md:p-3 text-xs md:text-sm">
-                            <h3 class="text-gray-900 dark:text-white">' . htmlspecialchars($bookseries['Title']) . '</h3>
-                            <p class="text-gray-700 dark:text-gray-300">Author: ' . htmlspecialchars($bookseries['Author']) . '</p>
-                            <p class="text-gray-700 dark:text-gray-300 line-clamp-2">' . htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 50)) . '...</p>
-                        </div>
+                        <a href="singlebook.php?id=' . $bookseries['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
+                            <img src="' . htmlspecialchars($bookseries['Image']) . '" alt="' . htmlspecialchars($bookseries['Title']) . '" class="w-20 md:w-30 h-20 md:h-30 object-cover mx-auto">
+                            <div class="p-2 md:p-3 text-center text-xs md:text-sm">
+                                <h3 class="text-gray-900 dark:text-white">' . htmlspecialchars($bookseries['Title']) . '</h3>
+                                <p class="text-gray-700 dark:text-gray-300">Author: ' . htmlspecialchars($bookseries['Author']) . '</p>
+                                <p class="text-gray-700 dark:text-gray-300 line-clamp-2">' . htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 50)) . '...</p>
+                            </div>
                         </a>';
                     
                     }
                 } else {
-                    echo 'No books in this series';
+                    echo '
+                    <div class="text-center">
+                        <p class="text-gray-700 dark:text-gray-300">No books in this series</p>
+                    </div>';
                 }
             echo "</div>";
         }
     } else {
-        echo 'No book series available';
+        echo '
+        <div class="text-center">
+            <p class="text-gray-700 dark:text-gray-300">No book series available</p>
+        </div>';
     }
     ?>
 </div>
