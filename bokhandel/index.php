@@ -151,7 +151,7 @@ $featured_books_result = $conn->query($featured_books_sql);
     if ($series_result->num_rows > 0) {
         while ($series = $series_result->fetch_assoc()) {
             echo "
-            <div class=\"text-center relative\">
+            <div class=\"text-center relative text-white\">
                 <div class=\"text-center absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center\">
                     <h2 class=\"text-2xl font-semibold mb-2\">{$series['SeriesName']}</h2>
                     <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesID']}</p>
