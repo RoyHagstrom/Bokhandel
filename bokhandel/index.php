@@ -110,7 +110,8 @@ $featured_books_result = $conn->query($featured_books_sql);
             const title = book.Title
                 ?.toString()
                 ?.trim()
-                ?.replace(/<[^>]*>|[\p{Z}\p{C}]+/gu, '');
+                ?.replace(/<[^>]*>|[\p{Z}\p{C}]+/gu, ' ')
+                ?.replace(/ +/g, ' '); 
             const author = book.Author
                 ?.toString()
                 ?.trim()
