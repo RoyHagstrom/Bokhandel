@@ -109,6 +109,43 @@ include 'db_connection.php';
 
     
 
+    <style>
+        #placeholder {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(255, 255, 255, 0.8); 
+            z-index: 9999; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 24px; 
+            font-weight: bold; 
+            opacity: 1; 
+            transition: opacity 0.5s ease-in-out; 
+        }
+    </style>
+
+    <div id="placeholder">Loading...</div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var placeholder = document.getElementById('placeholder');
+                placeholder.style.opacity = 0;
+                setTimeout(function() {
+                    placeholder.remove();
+                }, 500);
+            }, 1);
+        });
+    </script>
+
+
+
+
+
     
 </head>
 
@@ -286,6 +323,7 @@ include 'db_connection.php';
 
 
             <body class="full bg-gray-800 dark:bg-gray-900">
+
 
 
 
