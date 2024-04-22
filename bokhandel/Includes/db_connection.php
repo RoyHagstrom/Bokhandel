@@ -9,46 +9,29 @@
     define('DB_USERNAME', 'test');
     define('DB_PASSWORD', 'test');
     define('DB_DATABASE', 'bokhandel');
-    define('DB_CONNECTION_TIMEOUT', 5);
+    define('DB_CONNECTION_TIMEOUT', 3);
 
     function getDatabaseConnection() {
-        $hosts = array_reverse(DB_HOSTS);
         $conn = null;
-        foreach ($hosts as $host) {
-            $conn = connectToDatabase($host);
-            if ($conn) {
-                break;
+        foreach (DB_HOSTS as $host) {
+            $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+            if (!$conn->connect_error) {
+                $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
+                return $conn;
             }
+            $conn->close();
+            $conn = null;
         }
-        if (!$conn) {
-            throw new Exception("Could not get database connection");
-        }
-        return $conn;
+        return null;
     }
-
-    function connectToDatabase($host) {
-        $conn = new mysqli(
-            $host,
-            DB_USERNAME,
-            DB_PASSWORD,
-            DB_DATABASE,
-            DB_PORT,
-            NULL,
-            MYSQLI_CLIENT_FOUND_ROWS
-        );
-        if ($conn->connect_error) {
-            throw new mysqli_sql_exception($conn->connect_error);
-        }
-        $conn->set_charset('utf8mb4');
-        return $conn;
-    }
-
 
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
     }
 
-
     $conn = getDatabaseConnection();
+    if (!$conn) {
+        throw new Exception("Could not get database connection");
+    }
     $user = new USER($conn);
 
