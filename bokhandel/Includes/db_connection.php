@@ -12,15 +12,14 @@
     define('DB_CONNECTION_TIMEOUT', 3);
 
     function getDatabaseConnection() {
-        $conn = null;
         foreach (DB_HOSTS as $host) {
             $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
             if (!$conn->connect_error) {
                 $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
                 return $conn;
+            } else {
+                $conn->close();
             }
-            $conn->close();
-            $conn = null;
         }
         return null;
     }
