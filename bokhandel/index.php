@@ -174,7 +174,7 @@ $featured_books_result = $conn->query($featured_books_sql);
             echo "<h2 class='text-xl font-semibold mb-2'>${series['BookSeries']}</h2>";
             $series_name = $series['BookSeries'];
 
-            $book_series_query = "SELECT * FROM books WHERE BookSeries = '$series_name'";
+            $book_series_query = "SELECT * FROM Book WHERE Series = '$series_name'";
             $book_series_result = $conn->query($book_series_query);
 
             if ($book_series_result->num_rows > 0) {
