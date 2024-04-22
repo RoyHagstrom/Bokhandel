@@ -141,6 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">ID</th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Featured</th>
                         <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Image</th>
                         <th scope="col" class="px-6 py-3 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
@@ -150,6 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <tr>
                             <td class="px-6 py-4"><?php echo htmlspecialchars($seriesItem['SeriesID'], ENT_QUOTES); ?></td>
                             <td class="px-6 py-4"><?php echo htmlspecialchars($seriesItem['SeriesName'], ENT_QUOTES); ?></td>
+                            <td class="px-6 py-4"><?php echo htmlspecialchars($seriesItem['Featured'], ENT_QUOTES); ?></td>
                             <td class="px-6 py-4">
                                 <?php if ($seriesItem['Image']): ?>
                                     <img src="<?php echo htmlspecialchars($seriesItem['Image'], ENT_QUOTES); ?>" alt="Series Image" class="w-20 h-20 object-cover"/>
