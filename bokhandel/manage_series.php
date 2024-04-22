@@ -15,9 +15,7 @@ $series = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 $seriesData = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     if (isset($_POST['edit_series'])) {
-
         $seriesId = $_POST['edit_series'];
         $stmt = $conn->prepare("SELECT * FROM Series WHERE SeriesID = ?");
         $stmt->bind_param("i", $seriesId);
@@ -27,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['delete_series'])) {
-
         $seriesId = $_POST['delete_series'];
         $stmt = $conn->prepare("DELETE FROM Series WHERE SeriesID = ?");
         $stmt->bind_param("i", $seriesId);
@@ -39,42 +36,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['series_name'])) {
-
         $seriesName = $_POST['series_name'];
-        if (isset($_POST['edit_series'])) {
-            $seriesId = $_POST['edit_series'];
+        $image = $_FILES['series_image']['tmp_name'] ?? '';
+        $image_name = $_FILES['series_image']['name'] ?? '';
+        $target_dir = "images/";
+        $target_file = $target_dir . basename($image_name);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-            $image = $_FILES['series_image']['tmp_name'] ?? '';
-            $image_name = $_FILES['series_image']['name'] ?? '';
-            $target_dir = "images/";
-            $target_file = $target_dir . basename($image_name);
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-            if ($image && $image_name !== '') {
+        if ($image && $image_name !== '') {
+            // Check if the file is an image
+            if (getimagesize($image)) {
+                // Move the uploaded file to the target directory
                 if (move_uploaded_file($image, $target_file)) {
-                    $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Image = ? WHERE SeriesID = ?");
-                    $stmt->bind_param("sii", $seriesName, $target_file, $seriesId);
+                    if (isset($_POST['edit_series'])) {
+                        $seriesId = $_POST['edit_series'];
+                        $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Image = ? WHERE SeriesID = ?");
+                        $stmt->bind_param("ssi", $seriesName, $target_file, $seriesId);
+                    } else {
+                        $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Image) VALUES (?, ?)");
+                        $stmt->bind_param("ss", $seriesName, $target_file);
+                    }
                 } else {
                     echo "Error uploading image";
                 }
             } else {
-                $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
-                $stmt->bind_param("si", $seriesName, $seriesId);
+                echo "File is not an image";
             }
         } else {
-            $image = $_FILES['series_image']['tmp_name'] ?? '';
-            $image_name = $_FILES['series_image']['name'] ?? '';
-            $target_dir = "images/";
-            $target_file = $target_dir . basename($image_name);
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-            if ($image && $image_name !== '') {
-                if (move_uploaded_file($image, $target_file)) {
-                    $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Image) VALUES (?, ?)");
-                    $stmt->bind_param("si", $seriesName, $target_file);
-                } else {
-                    echo "Error uploading image";
-                }
+            if (isset($_POST['edit_series'])) {
+                $seriesId = $_POST['edit_series'];
+                $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
+                $stmt->bind_param("si", $seriesName, $seriesId);
             } else {
                 $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
                 $stmt->bind_param("s", $seriesName);
