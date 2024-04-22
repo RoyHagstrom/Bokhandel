@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $image = $_FILES['series_image']['tmp_name'] ?? '';
             $image_name = $_FILES['series_image']['name'] ?? '';
-            $target_dir = "Uploads/series/";
+            $target_dir = "/images";
             $target_file = $target_dir . basename($image_name);
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
