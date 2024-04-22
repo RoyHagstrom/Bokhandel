@@ -43,11 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $seriesName = $_POST['series_name'];
         if (isset($_POST['edit_series'])) {
             $seriesId = $_POST['edit_series'];
-            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
-            $stmt->bind_param("si", $seriesName, $seriesId);
+            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
+            $stmt->bind_param("sbi", $seriesName, $_FILES['series_image']['tmp_name'], $seriesId);
         } else {
-            $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
-            $stmt->bind_param("s", $seriesName);
+            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
+            $stmt->bind_param("sb", $seriesName, $_FILES['series_image']['tmp_name']);
         }
         if ($stmt->execute()) {
             $user->redirect("manage_series.php");
