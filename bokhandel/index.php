@@ -171,8 +171,8 @@ $featured_books_result = $conn->query($featured_books_sql);
 
     if ($series_result->num_rows > 0) {
         while ($series = $series_result->fetch_assoc()) {
-            echo "<h2 class='text-xl font-semibold mb-2'>${series['BookSeries']}</h2>";
-            $series_name = $series['BookSeries'];
+            echo "<h2 class='text-xl font-semibold mb-2'>${series['Series']}</h2>";
+            $series_name = $series['Series'];
 
             $book_series_query = "SELECT * FROM Book WHERE Series = '$series_name'";
             $book_series_result = $conn->query($book_series_query);
