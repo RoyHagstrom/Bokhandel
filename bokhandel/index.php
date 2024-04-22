@@ -140,7 +140,7 @@ $featured_books_result = $conn->query($featured_books_sql);
     <?php
     $stmt = $conn->query("SELECT * FROM Series LIMIT 4");
     while ($series = $stmt->fetch_assoc()) { ?>
-    <a href="series.php?id=<?= $series['SeriesID'] ?>" class="group w-full h-full">
+    <a href="books.php?search=<?= $series['SeriesName'] ?>" class="group w-full h-full">
         <div class="relative overflow-hidden rounded-lg shadow-md">
             <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" />
             <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-70 group-hover:bg-opacity-75 transition-opacity duration-200 ease-in-out">
