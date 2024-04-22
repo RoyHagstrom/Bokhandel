@@ -82,7 +82,7 @@ class USER
         $result = $stmt_getUser->get_result();
         $user = $result->fetch_assoc();
         if (!$user) {
-            throw new RuntimeException("No such user or email in database");
+            return "No such user or email in database";
         }
         $verify = password_verify($_POST["Password"], $user["Password"]);
         if ($verify) {
@@ -91,7 +91,7 @@ class USER
             $_SESSION["uid"] = $user["UserID"];
             return "success";
         } else {
-            throw new RuntimeException("Incorrect password!");
+            return "Incorrect password!";
         }
     }
 }
