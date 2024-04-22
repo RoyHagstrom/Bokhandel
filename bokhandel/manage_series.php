@@ -15,7 +15,9 @@ $series = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 $seriesData = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Handle form submission
     if (isset($_POST['edit_series'])) {
+        // Edit series
         $seriesId = $_POST['edit_series'];
         $stmt = $conn->prepare("SELECT * FROM Series WHERE SeriesID = ?");
         $stmt->bind_param("i", $seriesId);
@@ -25,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['delete_series'])) {
+        // Delete series
         $seriesId = $_POST['delete_series'];
         $stmt = $conn->prepare("DELETE FROM Series WHERE SeriesID = ?");
         $stmt->bind_param("i", $seriesId);
@@ -36,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['series_name'])) {
+        // Add or edit series
         $seriesName = $_POST['series_name'];
         if (isset($_POST['edit_series'])) {
             $seriesId = $_POST['edit_series'];
@@ -59,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2 class="text-3xl font-bold mb-4">Manage Series</h2>
 
         <div class="bg-white shadow-md rounded-lg p-6">
-            <form method="POST" action="" class="space-y-6">
+            <form method="POST" action="" class="space-y-6" enctype="multipart/form-data">
                 <?php if ($seriesData): ?>
                     <input type="hidden" name="edit_series" value="<?php echo $seriesData['SeriesID']; ?>">
                     <h3 class="text-xl font-semibold mb-2">Edit Series</h3>
@@ -74,9 +78,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div>
                         <label for="series_name" class="block text-sm font-semibold mb-2">Series Name:</label>
                         <input type="text" id="series_name" name="series_name" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter Series Name" required>
-                    
                     </div>
                 <?php endif; ?>
+
+                <div>
+                    <label for="series_image" class="block text-sm font-semibold mb-2">Series Image:</label>
+                    <input type="file" id="series_image" name="series_image" accept="image/*" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
 
                 <div class="flex items-center justify-end space-x-2">
                     <?php if ($seriesData): ?>
