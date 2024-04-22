@@ -123,7 +123,7 @@ $new_books_result = $conn->query($new_books_sql);
 
                     <div class="flex justify-center items-center grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
                         <?php 
-                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY Title ASC LIMIT 6";
+                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 6";
                     $other_books_result = $conn->query($other_books_sql);
                     while($other_book = $other_books_result->fetch_assoc()){
 
