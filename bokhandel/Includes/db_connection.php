@@ -11,23 +11,19 @@
     define('DB_DATABASE', 'bokhandel');
     define('DB_CONNECTION_TIMEOUT', 3);
 
-
     function getDatabaseConnection() {
-        $startTime = time();
+        $conn = null;
         foreach (DB_HOSTS as $host) {
             $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
-            if ($conn->connect_error) {
-                if (time() - $startTime < DB_CONNECTION_TIMEOUT) {
-                    continue;
-                }
-                throw new mysqli_sql_exception($conn->connect_error);
+            if (!$conn->connect_error) {
+                $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
+                return $conn;
             }
-            $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
-            return $conn;
+            $conn->close();
+            $conn = null;
         }
-        throw new Exception("All database hosts failed to connect");
+        return null;
     }
-
 
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
