@@ -151,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <tr>
                             <td class="px-6 py-4"><?php echo htmlspecialchars($seriesItem['SeriesID'], ENT_QUOTES); ?></td>
                             <td class="px-6 py-4"><?php echo htmlspecialchars($seriesItem['SeriesName'], ENT_QUOTES); ?></td>
-                            <td class="px-6 py-4"><?php echo htmlspecialchars($seriesItem['Featured'], ENT_QUOTES); ?></td>
+                            <td class="px-6 py-4"><?php echo $seriesItem['Featured'] ? 'yes' : 'no'; ?></td>
                             <td class="px-6 py-4">
                                 <?php if ($seriesItem['Image']): ?>
                                     <img src="<?php echo htmlspecialchars($seriesItem['Image'], ENT_QUOTES); ?>" alt="Series Image" class="w-20 h-20 object-cover"/>
