@@ -35,20 +35,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (isset($_POST['series_name'])) {
+    if (isset($_POST['series_name']) && isset($_FILES['series_image']) && $_FILES['series_image']['error'] == UPLOAD_OK) {
         $seriesName = $_POST['series_name'];
+        $image = $_FILES['series_image'];
+        $tmpName = $image['tmp_name'];
+        $imageType = $image['type'];
+        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+
         if (isset($_POST['edit_series'])) {
             $seriesId = $_POST['edit_series'];
-            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ? WHERE SeriesID = ?");
-            $stmt->bind_param("si", $seriesName, $seriesId);
+            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, SeriesImage = ? WHERE SeriesID = ?");
+            $stmt->bind_param("ssi", $seriesName, $imageName, $seriesId);
         } else {
-            $stmt = $conn->prepare("INSERT INTO Series (SeriesName) VALUES (?)");
-            $stmt->bind_param("s", $seriesName);
+            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, SeriesImage) VALUES (?, ?)");
+            $stmt->bind_param("ss", $seriesName, $imageName);
         }
-        if ($stmt->execute()) {
-            $user->redirect("manage_series.php");
+
+        $imageName = uniqid() . '.' . $ext;
+        $target = '/images' . $imageName;
+        if (move_uploaded_file($tmpName, $target)) {
+            $stmt->execute() ? $user->redirect("manage_series.php") : $user->redirect("manage_series.php?error=file_upload");
         } else {
-            echo "Error adding/editing series: " . $stmt->error;
+            $user->redirect("manage_series.php?error=file_upload");
         }
     }
 }
