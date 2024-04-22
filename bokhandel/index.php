@@ -162,7 +162,7 @@ $featured_books_result = $conn->query($featured_books_sql);
     </div>
 </div>
 
-
+<!--
 <div class="container mt-8">
     <h1 class="text-2xl font-semibold mb-6">Book Series</h1>
     <?php
@@ -198,7 +198,7 @@ $featured_books_result = $conn->query($featured_books_sql);
     }
     ?>
 </div>
-
+-->
 
 <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">New Books</h1>
