@@ -56,7 +56,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 
         <div class="container bg-neutral-500 p-8 w-full sm:w-135 mt-8">
-    <h1 class="text-black text-2xl font-semibold mb-6">Book Search 11</h1>
+    <h1 class="text-black text-2xl font-semibold mb-6">Book Search</h1>
     <div class="relative mb-4">
         <input type="text" id="searchInput" class="appearance-none border border-gray-300 rounded-md py-2 px-4 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 w-full" placeholder="Search for books">
         <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
