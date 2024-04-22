@@ -44,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
         if ($image && $image_name !== '') {
-            // Check if the file is an image
+
             if (getimagesize($image)) {
-                // Move the uploaded file to the target directory
+
                 if (move_uploaded_file($image, $target_file)) {
                     if (isset($_POST['edit_series'])) {
                         $seriesId = $_POST['edit_series'];
@@ -72,6 +72,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("s", $seriesName);
             }
         }
+
+
+        $featured = isset($_POST['featured']) ? 1 : 0;
+        if (isset($_POST['edit_series'])) {
+            $seriesId = $_POST['edit_series'];
+            $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Featured = ? WHERE SeriesID = ?");
+            $stmt->bind_param("sii", $seriesName, $featured, $seriesId);
+        } else {
+            $stmt = $conn->prepare("INSERT INTO Series (SeriesName, Featured) VALUES (?, ?)");
+            $stmt->bind_param("si", $seriesName, $featured);
+        }
+
         if ($stmt->execute()) {
             $user->redirect("manage_series.php");
         } else {
@@ -107,6 +119,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div>
                     <label for="series_image" class="block text-sm font-semibold mb-2">Series Image:</label>
                     <input type="file" id="series_image" name="series_image" accept="image/*" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div>
+                    <input type="checkbox" id="featured" name="featured" <?php echo $seriesData && $seriesData['Featured'] ? 'checked' : ''; ?>>
+                    <label for="featured" class="ml-2 text-sm font-semibold">Featured</label>
                 </div>
 
                 <div class="flex items-center justify-end space-x-2">
