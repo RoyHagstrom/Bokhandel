@@ -126,7 +126,7 @@ $new_books_result = $conn->query($new_books_sql);
                     while($other_book = $other_books_result->fetch_assoc()){
 
 
-                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '" class="relative block w-full overflow-hidden aspect-h-1 aspect-w-1 rounded-lg bg-gray-100 group">';
+                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '" class="relative block w-full overflow-hidden h-auto w-64 rounded-lg bg-gray-100 group">';
                 echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="group-hover:opacity-75 scale-75 absolute inset-0 transition duration-200 ease-in-out object-cover object-center"/>';
                 echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
                 echo '<div class="p-3 md:p-6 text-sm md:text-md">';
