@@ -37,11 +37,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST['series_name'])) {
         $seriesName = $_POST['series_name'];
-        $image = $_FILES['series_image']['tmp_name'] ?? '';
-        $image_name = $_FILES['series_image']['name'] ?? '';
-        $target_dir = "images/";
-        $target_file = $target_dir . basename($image_name);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $image = $_FILES['series_image']['tmp_name'];
+        $image_name = $_FILES['series_image']['name'];
+        
+
+        if ($image !== '') {
+            $target_dir = "images/";
+            $target_file = $target_dir . basename($image_name);
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        } else {
+            $image = '';
+            $image_name = '';
+        }
 
         if ($image && $image_name !== '') {
 
