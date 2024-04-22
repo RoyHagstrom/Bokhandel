@@ -136,9 +136,9 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 
 <h1 class="text-2xl font-semibold mb-6 text-center text-black">Book Series</h1>
-<div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 place-content-center">
+<div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-8 place-content-center items-center">
     <?php
-    $stmt = $conn->query("SELECT * FROM Series");
+    $stmt = $conn->query("SELECT * FROM Series LIMIT 4");
     while ($series = $stmt->fetch_assoc()) { ?>
     <a href="series.php?id=<?= $series['SeriesID'] ?>" class="w-full h-full">
         <div class="relative text-white">
