@@ -136,6 +136,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 
 <div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 place-content-center">
+    <h1 class="text-2xl font-semibold mb-6 text-center text-black">Book Series</h1>
     <?php
     $stmt = $conn->query("SELECT * FROM Series");
     while ($series = $stmt->fetch_assoc()) { ?>
