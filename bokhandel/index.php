@@ -145,7 +145,7 @@ $featured_books_result = $conn->query($featured_books_sql);
             <div class="absolute inset-0 flex flex-col justify-center items-center">
                 <h2 class="text-2xl font-semibold mb-2"><?= $series['SeriesName'] ?></h2>
             </div>
-            <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg" />
+            <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-28 sm:w-full sm:h-40 lg:w-full lg:h-64 object-cover rounded-lg" />
         </div>
     </a>
     <?php } if (!$stmt->num_rows) { ?>
