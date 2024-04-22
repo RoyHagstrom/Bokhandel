@@ -74,6 +74,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div>
                         <label for="series_name" class="block text-sm font-semibold mb-2">Series Name:</label>
                         <input type="text" id="series_name" name="series_name" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter Series Name" required>
+                    <div>
+                        <label for="series_image" class="block text-sm font-semibold mb-2">Series Image:</label>
+                        <input type="file" id="series_image" name="series_image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <?php if ($seriesData && $seriesData['SeriesImage']): ?>
+                            <img src="<?php echo $seriesData['SeriesImage']; ?>" alt="<?php echo $seriesData['SeriesName']; ?>" class="mt-2">
+                        <?php endif; ?>
+                    </div>
+
                     </div>
                 <?php endif; ?>
 
