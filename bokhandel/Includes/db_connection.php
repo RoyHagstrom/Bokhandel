@@ -19,6 +19,7 @@
                 return $conn;
             } else {
                 $conn->close();
+                throw new Exception("Could not get database connection");
             }
         }
         return null;
