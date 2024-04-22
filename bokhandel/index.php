@@ -100,34 +100,24 @@ $featured_books_result = $conn->query($featured_books_sql);
             return;
         }
 
-        const bookHTML = books.map(book => {
-            const escapedTitle = escapeHtml(book.Title);
-            const escapedAuthor = escapeHtml(book.Author);
-            const escapedDesc = escapeHtml(book.Description.toString().slice(0, 30).trim());
-            const escapedBookId = escapeHtml(book.BookID);
+        const html = books.map(book => {
+            const description = book.Description.toString().split(' ').slice(0, 30).join(' ');
+            const title = book.Title.toString().replace(/[^\w\s]/g, '');
+            const author = book.Author.toString().replace(/[^\w\s]/g, '');
 
             return `
-                <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${escapedBookId}';">
-                    <img src="${escapeHtml(book.Image)}" alt="${escapedTitle}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
+                <div class="book-info mb-4 flex text-container bg-white p-6 rounded-lg cursor-pointer" onclick="window.location='singlebook.php?id=${encodeURIComponent(book.BookID)}';">
+                <img src="${encodeURI(book.Image)}" alt="${encodeURI(title)}" class="h-32 object-cover mr-4 rounded-sm shadow-md">
                     <div style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" class="flex-grow text-xs">
-                        <h2 style="overflow: hidden" class="text-lg mb-1 leading-5"><a href="singlebook.php?id=${escapedBookId}">${escapedTitle}</a></h2>
-                        <p class="text-xs">Author: ${escapedAuthor}</p>
-                        <p class="line-clamp-2">${escapedDesc}...</p>
+                        <h2 style="overflow: hidden" class="text-lg mb-1 leading-5"><a href="singlebook.php?id=${encodeURIComponent(book.BookID)}">${title}</a></h2>
+                        <p class="text-xs">Author: ${author}</p>
+                        <p class="line-clamp-2">${description + '...'}</p>
                     </div>
                 </div>
             `;
         }).join('');
 
-        bookInfo.innerHTML = bookHTML;
-
-        function escapeHtml(unsafe) {
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
+        bookInfo.innerHTML = html;
     }
 </script>
 
