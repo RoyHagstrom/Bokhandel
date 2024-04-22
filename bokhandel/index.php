@@ -143,7 +143,7 @@ $featured_books_result = $conn->query($featured_books_sql);
     <a href="series.php?id=<?= $series['SeriesID'] ?>" class="group w-full h-full">
         <div class="relative overflow-hidden rounded-lg shadow-md">
             <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" />
-            <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-40 group-hover:bg-opacity-75 transition-opacity duration-200 ease-in-out">
+            <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-70 group-hover:bg-opacity-75 transition-opacity duration-200 ease-in-out">
                 <h2 class="text-2xl font-semibold text-white mb-2 group-hover:opacity-100 transition-opacity duration-200 ease-in-out underline decoration-black"><?= $series['SeriesName'] ?></h2>
             </div>
         </div>
