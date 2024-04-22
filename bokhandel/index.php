@@ -166,7 +166,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 <div class="container mt-8">
     <h1 class="text-2xl font-semibold mb-6">Book Series</h1>
     <?php
-    $series_query = "SELECT DISTINCT BookSeries FROM books";
+    $series_query = "SELECT DISTINCT Series FROM Book";
     $series_result = $conn->query($series_query);
 
     if ($series_result->num_rows > 0) {
