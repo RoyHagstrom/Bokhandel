@@ -21,7 +21,7 @@ $bookData = $result->fetch_assoc();
 
 
 if (!$bookData) {
-    $user->redirect("index.php");
+    $user->redirect("my_books.php?uid=" . $_SESSION["uid"]);
 
 }
 
