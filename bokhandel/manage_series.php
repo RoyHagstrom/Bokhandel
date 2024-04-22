@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 include 'Includes/header.php';
 
 if (!isset($_SESSION["uname"])) {
@@ -46,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $target_dir = "images/";
             $target_file = $target_dir . basename($image_name);
             if (move_uploaded_file($image, $target_file)) {
-                // Image uploaded successfully, continue with database update
+
                 if (isset($_POST['edit_series'])) {
                     $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Image = ?, Featured = ? WHERE SeriesID = ?");
                     $stmt->bind_param("ssii", $seriesName, $target_file, $featured, $_POST['edit_series']);
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit;
             }
         } else {
-            // No new image uploaded, update database without changing image path
+
             if (isset($_POST['edit_series'])) {
                 $stmt = $conn->prepare("UPDATE Series SET SeriesName = ?, Featured = ? WHERE SeriesID = ?");
                 $stmt->bind_param("sii", $seriesName, $featured, $_POST['edit_series']);
@@ -162,4 +163,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-<?php include 'Includes/footer.php'; ?>
+<?php
+
+include 'Includes/footer.php'; 
+ob_end_flush(); 
+?>
