@@ -32,32 +32,26 @@ class USER
 
     public function searchBooks($searchTerm)
     {
-        if (empty(trim($searchTerm))) {
-            http_response_code(400);
-            echo json_encode([]);
-            return;
-        }
+        try {
+            if (empty(trim($searchTerm))) {
+                http_response_code(400);
+                echo json_encode([]);
+                exit;
+            }
 
-        $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
-        $stmt = $this->conn->prepare(
-            "SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4"
-        );
-        if (!$stmt) {
-            throw new RuntimeException("Database error: {$this->conn->error}");
-        }
-        $stmt->bind_param("ss", $searchTerm, $searchTerm);
-        if (!$stmt->execute()) {
-            throw new RuntimeException("Database error: {$stmt->error}");
-        }
-        $result = $stmt->get_result();
-        if (!$result) {
-            throw new RuntimeException("Database error: {$this->conn->error}");
-        }
-        $books = $result->fetch_all(MYSQLI_ASSOC);
+            $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
+            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4");
+            $stmt->bind_param("ss", $searchTerm, $searchTerm);
+            $stmt->execute() or die($this->conn->error);
+            $result = $stmt->get_result();
+            $books = $result->fetch_all(MYSQLI_ASSOC);
 
-        http_response_code(200);
-        header('Content-Type: application/json');
-        echo json_encode($books);
+            http_response_code(200);
+            header('Content-Type: application/json');
+            echo json_encode($books);
+        } catch (Exception $e) {
+            http_response_code(500);
+        }
     }
 
     public function register($username, $email, $password, $role = "Regular")
