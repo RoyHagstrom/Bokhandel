@@ -7,7 +7,7 @@
     ]);
     define('DB_PORT', '3306');
     define('DB_USERNAME', 'test');
-    define('DB_PASSWORD', new SensitiveParameterValue('test'));
+    define('DB_PASSWORD', 'test');
     define('DB_DATABASE', 'bokhandel');
     define('DB_CONNECTION_TIMEOUT', 5);
 
@@ -30,7 +30,7 @@
         $conn = new mysqli(
             $host,
             DB_USERNAME,
-            DB_PASSWORD->value(),
+            DB_PASSWORD,
             DB_DATABASE,
             DB_PORT,
             null,
