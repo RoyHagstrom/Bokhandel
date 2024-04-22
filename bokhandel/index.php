@@ -138,34 +138,28 @@ $featured_books_result = $conn->query($featured_books_sql);
 <h1 class="text-2xl font-semibold mb-6 text-center text-black">Book Series</h1>
 <div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-8 place-content-center justify-center items-center self-center">
     <?php
-    $stmt = $conn->prepare("SELECT * FROM Series WHERE Featured = 1 ORDER BY SeriesID DESC LIMIT 4");
-    if ($stmt && $stmt->execute() && $stmt->num_rows) {
-        while ($series = $stmt->fetch_assoc()) { ?>
-            <a href="books.php?search=<?= urlencode($series['SeriesName']) ?>" class="group w-full h-full">
-                <div class="relative overflow-hidden rounded-lg shadow-md">
-                    <?php
-                    $book_stmt = $conn->prepare("SELECT Image FROM Book WHERE Series = ? ORDER BY BookID DESC LIMIT 1");
-                    $book_stmt->bind_param("i", $series['SeriesID']);
-                    if ($book_stmt && $book_stmt->execute() && $book_stmt->num_rows) {
-                        $bookimage = $book_stmt->get_result()->fetch_assoc();
-                    } else {
-                        $bookimage = null;
-                    }
-                    ?>
-                    <img src="<?= $bookimage ? $bookimage['Image'] : '' ?>" alt="<?= htmlspecialchars($series['SeriesName'], ENT_QUOTES) ?>" class="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" />
-                    <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-70 group-hover:bg-opacity-75 transition-opacity duration-200 ease-in-out">
-                        <h2 class="text-2xl font-semibold text-white mb-2 group-hover:opacity-100 transition-opacity duration-200 ease-in-out underline decoration-black"><?= htmlspecialchars($series['SeriesName'], ENT_QUOTES) ?></h2>
-                    </div>
-                </div>
-            </a>
-        <?php } 
-    } else {
-        ?>
+
+$stmt = $conn->query("SELECT b.*, s.SeriesName 
+                          FROM Book b 
+                          JOIN Series s ON b.SeriesID = s.SeriesID 
+                          ORDER BY b.BookID DESC 
+                          LIMIT 4");
+    while ($book = $stmt->fetch_assoc()) { ?>
+    <a href="books.php?search=<?= urlencode($book['SeriesName']) ?>" class="group w-full h-full">
+        <div class="relative overflow-hidden rounded-lg shadow-md">
+            <img src="<?= $book['Image'] ?>" alt="<?= $book['Title'] ?>" class="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" />
+            <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-70 group-hover:bg-opacity-75 transition-opacity duration-200 ease-in-out">
+                <h2 class="text-2xl font-semibold text-white mb-2 group-hover:opacity-100 transition-opacity duration-200 ease-in-out underline decoration-black"><?= $book['Title'] ?></h2>
+            </div>
+        </div>
+    </a>
+    <?php } if (!$stmt->num_rows) { ?>
         <div class="text-center">
             <p class="text-gray-700 dark:text-gray-300">No book series available</p>
         </div>
     <?php } ?>
 </div>
+
 
 
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
