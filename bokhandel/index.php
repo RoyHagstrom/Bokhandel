@@ -137,36 +137,20 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 <div class="container mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 place-content-center">
     <?php
-    $stmt = $conn->prepare("SELECT * FROM Series");
-    if (!$stmt) {
-        die("Failed to prepare SQL statement: " . $conn->error);
-    }
-
-    if (!$stmt->execute()) {
-        die("Failed to execute SQL statement: " . $stmt->error);
-    }
-
-    $series_result = $stmt->get_result();
-
-    if ($series_result->num_rows > 0) {
-        while ($series = $series_result->fetch_assoc()) {
-            echo "
-            <div class=\"text-center relative text-white\">
-                <div class=\"text-center absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center\">
-                    <h2 class=\"text-2xl font-semibold mb-2\">{$series['SeriesName']}</h2>
-                    <p class=\"text-gray-700 dark:text-gray-300\">{$series['SeriesID']}</p>
-                </div>
-                <img src=\"{$series['Image']}\" alt=\"Series Image\" class=\"w-full h-48 object-cover\" loading=\"lazy\"/>
+    $stmt = $conn->query("SELECT * FROM Series");
+    while ($series = $stmt->fetch_assoc()) { ?>
+        <div class="text-center relative text-white">
+            <div class="text-center absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center">
+                <h2 class="text-2xl font-semibold mb-2"><?= $series['SeriesName'] ?></h2>
+                <p class="text-gray-700 dark:text-gray-300"><?= $series['SeriesID'] ?></p>
             </div>
-            ";        
-        }
-    } else {
-        echo '
+            <img src="<?= $series['Image'] ?>" alt="Series Image" class="w-full h-48 object-cover" loading="lazy"/>
+        </div>
+    <?php } if (!$stmt->num_rows) { ?>
         <div class="text-center">
             <p class="text-gray-700 dark:text-gray-300">No book series available</p>
-        </div>';
-    }
-    ?>
+        </div>
+    <?php } ?>
 </div>
 
 
