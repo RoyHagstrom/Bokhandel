@@ -40,7 +40,7 @@ class USER
             }
 
             $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
-            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4");
+            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY BookID DESC LIMIT 4");
             $stmt->bind_param("ss", $searchTerm, $searchTerm);
             $stmt->execute() or die($this->conn->error);
             $result = $stmt->get_result();
