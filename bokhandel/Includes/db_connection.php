@@ -10,21 +10,14 @@
     define('DB_PASSWORD', 'test');
     define('DB_DATABASE', 'bokhandel');
     define('DB_CONNECTION_TIMEOUT', 3);
-    define('DB_ERROR_NETWORK_FAILURE', 2006);
 
     function getDatabaseConnection() {
-        $last_error_code = 0;
         foreach (DB_HOSTS as $host) {
             $conn = new mysqli($host, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
             if (!$conn->connect_error) {
                 $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, DB_CONNECTION_TIMEOUT);
                 return $conn;
             } else {
-                if ($last_error_code != DB_ERROR_NETWORK_FAILURE) {
-                    $last_error_code = $conn->connect_errno;
-                } else {
-                    break;
-                }
                 $conn->close();
             }
         }
