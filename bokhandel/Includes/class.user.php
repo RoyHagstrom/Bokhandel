@@ -39,9 +39,9 @@ class USER
                 exit;
             }
 
-            $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
+            $searchTerm = $this->conn->real_escape_string(trim($searchTerm));
             $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY RAND() LIMIT 4");
-            $stmt->bind_param("ss", $searchTerm, $searchTerm);
+            $stmt->bind_param("ss", '%' . $searchTerm . '%', '%' . $searchTerm . '%');
             $stmt->execute() or die($this->conn->error);
             $result = $stmt->get_result();
             $books = $result->fetch_all(MYSQLI_ASSOC);
@@ -51,6 +51,8 @@ class USER
             echo json_encode($books);
         } catch (Exception $e) {
             http_response_code(500);
+        } finally {
+            $stmt->close();
         }
     }
 
