@@ -285,48 +285,7 @@ include 'db_connection.php';
 
 
 
-            <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white transition-colors duration-300 ease-in-out">
-            <style>
+            <body class="full bg-gray-800 dark:bg-gray-900">
 
-                @keyframes fade-in {
-                    0% {
-                        opacity: 0;
-                        transform: scale(0.9);
-                    }
-                    50% {
-                        opacity: 0.5;
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: scale(1);
-                    }
-                }
-                .animate-fade-in {
-                    animation: fade-in 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
-                }
-                
-                @keyframes slide-in-from-top {
-                    0% {
-                        transform: translateY(-3rem);
-                    }
-                    100% {
-                        transform: translateY(0);
-                    }
-                }
-                .animate-slide-in-from-top {
-                    animation: slide-in-from-top 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
-                }
-                
-                .animate-spin {
-                    animation: spin 1.5s linear infinite;
-                }
-                @keyframes spin {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-                    100% {
-                        transform: rotate(360deg);
-                    }
-                }
-            </style>
+
 
