@@ -179,15 +179,15 @@ $featured_books_result = $conn->query($featured_books_sql);
             $book_series_result = $conn->query($book_series_query);
 
             if ($book_series_result->num_rows > 0) {
-                while ($book = $book_series_result->fetch_assoc()) {
+                while ($bookseries = $book_series_result->fetch_assoc()) {
                     echo '
-                    <a href="singlebook.php?id=' . $book['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
-                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">'.$book['Price'].'€</span>
-                        <img src="'.$book['Image'].'" alt="'.$book['Title'].'" class="w-30 md:w-full h-30 md:h-80 object-cover">
+                    <a href="singlebook.php?id=' . $bookseries['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">
+                        <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">'.$bookseries['Price'].'€</span>
+                        <img src="'.$bookseries['Image'].'" alt="'.$bookseries['Title'].'" class="w-30 md:w-full h-30 md:h-80 object-cover">
                         <div class="p-3 md:p-6 text-sm md:text-md">
-                            <h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">'.$book['Title'].'</h2>
-                            <p class="text-gray-700 dark:text-gray-300">Author: '.$book['Author'].'</p>
-                            <p class="text-gray-700 dark:text-gray-300">'.htmlspecialchars(substr(strip_tags(html_entity_decode($book["Description"])), 0, 50)).'...</p>
+                            <h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">'.$bookseries['Title'].'</h2>
+                            <p class="text-gray-700 dark:text-gray-300">Author: '.$bookseries['Author'].'</p>
+                            <p class="text-gray-700 dark:text-gray-300">'.htmlspecialchars(substr(strip_tags(html_entity_decode($bookseries["Description"])), 0, 50)).'...</p>
                         </div>
                     </a>';
                 }
