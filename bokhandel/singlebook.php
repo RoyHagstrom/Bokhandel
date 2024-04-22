@@ -79,14 +79,30 @@ $new_books_result = $conn->query($new_books_sql);
     </div>
     <div class="md:w-3/12 pl-4">
         <div class="book-info">
+            <?php if (!empty($book['Illustrator'])): ?>
             <p><span class="font-semibold">Illustrator:</span> <?php echo $book['Illustrator']; ?></p>
+            <?php endif; ?>
+            <?php if (!empty($book['AgeRecommendation'])): ?>
             <p><span class="font-semibold">Age Recommendation:</span> <?php echo $book['AgeRecommendation']; ?></p>
+            <?php endif; ?>
+            <?php if (!empty($book['CategoryName'])): ?>
             <p><span class="font-semibold">Category:</span> <?php echo $book['CategoryName']; ?></p> 
+            <?php endif; ?>
+            <?php if (!empty($book['Genre'])): ?>
             <p><span class="font-semibold">Genre:</span> <?php echo $book['Genre']; ?></p>
+            <?php endif; ?>
+            <?php if (!empty($book['PublicationYear'])): ?>
             <p><span class="font-semibold">Publication Year:</span> <?php echo $book['PublicationYear']; ?></p>
+            <?php endif; ?>
+            <?php if (!empty($book['Series'])): ?>
             <p><span class="font-semibold">Series:</span> <?php echo $book['Series']; ?></p>
+            <?php endif; ?>
+            <?php if (!empty($book['Publisher'])): ?>
             <p><span class="font-semibold">Publisher:</span> <?php echo $book['Publisher']; ?></p>
+            <?php endif; ?>
+            <?php if (!empty($book['Pages'])): ?>
             <p><span class="font-semibold">Pages:</span> <?php echo $book['Pages']; ?></p>
+            <?php endif; ?>
         </div>
     </div>
 </div>
