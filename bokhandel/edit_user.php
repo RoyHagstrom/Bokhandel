@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-semibold" for="bio">Bio:</label>
-                    <textarea id="bio" name="bio" class="border border-gray-400 p-2 w-full rounded-md" rows="5" maxlength="200"><?php echo htmlspecialchars($userInfo['Bio']); ?></textarea>
+                    <textarea id="bio" name="bio" class="border border-gray-400 p-2 w-full rounded-md" rows="5" maxlength="200"><?php echo $userInfo['Bio']; ?></textarea>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-semibold" for="image">Profile Image:</label>
