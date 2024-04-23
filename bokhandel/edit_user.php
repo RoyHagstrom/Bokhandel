@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
 
-    if ($_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+    if (isset($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
         $tmp_name = $_FILES["image"]["tmp_name"];
         $name = basename($_FILES["image"]["name"]);
         $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
@@ -52,8 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imageDir = "images/$newName";
         }
     } else {
-        $image = $userInfo["Image"];
-        $imageDir = "images/" . $userInfo["Image"];
+        $imageDir = $userInfo["Image"];
     }
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = ? WHERE UserID = ?");
     $stmt->bind_param("ssssss", $username, $email, $role, $bio, $imageDir, $userid);
