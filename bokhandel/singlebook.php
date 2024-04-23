@@ -151,9 +151,10 @@ $new_books_result = $conn->query($new_books_sql);
         <div class="book-info">
         <p><?php echo $book['Description']; ?></p>
         </div>
-    </div>
 
-    <?php
+
+
+        <?php
     $user_bio_sql = "SELECT Bio FROM User WHERE Username = '{$book['Author']}'";
     $user_bio_result = $conn->query($user_bio_sql);
     if ($user_bio_result->num_rows > 0) {
@@ -165,10 +166,16 @@ $new_books_result = $conn->query($new_books_sql);
     ?>
     <?php if (!empty($user_bio)): ?>
     <div class="p-8 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
-        <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl">About the Author</h1>
+        <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php $book['Author'] ?></h1>
         <p><?php echo $user_bio; ?></p>
     </div>
     <?php endif; ?>
+
+
+    
+    </div>
+
+
 
 
 
