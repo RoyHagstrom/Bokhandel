@@ -65,20 +65,28 @@ $other_books_result = $conn->query($other_books_sql);
             <div class="mt-4">
                 <p class="font-semibold mb-2">Rating:</p>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $book['BookID']; ?>">
-                    <div class="flex items-center">
-                        <select name="rating" id="rating" class="border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-full text-center appearance-none cursor-pointer w-32">
-                            <option value="" disabled selected>Rate this book</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md">Submit</button>
+                    <div class="flex items-center space-x-2">
+                        <?php for($i = 1; $i <= 5; $i++) { ?>
+                            <label for="star<?php echo $i; ?>" class="relative">
+                                <input type="radio" name="rating" id="star<?php echo $i; ?>" value="<?php echo $i; ?>" class="hidden peer" <?php if($i == $book['Rating']) { echo 'checked'; } ?>>
+                                <span class="block w-6 h-6 text-xl leading-none text-center bg-gray-200 dark:bg-gray-800 peer-focus:text-yellow-500 peer-focus:outline-none cursor-pointer">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </label>
+                        <?php } ?>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md">Submit</button>
                     </div>
                 </form>
                 <?php if(!empty($book['Rating'])){ ?>
-                    <p class="text-sm mt-2"><?php echo $book['Rating']; ?> out of 5 stars</p>
+                    <p class="text-sm mt-2">
+                        <?php for($i = 1; $i <= 5; $i++) { ?>
+                            <?php if($i <= $book['Rating']) { ?>
+                                <i class="fas fa-star text-yellow-500"></i>
+                            <?php } else { ?>
+                                <i class="fas fa-star text-gray-400"></i>
+                            <?php } ?>
+                        <?php } ?>
+                    </p>
                 <?php } ?>
             </div>
             
