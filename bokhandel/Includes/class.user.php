@@ -44,8 +44,8 @@ class USER
             }
 
             $searchTerm = '%' . $this->conn->real_escape_string(trim($searchTerm)) . '%';
-            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE MATCH(Title,Author,Description) AGAINST(? IN NATURAL LANGUAGE MODE) ORDER BY MATCH(Title,Author,Description) AGAINST(? IN NATURAL LANGUAGE MODE) DESC LIMIT 4");
-            $stmt->bind_param("ss", $searchTerm, $searchTerm);
+            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY BookID DESC LIMIT 4");
+            $stmt->bind_param("ss", "%$searchTerm%", "%$searchTerm%");
             $stmt->execute() or die($this->conn->error);
             $result = $stmt->get_result();
             $books = $result->fetch_all(MYSQLI_ASSOC);
