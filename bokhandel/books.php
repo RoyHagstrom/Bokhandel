@@ -9,7 +9,7 @@ $bind_params = [];
 $bind_types = '';
 
 if (!empty($search_term)) {
-    $search_term_esc = htmlspecialchars($search_term, ENT_QUOTES, 'UTF-8');
+    $search_term_esc = $search_term;
     $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR `Series` LIKE ?";
     $bind_types .= "sss";
     $bind_params[] = '%' . $search_term_esc . '%';
