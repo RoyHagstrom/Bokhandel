@@ -70,6 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="Regular" <?php echo $userInfo['Role'] == 'Regular' ? 'selected' : ''; ?>>Regular</option>
                     </select>
                 </div>
+                <div>
+                    <label class="block mb-2 text-sm font-semibold" for="bio">Bio:</label>
+                    <textarea id="bio" name="bio" class="border border-gray-400 p-2 w-full rounded-md" rows="5"><?php echo htmlspecialchars($userInfo['Bio']); ?></textarea>
+                </div>
             </div>
 
             <div class="text-center mt-8">
