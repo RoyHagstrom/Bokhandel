@@ -288,6 +288,5 @@ include 'db_connection.php';
 
 
             <body class="full bg-gray-800 dark:bg-gray-900">
-                <div class="max-w-screen-2xl mx-auto flex justify-center overflow-auto bg-gray-800 dark:bg-gray-900">
-
+                <div style="width: 1920px;" class="max-w-full mx-auto flex justify-center overflow-auto bg-gray-800 dark:bg-gray-900">
 
