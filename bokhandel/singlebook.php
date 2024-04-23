@@ -71,7 +71,12 @@ $series_result = $series_stmt->get_result();
         </div>
             <?php if (isset($series_result)): ?>
                 <pre>
-                    <?php print_r($series_result); ?>
+                    <?php 
+                        while($series_row = $series_result->fetch_assoc()){
+                            echo $series_row['SeriesName'] . "<br/>";
+                        }
+                    ?>
+                </pre>
                 </pre>
             <?php endif; ?>
             
