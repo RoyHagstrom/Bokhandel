@@ -47,11 +47,8 @@ $other_books_result = $conn->query($other_books_sql);
 $series_sql = "SELECT * FROM Series WHERE SeriesName = ? LIMIT 1";
 $series_stmt = $conn->prepare($series_sql);
 $series_stmt->bind_param("s", $book['Series']);
-if(!$series_stmt->execute()){
-    die("Failed to execute SQL statement: " . $series_stmt->error);
-}
+$series_stmt->execute();
 $series_result = $series_stmt->get_result();
-$series = $series_result->fetch_assoc();
 $series = $series_result->fetch_assoc();
 
 ?>
@@ -75,10 +72,8 @@ $series = $series_result->fetch_assoc();
         </div>
 
 
-        <?php
-                if ($series_result->num_rows > 0) {
-                    $series_row = $series_result->fetch_assoc(); 
-        ?>
+        <?php if ($series_result->num_rows > 0): ?>
+                <?php $series_row = $series_result->fetch_assoc(); ?>
                 <div class="mb-8">
                     <span class="block font-semibold mb-4">Series:</span>
                     <a href="series.php?series=<?php echo urlencode($series_row['SeriesName']); ?>">
@@ -86,9 +81,7 @@ $series = $series_result->fetch_assoc();
                         <span class="text-lg"><?php echo $series_row['SeriesName'] ?? ''; ?></span>
                     </a>
                 </div>
-        <?php
-                }
-        ?>
+            <?php endif; ?>
 
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
