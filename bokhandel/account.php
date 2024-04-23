@@ -50,7 +50,7 @@ if ($result->num_rows > 0) {
             </div>
             <?php if (!empty($userData['Image'])) : ?>
                 <div class="w-full mt-4">
-                    <img src="<?= $userData['Image'] ?>" alt="<?= $userData['Username'] ?>'s profile picture" class="w-full h-64">
+                    <img src="<?= $userData['Image'] ?>" alt="<?= $userData['Username'] ?>'s profile picture" class="w-auto h-64">
                 </div>
             <?php endif; ?>
             
