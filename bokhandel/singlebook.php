@@ -62,6 +62,26 @@ $other_books_result = $conn->query($other_books_sql);
                 </div>
             <?php endif; ?>
         </div>
+            <div class="mt-4">
+                <p class="font-semibold mb-2">Rating:</p>
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $book['BookID']; ?>">
+                    <div class="flex items-center">
+                        <select name="rating" id="rating" class="border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-full text-center appearance-none cursor-pointer w-32">
+                            <option value="" disabled selected>Rate this book</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md">Submit</button>
+                    </div>
+                </form>
+                <?php if(!empty($book['Rating'])){ ?>
+                    <p class="text-sm mt-2"><?php echo $book['Rating']; ?> out of 5 stars</p>
+                <?php } ?>
+            </div>
+            
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
         <div class="book-info">
