@@ -71,6 +71,7 @@ $series_result = $series_stmt->get_result();
         </div>
             <?php if (isset($book['Series'])): ?>
                 <div class="mb-8">
+<?php print_r($series_result); ?>
                     <span class="block font-semibold mb-4">Series:</span>
                     <a href="series.php?series=<?php echo urlencode($series_result['SeriesName']); ?>">
                         <img src="<?php echo $series_result['Image'] ?>" alt="<?php echo $series_result['SeriesName']; ?>" class="rounded-lg w-full mb-2">
