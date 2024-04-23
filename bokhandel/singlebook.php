@@ -70,8 +70,7 @@ $series = $series_result->fetch_assoc();
                 </div>
             <?php endif; ?>
         </div>
-        
-            <?php if ($series_result && $series_result->num_rows > 0): 
+        <?php
                 $series_row = $series_result->fetch_assoc(); 
                 ?>
                 <div class="mb-8">
@@ -81,7 +80,6 @@ $series = $series_result->fetch_assoc();
                         <span class="text-lg"><?php echo $series_row['SeriesName']; ?></span>
                     </a>
                 </div>
-            <?php endif; ?>
 
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
