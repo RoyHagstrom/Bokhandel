@@ -181,12 +181,10 @@ if ($category_id) {
                     </div>
                     <input type="search" <?php if(isset($_GET['search'])) { echo 'value="' . htmlspecialchars(urldecode($_GET['search'])) . '"'; } ?>  id="default-search" name="search" class="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required />
                 </div>
-                <button type="submit" class="text-white ml-2 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="submit" class="text-white ml-2 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="event.preventDefault(); document.getElementById('search-form').submit(); fetch('<?php echo $_SERVER['PHP_SELF'] ?>?search=' + encodeURIComponent(document.getElementById('default-search').value), { method: 'GET' }).then(response => response.json()).then(books => { window.location.href = 'books.php?search=' + encodeURIComponent(document.getElementById('default-search').value); });">
                     Search
                 </button>
-                <button type="button" id="clear-search" class="ml-2 px-4 py-2 rounded-lg bg-blue-200 hover:bg-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium text-sm text-white dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Clear
-                </button>
+                <button type="button" id="clear-search" class="ml-2 px-4 py-2 rounded-lg bg-blue-200 hover:bg-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium text-sm text-white dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="window.location.href = 'books.php';">Clear</button>
             </form>
         </div>
 
