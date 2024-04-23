@@ -74,7 +74,7 @@ $new_books_result = $conn->query($new_books_sql);
                 <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
                 <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Other books by <?php echo $book['Author']; ?>:</h2>
 
-                    <div class="flex justify-center items-center grid gap-2 md:grid-cols-3 lg:grid-cols-6">
+                    <div class="flex justify-center items-center grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
                         <?php 
                     while($other_book = $other_books_result->fetch_assoc()){
 
