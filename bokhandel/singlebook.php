@@ -86,20 +86,29 @@ $new_books_result = $conn->query($new_books_sql);
                 <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
                     
                 <?php
-                    $search_url = 'https://www.google.com/search?q=' . urlencode($book['Author']) . '&tbm=isch';
-                    $image_url = '';
-                    
-                    $html = file_get_contents($search_url);
-                    if(preg_match('/og:image" content="(https:\/\/[^\"]+)"/', $html, $matches)) {
-                        $image_url = $matches[1];
-                    }
-                ?>
-                
-                <?php if ($image_url): ?>
-                <div class="max-h-48 overflow-hidden">
-                    <img src="<?= $image_url ?>" alt="<?= $book['Author'] ?> image" class="w-full h-auto object-cover">
-                </div>
-                <?php endif; ?>
+
+$api_key = 'YOUR_API_KEY';
+$search_term = urlencode($book['Author']);
+
+$search_url = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={$api_key}&text={$search_term}&format=json&nojsoncallback=1";
+$response = file_get_contents($search_url);
+$data = json_decode($response, true);
+
+$image_url = '';
+
+if (isset($data['photos']['photo'][0])) {
+    $photo = $data['photos']['photo'][0];
+    $image_url = "https://farm{$photo['farm']}.staticflickr.com/{$photo['server']}/{$photo['id']}_{$photo['secret']}.jpg";
+}
+?>
+
+<?php if ($image_url): ?>
+<div class="max-h-48 overflow-hidden">
+    <img src="<?= $image_url ?>" alt="<?= $book['Author'] ?> image" class="w-full h-auto object-cover">
+</div>
+<?php endif; ?>
+
+
                 <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Other books by <?php echo $book['Author']; ?>:</h2>
 
                     <div class="flex justify-center items-center grid gap-2 grid-cols-3 lg:grid-cols-6">
