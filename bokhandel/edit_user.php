@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 include 'Includes/header.php';
 
 if (!isset($_SESSION["uid"])) {
@@ -112,3 +113,6 @@ include 'Includes/footer.php';
 
 
 
+<?php 
+ob_end_flush();
+?>
