@@ -2,6 +2,9 @@
 
 header("Cache-Control: public, max-age=31536000, immutable");
 
+ob_start(); 
+
+
 include 'class.user.php';
 include 'db_connection.php';
 
