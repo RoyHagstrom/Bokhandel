@@ -39,28 +39,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
 
-    if ($result[0] == 0) {
-        if ($_FILES["image"]["error"] === UPLOAD_ERR_OK) {
-            $tmp_name = $_FILES["image"]["tmp_name"];
-            $name = basename($_FILES["image"]["name"]);
-            $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-            $newName = uniqid() . ".$imgExt";
-            $target = "Images/users/" . $newName;
-            move_uploaded_file($tmp_name, $target);
-            $image = $newName;
-        } else {
-            $image = $userInfo["Image"];
-        }
+    if ($_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES["image"]["tmp_name"];
+        $name = basename($_FILES["image"]["name"]);
+        $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+        $newName = uniqid() . ".$imgExt";
+        $target = "Images/users/" . $newName;
+        move_uploaded_file($tmp_name, $target);
+        $image = $newName;
+    } else {
+        $image = $userInfo["Image"];
     }
 
-
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = ? WHERE UserID = ?");
-    $stmt->bind_param("ssssss", $username, $email, $role, $bio, $image, $userid); 
+    $stmt->bind_param("sssssi", $username, $email, $role, $bio, $image, $userid); 
     if ($stmt->execute()) {
         $user->redirect("account.php?uid=" . urlencode($_GET["userid"]));
     } else {
         echo "Error updating user information: " . $stmt->error;
     }
+
 }
 ?>
 
