@@ -31,8 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : $userInfo["Email"];
     $role = isset($_POST["role"]) ? htmlspecialchars($_POST["role"]) : $userInfo["Role"]; 
     $bio = isset($_POST["bio"]) ? htmlspecialchars($_POST["bio"]) : $userInfo["Bio"]; 
-    $image = isset($_FILES["image"]) ? $_FILES["image"] : $userInfo["Image"]; 
-
+    
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID = ?");
     $stmt->bind_param("si", $username, $userid); 
@@ -48,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $target = "Images/users/" . $newName;
             move_uploaded_file($tmp_name, $target);
             $image = $newName;
+        } else {
+            $image = $userInfo["Image"];
         }
     }
 
@@ -66,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container mx-auto p-8">
         <h2 class="text-center text-3xl font-bold mb-4">Edit Profile</h2>
-        <form class="bg-white shadow-md rounded-lg p-8 mt-8" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?userid=<?php echo $userid; ?>">
+        <form class="bg-white shadow-md rounded-lg p-8 mt-8" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?userid=<?php echo $userid; ?>" enctype="multipart/form-data">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
                     <label class="block mb-2 text-sm font-semibold" for="username">Username:</label>
@@ -109,7 +110,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 include 'Includes/footer.php';
 ?>
-
-
-
 
