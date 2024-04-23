@@ -78,7 +78,7 @@ $new_books_result = $conn->query($new_books_sql);
 
 
 <?php
-                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 3";
+                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 6";
                     $other_books_result = $conn->query($other_books_sql);
 ?>
 
