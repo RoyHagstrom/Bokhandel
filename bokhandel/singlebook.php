@@ -85,7 +85,7 @@ if ($series_result->num_rows > 0) {
                     <span class="block font-semibold mb-4">Series:</span>
                     <div class="relative overflow-hidden group rounded-lg bg-gray-800">
                         <a href="series.php?series=<?php echo urlencode($series['SeriesName']); ?>" class="absolute inset-0 flex items-center justify-center">
-                            <span class="sr-only"><?php echo $series['SeriesName'] ?? ''; ?></span>
+                            <span class="sr-only"><?php echo $series['SeriesName']; ?></span>
                         </a>
                         <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-full object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out bg-gray-700 dark:bg-gray-900" loading="lazy" />
                     </div>
