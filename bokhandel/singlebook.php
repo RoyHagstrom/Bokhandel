@@ -44,8 +44,11 @@ $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND Bo
 $other_books_result = $conn->query($other_books_sql);
 
 
-$series_sql = "SELECT * FROM Series";
-$series_result = $conn->query($series_sql);
+$series_sql = "SELECT * FROM Series WHERE SeriesName = ?";
+$series_stmt = $conn->prepare($series_sql);
+$series_stmt->bind_param("s", $book['Series']);
+$series_stmt->execute();
+$series_result = $series_stmt->get_result();
 
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
