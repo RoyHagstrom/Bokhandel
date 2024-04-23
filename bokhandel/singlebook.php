@@ -62,7 +62,7 @@ $other_books_result = $conn->query($other_books_sql);
                 </div>
             <?php endif; ?>
         </div>
-            <?php if (isset($book['SeriesName'])): ?>
+            <?php if (isset($book['Series'])): ?>
                 <div class="mb-8">
                     <span class="block font-semibold mb-4">Series:</span>
                     <a href="series.php?series=<?php echo urlencode($book['SeriesName']); ?>">
