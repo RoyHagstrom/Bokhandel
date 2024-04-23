@@ -55,10 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $image = $userInfo["Image"];
         $imageDir = "images/" . $userInfo["Image"];
     }
-    $stmt->bind_param("ssssssi", $username, $email, $role, $bio, $image, $imageDir, $userid);
-
+    $stmt->bind_param("ssssss", $username, $email, $role, $bio, $image, $imageDir); 
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = ? WHERE UserID = ?");
-    $stmt->bind_param("sssssi", $username, $email, $role, $bio, $image, $userid); 
     if (!$stmt->execute()) {
         echo "Error updating user information: " . $stmt->error;
     }
