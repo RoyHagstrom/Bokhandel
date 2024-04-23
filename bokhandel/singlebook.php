@@ -62,7 +62,16 @@ $other_books_result = $conn->query($other_books_sql);
                 </div>
             <?php endif; ?>
         </div>
-        
+            <?php if (isset($book['SeriesName'])): ?>
+                <div class="mb-8">
+                    <span class="block font-semibold mb-4">Series:</span>
+                    <a href="series.php?series=<?php echo urlencode($book['SeriesName']); ?>">
+                        <img src="<?php echo $book['SeriesImage'] ?>" alt="<?php echo $book['SeriesName']; ?>" class="rounded-lg w-full mb-2">
+                        <span class="text-lg"><?php echo $book['SeriesName']; ?></span>
+                    </a>
+                </div>
+            <?php endif; ?>
+
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
         <div class="book-info">
