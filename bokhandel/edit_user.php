@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : $userInfo["Email"];
     $role = isset($_POST["role"]) ? htmlspecialchars($_POST["role"]) : $userInfo["Role"]; 
     $bio = isset($_POST["bio"]) ? htmlspecialchars($_POST["bio"]) : $userInfo["Bio"]; 
+    $image = isset($_POST["image"]) ? $_FILES["image"] : $userInfo["Image"]; 
     
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID = ?");
