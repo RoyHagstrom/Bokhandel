@@ -142,6 +142,17 @@ $new_books_result = $conn->query($new_books_sql);
             <p><span class="font-semibold">Pages:</span> <?php echo $book['Pages']; ?></p>
             <?php endif; ?>
         </div>
+        <?php
+    $user_bio_sql = "SELECT Bio, Username FROM User WHERE Username = '{$book['Author']}'";
+    $user_bio_result = $conn->query($user_bio_sql);
+    $user_bio = $user_bio_result->fetch_assoc();
+    ?>
+    <?php if (!empty($user_bio["Bio"])): ?>
+    <div class="p-8 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
+        <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
+        <p><?php echo $user_bio["Bio"]; ?></p>
+    </div>
+    <?php endif; ?>
     </div>
 </div>
 
@@ -153,17 +164,7 @@ $new_books_result = $conn->query($new_books_sql);
         </div>
     </div>
 
-    <?php
-    $user_bio_sql = "SELECT Bio, Username FROM User WHERE Username = '{$book['Author']}'";
-    $user_bio_result = $conn->query($user_bio_sql);
-    $user_bio = $user_bio_result->fetch_assoc();
-    ?>
-    <?php if (!empty($user_bio["Bio"])): ?>
-    <div class="p-8 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
-        <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
-        <p><?php echo $user_bio["Bio"]; ?></p>
-    </div>
-    <?php endif; ?>
+
 
 
 
