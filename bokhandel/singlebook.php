@@ -44,18 +44,6 @@ $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND Bo
 $other_books_result = $conn->query($other_books_sql);
 
 
-$series = null; 
-
-$series_sql = "SELECT * FROM Series WHERE SeriesName = ? LIMIT 1";
-$series_stmt = $conn->prepare($series_sql);
-$series_stmt->bind_param("s", $book['Series']);
-$series_stmt->execute();
-$series_result = $series_stmt->get_result();
-
-if ($series_result->num_rows > 0) {
-
-    $series = $series_result->fetch_assoc();
-}
 
 
 ?>
@@ -78,19 +66,6 @@ if ($series_result->num_rows > 0) {
             <?php endif; ?>
         </div>
 
-
-        <?php if ($series_result->num_rows > 0): ?>
-                <?php $series_row = $series_result->fetch_assoc(); ?>
-                <div class="mb-8">
-                    <span class="block font-semibold mb-4">Series:</span>
-                    <div class="relative overflow-hidden group rounded-lg bg-gray-800">
-                        <a href="series.php?series=<?php echo urlencode($series['SeriesName']); ?>" class="absolute inset-0 flex items-center justify-center">
-                            <span class="sr-only"><?php echo $series['SeriesName']; ?></span>
-                        </a>
-                        <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-full object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out bg-gray-700 dark:bg-gray-900" loading="lazy" />
-                    </div>
-                </div>
-            <?php endif; ?>
 
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
