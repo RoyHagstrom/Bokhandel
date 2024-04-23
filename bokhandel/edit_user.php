@@ -44,18 +44,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = basename($_FILES["image"]["name"]);
         $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
         $newName = uniqid() . ".$imgExt";
-        $target = "Images/users/" . $newName;
-        move_uploaded_file($tmp_name, $target);
-        $image = $newName;
+        $target = "Images/$newName"; 
+        if (!move_uploaded_file($tmp_name, "Images/$newName")) {
+            echo "Error uploading image";
+        } else {
+            $image = $newName;
+        }
     } else {
         $image = $userInfo["Image"];
     }
 
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = ? WHERE UserID = ?");
     $stmt->bind_param("sssssi", $username, $email, $role, $bio, $image, $userid); 
-    if ($stmt->execute()) {
-        $user->redirect("account.php?uid=" . urlencode($_GET["userid"]));
-    } else {
+    if (!$stmt->execute()) {
         echo "Error updating user information: " . $stmt->error;
     }
 
