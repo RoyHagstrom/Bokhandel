@@ -14,16 +14,14 @@ if (!empty($search_term)) {
 
     $words = array_map('preg_quote', explode(' ', $search_term));
 
-    $pattern = '%' . implode('%', $words) . '%';
+    $patterns = array_fill(0, count($words), '?');
 
-    $placeholders = str_repeat('?,', count($words));
+    $placeholders = implode(',', $patterns);
     $bind_types = str_repeat('s', count($words));
-    $bind_params = array_merge($bind_params, array_fill(0, count($words), $pattern));
+    $bind_params = array_merge($bind_params, $words);
 
-    $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR `Series` LIKE ?";
-    $bind_params[] = $pattern;
-    $bind_params[] = $pattern;
-    $bind_params[] = $pattern;
+    $condition_parts = array_fill(0, count($words), '?');
+    $conditions[] = "`Title` LIKE " . implode(' OR `Author` LIKE ', $condition_parts) . " OR `Series` LIKE " . implode(' OR `Series` LIKE ', $condition_parts);
 }
 
 if (!empty($category_id)) {
