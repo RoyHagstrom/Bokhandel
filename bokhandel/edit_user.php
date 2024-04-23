@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : $userInfo["Email"];
     $role = isset($_POST["role"]) ? htmlspecialchars($_POST["role"]) : $userInfo["Role"]; 
     $bio = isset($_POST["bio"]) ? htmlspecialchars($_POST["bio"]) : $userInfo["Bio"]; 
+    $image = isset($_FILES["image"]) ? $_FILES["image"] : $userInfo["Image"]; 
 
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID = ?");
@@ -38,10 +39,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
 
+    if ($result[0] == 0) {
+        if ($_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+            $tmp_name = $_FILES["image"]["tmp_name"];
+            $name = basename($_FILES["image"]["name"]);
+            $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+            $newName = uniqid() . ".$imgExt";
+            $target = "Images/users/" . $newName;
+            move_uploaded_file($tmp_name, $target);
+            $image = $newName;
+        }
+    }
 
 
-    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ? WHERE UserID = ?");
-    $stmt->bind_param("ssssi", $username, $email, $role, $bio, $userid); 
+    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = ? WHERE UserID = ?");
+    $stmt->bind_param("ssssss", $username, $email, $role, $bio, $image, $userid); 
     if ($stmt->execute()) {
         $user->redirect("account.php?uid=" . urlencode($_GET["userid"]));
     } else {
@@ -74,6 +86,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div>
                     <label class="block mb-2 text-sm font-semibold" for="bio">Bio:</label>
                     <textarea id="bio" name="bio" class="border border-gray-400 p-2 w-full rounded-md" rows="5" maxlength="299"><?php echo htmlspecialchars($userInfo['Bio']); ?></textarea>
+                </div>
+                <div class="col-span-1">
+                    <label class="block mb-2 text-sm font-semibold" for="Image">Profile Image:</label>
+                    <input type="file" id="Image" name="Image" class="border border-gray-400 p-2 w-full rounded-md">
+                    <?php 
+                        if(!empty($userInfo['Image'])): 
+                            echo '<img src="assets/uploads/'.$userInfo['Image'].'" alt="Profile Image" class="mt-4 max-h-64 mx-auto rounded-md">';
+                        endif; 
+                    ?>
                 </div>
             </div>
 

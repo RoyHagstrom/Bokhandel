@@ -48,6 +48,12 @@ if ($result->num_rows > 0) {
                 <span class="font-semibold mr-2 text-lg">Bio:</span>
                 <span class="text-lg"><?= $userData['Bio'] ? $userData['Bio'] : 'No bio provided'; ?></span>
             </div>
+            <?php if (!empty($userData['Image'])) : ?>
+                <div class="w-full mt-4">
+                    <img src="/images/users/<?= $userData['Image'] ?>" alt="<?= $userData['Username'] ?>'s profile picture" class="w-full max-w-full">
+                </div>
+            <?php endif; ?>
+            
         </div>
         <h3 class="text-2xl font-bold mb-2 mt-8">Actions:</h3>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
