@@ -11,10 +11,11 @@ $bind_types = '';
 if (!empty($search_term)) {
     $decoded_search_term = urldecode($search_term);
     $like_condition = '%' . $decoded_search_term . '%';
-    $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR `Series` LIKE ?";
-    $bind_params[] = $like_condition;
-    $bind_params[] = $like_condition;
-    $bind_params[] = $like_condition;
+    $conditions[] = "(`Title` LIKE :title OR `Author` LIKE :author OR `Series` LIKE :series)";
+    $bind_types .= "sss";
+    $bind_params[':title'] = $like_condition;
+    $bind_params[':author'] = $like_condition;
+    $bind_params[':series'] = $like_condition;
 }
 
 
