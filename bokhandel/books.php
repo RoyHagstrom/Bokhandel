@@ -137,8 +137,8 @@ if ($category_id) {
 
 <div class="bg-white text-black">
     <div class="container p-8 mx-auto">
-        <div class="flex flex-wrap items-center justify-center">
-        <div class="mx-auto mb-2 p-4 flex flex-wrap items-center justify-center gap-4">
+        <div class="flex row items-center justify-center">
+        <div class="mx-auto mb-2 p-4 flex row items-center justify-center gap-4">
             <form method="get" class="flex flex-col sm:flex-row items-center max-w-xl">
                 <div class="sm:flex sm:flex-row items-center sm:space-x-4">
                     <div class="sm:w-1/2">
