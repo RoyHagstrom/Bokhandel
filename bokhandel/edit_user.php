@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = isset($_POST["username"]) ? htmlspecialchars($_POST["username"]) : $userInfo["Username"];
     $email = isset($_POST["email"]) ? htmlspecialchars($_POST["email"]) : $userInfo["Email"];
     $role = isset($_POST["role"]) ? htmlspecialchars($_POST["role"]) : $userInfo["Role"]; 
+    $bio = isset($_POST["bio"]) ? htmlspecialchars($_POST["bio"]) : $userInfo["Bio"]; 
 
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM User WHERE Username = ? AND UserID = ?");
@@ -39,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ? WHERE UserID = ?");
-    $stmt->bind_param("sssi", $username, $email, $role, $userid); 
+    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ? WHERE UserID = ?");
+    $stmt->bind_param("ssssi", $username, $email, $role, $bio, $userid); 
     if ($stmt->execute()) {
         $user->redirect("account.php?uid=" . urlencode($_GET["userid"]));
     } else {
