@@ -63,8 +63,10 @@ $new_books_result = $conn->query($new_books_sql);
                 </div>
 
 
-                <?php
-                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 6";
+
+
+<?php
+                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 3";
                     $other_books_result = $conn->query($other_books_sql);
 ?>
 
@@ -77,13 +79,13 @@ $new_books_result = $conn->query($new_books_sql);
                     while($other_book = $other_books_result->fetch_assoc()){
 
 
-                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '"class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
-                echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
-                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="w-30 md:w-full h-30 md:h-80 object-cover">';
-                echo '<div class="p-3 md:p-6 text-sm md:text-md">';
-                echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $other_book['Title'] . '</h2>';
-                echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $other_book['Author'] . '</p>';
-                echo '<p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($other_book["Description"])), 0, 100)) . '...</p>';
+                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '"class="block h-24 md:h-28 bg-gray-100 dark:bg-gray-700 rounded-sm shadow-sm overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-200">';
+                echo '<span class="absolute top-1 right-1 text-sm font-medium">' . $other_book['Price'] . '€</span>';
+                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="h-16 md:h-20 w-auto object-cover">';
+                echo '<div class="p-2 md:p-3 text-xs md:text-sm">';
+                echo '<h3 class="text-gray-800 dark:text-white">' . $other_book['Title'] . '</h3>';
+                echo '<p class="text-gray-600 dark:text-gray-400">Author: ' . $other_book['Author'] . '</p>';
+                echo '<p class="text-gray-600 dark:text-gray-400">' . htmlspecialchars(substr(strip_tags(html_entity_decode($other_book["Description"])), 0, 60)) . '...</p>';
                 echo '</div>';
                 echo '</a>';
 
