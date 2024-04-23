@@ -37,7 +37,6 @@ class USER
     public function searchBooks($searchTerm)
     {
         try {
-
             $searchTerm = trim($searchTerm);
             if (empty($searchTerm)) {
                 http_response_code(400);
@@ -46,13 +45,11 @@ class USER
             }
             $searchTerm = '%' . $this->conn->real_escape_string($searchTerm) . '%';
     
-
             $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? OR Description LIKE ? OR Genre LIKE ? ORDER BY BookID DESC LIMIT 4");
             $stmt->bind_param("ssss", $searchTerm, $searchTerm, $searchTerm, $searchTerm);
             $stmt->execute();
             $result = $stmt->get_result();
-            
-
+    
             $books = [];
             while ($row = $result->fetch_assoc()) {
 
@@ -61,7 +58,6 @@ class USER
                 }
             }
     
-
             http_response_code(200);
             header('Content-Type: application/json');
             echo json_encode($books);
@@ -70,6 +66,7 @@ class USER
             echo json_encode(array("error" => "Internal Server Error"));
         }
     }
+    
     
     
     
