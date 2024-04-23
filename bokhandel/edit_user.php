@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
         $newName = uniqid() . ".$imgExt";
         $target = "images/$newName"; 
-        if (!move_uploaded_file($tmp_name, "Images/$newName")) {
+        if (!move_uploaded_file($tmp_name, "images/$newName")) {
             echo "Error uploading image";
         } else {
             $image = $newName;
