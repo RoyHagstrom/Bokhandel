@@ -79,7 +79,6 @@ if ($series_result->num_rows > 0) {
         </div>
 
 
-        <?php if ($series_result->num_rows > 0): ?>
                 <?php $series_row = $series_result->fetch_assoc(); ?>
                 <div class="mb-8">
                     <span class="block font-semibold mb-4">Series:</span>
@@ -88,7 +87,6 @@ if ($series_result->num_rows > 0) {
                         <span class="text-lg"><?php echo $series_row['SeriesName'] ?? ''; ?></span>
                     </a>
                 </div>
-            <?php endif; ?>
 
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
