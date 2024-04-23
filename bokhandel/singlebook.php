@@ -69,7 +69,12 @@ $series_result = $series_stmt->get_result();
                 </div>
             <?php endif; ?>
         </div>
-
+            <?php if (isset($series_result)): ?>
+                <pre>
+                    <?php print_r($series_result); ?>
+                </pre>
+            <?php endif; ?>
+            
 
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
