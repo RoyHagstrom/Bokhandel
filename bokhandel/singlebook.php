@@ -83,9 +83,9 @@ if ($series_result->num_rows > 0) {
                 <?php $series_row = $series_result->fetch_assoc(); ?>
                 <div class="mb-8">
                     <span class="block font-semibold mb-4">Series:</span>
-                    <a href="series.php?series=<?php echo urlencode($series['SeriesName']); ?>">
-                        <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-48 sm:h-64 lg:h-80 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" />
-                        <span class="text-lg"><?php echo $series['SeriesName'] ?? ''; ?></span>
+                    <a href="series.php?series=<?php echo urlencode($series['SeriesName']); ?>" class="block aspect-w-10 aspect-h-15 overflow-hidden group rounded-lg">
+                        <img src="<?= $series['Image'] ?>" alt="<?= $series['SeriesName'] ?>" class="w-full h-full object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out" loading="lazy" />
+                        <span class="sr-only"><?php echo $series['SeriesName'] ?? ''; ?></span>
                     </a>
                 </div>
             <?php endif; ?>
