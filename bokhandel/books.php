@@ -135,7 +135,7 @@ if ($category_id) {
 <?php endif; ?>
 
 
-<div class="bg-white text-black">
+<div class="bg-white text-black flex flex-col">
     <div class="container p-8 mx-auto">
         <div class="mx-auto mb-2 p-4 flex flex-wrap items-center justify-center gap-4">
             <form method="get" class="flex flex-col sm:flex-row items-center max-w-xl">
