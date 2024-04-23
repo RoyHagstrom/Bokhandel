@@ -93,7 +93,7 @@ $new_books_result = $conn->query($new_books_sql);
 
                 echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '"class="block h-auto bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
                 echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
-                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="w-full md:w-full h-28 md:h-48 object-cover">';
+                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="w-full md:w-full h-36 md:h-48 object-cover">';
                 echo '</a>';
 
 
