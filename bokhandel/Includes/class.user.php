@@ -55,7 +55,10 @@ class USER
 
             $books = [];
             while ($row = $result->fetch_assoc()) {
-                $books[] = $row;
+
+                if (levenshtein(strtolower($searchTerm), strtolower($row['Title'])) <= 2 || levenshtein(strtolower($searchTerm), strtolower($row['Author'])) <= 2) {
+                    $books[] = $row;
+                }
             }
     
 
@@ -67,6 +70,7 @@ class USER
             echo json_encode(array("error" => "Internal Server Error"));
         }
     }
+    
     
     
 
