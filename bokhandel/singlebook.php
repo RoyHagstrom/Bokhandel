@@ -84,16 +84,22 @@ $new_books_result = $conn->query($new_books_sql);
 
         <?php if (isset($book['Author']) && $other_books_result->num_rows > 0){  ?>
                 <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
-                <?php 
-                    $author_query = urlencode($book['Author']);
-                    $author_search = "https://www.google.com/search?q=". $author_query . "&safe=active&tbm=isch";
-                ?>
-                <div class="mt-4">
-                    <h3 class="font-semibold mb-2 text-center text-black sm:text-xl text-lg">Search results for <?php echo $book['Author'] ?>:</h3>
-                    <iframe src="<?php echo $author_search ?>" class="w-full h-72 border-black border-2 rounded-lg"></iframe>
-                </div>
                     
+                <?php
+                    $search_url = 'https://www.google.com/search?q=' . urlencode($book['Author']) . '&tbm=isch';
+                    $image_url = '';
+                    
+                    $html = file_get_contents($search_url);
+                    if(preg_match('/og:image" content="(https:\/\/[^\"]+)"/', $html, $matches)) {
+                        $image_url = $matches[1];
+                    }
+                ?>
                 
+                <?php if ($image_url): ?>
+                <div class="max-h-48 overflow-hidden">
+                    <img src="<?= $image_url ?>" alt="<?= $book['Author'] ?> image" class="w-full h-auto object-cover">
+                </div>
+                <?php endif; ?>
                 <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Other books by <?php echo $book['Author']; ?>:</h2>
 
                     <div class="flex justify-center items-center grid gap-2 grid-cols-3 lg:grid-cols-6">
