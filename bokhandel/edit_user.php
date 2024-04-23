@@ -88,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <textarea id="bio" name="bio" class="border border-gray-400 p-2 w-full rounded-md" rows="5" maxlength="299"><?php echo htmlspecialchars($userInfo['Bio']); ?></textarea>
                 </div>
                 <div class="col-span-1">
-                    <label class="block mb-2 text-sm font-semibold" for="Image">Profile Image:</label>
-                    <input type="file" id="Image" name="Image" class="border border-gray-400 p-2 w-full rounded-md">
+                    <label class="block mb-2 text-sm font-semibold" for="image">Profile Image:</label>
+                    <input type="file" id="image" name="image" class="border border-gray-400 p-2 w-full rounded-md">
                     <?php 
                         if(!empty($userInfo['Image'])): 
                             echo '<img src="assets/uploads/'.$userInfo['Image'].'" alt="Profile Image" class="mt-4 max-h-64 mx-auto rounded-md">';
