@@ -34,6 +34,15 @@ if (isset($_GET['id'])) {
 
 $new_books_sql = "SELECT * FROM Book ORDER BY BookID DESC LIMIT 6";
 $new_books_result = $conn->query($new_books_sql);
+
+$user_bio_sql = "SELECT * FROM User WHERE Username = '{$book['Author']}'";
+$user_bio_result = $conn->query($user_bio_sql);
+$user_bio = $user_bio_result->fetch_assoc();
+
+
+$other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 6";
+$other_books_result = $conn->query($other_books_sql);
+
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
 <h1 class="text-3xl font-bold mt-8"><?php echo $book['Title']; ?></h1>
@@ -78,37 +87,12 @@ $new_books_result = $conn->query($new_books_sql);
 
 
 <?php
-                    $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 6";
-                    $other_books_result = $conn->query($other_books_sql);
+                    
 ?>
 
         <?php if (isset($book['Author']) && $other_books_result->num_rows > 0){  ?>
                 <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
                     
-                <?php
-
-$api_key = 'YOUR_API_KEY';
-$search_term = urlencode($book['Author']);
-
-$search_url = "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={$api_key}&text={$search_term}&format=json&nojsoncallback=1";
-$response = file_get_contents($search_url);
-$data = json_decode($response, true);
-
-$image_url = '';
-
-if (isset($data['photos']['photo'][0])) {
-    $photo = $data['photos']['photo'][0];
-    $image_url = "https://farm{$photo['farm']}.staticflickr.com/{$photo['server']}/{$photo['id']}_{$photo['secret']}.jpg";
-}
-?>
-
-<?php if ($image_url): ?>
-<div class="max-h-48 overflow-hidden">
-    <img src="<?= $image_url ?>" alt="<?= $book['Author'] ?> image" class="w-full h-auto object-cover">
-</div>
-<?php endif; ?>
-
-
                 <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Other books by <?php echo $book['Author']; ?>:</h2>
 
                     <div class="flex justify-center items-center grid gap-2 grid-cols-3 lg:grid-cols-6">
@@ -163,12 +147,12 @@ if (isset($data['photos']['photo'][0])) {
             <?php endif; ?>
         </div>
         <?php
-    $user_bio_sql = "SELECT Bio, Username FROM User WHERE Username = '{$book['Author']}'";
-    $user_bio_result = $conn->query($user_bio_sql);
-    $user_bio = $user_bio_result->fetch_assoc();
     ?>
     <?php if (!empty($user_bio["Bio"])): ?>
     <div class="p-8 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
+        <?php if (!empty($user_bio['Image'])): ?>
+            <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="w-full h-auto rounded-lg mt-4">
+        <?php endif; ?>
         <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
         <p><?php echo $user_bio["Bio"]; ?></p>
     </div>
