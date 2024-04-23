@@ -72,7 +72,7 @@ $new_books_result = $conn->query($new_books_sql);
 
         <?php if (isset($book['Author']) && $other_books_result->num_rows > 0){  ?>
                 <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
-                <h2 class="font-semibold mb-3 text-center text-black sm:text-3xl text-2xl">Other books by <?php echo $book['Author']; ?>:</h2>
+                <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Other books by <?php echo $book['Author']; ?>:</h2>
 
                     <div class="flex justify-center items-center grid gap-2 md:grid-cols-3 lg:grid-cols-6">
                         <?php 
