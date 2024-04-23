@@ -71,15 +71,15 @@ $new_books_result = $conn->query($new_books_sql);
 ?>
 
         <?php if (isset($book['Author']) && $other_books_result->num_rows > 0){  ?>
-                <div class="p-8 rounded-lg w-full sm:w-116 mt-8 container justify-center items-center">
-                <h2 class="font-semibold mb-6 text-center text-black sm:text-3xl text-2xl">Other books by <?php echo $book['Author']; ?>:</h2>
+                <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
+                <h2 class="font-semibold mb-3 text-center text-black sm:text-3xl text-2xl">Other books by <?php echo $book['Author']; ?>:</h2>
 
                     <div class="flex justify-center items-center grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
                         <?php 
                     while($other_book = $other_books_result->fetch_assoc()){
 
 
-                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '"class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
+                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '"class="block h-28 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
                 echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
                 echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="w-30 md:w-full h-30 md:h-80 object-cover">';
                 echo '<div class="p-3 md:p-6 text-sm md:text-md">';
