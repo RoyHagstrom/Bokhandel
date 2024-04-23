@@ -288,5 +288,4 @@ include 'db_connection.php';
 
 
             <body class="full bg-gray-800 dark:bg-gray-900">
-                <div style="width: 1920px;" class="max-w-full mx-auto flex justify-center overflow-auto bg-gray-800 dark:bg-gray-900">
-
+                <div style="width: 1920px; background: linear-gradient(to right, rgba(16, 24, 32, 1) 0%, rgba(16, 24, 32, 1) 50%, rgba(16, 24, 32, 0) 100%);" class="max-w-full mx-auto flex justify-center overflow-auto bg-gradient-to-r from-gray-700 to-transparent dark:bg-gradient-to-r dark:from-gray-800 dark:to-transparent">
