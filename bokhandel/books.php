@@ -10,12 +10,13 @@ $bind_types = '';
 
 if (!empty($search_term)) {
     $search_term = preg_replace('/[^A-Za-z0-9\s]/', '', $search_term); 
-    $search_term = trim(preg_replace('/\s+/', ' ', $search_term)); 
+    $search_term = trim(preg_replace('/[\s]+/', ' ', $search_term)); 
     $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR `Series` LIKE ?";
     $bind_types .= "sss";
     $bind_params[] = '%' . $search_term . '%';
-    $bind_params[] = '%' . $search_term . '%';
-    $bind_params[] = '%' . $search_term . '%';
+    $bind_params[] = '%' . str_replace(' ', '%', $search_term) . '%';
+    $bind_params[] = '%' . str_replace(' ', '%', $search_term) . '%';
+}
 }
 
 if (!empty($category_id)) {
