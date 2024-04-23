@@ -107,41 +107,6 @@ include 'db_connection.php';
     }
     </script>
 
-    
-
-    <style>
-        #placeholder {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background-color: black; 
-            z-index: 9999; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            font-size: 24px; 
-            font-weight: bold; 
-            opacity: 0.4; 
-            transition: opacity 0.3s ease-in-out; 
-        }
-    </style>
-
-    <div id="placeholder"></div>
-
-    <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                var placeholder = document.getElementById('placeholder');
-                placeholder.style.opacity = 0;
-                setTimeout(function() {
-                    placeholder.remove();
-                }, 500);
-            }, 1);
-        });
-    </script>
-
 
 
 
