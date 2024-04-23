@@ -69,7 +69,7 @@ if ($category_id) {
         $title = "Category Not Found";
     }
 } elseif(isset($_GET['search'])) {
-    $title = '"'.$search_term.'"';
+    $title = '"'.$decoded_search_term.'"';
 }
 
 ?>
