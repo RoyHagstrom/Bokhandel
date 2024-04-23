@@ -9,13 +9,12 @@ $bind_params = [];
 $bind_types = '';
 
 if (!empty($search_term)) {
-    $search_term = preg_replace('/[^A-Za-z0-9\s]/', '', $search_term); 
-    $search_term = trim(preg_replace('/\s+/', ' ', $search_term)); 
     $like_condition = '%' . $search_term . '%';
     $conditions[] = "(`Title` LIKE ? OR `Author` LIKE ? OR `Series` LIKE ?)";
     $bind_types .= "sss";
     $bind_params = array_fill(0, 3, $like_condition);
 }
+
 
 
 if (!empty($category_id)) {
