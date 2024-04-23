@@ -43,6 +43,10 @@ $user_bio = $user_bio_result->fetch_assoc();
 $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 12";
 $other_books_result = $conn->query($other_books_sql);
 
+
+$series_sql = "SELECT * FROM Series";
+$series_result = $conn->query($series_sql);
+
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
 <h1 class="text-3xl font-bold mt-8"><?php echo $book['Title']; ?></h1>
@@ -65,9 +69,9 @@ $other_books_result = $conn->query($other_books_sql);
             <?php if (isset($book['Series'])): ?>
                 <div class="mb-8">
                     <span class="block font-semibold mb-4">Series:</span>
-                    <a href="series.php?series=<?php echo urlencode($book['SeriesName']); ?>">
-                        <img src="<?php echo $book['SeriesImage'] ?>" alt="<?php echo $book['SeriesName']; ?>" class="rounded-lg w-full mb-2">
-                        <span class="text-lg"><?php echo $book['SeriesName']; ?></span>
+                    <a href="series.php?series=<?php echo urlencode($series_result['SeriesName']); ?>">
+                        <img src="<?php echo $series_result['Image'] ?>" alt="<?php echo $series_result['SeriesName']; ?>" class="rounded-lg w-full mb-2">
+                        <span class="text-lg"><?php echo $series_result['SeriesName']; ?></span>
                     </a>
                 </div>
             <?php endif; ?>
