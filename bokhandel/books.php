@@ -17,7 +17,6 @@ if (!empty($search_term)) {
     $bind_params[] = '%' . str_replace(' ', '%', $search_term) . '%';
     $bind_params[] = '%' . str_replace(' ', '%', $search_term) . '%';
 }
-}
 
 if (!empty($category_id)) {
     $conditions[] = "`Category` = '$category_id'";
