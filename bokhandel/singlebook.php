@@ -47,8 +47,11 @@ $other_books_result = $conn->query($other_books_sql);
 $series_sql = "SELECT * FROM Series WHERE SeriesName = ? LIMIT 1";
 $series_stmt = $conn->prepare($series_sql);
 $series_stmt->bind_param("s", $book['Series']);
-$series_stmt->execute();
+if(!$series_stmt->execute()){
+    die("Failed to execute SQL statement: " . $series_stmt->error);
+}
 $series_result = $series_stmt->get_result();
+$series = $series_result->fetch_assoc();
 $series = $series_result->fetch_assoc();
 
 ?>
