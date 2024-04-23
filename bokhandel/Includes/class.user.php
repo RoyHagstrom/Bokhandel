@@ -47,8 +47,8 @@ class USER
             $searchTerm = '%' . $this->conn->real_escape_string($searchTerm) . '%';
     
 
-            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? ORDER BY BookID DESC LIMIT 4");
-            $stmt->bind_param("ss", $searchTerm, $searchTerm);
+            $stmt = $this->conn->prepare("SELECT * FROM Book WHERE Title LIKE ? OR Author LIKE ? OR Description LIKE ? OR Genre LIKE ? ORDER BY BookID DESC LIMIT 4");
+            $stmt->bind_param("ssss", $searchTerm, $searchTerm, $searchTerm, $searchTerm);
             $stmt->execute();
             $result = $stmt->get_result();
             
@@ -67,6 +67,7 @@ class USER
             echo json_encode(array("error" => "Internal Server Error"));
         }
     }
+    
     
 
     public function register($username, $email, $password, $role = "Regular")
