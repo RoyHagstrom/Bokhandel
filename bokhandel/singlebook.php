@@ -69,17 +69,18 @@ $series_result = $series_stmt->get_result();
                 </div>
             <?php endif; ?>
         </div>
-            <?php if (isset($series_result)): ?>
-                <pre>
-                    <?php 
-                        while($series_row = $series_result->fetch_assoc()){
-                            echo $series_row['SeriesName'] . "<br/>";
-                        }
-                    ?>
-                </pre>
-                </pre>
+        
+            <?php if ($series_result && $series_result->num_rows > 0): 
+                $series_row = $series_result->fetch_assoc(); 
+                ?>
+                <div class="mb-8">
+                    <span class="block font-semibold mb-4">Series:</span>
+                    <a href="series.php?series=<?php echo urlencode($series_row['SeriesName']); ?>">
+                        <img src="<?php echo $series_row['Image'] ?>" alt="<?php echo $series_row['SeriesName']; ?>" class="rounded-lg w-full mb-2">
+                        <span class="text-lg"><?php echo $series_row['SeriesName']; ?></span>
+                    </a>
+                </div>
             <?php endif; ?>
-            
 
     </div>
     <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
