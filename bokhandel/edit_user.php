@@ -45,20 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
         $newName = uniqid() . ".$imgExt";
         $target = "images/$newName";
-        $imageDir = $target;
         if (!move_uploaded_file($tmp_name, $target)) {
             echo "Error uploading image";
         } else {
             $image = $newName;
+            $imageDir = "images/$newName";
         }
     } else {
         $image = $userInfo["Image"];
         $imageDir = "images/" . $userInfo["Image"];
     }
     $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = ? WHERE UserID = ?");
-    $stmt->bind_param("ssssss", $username, $email, $role, $bio, $image, $imageDir);
+    $stmt->bind_param("ssssss", $username, $email, $role, $bio, $imageDir, $userid);
     if (!$stmt->execute()) {
-        echo "Error updating user information: " . $stmt->error;
+        throw new mysqli_sql_exception("Error updating user information: " . $stmt->error);
     }
 
 
