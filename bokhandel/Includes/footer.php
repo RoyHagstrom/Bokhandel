@@ -2,6 +2,8 @@
 
 
 ?>
+</div>
+
 <footer class="py-4 bg-gray-800 dark:bg-gray-900">
         <div class="container mx-auto flex justify-center items-center gap-8">
             <div>
@@ -27,6 +29,5 @@
 
 
 
-</div>
 </body>
 </html>
