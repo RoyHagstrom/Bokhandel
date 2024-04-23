@@ -9,13 +9,21 @@ $bind_params = [];
 $bind_types = '';
 
 if (!empty($search_term)) {
-    $search_term = preg_replace('/[^A-Za-z0-9\s]/', '', $search_term); 
-    $search_term = trim(preg_replace('/[\s]+/', ' ', $search_term)); 
+    $search_term = preg_replace('/[^A-Za-z0-9\s]/u', '', $search_term); 
+    $search_term = trim($search_term); 
+
+    $words = array_map('preg_quote', explode(' ', $search_term));
+
+    $pattern = '%' . implode('%', $words) . '%';
+
+    $placeholders = str_repeat('?,', count($words));
+    $bind_types = str_repeat('s', count($words));
+    $bind_params = array_merge($bind_params, array_fill(0, count($words), $pattern));
+
     $conditions[] = "`Title` LIKE ? OR `Author` LIKE ? OR `Series` LIKE ?";
-    $bind_types .= "sss";
-    $bind_params[] = '%' . $search_term . '%';
-    $bind_params[] = '%' . str_replace(' ', '%', $search_term) . '%';
-    $bind_params[] = '%' . str_replace(' ', '%', $search_term) . '%';
+    $bind_params[] = $pattern;
+    $bind_params[] = $pattern;
+    $bind_params[] = $pattern;
 }
 
 if (!empty($category_id)) {
