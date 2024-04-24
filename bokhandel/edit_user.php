@@ -47,19 +47,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newName = uniqid() . ".$imgExt";
             $target = "images/$newName";
             if (!move_uploaded_file($tmp_name, $target)) {
-                echo "Error uploading image";
+                throw new RuntimeException("Error uploading image");
             } else {
                 $image = $newName;
                 $imageDir = "images/$newName";
             }
         } else {
-            echo "Error uploading image: " . $_FILES["image"]["error"];
+            throw new RuntimeException("Error uploading image: " . $_FILES["image"]["error"]);
         }
     } else {
         $imageDir = $userInfo["Image"];
     }
-    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = ? WHERE UserID = ?");
-    $stmt->bind_param("ssssss", $username, $email, $role, $bio, $imageDir, $userid);
+    $stmt = $conn->prepare("UPDATE User SET Username = ?, Email = ?, Role = ?, Bio = ?, Image = IFNULL(?, Image) WHERE UserID = ?");
+    $stmt->bind_param("sssssi", $username, $email, $role, $bio, $imageDir, $userid);
     if (!$stmt->execute()) {
         throw new mysqli_sql_exception("Error updating user information: " . $stmt->error);
     }
