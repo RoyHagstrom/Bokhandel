@@ -57,7 +57,7 @@ $other_books_result = $conn->query($other_books_sql);
             <?php if ($book['Image']): ?>
                 <div class="mb-8 relative">
                     <span class="absolute top-0 left-0 m-2 px-3 py-1 bg-gray-800 text-white rounded-lg"><?= $book['StatusName'] ?></span>
-                    <img id="bookImage" src="<?= $book['Image'] ?>" alt="<?= $book['Title'] ?>" class="w-full h-auto rounded-lg">
+                    <img id="bookImage" src="<?= $book['Image'] ?>" alt="<?= $book['Title'] ?>" class="w-full h-auto max-h-3xl rounded-lg">
                     <span class="absolute top-0 right-0 m-2 px-3 py-1 bg-green-500 text-white rounded-lg font-bold"><?= $book['Price'] ?>€</span>
                     <?php if (isset($book['AgeRecommendation'])){  ?>
                     <span class="absolute bottom-0 right-0 m-2 px-3 py-1 bg-red-900 text-white rounded-lg font-black"><?= $book['AgeRecommendation'] ?></span>
