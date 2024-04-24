@@ -301,13 +301,13 @@ include 'db_connection.php';
             <li>
                 <a href="create_book.php" class="text-white">
                     <img src="https://www.svgrepo.com/show/488479/writing.svg" alt="Register" class="w-6 h-6 mr-2 inline-block">
-                    Add user
+                    Create a book
                 </a>
             </li>
             <li>
                 <a href="my_books.php?uid=<?= $_SESSION['uid'] ?>" class="text-white">
                     <img src="https://www.svgrepo.com/show/473036/books.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block">
-                    Manage users
+                    View my books
                 </a>
             </li>
         </ul>
