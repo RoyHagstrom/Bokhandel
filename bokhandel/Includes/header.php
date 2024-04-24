@@ -290,6 +290,54 @@ include 'db_connection.php';
 
 
 
+
+            <?php if(isset($_SESSION['urole']) && $_SESSION['urole'] == "Regular"){ ?>
+
+<header class="xl:block hidden bg-gray-700 dark:bg-gray-700 py-4 text-sm xl:text-base sticky top-0 z-10">
+
+
+    <nav class="text-sm md:flex justify-center items-center">
+        <ul class="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
+            <li>
+                <a href="register.php" class="text-white">
+                    <img src="https://www.svgrepo.com/show/532379/user-plus.svg" alt="Register" class="w-6 h-6 mr-2 inline-block">
+                    Add user
+                </a>
+            </li>
+            <li>
+                <a href="manage_users.php" class="text-white">
+                    <img src="https://www.svgrepo.com/show/532376/user-pen.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block">
+                    Manage users
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+    <header class="block xl:hidden bg-gray-700 dark:bg-gray-700 py-4 text-sm xl:text-base sticky top-0 z-10">
+
+    <nav class="text-sm md:flex justify-center items-center">
+    <ul class="flex justify-center space-x-4 md:space-x-8 lg:space-x-10">
+            <li>
+                <a href="register.php" class="text-white">
+                    <img src="https://www.svgrepo.com/show/532379/user-plus.svg" alt="Register" class="w-6 h-6 mr-2 inline-block fill-white">
+                </a>
+            </li>
+            <li>
+                <a href="manage_users.php" class="text-white">
+                    <img src="https://www.svgrepo.com/show/532376/user-pen.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block fill-white">
+                </a>
+            </li>
+    </nav>
+
+
+</header>
+
+
+<?php } ?>
+
+
+
             <body class="full bg-gray-800 dark:bg-gray-900">
                 <div style="width: 1920px;" class="max-w-full mx-auto justify-center overflow-hidden bg-gray-800 dark:bg-gray-900">
 
