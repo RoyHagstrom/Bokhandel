@@ -154,7 +154,7 @@ $other_books_result = $conn->query($other_books_sql);
         <?php
     ?>
     <?php if (!empty($user_bio["Bio"])): ?>
-    <div class="p-8 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
+    <div class="p-4 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
     <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
 
         <?php if (!empty($user_bio['Image'])): ?>
