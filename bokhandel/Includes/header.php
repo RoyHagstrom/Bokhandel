@@ -346,5 +346,6 @@ include 'db_connection.php';
 
 
 
-            <body class="dark:bg-gray-800 bg-gray-100">
-                <div style="width: 1920px;" class="max-w-full mx-auto justify-center overflow-hidden bg-gray-100 dark:bg-gray-800">
+            <body class="full bg-gray-800 dark:bg-gray-900">
+                <div style="width: 1920px;" class="max-w-full mx-auto justify-center overflow-hidden bg-gray-800 dark:bg-gray-900">
+
