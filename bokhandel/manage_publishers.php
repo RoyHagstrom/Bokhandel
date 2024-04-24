@@ -146,6 +146,18 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             </div>
         </div>
     </div>
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold mb-4">Publishers and their Books</h2>
+        <?php foreach ($publishers as $publisher) : ?>
+            <h3 class="text-xl font-semibold mb-2"><?php echo $publisher['Name']; ?></h3>
+            <ul>
+                <?php foreach (array_filter($books, function($b) use ($publisher) { return $b['Publisher'] == $publisher['Name']; }) as $book) : ?>
+                    <li><a href="edit_book.php?book_id=<?php echo $book['BookID']; ?>"><?php echo $book['Title']; ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endforeach; ?>
+    </div>
+
 </div>
 
 
