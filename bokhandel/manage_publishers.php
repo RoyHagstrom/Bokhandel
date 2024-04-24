@@ -150,7 +150,7 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <div class="bg-white p-8 rounded-lg shadow-md">
 
         <h2 class="text-2xl font-semibold mb-4">Publishers and their Books</h2>
-        <table class="table-auto border-t border-b">
+        <table class="table-auto">
             <thead>
                 <tr>
                     <th>Publisher</th>
@@ -160,10 +160,8 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             <tbody>
                 <?php foreach ($publishers as $publisher) : ?>
                     <tr>
-                        <td colspan="2" class="border-t border-b"><?php echo $publisher['Name']; ?></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
+                        <td><?php echo $publisher['Name']; ?></td>
+                        <td>
                             <table class="table-auto">
                                 <tbody>
                                     <?php foreach (array_filter($books, function($b) use ($publisher) { return $b['Publisher'] == $publisher['Name']; }) as $book) : ?>
