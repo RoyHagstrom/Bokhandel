@@ -146,17 +146,36 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             </div>
         </div>
     </div>
-    <div class="mt-8">
+    <div class="w-full">
         <h2 class="text-2xl font-semibold mb-4">Publishers and their Books</h2>
-        <?php foreach ($publishers as $publisher) : ?>
-            <h3 class="text-xl font-semibold mb-2"><?php echo $publisher['Name']; ?></h3>
-            <ul>
-                <?php foreach (array_filter($books, function($b) use ($publisher) { return $b['Publisher'] == $publisher['Name']; }) as $book) : ?>
-                    <li><a href="edit_book.php?book_id=<?php echo $book['BookID']; ?>"><?php echo $book['Title']; ?></a></li>
+        <table class="table-auto">
+            <thead>
+                <tr>
+                    <th>Publisher</th>
+                    <th>Books</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($publishers as $publisher) : ?>
+                    <tr>
+                        <td><?php echo $publisher['Name']; ?></td>
+                        <td>
+                            <table class="table-auto">
+                                <tbody>
+                                    <?php foreach (array_filter($books, function($b) use ($publisher) { return $b['Publisher'] == $publisher['Name']; }) as $book) : ?>
+                                        <tr>
+                                            <td><a href="edit_book.php?book_id=<?php echo $book['BookID']; ?>"><?php echo $book['Title']; ?></a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
-            </ul>
-        <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
+
 
 </div>
 
