@@ -1,6 +1,8 @@
 <?php
 
-header("Cache-Control: public, max-age=31536000, immutable");
+if (preg_match('/\.(jpg|jpeg|png|gif)$/i', $_SERVER["REQUEST_URI"])) {
+    header("Cache-Control: public, max-age=31536000, immutable");
+}
 
 ob_start(); 
 
