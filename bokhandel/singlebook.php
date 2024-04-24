@@ -40,7 +40,7 @@ $user_bio_result = $conn->query($user_bio_sql);
 $user_bio = $user_bio_result->fetch_assoc();
 
 
-$other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY BookID DESC LIMIT 6";
+$other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND BookID <> {$book['BookID']} ORDER BY rand() LIMIT 6";
 $other_books_result = $conn->query($other_books_sql);
 
 
