@@ -55,6 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
     }
 }
 
+$stmt = $conn->prepare("SELECT * FROM Book");
+$stmt->execute();
+$books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
 
 ?>
 
@@ -102,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number of Books</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
@@ -115,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['PublisherID']; ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Name']; ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo count(array_filter($books, function($b) use ($publisher) { return $b['PublisherID'] == $publisher['PublisherID']; })); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Address']; ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Country']; ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Phone']; ?></td>
