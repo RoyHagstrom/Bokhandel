@@ -21,6 +21,13 @@ include 'db_connection.php';
 
 <head>
 
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" integrity="sha256-bzr+qe38ORs1tU0Ry/5V7ZqWnt31cc/oBq7W7oJw4Wo= sha384-bzr+qe38ORs1tU0Ry/5V7ZqWnt31cc/oBq7W7oJw4Wo= sha512-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI=" crossorigin="anonymous" as="style" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" integrity="sha256-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha384-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha512-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI=" crossorigin="anonymous" as="style" />
+
+
+
 <meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate">
 
 
@@ -61,9 +68,7 @@ include 'db_connection.php';
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://www.googleapis.com">
     <link rel="preconnect" href="https://www.google.com">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style" crossorigin="anonymous" integrity="sha256-X+Xsy71qW+1KW4bC/BzGW0S6Fk/4NvA+l4X6cA0v6U=" onload="this.setAttribute('crossorigin', 'anonymous');this.setAttribute('integrity', 'sha256-X+Xsy71qW+1KW4bC/BzGW0S6Fk/4NvA+l4X6cA0v6U=');this.setAttribute('cache-control', 'max-age=31536000, immutable');this.setAttribute('cache-control', 'max-age=31536000, immutable');this.setAttribute('crossorigin', 'anonymous');">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" as="style" crossorigin="anonymous" integrity="sha256-4c7yQWXx7t3C0t/Nj/o32/FZQMjG2YrOcGQQNx/2jY=" onload="this.setAttribute('crossorigin', 'anonymous');this.setAttribute('integrity', 'sha256-4c7yQWXx7t3C0t/Nj/o32/FZQMjG2YrOcGQQNx/2jY=');this.setAttribute('cache-control', 'max-age=31536000, immutable');this.setAttribute('crossorigin', 'anonymous');">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" as="style" crossorigin="anonymous" integrity="sha256-4c7yQWXx7t3C0t/Nj/o32/FZQMjG2YrOcGQQNx/2jY=">
+ 
 
 
     <meta charset="UTF-8">
