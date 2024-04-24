@@ -150,23 +150,23 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <div class="bg-white p-8 rounded-lg shadow-md">
 
         <h2 class="text-2xl font-semibold mb-4">Publishers and their Books</h2>
-        <table class="table-auto">
-            <thead>
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
                 <tr>
-                    <th>Publisher</th>
-                    <th>Books</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Publisher</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Books</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-gray-200">
                 <?php foreach ($publishers as $publisher) : ?>
                     <tr>
-                        <td><?php echo $publisher['Name']; ?></td>
-                        <td>
-                            <table class="table-auto">
-                                <tbody>
+                        <td class="px-6 py-4 whitespace-nowrap"><?php echo $publisher['Name']; ?></td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <tbody class="divide-y divide-gray-200">
                                     <?php foreach (array_filter($books, function($b) use ($publisher) { return $b['Publisher'] == $publisher['Name']; }) as $book) : ?>
                                         <tr>
-                                            <td><a href="edit_book.php?book_id=<?php echo $book['BookID']; ?>"><?php echo $book['Title']; ?></a></td>
+                                            <td class="px-6 py-4 whitespace-nowrap"><a href="edit_book.php?book_id=<?php echo $book['BookID']; ?>"><?php echo $book['Title']; ?></a></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -174,6 +174,11 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                         </td>
                     </tr>
                 <?php endforeach; ?>
+                <?php if (empty($publishers)) : ?>
+                    <tr>
+                        <td colspan="2" class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-500">No publishers found.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
