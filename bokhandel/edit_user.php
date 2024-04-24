@@ -53,7 +53,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $imageDir = "images/$newName";
             }
         } else {
-            throw new RuntimeException("Error uploading image: " . $_FILES["image"]["error"] . " (" . upload_error_message($_FILES["image"]["error"]) . ")");
+            $errorMessages = [
+                UPLOAD_ERR_INI_SIZE => "The uploaded file exceeds the upload_max_filesize directive in php.ini",
+                UPLOAD_ERR_FORM_SIZE => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",
+                UPLOAD_ERR_PARTIAL => "The uploaded file was only partially uploaded",
+                UPLOAD_ERR_NO_FILE => "No file was uploaded",
+                UPLOAD_ERR_NO_TMP_DIR => "Missing a temporary folder",
+                UPLOAD_ERR_CANT_WRITE => "Failed to write file to disk",
+                UPLOAD_ERR_EXTENSION => "File upload stopped by extension"
+            ];
+            $errorMessage = $errorMessages[$_FILES["image"]["error"]] ?? "Unknown upload error";
+            throw new RuntimeException("Error uploading image: " . $errorMessage);
         }
     } else {
         $imageDir = $userInfo["Image"];
@@ -62,19 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssssi", $username, $email, $role, $bio, $imageDir, $userid);
     if (!$stmt->execute()) {
         throw new mysqli_sql_exception("Error updating user information: " . $stmt->error);
-    }
-
-    function upload_error_message($code) {
-        $errors = [
-            UPLOAD_ERR_INI_SIZE => "The uploaded file exceeds the upload_max_filesize directive in php.ini",
-            UPLOAD_ERR_FORM_SIZE => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",
-            UPLOAD_ERR_PARTIAL => "The uploaded file was only partially uploaded",
-            UPLOAD_ERR_NO_FILE => "No file was uploaded",
-            UPLOAD_ERR_NO_TMP_DIR => "Missing a temporary folder",
-            UPLOAD_ERR_CANT_WRITE => "Failed to write file to disk",
-            UPLOAD_ERR_EXTENSION => "File upload stopped by extension"
-        ];
-        return isset($errors[$code]) ? $errors[$code] : "Unknown upload error";
     }
 
 
