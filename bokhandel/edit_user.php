@@ -39,17 +39,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result()->fetch_row();
 
-    if (isset($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
-        $tmp_name = $_FILES["image"]["tmp_name"];
-        $name = basename($_FILES["image"]["name"]);
-        $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-        $newName = $_GET["userid"] . uniqid() . ".$imgExt";
-        $target = "images/$newName";
-        if (!move_uploaded_file($tmp_name, $target)) {
-            echo "Error uploading image";
+    if (isset($_FILES["image"]) && $_FILES["image"]["error"] !== UPLOAD_ERR_NO_FILE) {
+        if ($_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+            $tmp_name = $_FILES["image"]["tmp_name"];
+            $name = basename($_FILES["image"]["name"]);
+            $imgExt = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+            $newName = uniqid() . ".$imgExt";
+            $target = "images/$newName";
+            if (!move_uploaded_file($tmp_name, $target)) {
+                echo "Error uploading image";
+            } else {
+                $image = $newName;
+                $imageDir = "images/$newName";
+            }
         } else {
-            $image = $newName;
-            $imageDir = "images/$newName";
+            echo "Error uploading image: " . $_FILES["image"]["error"];
         }
     } else {
         $imageDir = $userInfo["Image"];
