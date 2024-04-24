@@ -149,7 +149,6 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <div class="w-full">
     <div class="bg-white p-8 rounded-lg shadow-md">
 
-        <h2 class="text-2xl font-semibold mb-4">Publishers and their Books</h2>
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
