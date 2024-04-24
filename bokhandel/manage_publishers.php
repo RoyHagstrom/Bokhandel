@@ -120,7 +120,7 @@ $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['PublisherID']; ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Name']; ?></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo count(array_filter($books, function($b) use ($publisher) { return $b['PublisherID'] == $publisher['PublisherID']; })); ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo count(array_filter($books, function($b) use ($publisher) { return $b['Publisher'] == $publisher['Name']; })); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Address']; ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Country']; ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $publisher['Phone']; ?></td>
