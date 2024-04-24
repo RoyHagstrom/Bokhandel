@@ -299,14 +299,14 @@ include 'db_connection.php';
     <nav class="text-sm md:flex justify-center items-center">
         <ul class="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
             <li>
-                <a href="register.php" class="text-white">
-                    <img src="https://www.svgrepo.com/show/532379/user-plus.svg" alt="Register" class="w-6 h-6 mr-2 inline-block">
+                <a href="create_book.php" class="text-white">
+                    <img src="https://www.svgrepo.com/show/488479/writing.svg" alt="Register" class="w-6 h-6 mr-2 inline-block">
                     Add user
                 </a>
             </li>
             <li>
-                <a href="manage_users.php" class="text-white">
-                    <img src="https://www.svgrepo.com/show/532376/user-pen.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block">
+                <a href="my_books.php?uid=<?= $_SESSION['uid'] ?>" class="text-white">
+                    <img src="https://www.svgrepo.com/show/473036/books.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block">
                     Manage users
                 </a>
             </li>
@@ -319,13 +319,13 @@ include 'db_connection.php';
     <nav class="text-sm md:flex justify-center items-center">
     <ul class="flex justify-center space-x-4 md:space-x-8 lg:space-x-10">
             <li>
-                <a href="register.php" class="text-white">
-                    <img src="https://www.svgrepo.com/show/532379/user-plus.svg" alt="Register" class="w-6 h-6 mr-2 inline-block fill-white">
+                <a href="create_book.php" class="text-white">
+                    <img src="https://www.svgrepo.com/show/488479/writing.svg" alt="Register" class="w-6 h-6 mr-2 inline-block fill-white">
                 </a>
             </li>
             <li>
-                <a href="manage_users.php" class="text-white">
-                    <img src="https://www.svgrepo.com/show/532376/user-pen.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block fill-white">
+                <a href="my_books.php?uid=<?= $_SESSION['uid'] ?>" class="text-white">
+                    <img src="https://www.svgrepo.com/show/473036/books.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block fill-white">
                 </a>
             </li>
     </nav>
