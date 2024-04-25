@@ -29,14 +29,14 @@ $user_bio = $user_bio_result->fetch_assoc();
     <h2 class="text-3xl font-bold mb-4"><?php echo $author; ?>'s books</h2>
 
     <?php if (!empty($user_bio["Bio"])): ?>
-    <div class="p-4 rounded-lg w-full m-4 bg-gray-100 h-auto">
+    <div class="p-4 rounded-lg w-full m-4 bg-gray-100">
         <a href="my_books.php?uid=<?php echo $user_bio['Username']; ?>">
             <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
 
             <?php if (!empty($user_bio['Image'])): ?>
                 <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="float-left w-auto h-40 rounded-lg mr-2 mb-2">
             <?php endif; ?>
-            <p class="h-auto"><?php echo $user_bio["Bio"]; ?></p>
+            <p class="h-<?php if (!empty($user_bio['Image'])) { echo "40"; } else { echo "auto"; } ?>"><?php echo $user_bio["Bio"]; ?></p>
         </a>
     </div>
     <?php endif; ?>
