@@ -25,7 +25,7 @@ $user_bio = $user_bio_result->fetch_assoc();
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
 
-<div class="container mx-auto sm:p-8 w-full md:max-w-6xl">
+<div class="container mx-auto sm:p-8 w-full md:max-w-6xl justify-center items-center">
     <h2 class="text-3xl font-bold mb-4"><?php echo $author; ?>'s books</h2>
 
     <?php if (!empty($user_bio["Bio"])): ?>
