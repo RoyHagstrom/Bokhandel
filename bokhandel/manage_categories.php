@@ -154,11 +154,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </form>
             </div>
+            </div>
         <?php endforeach; endif; ?>
     </div>
-</div>
-</div>
-</div>
 <?php 
 
 
