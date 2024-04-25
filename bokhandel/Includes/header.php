@@ -133,6 +133,11 @@ include 'db_connection.php';
         <p class="text-6xl font-bold">Loading...</p>
     </div>
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.display="block";
+    });
+    </script>
 
 
 
