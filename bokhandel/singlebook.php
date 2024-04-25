@@ -155,7 +155,7 @@ $other_books_result = $conn->query($other_books_sql);
     ?>
     <?php if (!empty($user_bio["Bio"])): ?>
     <div class="p-4 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
-        <a href="userprofile.php?id=<?php echo $user_bio['UserID']; ?>">
+        <a href="my_books.php?uid=<?php echo $user_bio['UserID']; ?>">
             <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
 
             <?php if (!empty($user_bio['Image'])): ?>
