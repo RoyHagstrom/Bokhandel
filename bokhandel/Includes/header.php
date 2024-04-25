@@ -142,14 +142,21 @@ include 'db_connection.php';
 
             setTimeout(function() {
 
-                document.getElementById("testScreen").style.display = "block";
+                var testScreen = document.getElementById("testScreen");
+
+                testScreen.style.opacity = 1;
+                testScreen.style.transition = "opacity 1s ease-in-out";
 
                 setTimeout(function() {
 
-                    document.getElementById("testScreen").style.display = "none";
+                    testScreen.style.opacity = 0;
 
-                    localStorage.setItem("testScreenDisplayed", "true");
-                }, 3000);
+                    setTimeout(function() {
+                        testScreen.style.display = "none";
+
+                        localStorage.setItem("testScreenDisplayed", "true");
+                    }, 1000);
+                }, 1000);
             }, 0);
         }
     });
