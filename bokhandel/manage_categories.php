@@ -18,7 +18,7 @@ $category = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['edit_category'])) {
         $categoryId = $_POST['edit_category'];
-        $stmt = $conn->prepare("SELECT * FROM categories WHERE id = ? sort by name ASC");
+        $stmt = $conn->prepare("SELECT * FROM categories WHERE id = ? ORDER BY name ASC");
         $stmt->bind_param("i", $categoryId);
         $stmt->execute();
         $category = $stmt->get_result()->fetch_assoc();
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $imagePath = $targetPath;
             }
         }
-        ob_start();
+
         $categoryName = $_POST['category_name'];
         $featured = $_POST['featured'];
         if (isset($_POST['edit_category'])) {
@@ -60,10 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sis", $categoryName, $featured, $imagePath);
         }
         if ($stmt->execute()) {
-            if (ob_get_clean() === false) {
-                header('Location: manage_categories.php');
-                exit();
-            }
+            header('Location: manage_categories.php');
+            exit();
         } else {
             echo "Error adding/editing category: " . $stmt->error;
         }
