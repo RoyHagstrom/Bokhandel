@@ -17,7 +17,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 
-$user_bio_sql = "SELECT * FROM User WHERE Username = '{$user_bio['Username']}'";
+$user_bio_sql = "SELECT * FROM User WHERE Username = '{$author}'";
 $user_bio_result = $conn->query($user_bio_sql);
 $user_bio = $user_bio_result->fetch_assoc();
 
