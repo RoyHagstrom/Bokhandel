@@ -46,7 +46,7 @@ $user_bio = $user_bio_result->fetch_assoc();
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <a href="singlebook.php?id=<?php echo $row['BookID']; ?>" class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
                 <div class="relative h-auto">
-                    <img src="<?php echo $row['Image']; ?>" alt="<?php echo $row['Title']; ?>" class="object-cover w-full h-auto max-h-80">
+                    <img src="<?php echo $row['Image']; ?>" alt="<?php echo $row['Title']; ?>" class="object-cover w-full h-auto max-h-96">
                     <div class="absolute top-0 right-0 p-2">
                         <span class="bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg"><?php echo $row['Price']; ?>€</span>
                     </div>
