@@ -161,7 +161,9 @@ $other_books_result = $conn->query($other_books_sql);
             <?php if (!empty($user_bio['Image'])): ?>
                 <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="float-left w-auto h-40 rounded-lg mr-2 mb-2">
             <?php endif; ?>
-            <p class="leading-5"><?php echo $user_bio["Bio"]; ?></p>
+            <p class="leading-5" style="max-width: 30ch; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+              <?php echo substr($user_bio["Bio"], 0, 200); ?>
+            </p>
         </a>
     </div>
     <?php endif; ?>
