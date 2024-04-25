@@ -135,6 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div>
                         <label for="image" class="block text-sm font-semibold mb-2">Upload Image:</label>
                         <input type="file" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <div class="flex flex-wrap justify-center items-center">
+
                         <?php
                         echo '<div class="m-2 md:m-4 relative rounded-lg">';
                         echo '<a href="books.php?id=' . htmlspecialchars($category['id'], ENT_QUOTES) . '">'; 
@@ -143,6 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo '</a>';
                         echo '</div>';
                         ?>
+                        </div>
 
                     <div class="flex items-center justify-end space-x-2">
                         <button type="submit" name="delete_category" value="<?php echo $category['id']; ?>" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">Delete Category</button>
