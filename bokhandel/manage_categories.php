@@ -135,7 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div>
                         <label for="image" class="block text-sm font-semibold mb-2">Upload Image:</label>
                         <input type="file" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        <div class="flex flex-wrap justify-center items-center">
+                        
+                        <div class="flex flex-wrap">
 
                         <?php
                         echo '<div class="m-2 md:m-4 relative rounded-lg">';
