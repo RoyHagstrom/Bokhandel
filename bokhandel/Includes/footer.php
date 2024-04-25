@@ -31,16 +31,6 @@
 
 </body>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-
-        document.getElementById("testScreen").style.display = "none";
-        
-        document.body.style.display = "block";
-    });
-    </script>
-
-    
 </html>
 
 

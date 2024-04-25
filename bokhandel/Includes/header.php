@@ -133,6 +133,26 @@ include 'db_connection.php';
         <p class="text-6xl font-bold">test</p>
     </div>
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        var testScreenDisplayed = localStorage.getItem("testScreenDisplayed");
+        
+        if (!testScreenDisplayed) {
+
+            document.getElementById("testScreen").style.display = "block";
+            setTimeout(function() {
+
+                document.getElementById("testScreen").style.display = "none";
+
+                localStorage.setItem("testScreenDisplayed", "true");
+            }, 3000);
+        } else {
+
+            document.body.style.display = "block";
+        }
+    });
+    </script>
 
 
 
