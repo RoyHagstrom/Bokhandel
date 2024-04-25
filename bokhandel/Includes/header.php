@@ -141,7 +141,6 @@ include 'db_connection.php';
         document.body.style.display = "block";
     });
     </script>
-</body>
 
 
 
