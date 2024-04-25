@@ -128,26 +128,16 @@ include 'db_connection.php';
 
 
 
-<body class="full bg-gray-800 dark:bg-gray-900" style="opacity: 0;">
+<body class="full bg-gray-800 dark:bg-gray-900">
     <div class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="background-color: rgba(1, 1, 1, 0.8); backdrop-filter: blur(10px); z-index: 9999; color: rgb(255, 255, 255);">
         <p class="text-6xl font-bold">test</p>
     </div>
 
     <script>
-
-        document.body.style.transition = "opacity 1s";
-        document.body.style.opacity = "0";
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-
-            document.querySelector(".loading-overlay").remove();
-
-            document.body.style.opacity = "1";
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.display="block";
+    });
     </script>
-</body>
-
 
 
 
