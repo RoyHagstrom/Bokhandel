@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['category_name'])) {
-        $imagePath = '';
+        $imagePath = null;
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $tmpName = $_FILES['image']['tmp_name'];
             $fileName = $_FILES['image']['name'];
@@ -58,11 +58,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $featured = $_POST['featured'];
         if (isset($_POST['edit_category'])) {
             $categoryId = $_POST['edit_category'];
-            $stmt = $conn->prepare("UPDATE categories SET name = ?, featured = ?, image = ? WHERE id = ?");
-            $stmt->bind_param("sisi", $categoryName, $featured, $imagePath, $categoryId);
+            if ($imagePath !== null) {
+                $stmt = $conn->prepare("UPDATE categories SET name = ?, featured = ?, image = ? WHERE id = ?");
+                $stmt->bind_param("sisi", $categoryName, $featured, $imagePath, $categoryId);
+            } else {
+                $stmt = $conn->prepare("UPDATE categories SET name = ?, featured = ? WHERE id = ?");
+                $stmt->bind_param("sii", $categoryName, $featured, $categoryId);
+            }
         } else {
-            $stmt = $conn->prepare("INSERT INTO categories (name, featured, image) VALUES (?, ?, ?)");
-            $stmt->bind_param("sis", $categoryName, $featured, $imagePath);
+            if ($imagePath !== null) {
+                $stmt = $conn->prepare("INSERT INTO categories (name, featured, image) VALUES (?, ?, ?)");
+                $stmt->bind_param("sis", $categoryName, $featured, $imagePath);
+            } else {
+                $stmt = $conn->prepare("INSERT INTO categories (name, featured) VALUES (?, ?)");
+                $stmt->bind_param("si", $categoryName, $featured);
+            }
         }
         if ($stmt->execute()) {
             header('Location: manage_categories.php');
