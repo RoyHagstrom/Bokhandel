@@ -154,15 +154,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </form>
             </div>
+            </div>
         <?php endforeach; endif; ?>
-    </div>
     </div>
 </div>
 <?php 
 
-$includePath = 'Includes/footer.php';
-if (!file_exists($includePath)) {
-    die("The file '$includePath' was not found.");
-}
-include $includePath; 
+
+include 'Includes/footer.php'; 
 ?>
