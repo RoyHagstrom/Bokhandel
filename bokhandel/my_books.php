@@ -16,11 +16,31 @@ $stmt->bind_param("s", $author);
 $stmt->execute();
 $result = $stmt->get_result();
 
+
+$user_bio_sql = "SELECT * FROM User WHERE Username = '{$user_bio['Username']}'";
+$user_bio_result = $conn->query($user_bio_sql);
+$user_bio = $user_bio_result->fetch_assoc();
+
+
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
 
 <div class="container mx-auto sm:p-8 w-full md:max-w-6xl">
     <h2 class="text-3xl font-bold mb-4"><?php echo $author; ?>'s books</h2>
+
+    <?php if (!empty($user_bio["Bio"])): ?>
+    <div class="p-4 rounded-lg w-full sm:w-116 mt-8 bg-gray-100">
+        <a href="my_books.php?uid=<?php echo $user_bio['Username']; ?>">
+            <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
+
+            <?php if (!empty($user_bio['Image'])): ?>
+                <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="float-left w-auto h-40 rounded-lg mr-2 mb-2">
+            <?php endif; ?>
+            <p class="leading-5"><?php echo $user_bio["Bio"]; ?></p>
+        </a>
+    </div>
+    <?php endif; ?>
+
     <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
