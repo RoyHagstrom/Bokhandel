@@ -37,17 +37,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (isset($_POST['category_name'])) {
+        $imagePath = '';
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $tmpName = $_FILES['image']['tmp_name'];
+            $fileName = $_FILES['image']['name'];
+            $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+            $fileName = bin2hex(random_bytes(8)) . '.' . $ext;
+            $targetPath = 'images/' . $fileName;
+            if (move_uploaded_file($tmpName, $targetPath)) {
+                $imagePath = $targetPath;
+            }
+        }
         ob_start();
         $categoryName = $_POST['category_name'];
         $featured = $_POST['featured'];
-        $image = $_POST['image']; 
         if (isset($_POST['edit_category'])) {
             $categoryId = $_POST['edit_category'];
             $stmt = $conn->prepare("UPDATE categories SET name = ?, featured = ?, image = ? WHERE id = ?");
-            $stmt->bind_param("sisi", $categoryName, $featured, $image, $categoryId);
+            $stmt->bind_param("sisi", $categoryName, $featured, $imagePath, $categoryId);
         } else {
             $stmt = $conn->prepare("INSERT INTO categories (name, featured, image) VALUES (?, ?, ?)");
-            $stmt->bind_param("sis", $categoryName, $featured, $image);
+            $stmt->bind_param("sis", $categoryName, $featured, $imagePath);
         }
         if ($stmt->execute()) {
             if (ob_get_clean() === false) {
@@ -120,8 +130,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div>
-                        <label for="image" class="block text-sm font-semibold mb-2">Image URL:</label>
-                        <input type="text" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="<?php echo htmlspecialchars($category['image'], ENT_QUOTES); ?>" oninput="this.nextElementSibling.src=this.value">
+                        <label for="image" class="block text-sm font-semibold mb-2">Image URL or Upload Image:</label>
+                        <input type="file" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">If you upload an image, it will overwrite the image URL</p>
                         <img src="<?php echo htmlspecialchars($category['image'], ENT_QUOTES); ?>" id="category-image" alt="Category Image" class="mt-2 w-64 h-48 object-cover">
                     </div>
 
