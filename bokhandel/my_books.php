@@ -7,7 +7,7 @@ include 'Includes/header.php';
 
 
 
-    $author = $_GET["uname"];    
+    $author = $_GET["uid"];    
 
 
 
