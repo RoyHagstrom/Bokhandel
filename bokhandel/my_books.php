@@ -1,22 +1,14 @@
 <?php
 include 'Includes/header.php';
 
-if (!isset($_SESSION["uid"])) {
-    $user->redirect("login.php");
-}
 
 
 
 
-if(isset($_SESSION["uname"]) && $_SESSION["urole"] != "Admin"){
-    $author = $_SESSION["uname"];    
-    } 
-    elseif($_SESSION["urole"] == "Admin" && isset($_GET["uname"])){
+
+
     $author = $_GET["uname"];    
-    }
-    elseif(isset($_GET["uid"])){
-        $author = $_GET["uid"];
-    }
+
 
 
 $stmt = $conn->prepare("SELECT * FROM Book WHERE Author = ? ORDER BY BookID DESC");
