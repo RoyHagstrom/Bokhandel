@@ -41,7 +41,7 @@ $user_bio = $user_bio_result->fetch_assoc();
     </div>
     <?php endif; ?>
 
-    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-max">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <a href="singlebook.php?id=<?php echo $row['BookID']; ?>" class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
