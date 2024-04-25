@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <?php if ($categories): foreach ($categories as $category): ?>
             <div class="bg-white shadow-md rounded-lg p-6">
-            <form method="POST" action="" class="container space-y-8 bg-white p-8 shadow-md rounded-lg mt-8" enctype="multipart/form-data">
+            <form method="POST" action="" class="container space-y-8 bg-white p-8 rounded-lg mt-8" enctype="multipart/form-data">
                     <input type="hidden" name="edit_category" value="<?php echo $category['id']; ?>">
                     <h3 class="text-xl font-semibold mb-2">Edit <?php echo $category['name']; ?></h3>
 
