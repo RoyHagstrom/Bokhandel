@@ -43,7 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $fileName = $_FILES['image']['name'];
             $ext = pathinfo($fileName, PATHINFO_EXTENSION);
             $fileName = bin2hex(random_bytes(8)) . '.' . $ext;
-            $targetPath = 'images/' . $fileName;
+            $targetDirectory = 'images/category';
+            if (!is_dir($targetDirectory)) {
+                mkdir($targetDirectory, 0777, true);
+            }
+
+            $targetPath = 'images/category' . $fileName;
             if (move_uploaded_file($tmpName, $targetPath)) {
                 $imagePath = $targetPath;
             }
@@ -74,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center">
 
-<form method="POST" action="" class="container space-y-8 bg-white p-8 shadow-md rounded-lg mt-8">
+<form method="POST" action="" class="container space-y-8 bg-white p-8 shadow-md rounded-lg mt-8" enctype="multipart/form-data">
     <h2 class="text-2xl font-semibold mb-6">Create Category</h2>
 
     <div class="space-y-6">
@@ -110,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <?php if ($categories): foreach ($categories as $category): ?>
             <div class="bg-white shadow-md rounded-lg p-6">
-                <form method="POST" action="" class="space-y-6">
+            <form method="POST" action="" class="container space-y-8 bg-white p-8 shadow-md rounded-lg mt-8" enctype="multipart/form-data">
                     <input type="hidden" name="edit_category" value="<?php echo $category['id']; ?>">
                     <h3 class="text-xl font-semibold mb-2">Edit <?php echo $category['name']; ?></h3>
 
