@@ -133,14 +133,7 @@ include 'db_connection.php';
         <p class="text-6xl font-bold">test</p>
     </div>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
 
-        document.getElementById("testScreen").style.display = "none";
-        
-        document.body.style.display = "block";
-    });
-    </script>
 
 
 
