@@ -94,8 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div>
-            <label for="image" class="block text-lg font-medium mb-2">Image URL:</label>
-            <input type="text" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required placeholder="Enter image URL">
+            <label for="image" class="block text-lg font-medium mb-2">Upload Image:</label>
+            <input type="file" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" accept="image/*">
         </div>
     </div>
 
