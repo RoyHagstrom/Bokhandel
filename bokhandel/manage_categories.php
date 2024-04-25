@@ -133,9 +133,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div>
-                        <label for="image" class="block text-sm font-semibold mb-2">Image URL or Upload Image:</label>
+                        <label for="image" class="block text-sm font-semibold mb-2">Upload Image:</label>
                         <input type="file" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        <p class="text-sm text-gray-500 mt-1">If you upload an image, it will overwrite the image URL</p>
                         <img src="<?php echo htmlspecialchars($category['image'], ENT_QUOTES); ?>" id="category-image" alt="Category Image" class="mt-2 w-64 h-48 object-cover">
                     </div>
 
