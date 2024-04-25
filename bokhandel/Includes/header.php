@@ -131,7 +131,7 @@ include 'db_connection.php';
 <body class="full bg-gray-800 dark:bg-gray-900">
     <div id="testScreen" class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="background-color: rgba(1, 1, 1, 0.8); backdrop-filter: blur(10px); z-index: 9999; color: rgb(255, 255, 255); display: none;">
         <p class="text-6xl font-bold">Yrkesprov: Bokhanddel</p>
-        <p class="text-6xl font-bold">Roy Hagström</p>
+        <p class="text-6xl font-bold"></p>
     </div>
 
     <script>
