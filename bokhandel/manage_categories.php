@@ -136,12 +136,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="image" class="block text-sm font-semibold mb-2">Upload Image:</label>
                         <input type="file" id="image" name="image" class="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <?php
-                        echo '<div style="display: inline-block;">'; 
+                        echo "<div class='w-28 h-28'";
+                        echo '<div class="m-2 md:m-4 relative rounded-lg">';
                         echo '<a href="books.php?id=' . htmlspecialchars($category['id'], ENT_QUOTES) . '">'; 
-                        echo '<img src="' . htmlspecialchars($category['image'], ENT_QUOTES) . '" alt="' . htmlspecialchars($category['name'], ENT_QUOTES) . '" class="mt-2 w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70" style="max-width: 100%; height: auto;">'; 
-                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg" style="max-width: 100%;">' . htmlspecialchars($category['name'], ENT_QUOTES) . '</div>'; 
-                        echo '</a>'; 
-                        echo '</div>'; 
+                        echo '<img src="' . htmlspecialchars($category['image'], ENT_QUOTES) . '" alt="' . htmlspecialchars($category['name'], ENT_QUOTES) . '" class="mt-2 w-28 h-28 sm:w-40 sm:h-40 lg:w-64 lg:h-64 object-cover rounded-lg opacity-70">';
+                        echo '<div class="absolute inset-0 flex items-center justify-center text-white text-sm lg:text-3xl font-semibold bg-black bg-opacity-50 rounded-lg">' . htmlspecialchars($category['name'], ENT_QUOTES) . '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                        echo "</div>";
                         ?>
 
                     <div class="flex items-center justify-end space-x-2">
