@@ -25,7 +25,7 @@ $user_bio = $user_bio_result->fetch_assoc();
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
 
-<div class="container mx-auto sm:p-8 w-full md:max-w-6xl justify-center items-center">
+<div class="container mx-auto sm:p-8 w-full md:max-w-6xl">
     <h2 class="text-3xl font-bold mb-4"><?php echo $author; ?>'s books</h2>
 
     <?php if (!empty($user_bio["Bio"])): ?>
@@ -41,7 +41,7 @@ $user_bio = $user_bio_result->fetch_assoc();
     </div>
     <?php endif; ?>
 
-    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-max">
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <a href="singlebook.php?id=<?php echo $row['BookID']; ?>" class="block h-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300">
