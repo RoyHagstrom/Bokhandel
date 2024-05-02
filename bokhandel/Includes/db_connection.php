@@ -2,7 +2,7 @@
 
     define('DB_HOSTS', [
         'primary' => '172.22.0.4',
-        'local' => '192.168.1.111',
+        'local' => 'localhost',
         'network' => 'novatest.ddns.net'
     ]);
     define('DB_PORT', '3306');
