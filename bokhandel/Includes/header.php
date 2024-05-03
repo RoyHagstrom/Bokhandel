@@ -211,6 +211,7 @@ include 'db_connection.php';
         <ul class="flex flex-col items-center space-y-4 p-6">
             <li><a href="index.php" class="text-white dark:text-gray-200 hover:text-gray-300">Home</a></li>
             <li><a href="books.php" class="text-white dark:text-gray-200 hover:text-gray-300">Books</a></li>
+            <li><a href="About.php" class="text-white dark:text-gray-200 hover:text-gray-300">About us</a></li>
             <li><a href="contact.php" class="text-white dark:text-gray-200 hover:text-gray-300">Contact</a></li>
             <?php if(isset($_SESSION["uname"])){echo '<li><a href="account.php?uid=' . $_SESSION["uid"] . '" class="text-white dark:text-gray-200 hover:text-gray-300">' . $_SESSION["uname"] . '</a></li>';}?>
                     <?php if(isset($_SESSION["uname"])){echo '<li><a href="logout.php" class="bg-black-900 text-white dark:text-gray-200 hover:bg-black-800 dark:hover:bg-black-400 px-4 py-2 rounded-md">Logout</a></li>';}
