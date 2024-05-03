@@ -47,7 +47,7 @@
       </div>
         <div class="w-full shrink-0 grow-0 basis-auto md:w-5/12 md:px-3 lg:px-6">
         <section class="mt-12">
-          <h3 class="mb-4 text-2xl font-semibold">Section inLorem ipsumfo</h3>
+          <h3 class="mb-4 text-2xl font-semibold">Lorem ipsumfo</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
             voluptatem, natus quas quisquam porro molestiae odio autem
