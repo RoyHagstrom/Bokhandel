@@ -16,6 +16,31 @@ include 'Includes/header.php';
             </p>
         </div>
 
+        
+        <div class="mt-8 border-t border-gray-200"></div>
+
+        <div class="mt-8 md:flex items-center">
+            <h2 class="text-lg font-bold mb-4 md:mb-0 md:text-left">Lorem ipsum</h2>
+            <p class="text-lg md:ml-6">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus, dolor eget suscipit facilisis, magna felis tempus ligula, at eleifend mi nibh eu nunc.
+            </p>
+        </div>
+
+        <div class="mt-8 md:flex items-center">
+            <h2 class="text-lg font-bold mb-4 md:mb-0 md:text-left">Our Values</h2>
+            <p class="text-lg md:ml-6">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus, dolor eget suscipit facilisis, magna felis tempus ligula, at eleifend mi nibh eu nunc.
+            </p>
+        </div>
+
+        <div class="mt-8 md:flex items-center">
+            <h2 class="text-lg font-bold mb-4 md:mb-0 md:text-left">Our Team</h2>
+            <p class="text-lg md:ml-6">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus, dolor eget suscipit facilisis, magna felis tempus ligula, at eleifend mi nibh eu nunc.
+            </p>
+        </div>
+
+
     </div>  
 
 
