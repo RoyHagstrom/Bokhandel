@@ -12,7 +12,7 @@ include 'Includes/header.php';
                 <img src="images/img-02.jpg" alt="Image" class="w-full h-auto object-cover rounded-lg">
             </div>
             <div class="w-full md:w-1/2">
-                <p class="leading-relaxed">
+                <p class="leading-relaxed p-4">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus, dolor eget suscipit facilisis, magna felis tempus ligula, at eleifend mi nibh eu nunc. Nullam auctor, velit in fermentum bibendum, metus odio malesuada nulla, eu suscipit nisl nisi in tortor. Ut vel purus est. Sed tincidunt tincidunt mi, ac tincidunt nunc feugiat ac. Vivamus mattis nulla eu nisl rhoncus, vitae cursus justo lacinia. Sed feugiat, elit non vulputate aliquet, ante purus cursus nisl, vel lobortis risus nunc eu mi.
                 </p>
             </div>
