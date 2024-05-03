@@ -45,6 +45,19 @@
           ipsum dolor eius reiciendis, velit adipisci quas.
         </p>
       </div>
+
+      <!-- Add a new section -->
+      <section class="mb-32">
+        <div class="mb-8 w-full md:mb-0 md:w-3/12 md:px-3 lg:px-6">
+          <h3 class="mb-4 text-2xl font-bold">New Section</h3>
+          <p class="text-neutral-500 dark:text-neutral-300">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Perspiciatis quam, quia earum quae quasi cumque ducimus autem.
+          </p>
+        </div>
+      </section>
+      <!-- End of a new section -->
+
     </div>
   </section>
   <!-- Section: Design Block -->
