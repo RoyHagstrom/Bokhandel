@@ -3,6 +3,7 @@
 
 
 
+<div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
 
 <!-- Container for demo purpose -->
 <div class="container my-24 mx-auto md:px-6">
@@ -92,7 +93,7 @@
   </section>
   <!-- Section: Design Block -->
 </div>
-<!-- Container for demo purpose -->
+</div>
 
 
 
