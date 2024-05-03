@@ -1,3 +1,7 @@
+<?php
+include 'Includes/header.php'; 
+?>
+
 <div class="bg-white text-black px-4 py-20 flex flex-col justify-center items-center sm:px-6 lg:px-8">
     <h1 class="text-2xl font-bold mb-4 sm:text-3xl">About Us</h1>
 
@@ -6,3 +10,9 @@
   <p>Our store is located in Pehr Sommars Gata 14, Ekenäs, Finland.</p>
 
 </div>
+
+
+
+<?php
+include 'Includes/footer.php'; 
+?>
