@@ -1,6 +1,4 @@
-<?php
-include 'Includes/header.php'; 
-?>
+<?php include 'Includes/header.php'; ?>
 
 <div class="bg-white text-black px-4 py-10 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-6xl">
@@ -21,25 +19,27 @@ include 'Includes/header.php';
         <div class="mt-8 border-t border-gray-200"></div>
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center bg-white rounded-lg shadow-lg p-6">
                 <h2 class="text-lg font-bold mb-4 md:mb-0 md:text-left">Our Mission</h2>
                 <p class="text-lg">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus, dolor eget suscipit facilisis, magna felis tempus ligula, at eleifend mi nibh eu nunc.
                 </p>
             </div>
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center bg-white rounded-lg shadow-lg p-6">
                 <h2 class="text-lg font-bold mb-4 md:mb-0 md:text-left">Our Values</h2>
                 <p class="text-lg">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus, dolor eget suscipit facilisis, magna felis tempus ligula, at eleifend mi nibh eu nunc.
                 </p>
             </div>
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center bg-white rounded-lg shadow-lg p-6">
                 <h2 class="text-lg font-bold mb-4 md:mb-0 md:text-left">Our Team</h2>
                 <p class="text-lg">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus, dolor eget suscipit facilisis, magna felis tempus ligula, at eleifend mi nibh eu nunc.
                 </p>
             </div>
         </div>
+
+        <div class="mt-8">
 
 
 
