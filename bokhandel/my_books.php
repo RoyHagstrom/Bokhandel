@@ -37,7 +37,7 @@ $user_bio = $user_bio_result->fetch_assoc();
 
             <?php if (!empty($user_bio['Image'])): ?>
                 <div class="relative sm:w-[300px] w-full">
-                    <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="rounded-lg object-cover object-center w-full h-auto sm:h-40">
+                    <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="rounded-lg object-cover object-center w-auto h-auto sm:h-40">
                 </div>
             <?php endif; ?>
 
