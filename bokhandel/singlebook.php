@@ -252,9 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 let newRating = (value).toFixed(1); 
                                 console.log('Calculated new rating:', newRating);
                                 
-                                newRating += parseFloat(this.value);
                                 newRating = Math.min(5, Math.max(0, newRating));
-                                console.log('Clamped new rating:', newRating);
                                 console.log('Clamped new rating:', newRating);
                                 
                                 ratingInput.value = newRating; 
