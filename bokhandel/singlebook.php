@@ -65,7 +65,7 @@ if(isset($_SESSION['uname'])){
         }
     }
         $voted = true;
-    }
+    
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !$voted) {
         $bookID = $_POST['book'];
