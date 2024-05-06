@@ -44,11 +44,16 @@ $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND Bo
 $other_books_result = $conn->query($other_books_sql);
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$voted = false;
+$voteCacheFile = 'vote_cache/' . $_SESSION['uname'] . '_' . $bookID . '.txt';
+if (file_exists($voteCacheFile)) {
+    $voted = true;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !$voted) {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
     $ratingChange = floatval($ratingChange);
-
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
     $updateBookRatingStmt = $conn->prepare($sql);
@@ -60,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Failed to execute SQL statement: " . $updateBookRatingStmt->error);
     }
 
+    file_put_contents($voteCacheFile, time());
+    
     header("Location: singlebook.php?id=" . $bookID);
     exit();
 }
