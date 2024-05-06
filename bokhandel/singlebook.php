@@ -235,12 +235,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         button.addEventListener('click', function(event) {
                             event.preventDefault();
                             let ratingInput = this.form.querySelector('#rating');
-                            let newRating = parseFloat(ratingInput.value) + parseFloat(this.value);
-                            ratingInput.value = newRating.toFixed(1);
+                            let value = parseFloat(this.value);
+                            let newRating = parseFloat(ratingInput.value) + value; 
+                            ratingInput.value = newRating.toFixed(1); 
                             this.form.submit();
                         });
                     });
                 </script>
+
 
 
 
