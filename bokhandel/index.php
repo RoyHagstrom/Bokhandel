@@ -187,7 +187,7 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
 
-<div class="flex items-center mb-6">
+<div class="flex items-center mb-6 gap-2">
 
     <h1 class="text-2xl font-semibold">Highest Rated Books</h1>
 
