@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$ratingChange, $bookID]);
+    $updateBookRatingStmt = $pdo->prepare($sql);
+    $updateBookRatingStmt->execute([$ratingChange, $bookID]);
 
 
     header("Location: book_page.php?book_id=" . $bookID);
