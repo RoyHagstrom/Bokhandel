@@ -207,7 +207,7 @@ if(isset($_SESSION['uname'])){
             <div class="flex">
                 <?php
 
-                $rating = isset($book['Rating']) ? $book['Rating'] : 0;
+                $rating = isset($book['Rating']) ? $book['Rating'] : 5;
                 
                 $outOf = 5;
                 $filledStars = floor($rating);
