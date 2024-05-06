@@ -1,9 +1,12 @@
 <?php
 
 
-echo '<pre>';
-print_r($_SERVER);
-echo '</pre>';
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    echo 'Forwarded IP: ' . $_SERVER['HTTP_CLIENT_IP'];
+  } else {
+      echo 'No shared network IP address available';
+  }
+  
 
 
 ?>
