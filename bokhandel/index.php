@@ -162,6 +162,9 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">Featured Books</h1>
+    <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+        These books are selected based on their popularity, freshness, and relevance. They are featured here to give you an idea of what we have to offer.
+    </p>
 
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
@@ -190,6 +193,8 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 <div class="flex items-center mb-6 gap-2">
 
     <h1 class="text-2xl font-semibold">Highest Rated Books</h1>
+    <p class="text-sm text-gray-700 dark:text-gray-300 ml-4">(Based on average ratings given by users)</p>
+
 
 
     <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -237,6 +242,10 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">New Books</h1>
+    <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+        These books are the newest ones added to our bookstore. They are selected based on their freshness and relevance. They are featured here to give you an idea of what we have to offer.
+    </p>
+
 
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
