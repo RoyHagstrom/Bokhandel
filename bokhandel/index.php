@@ -162,9 +162,12 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">Featured Books</h1>
-    <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
-        These books are selected based on their popularity, freshness, and relevance. They are featured here to give you an idea of what we have to offer.
-    </p>
+    <div class="text-gray-700 dark:text-gray-300 mb-8">
+        <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac velit at purus aliquet bibendum eu sed sem. Nulla facilisi. Nullam auctor, nulla et condimentum posuere,
+            sem nisi tristique velit, ut eleifend urna leo et velit. Sed nec velit eget metus dictum vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        </p>
+    </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
@@ -193,8 +196,9 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 <div class="flex items-center mb-6 gap-2">
 
     <h1 class="text-2xl font-semibold">Highest Rated Books</h1>
-    <p class="text-sm text-gray-700 dark:text-gray-300 ml-4">(Based on average ratings given by users)</p>
-
+    <p class="mt-2 text-sm text-gray-700 dark:text-gray-300 lg:text-base">
+        Our highest rated books are selected based on their reviews from our users. Here are some of our top picks.
+    </p>
 
 
     <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -213,7 +217,6 @@ $highest_rated_result = $conn->query($highest_rated_sql);
         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
     </svg>
 </div>
-
 
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
@@ -242,10 +245,12 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">New Books</h1>
-    <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
-        These books are the newest ones added to our bookstore. They are selected based on their freshness and relevance. They are featured here to give you an idea of what we have to offer.
-    </p>
-
+    <div class="text-gray-700 dark:text-gray-300 mb-8">
+        <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac velit at purus aliquet bibendum eu sed sem. Nulla facilisi. Nullam auctor, nulla et condimentum posuere,
+            sem nisi tristique velit, ut eleifend urna leo et velit. Sed nec velit eget metus dictum vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        </p>
+    </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
