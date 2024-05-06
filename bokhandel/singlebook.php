@@ -239,6 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 event.preventDefault();
                                 let ratingInput = this.form.querySelector('#rating');
                                 let value = parseFloat(this.value);
+                                alert(`Rating value: ${value}`);
                                 let currentRating = parseFloat(ratingInput.value);
                                 let newRating = (currentRating + value).toFixed(1); 
                                 newRating = Math.min(5, Math.max(0, parseFloat(newRating)));
