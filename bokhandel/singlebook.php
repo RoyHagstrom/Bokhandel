@@ -232,7 +232,7 @@ if(isset($_SESSION['uname'])){
                 ?>
                 <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating . ' out of ' . $outOf; ?></span>
                 
-                <?php if isset($_SESSION['uname']) && file_exists('vote_cache/' . $_SESSION['uname'] . '_' . $book['BookID'] . '_' .  '.txt'): ?>
+                <?php if (isset($_SESSION['uname']) && (file_exists('vote_cache/' . $_SESSION['uname'] . '_' . $book['BookID'] . '_' .  '.txt'))): ?>
                 <?php else: ?>
 
                     <form method="post" class="inline-flex items-center gap-2">
