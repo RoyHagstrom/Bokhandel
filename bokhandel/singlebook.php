@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
     $ratingChange = floatval($ratingChange);
-    $ratingChange = min(0.05, max(-0.05, $ratingChange));
+    $ratingChange = min(0.5, max(-0.5, $ratingChange));
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
     $updateBookRatingStmt = $conn->prepare($sql);
@@ -221,14 +221,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form method="post" action="">
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
                     <input type="hidden" name="rating" id="rating" value="<?php echo htmlspecialchars($rating); ?>">
-                    <button type="submit" name="submit-rating" value="0.05" class="text-green-600 hover:text-green-800">
+                    <button type="submit" name="submit-rating" value="0.5" class="text-green-600 hover:text-green-800">
                         <img class="w-8 h-8" src="https://www.svgrepo.com/show/510271/thumbs-up.svg" alt="Thumbs Up">
                     </button>
                 </form>
                 <form method="post" action="">
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
                     <input type="hidden" name="rating" id="rating" value="<?php echo htmlspecialchars($rating); ?>">
-                    <button type="submit" name="submit-rating" value="-0.05" class="text-red-600 hover:text-red-800">
+                    <button type="submit" name="submit-rating" value="-0.5" class="text-red-600 hover:text-red-800">
                         <img class="w-8 h-8" src="https://www.svgrepo.com/show/510270/thumbs-down.svg" alt="Thumbs Down">
                     </button>
                 </form>
