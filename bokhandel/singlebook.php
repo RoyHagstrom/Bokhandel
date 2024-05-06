@@ -233,17 +233,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </button>
                 </form>
                 <script>
-                    document.querySelectorAll('[name="submit-rating"]').forEach(button => {
-                        button.addEventListener('click', function(event) {
-                            event.preventDefault();
-                            let ratingInput = this.form.querySelector('#rating');
-                            let value = parseFloat(this.value);
-                            let currentRating = parseFloat(ratingInput.value);
-                            let newRating = currentRating + value; 
-                            
-                            newRating = Math.min(5, Math.max(0, newRating));
-                            ratingInput.value = newRating.toFixed(1); 
-                            this.form.submit();
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.querySelectorAll('[name="submit-rating"]').forEach(button => {
+                            button.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                let ratingInput = this.form.querySelector('#rating');
+                                let value = parseFloat(this.value);
+                                let currentRating = parseFloat(ratingInput.value);
+                                let newRating = (currentRating + value).toFixed(1); 
+                                newRating = Math.min(5, Math.max(0, parseFloat(newRating)));
+                                ratingInput.value = newRating; 
+                                this.form.submit();
+                            });
                         });
                     });
                 </script>
