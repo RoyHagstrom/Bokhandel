@@ -13,6 +13,8 @@ include 'Includes/header.php';
             <p><strong>Email:</strong> <a href="mailto:roy@gmail.com" class="text-blue-600">roy@gmail.com</a></p>
             <p><strong>Phone:</strong> +358 40324973</p>
             <p><strong>Address:</strong> Pehr Sommars Gata 14, 10600 Ekenäs</p>
+            <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus, ipsum sed blandit efficitur,
+                nulla purus auctor turpis, ac ultricies nibh risus eget arcu.</p>
         </div>
         <div class="w-full flex-grow p-8 bg-gray-50 sm:w-1/2">
             <h2 class="text-xl font-semibold mb-4">Contact Form</h2>
