@@ -52,7 +52,7 @@
             laboriosam, eius iusto fugiat doloremque. Dolor blanditiis odio
             placeat, doloremque ducimus quisquam velit.
           </p>
-          <img src="images/img-02.jpg" alt="Image" class="w-full object-cover rounded-lg">
+          <img src="images/img-02.jpg" alt="Image" class="w-full object-cover rounded-lg m-2">
         </section>
         </div>
     </div>
