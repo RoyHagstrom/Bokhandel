@@ -44,7 +44,6 @@ $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND Bo
 $other_books_result = $conn->query($other_books_sql);
 
 
-if(isset($_SESSION['uname'])){
     $voted = false;
     $voteCacheFile = 'vote_cache/' . $user->getUserIP() . '_' . $bookID . '_' . '.txt';
     if (file_exists($voteCacheFile)) {
@@ -76,7 +75,7 @@ if(isset($_SESSION['uname'])){
         header("Location: singlebook.php?id=" . $bookID);
         exit();
     }
-}
+
 
 
 ?>
