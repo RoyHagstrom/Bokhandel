@@ -47,8 +47,9 @@ $other_books_result = $conn->query($other_books_sql);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
+    echo $ratingChange;
     $ratingChange = floatval($ratingChange);
-    $ratingChange = -0.1;
+    $ratingChange = min(0.1, max(-0.1, $ratingChange));
 
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
