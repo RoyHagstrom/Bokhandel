@@ -46,7 +46,7 @@ $other_books_result = $conn->query($other_books_sql);
 
 if(isset($_SESSION['uname'])){
     $voted = false;
-    $voteCacheFile = 'vote_cache/' . $_SERVER['HTTP_CLIENT_IP'] . '_' . $bookID . '_' . '.txt';
+    $voteCacheFile = 'vote_cache/' . $user->getUserIP() . '_' . $bookID . '_' . '.txt';
     if (file_exists($voteCacheFile)) {
         $voted = true;
     }
