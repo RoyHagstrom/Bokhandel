@@ -201,11 +201,11 @@ $other_books_result = $conn->query($other_books_sql);
                 <div class="flex mt-2">
                     <form method="post" action="rating.php">
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
-                        <button type="submit" name="rating" value="1" class="text-green-600 hover:text-green-800"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h8l-4-8-4 8zm6-1 4a2 2 0 1 1-4 0v6h6"/></svg></button>
+                        <button type="submit" name="rating" value="1" class="text-green-600 hover:text-green-800"><img src="https://www.svgrepo.com/show/510271/thumbs-up.svg" /></button>
                     </form>
                     <form method="post" action="rating.php">
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
-                        <button type="submit" name="rating" value="-1" class="text-red-600 hover:text-red-800"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.643l-4.995 4.996a1 1 0 0 1-1.414 0l-4.995-4.996A7 7 0 1 0 10.343 8zm-7.16 4.157a2 2 0 1 0 4.001 0 2 2 0 0 0-4.001 0z"/></svg></button>
+                        <button type="submit" name="rating" value="-1" class="text-red-600 hover:text-red-800"><img src="https://www.svgrepo.com/show/510270/thumbs-down.svg" /></button>
                     </form>
                 </div>
             </div>
