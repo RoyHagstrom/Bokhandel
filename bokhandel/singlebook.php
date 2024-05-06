@@ -45,21 +45,37 @@ $other_books_result = $conn->query($other_books_sql);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Debug info
+    error_log('Received POST request');
+
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
+    error_log('Received book ID: ' . $bookID);
+    error_log('Received rating change: ' . $ratingChange);
+
     $ratingChange = floatval($ratingChange);
     $ratingChange = min(0.1, max(-0.1, $ratingChange));
 
-
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
+    error_log('SQL statement: ' . $sql);
+
     $updateBookRatingStmt = $conn->prepare($sql);
     if (!$updateBookRatingStmt) {
+        error_log('Failed to prepare SQL statement: ' . $conn->error);
         die("Failed to prepare SQL statement: " . $conn->error);
     }
-    $updateBookRatingStmt->bind_param("di", $ratingChange, $bookID); 
+
+    if (!$updateBookRatingStmt->bind_param("di", $ratingChange, $bookID)) {
+        error_log('Failed to bind parameters: ' . $updateBookRatingStmt->error);
+        die("Failed to bind parameters: " . $updateBookRatingStmt->error);
+    }
+
     if (!$updateBookRatingStmt->execute()) {
+        error_log('Failed to execute SQL statement: ' . $updateBookRatingStmt->error);
         die("Failed to execute SQL statement: " . $updateBookRatingStmt->error);
     }
+
+    error_log('Updated book rating');
 
     header("Location: singlebook.php?id=" . $bookID);
     exit();
