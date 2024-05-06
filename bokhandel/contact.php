@@ -16,6 +16,8 @@ include 'Includes/header.php';
         </div>
         <div class="w-full flex-grow p-8 bg-gray-50 sm:w-1/2">
             <h2 class="text-xl font-semibold mb-4">Contact Form</h2>
+            <p>Contact us if you have questions about our activities. We are happy to help with any questions you may have. Please fill out the contact form and we will get back to you as soon as possible.</p>
+            <p>Here you can find answers to the most frequently asked questions from customers or visitors.</p>
             <form action="" method="POST" class="space-y-4">
                 <div>
                     <label for="name" class="block text-sm font-semibold">Name:</label>
