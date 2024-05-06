@@ -200,11 +200,11 @@ $other_books_result = $conn->query($other_books_sql);
                 
                     <form method="post" action="rating.php">
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
-                        <button type="submit" name="rating" value="1" class="text-green-600 hover:text-green-800"><img src="https://www.svgrepo.com/show/510271/thumbs-up.svg" /></button>
+                        <button type="submit" name="rating" value="1" class="text-green-600 hover:text-green-800"><img class="w-4 h-4" src="https://www.svgrepo.com/show/510271/thumbs-up.svg" /></button>
                     </form>
                     <form method="post" action="rating.php">
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
-                        <button type="submit" name="rating" value="-1" class="text-red-600 hover:text-red-800"><img src="https://www.svgrepo.com/show/510270/thumbs-down.svg" /></button>
+                        <button type="submit" name="rating" value="-1" class="text-red-600 hover:text-red-800"><img class="w-4 h-4" src="https://www.svgrepo.com/show/510270/thumbs-down.svg" /></button>
                     </form>
             </div>
         </div>
