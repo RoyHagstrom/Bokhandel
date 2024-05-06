@@ -68,50 +68,7 @@ $other_books_result = $conn->query($other_books_sql);
 
 
     </div>
-    <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
-        <div class="book-info">
-            <div class="flex flex-col">
 
-                <div class="max-h-48 overflow-hidden">
-                    <p><span class="font-semibold">Description:</span> <?php echo $book['Description']; ?></p>
-                </div>
-
-
-                <?php if (isset($_SESSION["uname"]) && $_SESSION["uname"] == $book['Author']){  ?>
-                <div class="mt-4 flex gap-2">
-                    <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
-                    <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
-                </div>
-            <?php } elseif(isset($_SESSION["uname"]) && $_SESSION["urole"] == "Admin"){ ?>
-                <div class="mt-4 flex gap-2">
-                <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
-                <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
-            </div>
-            <?php } ?>
-
-
-
-<?php
-                    
-?>
-
-        <?php if (isset($book['Author']) && $other_books_result->num_rows > 0){  ?>
-                <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
-                    
-                <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Other books by <?php echo $book['Author']; ?>:</h2>
-
-                    <div class="flex justify-center items-center grid gap-2 grid-cols-3 lg:grid-cols-6">
-                        <?php 
-                    while($other_book = $other_books_result->fetch_assoc()){
-
-
-                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '"class="block h-auto bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
-                echo '<span class="absolute top-1 right-1 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
-                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="w-full md:w-full h-36 md:h-48 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out">';
-                echo '</a>';
-
-
-                     } ?>
 
 
 <div class="flex items-center mb-2">
@@ -171,6 +128,53 @@ $other_books_result = $conn->query($other_books_sql);
     <span class="text-sm font-medium text-gray-500 dark:text-gray-400">1%</span>
 </div>   
 
+
+
+    <div class="md:w-7/12 mb-4 lg:mb-0 md:pl-4">
+        <div class="book-info">
+            <div class="flex flex-col">
+
+                <div class="max-h-48 overflow-hidden">
+                    <p><span class="font-semibold">Description:</span> <?php echo $book['Description']; ?></p>
+                </div>
+
+
+                <?php if (isset($_SESSION["uname"]) && $_SESSION["uname"] == $book['Author']){  ?>
+                <div class="mt-4 flex gap-2">
+                    <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
+                    <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
+                </div>
+            <?php } elseif(isset($_SESSION["uname"]) && $_SESSION["urole"] == "Admin"){ ?>
+                <div class="mt-4 flex gap-2">
+                <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
+                <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
+            </div>
+            <?php } ?>
+
+
+
+<?php
+                    
+?>
+
+        <?php if (isset($book['Author']) && $other_books_result->num_rows > 0){  ?>
+                <div class="p-4 rounded-lg w-full sm:w-116 mt-2 container justify-center items-center">
+                    
+                <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Other books by <?php echo $book['Author']; ?>:</h2>
+
+                    <div class="flex justify-center items-center grid gap-2 grid-cols-3 lg:grid-cols-6">
+                        <?php 
+                    while($other_book = $other_books_result->fetch_assoc()){
+
+
+                echo '<a href="singlebook.php?id=' . $other_book['BookID'] . '"class="block h-auto bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
+                echo '<span class="absolute top-1 right-1 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $other_book['Price'] . '€</span>';
+                echo '<img src="' . $other_book['Image'] . '" alt="' . $other_book['Title'] . '" class="w-full md:w-full h-36 md:h-48 object-cover group-hover:opacity-75 transition-opacity duration-200 ease-in-out">';
+                echo '</a>';
+
+
+                     } ?>
+                     
                 </div>
                 </div>
             <?php } ?>
