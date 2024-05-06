@@ -46,7 +46,7 @@ $other_books_result = $conn->query($other_books_sql);
 
 if(isset($_SESSION['uname'])){
     $voted = false;
-    $voteCacheFile = 'vote_cache/' . $_SESSION['uname'] . '_' . $bookID . '_' . '.txt';
+    $voteCacheFile = 'vote_cache/' . $_SERVER['HTTP_CLIENT_IP'] . '_' . $bookID . '_' . '.txt';
     if (file_exists($voteCacheFile)) {
         $voted = true;
     }
@@ -232,7 +232,7 @@ if(isset($_SESSION['uname'])){
                 ?>
                 <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating . ' out of ' . $outOf; ?></span>
                 
-                <?php if (!isset($_SESSION['uname']) || (file_exists('vote_cache/' . $_SESSION['uname'] . '_' . $book['BookID'] . '_' .  '.txt'))): ?>
+                <?php if (file_exists('vote_cache/' . $_SERVER['HTTP_CLIENT_IP'] . '_' . $book['BookID'] . '_' .  '.txt')): ?>
                 <?php else: ?>
 
                     <form method="post" class="inline-flex items-center gap-2">
