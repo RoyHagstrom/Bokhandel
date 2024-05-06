@@ -48,7 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
     $ratingChange = floatval($ratingChange);
-    $ratingChange = min(0.5, max(-0.5, $ratingChange));
+    $ratingChange = min(0.1, max(-0.1, $ratingChange));
+
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
     $updateBookRatingStmt = $conn->prepare($sql);
@@ -198,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="flex">
                 <?php
 
-                $rating = isset($book['Rating']) ? round($book['Rating'], 1) : 0.0;
+                $rating = isset($book['Rating']) ? $book['Rating'] : 0;
                 
                 $outOf = 5;
                 $filledStars = floor($rating);
@@ -236,22 +237,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     document.addEventListener('DOMContentLoaded', function() {
                         document.querySelectorAll('[name="submit-rating"]').forEach(button => {
                             button.addEventListener('click', function(event) {
+                                console.log('Click event on rating button');
                                 event.preventDefault();
-                                console.log("Clicked button:", this);
+                                console.log('Prevented default form submit');
+                                
                                 let ratingInput = this.form.querySelector('#rating');
-                                console.log("Found rating input:", ratingInput);
+                                console.log('Found rating input');
+                                
                                 let value = parseFloat(this.value);
-                                console.log("Value:", value);
+                                console.log('Parsed value:', value);
+                                
                                 let currentRating = parseFloat(ratingInput.value);
-                                console.log("Current rating:", currentRating);
+                                console.log('Current rating:', currentRating);
+                                
                                 let newRating = (currentRating + value).toFixed(1); 
-                                console.log("Calculated new rating:", newRating);
+                                console.log('Calculated new rating:', newRating);
+                                
                                 newRating = Math.min(5, Math.max(0, parseFloat(newRating)));
-                                console.log("Constrained new rating:", newRating);
+                                console.log('Clamped new rating:', newRating);
+                                
                                 ratingInput.value = newRating; 
-                                console.log("Updated rating input:", ratingInput);
+                                console.log('Updated rating input value');
+                                
                                 this.form.submit();
-                                console.log("Submitted form:", this.form);
+                                console.log('Submitted form');
                             });
                         });
                     });
