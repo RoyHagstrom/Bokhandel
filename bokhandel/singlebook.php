@@ -48,22 +48,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
 
+    $ratingChange = floatval($ratingChange);
+
+    $ratingChange = min(0.1, max(-0.1, $ratingChange));
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
     $updateBookRatingStmt = $conn->prepare($sql);
     if (!$updateBookRatingStmt) {
         die("Failed to prepare SQL statement: " . $conn->error);
     }
-    $updateBookRatingStmt->execute([$ratingChange, $bookID]);
-    if (!$updateBookRatingStmt) {
+    $updateBookRatingStmt->bind_param("di", $ratingChange, $bookID); 
+    if (!$updateBookRatingStmt->execute()) {
         die("Failed to execute SQL statement: " . $updateBookRatingStmt->error);
     }
-
 
     header("Location: singlebook.php?id=" . $bookID);
     exit();
 }
-
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
 <h1 class="text-3xl font-bold mt-8"><?php echo $book['Title']; ?></h1>
