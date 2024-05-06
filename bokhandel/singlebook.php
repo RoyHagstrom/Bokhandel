@@ -195,8 +195,7 @@ $other_books_result = $conn->query($other_books_sql);
                     </svg>';
                 }
                 ?>
-                <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating; ?></p>
-                <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">out of <?php echo $outOf; ?></p>
+                <p class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating . ' out of ' . $outOf; ?></p>
             </div>
         </div>
         <div class="col-md-auto col-sm-12">
@@ -206,6 +205,7 @@ $other_books_result = $conn->query($other_books_sql);
         </div>
     </div>
 </div>
+
 
 
 
