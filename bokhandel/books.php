@@ -39,6 +39,8 @@ $orderMappings = [
     'added_desc' => '`BookID` DESC',
     'Price_asc' => '`Price` ASC',
     'Price_desc' => '`Price` DESC',
+    'rating_asc' => '`Rating` ASC',
+    'rating_desc' => '`Rating` DESC',
 ];
 if ($order && array_key_exists($order, $orderMappings)) {
     $sql .= " ORDER BY " . $orderMappings[$order];
@@ -170,6 +172,9 @@ if ($category_id) {
                             <option value="added_desc" <?php echo ($_GET['sort'] ?? '') == 'added_desc' ? 'selected' : '' ?>>Added (Newest First)</option>
                             <option value="Price_asc" <?php echo ($_GET['sort'] ?? '') == 'Price_asc' ? 'selected' : '' ?>>Price (Cheapest First)</option>
                             <option value="Price_desc" <?php echo ($_GET['sort'] ?? '') == 'Price_desc' ? 'selected' : '' ?>>Price (Expensive First)</option>
+                            <option value="rating_asc" <?php echo ($_GET['sort'] ?? '') == 'rating_asc' ? 'selected' : '' ?>>Rating (Low to High)</option>
+                            <option value="rating_desc" <?php echo ($_GET['sort'] ?? '') == 'rating_desc' ? 'selected' : '' ?>>Rating (High to Low)</option>
+
                         </select>
                     </div>
                 </div>
