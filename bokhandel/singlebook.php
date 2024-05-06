@@ -50,8 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
-    $updateBookRatingStmt = $pdo->prepare($sql);
+    $updateBookRatingStmt = $conn->prepare($sql);
+    if (!$updateBookRatingStmt) {
+        die("Failed to prepare SQL statement: " . $conn->error);
+    }
     $updateBookRatingStmt->execute([$ratingChange, $bookID]);
+    if (!$updateBookRatingStmt) {
+        die("Failed to execute SQL statement: " . $updateBookRatingStmt->error);
+    }
 
 
     header("Location: book_page.php?book_id=" . $bookID);
