@@ -31,7 +31,7 @@ $user_bio = $user_bio_result->fetch_assoc();
     <?php if (!empty($user_bio["Bio"])): ?>
     <div class="p-4 rounded-lg w-full my-4 bg-gray-100 sm:p-8">
         <a href="my_books.php?uid=<?php echo $user_bio['Username']; ?>">
-            <h1 class="text-center font-semibold mb-6 text-black sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl">
+            <h1 class="text-center font-semibold mb-6 text-black sm:text-sm md:text-xl lg:text-3xl">
                 <?php echo $user_bio['Username'] ?>
             </h1>
 
