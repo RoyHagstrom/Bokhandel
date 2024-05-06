@@ -219,24 +219,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form method="post" action="">
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
                     <input type="hidden" name="rating" id="rating" value="<?php echo htmlspecialchars($rating); ?>">
-                    <button type="submit" name="submit-rating" value="+1" class="text-green-600 hover:text-green-800"><img class="w-8 h-8" src="https://www.svgrepo.com/show/510271/thumbs-up.svg" alt="Thumbs Up"></button>
+                    <button type="submit" name="submit-rating" value="0.1" class="text-green-600 hover:text-green-800">
+                        <img class="w-8 h-8" src="https://www.svgrepo.com/show/510271/thumbs-up.svg" alt="Thumbs Up">
+                    </button>
                 </form>
                 <form method="post" action="">
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
                     <input type="hidden" name="rating" id="rating" value="<?php echo htmlspecialchars($rating); ?>">
-                    <button type="submit" name="submit-rating" value="-1" class="text-red-600 hover:text-red-800"><img class="w-8 h-8" src="https://www.svgrepo.com/show/510270/thumbs-down.svg" alt="Thumbs Down"></button>
+                    <button type="submit" name="submit-rating" value="-0.1" class="text-red-600 hover:text-red-800">
+                        <img class="w-8 h-8" src="https://www.svgrepo.com/show/510270/thumbs-down.svg" alt="Thumbs Down">
+                    </button>
                 </form>
                 <script>
                     document.querySelectorAll('[name="submit-rating"]').forEach(button => {
                         button.addEventListener('click', function(event) {
                             event.preventDefault();
                             let ratingInput = this.form.querySelector('#rating');
-                            let newRating = parseInt(ratingInput.value) + parseInt(this.value);
-                            ratingInput.value = newRating;
+                            let newRating = parseFloat(ratingInput.value) + parseFloat(this.value);
+                            ratingInput.value = newRating.toFixed(1);
                             this.form.submit();
                         });
                     });
                 </script>
+
 
 
 
