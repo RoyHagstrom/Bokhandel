@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
     $ratingChange = floatval($ratingChange);
-    $ratingChange = min(0.1, max(-0.1, $ratingChange));
+    $ratingChange = min(0.05, max(-0.05, $ratingChange));
 
 
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
