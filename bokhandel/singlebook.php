@@ -176,7 +176,7 @@ $other_books_result = $conn->query($other_books_sql);
 <div class="container rounded-b-lg p-8 shadow-md">
     <div class="row">
         <div class="col-md-auto col-sm-12">
-            <div class="d-inline-flex align-items-center">
+            <div class="flex">
                 <?php
                 $rating = 4.95;
                 $outOf = 5;
@@ -201,7 +201,7 @@ $other_books_result = $conn->query($other_books_sql);
 
         <div class="col-md-auto col-sm-12">
             <div class="book-info">
-                <p><?php echo ($book['Description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p><?php echo $book['Description']; ?></p>
             </div>
         </div>
     </div>
