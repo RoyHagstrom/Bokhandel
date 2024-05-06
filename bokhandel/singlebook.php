@@ -237,14 +237,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         document.querySelectorAll('[name="submit-rating"]').forEach(button => {
                             button.addEventListener('click', function(event) {
                                 event.preventDefault();
+                                console.log("Clicked button:", this);
                                 let ratingInput = this.form.querySelector('#rating');
+                                console.log("Found rating input:", ratingInput);
                                 let value = parseFloat(this.value);
-                                alert(`Rating value: ${value}`);
+                                console.log("Value:", value);
                                 let currentRating = parseFloat(ratingInput.value);
+                                console.log("Current rating:", currentRating);
                                 let newRating = (currentRating + value).toFixed(1); 
+                                console.log("Calculated new rating:", newRating);
                                 newRating = Math.min(5, Math.max(0, parseFloat(newRating)));
+                                console.log("Constrained new rating:", newRating);
                                 ratingInput.value = newRating; 
+                                console.log("Updated rating input:", ratingInput);
                                 this.form.submit();
+                                console.log("Submitted form:", this.form);
                             });
                         });
                     });
