@@ -249,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 let currentRating = parseFloat(ratingInput.value);
                                 console.log('Current rating:', currentRating);
                                 
-                                let newRating = (currentRating + value).toFixed(1); 
+                                let newRating = (value).toFixed(1); 
                                 console.log('Calculated new rating:', newRating);
                                 
                                 newRating = Math.min(5, Math.max(0, parseFloat(newRating)));
