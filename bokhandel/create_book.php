@@ -90,33 +90,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container mx-auto p-8">
         <h2 class="text-3xl font-bold mb-4">Create Book</h2>
 
-        
-
-
-
-
-        <ul class="mb-8 space-y-4">
-            <?php for ($i = 1; $i <= 3; $i++): ?>
-                <li class="relative flex items-center">
-                    <div class="z-10 flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900">
-                        <svg class="w-2.5 h-2.5 text-blue-100 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                        </svg>
-                    </div>
-                    <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-                    <div class="mt-3">
-                        <h3 class="font-medium text-gray-900 dark:text-white"><?php echo "Step $i"; ?></h3>
-                    </div>
-                </li>
-            <?php endfor; ?>
-        </ul>
-
-
-
-
-
-
-
         <form class="bg-white shadow-md rounded-lg overflow-hidden" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
 
             <div id="step1" class="bg-white shadow-md rounded-lg overflow-hidden">
