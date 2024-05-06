@@ -69,7 +69,8 @@ if(isset($_SESSION['uname'])){
         $cacheData = json_encode([
             'username' => $_SESSION['uname'],
             'bookId' => $bookID,
-            'voteTime' => time()
+            'voteTime' => time(),
+            'voteValue' => $ratingChange
         ]);
         file_put_contents($voteCacheFile, $cacheData);
         header("Location: singlebook.php?id=" . $bookID);
