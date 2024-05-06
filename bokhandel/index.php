@@ -169,7 +169,7 @@ $highest_rated_result = $conn->query($highest_rated_sql);
         </p>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 justify-center items-center">
         <?php
         if ($featured_books_result->num_rows > 0) {
             while ($row = $featured_books_result->fetch_assoc()) {
