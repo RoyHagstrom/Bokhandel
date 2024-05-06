@@ -47,7 +47,10 @@ $other_books_result = $conn->query($other_books_sql);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
-    echo $ratingChange;
+    if (isset($_SESSION['ratingChange'])) {
+        $ratingChange = $_SESSION['ratingChange'];
+    }
+    $_SESSION['ratingChange'] = $ratingChange;
     $ratingChange = floatval($ratingChange);
     $ratingChange = min(0.1, max(-0.1, $ratingChange));
 
@@ -66,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
 }
 
-
+echo $_SESSION['ratingChange'];
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
 <h1 class="text-3xl font-bold mt-8"><?php echo $book['Title']; ?></h1>
