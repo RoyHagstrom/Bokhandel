@@ -29,15 +29,19 @@ $user_bio = $user_bio_result->fetch_assoc();
     <h2 class="text-3xl font-bold mb-4"><?php echo $author; ?>'s books</h2>
 
     <?php if (!empty($user_bio["Bio"])): ?>
-    <div class="p-4 rounded-lg w-full my-4 bg-gray-100 min-h-64">
-        <a href="my_books.php?uid=<?php echo $user_bio['Username']; ?>">
-            <h1 class=" font-semibold mb-6 text-center text-black sm:text-3xl text-2xl"><?php echo $user_bio['Username'] ?></h1>
+    <div class="p-4 rounded-lg w-full my-4 bg-gray-100 min-h-64 shadow-md">
+        <a href="my_books.php?uid=<?php echo $user_bio['Username']; ?>" class="flex flex-col items-center">
+            <h1 class="mt-4 font-semibold text-3xl text-center text-black sm:mt-6"><?php echo $user_bio['Username'] ?></h1>
 
             <?php if (!empty($user_bio['Image'])): ?>
-                <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="float-left w-auto h-40 rounded-lg mr-2 mb-2">
+                <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="mt-2 w-64 h-64 object-cover rounded-full">
             <?php endif; ?>
-            <div class="mt-2 <?php if (!empty($user_bio['Image'])) { echo "sm:mt-4"; } ?>"><p class="h-auto max-w-[60ch] leading-relaxed"><?php echo $user_bio["Bio"]; ?></p></div>
-            </a>
+            
+            <div class="mt-4 max-w-[60ch] text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
+                <?php echo $user_bio["Bio"]; ?>
+            </div>
+        </a>
+    </div>
     </div>
     <?php endif; ?>
 
