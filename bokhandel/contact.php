@@ -15,6 +15,17 @@ include 'Includes/header.php';
             <p><strong>Address:</strong> Pehr Sommars Gata 14, 10600 Ekenäs</p>
             <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus, ipsum sed blandit efficitur,
                 nulla purus auctor turpis, ac ultricies nibh risus eget arcu.</p>
+
+            <h3 class="mt-4 text-xl font-semibold">Customer Service and Business Customers</h3>
+            <p>If you have questions, doubts, or thoughts – do not hesitate to contact us by e-mail!</p>
+            <p><strong>Customer Service:</strong> kundtjanst@akateeminen.com</p>
+            <p><strong>Business Sales:</strong> foretag@akateeminen.com</p>
+            <p>If you are not sure to whom you should send your message, please contact us via our website form.</p>
+
+            <h3 class="mt-4 text-xl font-semibold">Other Persons</h3>
+            <p><strong>Executive Director:</strong> Marjo Tuomikoski</p>
+            <p><strong>Marketing:</strong> markkinointi@akateeminen.com</p>
+            <p>For marketing matters, please contact us at the address indicated above.</p>
         </div>
         <div class="w-full flex-grow p-8 bg-gray-50 sm:w-1/2">
             <h2 class="text-xl font-semibold mb-4">Contact Form</h2>
