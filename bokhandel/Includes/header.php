@@ -352,7 +352,7 @@ include 'db_connection.php';
                 </a>
             </li>
             <li>
-                <a href="my_books.php?uid=<?= $_SESSION['uid'] ?>" class="text-white">
+                <a href="my_books.php?uid=<?= $_SESSION['uname'] ?>" class="text-white">
                     <img src="https://www.svgrepo.com/show/473036/books.svg" alt="Manage Users" class="w-6 h-6 mr-2 inline-block">
                     View my books
                 </a>
