@@ -5,9 +5,7 @@
 
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
 
-<!-- Container for demo purpose -->
 <div class="container my-24 mx-auto md:px-6">
-  <!-- Section: Design Block -->
   <section class="mb-32">
     <div class="flex flex-wrap">
       <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:mb-0 md:w-7/12 md:px-3 lg:px-6">
@@ -54,11 +52,11 @@
             laboriosam, eius iusto fugiat doloremque. Dolor blanditiis odio
             placeat, doloremque ducimus quisquam velit.
           </p>
+          <img src="images/img-02.jpg" alt="Image" class="w-full md:w-1/2 h-auto md:h-80 object-cover rounded-lg mb-6 md:mb-0">
         </section>
         </div>
     </div>
   </section>
-  <!-- Section: Design Block -->
 </div>
 </div>
 
