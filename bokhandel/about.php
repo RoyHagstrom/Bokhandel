@@ -9,7 +9,7 @@
   <section class="mb-32">
     <div class="flex flex-wrap">
       <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:mb-0 md:w-7/12 md:px-3 lg:px-6">
-        <h2 class="mb-8 text-3xl font-bold">Frequently asked questions</h2>
+        <h2 class="mb-8 text-3xl font-bold">Minima sunt at nulla tenetur</h2>
         <p class="mb-2 font-bold">Anim pariatur cliche reprehenderit?</p>
         <p class="mb-8 text-neutral-500 dark:text-neutral-300">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt
