@@ -240,13 +240,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             let value = parseFloat(this.value);
                             let currentRating = parseFloat(ratingInput.value);
                             let newRating = currentRating + value; 
-
-                            newRating = Math.max(0, newRating);
+                            
+                            newRating = Math.min(5, Math.max(0, newRating));
                             ratingInput.value = newRating.toFixed(1); 
                             this.form.submit();
                         });
                     });
                 </script>
+
 
 
 
