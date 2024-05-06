@@ -187,9 +187,9 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
 
-<div class="flex items-center">
+<div class="flex items-center mb-6">
 
-    <h1 class="text-2xl font-semibold mb-6">Highest Rated Books</h1>
+    <h1 class="text-2xl font-semibold">Highest Rated Books</h1>
 
 
     <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
