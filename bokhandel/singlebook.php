@@ -50,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ratingChange = floatval($ratingChange);
     $ratingChange = min(0.05, max(-0.05, $ratingChange));
 
-
     $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
     $updateBookRatingStmt = $conn->prepare($sql);
     if (!$updateBookRatingStmt) {
