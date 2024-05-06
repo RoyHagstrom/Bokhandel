@@ -198,7 +198,6 @@ $other_books_result = $conn->query($other_books_sql);
                 ?>
                 <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating . ' out of ' . $outOf; ?></span>
                 
-                <div class="flex mt-2">
                     <form method="post" action="rating.php">
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
                         <button type="submit" name="rating" value="1" class="text-green-600 hover:text-green-800"><img src="https://www.svgrepo.com/show/510271/thumbs-up.svg" /></button>
@@ -207,7 +206,6 @@ $other_books_result = $conn->query($other_books_sql);
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
                         <button type="submit" name="rating" value="-1" class="text-red-600 hover:text-red-800"><img src="https://www.svgrepo.com/show/510270/thumbs-down.svg" /></button>
                     </form>
-                </div>
             </div>
         </div>
 
