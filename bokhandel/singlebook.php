@@ -44,7 +44,19 @@ $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND Bo
 $other_books_result = $conn->query($other_books_sql);
 
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $bookID = $_POST['book'];
+    $ratingChange = $_POST['rating'];
 
+
+    $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$ratingChange, $bookID]);
+
+
+    header("Location: book_page.php?book_id=" . $bookID);
+    exit();
+}
 
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
