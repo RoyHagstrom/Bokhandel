@@ -18,13 +18,13 @@ include 'Includes/header.php';
 
             <h3 class="mt-4 text-xl font-semibold">Customer Service and Business Customers</h3>
             <p>If you have questions, doubts, or thoughts – do not hesitate to contact us by e-mail!</p>
-            <p><strong>Customer Service:</strong> kundtjanst@akateeminen.com</p>
-            <p><strong>Business Sales:</strong> foretag@akateeminen.com</p>
+            <p><strong>Customer Service:</strong> kundtjanst@bokhandel.com</p>
+            <p><strong>Business Sales:</strong> foretag@bokhandel.com</p>
             <p>If you are not sure to whom you should send your message, please contact us via our website form.</p>
 
             <h3 class="mt-4 text-xl font-semibold">Other Persons</h3>
             <p><strong>Executive Director:</strong> Marjo Tuomikoski</p>
-            <p><strong>Marketing:</strong> markkinointi@akateeminen.com</p>
+            <p><strong>Marketing:</strong> markkinointi@bokhandel.com</p>
             <p>For marketing matters, please contact us at the address indicated above.</p>
         </div>
         <div class="w-full flex-grow p-8 bg-gray-50 sm:w-1/2">
