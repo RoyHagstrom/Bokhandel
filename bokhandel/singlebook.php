@@ -197,33 +197,17 @@ $other_books_result = $conn->query($other_books_sql);
                 }
                 ?>
                 <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating . ' out of ' . $outOf; ?></span>
-            <div class="mt-2 flex items-center">
-                <button class="text-blue-500" onclick="rateBook('<?php echo $book['ISBN']; ?>', 1)">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 12s2-4.5 5-4.5 5 4.5 5 4.5"></path><path d="M3.75 5.75v8.59c2.923 1.031 5.25 2.547 5.971 4.5 0.64-2.053 1-4.488 1-6.957 0-2.76-1.343-3.274-3.02-4.227"></path></svg>
-                </button>
-                <button class="ml-2 text-red-500" onclick="rateBook('<?php echo $book['ISBN']; ?>', -1)">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 12s2-4.5 5-4.5 5 4.5 5 4.5"></path><path d="M21 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z"></path><path d="M3.75 5.75v8.59c2.923 1.031 5.25 2.547 5.971 4.5 0.64-2.053 1-4.488 1-6.957 0-2.76-1.343-3.274-3.02-4.227"></path></svg>
-                </button>
-            </div>
-            <script>
-                function rateBook(isbn, rating) {
-                    fetch('/api/rateBook.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            isbn: isbn,
-                            rating: rating
-                        })
-                    }).then(response => response.json()).then(data => {
-                        if (data.success) {
-                            location.reload();
-                        }
-                    });
-                }
-            </script>
-            
+                
+                <div class="flex mt-2">
+                    <form method="post" action="rating.php">
+                        <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
+                        <button type="submit" name="rating" value="1" class="text-green-600 hover:text-green-800"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h8l-4-8-4 8zm6-1 4a2 2 0 1 1-4 0v6h6"/></svg></button>
+                    </form>
+                    <form method="post" action="rating.php">
+                        <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
+                        <button type="submit" name="rating" value="-1" class="text-red-600 hover:text-red-800"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.643l-4.995 4.996a1 1 0 0 1-1.414 0l-4.995-4.996A7 7 0 1 0 10.343 8zm-7.16 4.157a2 2 0 1 0 4.001 0 2 2 0 0 0-4.001 0z"/></svg></button>
+                    </form>
+                </div>
             </div>
         </div>
 
