@@ -26,7 +26,7 @@ include 'db_connection.php';
 
 
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" integrity="sha256-bzr+qe38ORs1tU0Ry/5V7ZqWnt31cc/oBq7W7oJw4Wo= sha384-bzr+qe38ORs1tU0Ry/5V7ZqWnt31cc/oBq7W7oJw4Wo= sha512-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI=" crossorigin="anonymous" as="style" />
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@4.10.5/dist/full.min.css" integrity="sha256-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha384-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha512-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI=" crossorigin="anonymous" as="style" />
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" integrity="sha256-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha384-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha512-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI=" crossorigin="anonymous" as="style" />
 
 
 
@@ -65,7 +65,7 @@ include 'db_connection.php';
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@4.10.5/dist/full.min.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" as="style">
     <link rel="preload" href="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" as="script">
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://www.googleapis.com">
@@ -86,7 +86,7 @@ include 'db_connection.php';
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.5/dist/full.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" rel="stylesheet">
 
     <script src="https://cdn.tiny.cloud/1/9gyxjs4n2tcjzi38r7oz33d8yyga54xk0fenkwi8hff4v4br/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Bokhandel</title>
