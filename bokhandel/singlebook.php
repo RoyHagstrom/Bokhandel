@@ -198,14 +198,29 @@ $other_books_result = $conn->query($other_books_sql);
                 ?>
                 <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating . ' out of ' . $outOf; ?></span>
                 
-                    <form method="post" action="rating.php">
+                    <form method="post" action="">
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
-                        <button type="submit" name="rating" value="1" class="text-green-600 hover:text-green-800"><img class="w-8 h-8" src="https://www.svgrepo.com/show/510271/thumbs-up.svg" /></button>
+                        <input type="hidden" name="rating" id="rating" value="<?php echo $rating; ?>">
+                        <button type="submit" name="submit-rating" value="1" class="text-green-600 hover:text-green-800"><img class="w-8 h-8" src="https://www.svgrepo.com/show/510271/thumbs-up.svg" /></button>
                     </form>
-                    <form method="post" action="rating.php">
+                    <form method="post" action="">
                         <input type="hidden" name="book" value="<?php echo $book['BookID']; ?>">
-                        <button type="submit" name="rating" value="-1" class="text-red-600 hover:text-red-800"><img class="w-8 h-8" src="https://www.svgrepo.com/show/510270/thumbs-down.svg" /></button>
+                        <input type="hidden" name="rating" id="rating" value="<?php echo $rating; ?>">
+                        <button type="submit" name="submit-rating" value="-1" class="text-red-600 hover:text-red-800"><img class="w-8 h-8" src="https://www.svgrepo.com/show/510270/thumbs-down.svg" /></button>
                     </form>
+                    <script>
+                        document.querySelectorAll('[name="submit-rating"]').forEach(button => {
+                            button.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                let ratingInput = document.querySelector('#rating');
+                                let newRating = parseInt(ratingInput.value) + parseInt(this.value);
+                                ratingInput.value = newRating;
+                                this.form.submit();
+                            });
+                        });
+                    </script>
+
+
             </div>
         </div>
 
