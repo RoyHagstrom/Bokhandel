@@ -66,8 +66,12 @@ if(isset($_SESSION['uname'])){
             die("Failed to execute SQL statement: " . $updateBookRatingStmt->error);
         }
 
-        file_put_contents($voteCacheFile, time());
-        
+        $cacheData = json_encode([
+            'username' => $_SESSION['uname'],
+            'bookId' => $bookID,
+            'voteTime' => time()
+        ]);
+        file_put_contents($voteCacheFile, $cacheData);
         header("Location: singlebook.php?id=" . $bookID);
         exit();
     }
