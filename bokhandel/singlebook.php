@@ -65,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: singlebook.php?id=" . $bookID);
     exit();
 }
+
+
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
 <h1 class="text-3xl font-bold mt-8"><?php echo $book['Title']; ?></h1>
