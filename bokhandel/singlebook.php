@@ -201,7 +201,7 @@ $other_books_result = $conn->query($other_books_sql);
 
         <div class="col-md-auto col-sm-12">
             <div class="book-info">
-                <p><?php echo htmlspecialchars($book['Description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p><?php echo ($book['Description'], ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         </div>
     </div>
