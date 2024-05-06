@@ -47,10 +47,6 @@ $other_books_result = $conn->query($other_books_sql);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookID = $_POST['book'];
     $ratingChange = $_POST['rating'];
-    if (isset($_SESSION['ratingChange'])) {
-        $ratingChange = $_SESSION['ratingChange'];
-    }
-    $_SESSION['ratingChange'] = $ratingChange;
     $ratingChange = floatval($ratingChange);
     $ratingChange = min(0.1, max(-0.1, $ratingChange));
 
@@ -69,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
 }
 
-echo $_SESSION['ratingChange'];
+
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center ">
 <h1 class="text-3xl font-bold mt-8"><?php echo $book['Title']; ?></h1>
@@ -242,12 +238,16 @@ echo $_SESSION['ratingChange'];
                             event.preventDefault();
                             let ratingInput = this.form.querySelector('#rating');
                             let value = parseFloat(this.value);
-                            let newRating = parseFloat(ratingInput.value) + value; 
+                            let currentRating = parseFloat(ratingInput.value);
+                            let newRating = currentRating + value; 
+
+                            newRating = Math.max(0, newRating);
                             ratingInput.value = newRating.toFixed(1); 
                             this.form.submit();
                         });
                     });
                 </script>
+
 
 
 
