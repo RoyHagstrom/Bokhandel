@@ -44,31 +44,33 @@ $other_books_sql = "SELECT * FROM Book WHERE Author = '{$book['Author']}' AND Bo
 $other_books_result = $conn->query($other_books_sql);
 
 
-$voted = false;
-$voteCacheFile = 'vote_cache/' . $_SESSION['uname'] . '_' . $bookID . '.txt';
-if (file_exists($voteCacheFile)) {
-    $voted = true;
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !$voted) {
-    $bookID = $_POST['book'];
-    $ratingChange = $_POST['rating'];
-    $ratingChange = floatval($ratingChange);
-
-    $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
-    $updateBookRatingStmt = $conn->prepare($sql);
-    if (!$updateBookRatingStmt) {
-        die("Failed to prepare SQL statement: " . $conn->error);
-    }
-    $updateBookRatingStmt->bind_param("di", $ratingChange, $bookID); 
-    if (!$updateBookRatingStmt->execute()) {
-        die("Failed to execute SQL statement: " . $updateBookRatingStmt->error);
+if(isset($_SESSION['uname'])){
+    $voted = false;
+    $voteCacheFile = 'vote_cache/' . $_SESSION['uname'] . '_' . $bookID . '.txt';
+    if (file_exists($voteCacheFile)) {
+        $voted = true;
     }
 
-    file_put_contents($voteCacheFile, time());
-    
-    header("Location: singlebook.php?id=" . $bookID);
-    exit();
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !$voted) {
+        $bookID = $_POST['book'];
+        $ratingChange = $_POST['rating'];
+        $ratingChange = floatval($ratingChange);
+
+        $sql = "UPDATE Book SET Rating = Rating + ? WHERE BookID = ?";
+        $updateBookRatingStmt = $conn->prepare($sql);
+        if (!$updateBookRatingStmt) {
+            die("Failed to prepare SQL statement: " . $conn->error);
+        }
+        $updateBookRatingStmt->bind_param("di", $ratingChange, $bookID); 
+        if (!$updateBookRatingStmt->execute()) {
+            die("Failed to execute SQL statement: " . $updateBookRatingStmt->error);
+        }
+
+        file_put_contents($voteCacheFile, time());
+        
+        header("Location: singlebook.php?id=" . $bookID);
+        exit();
+    }
 }
 
 
