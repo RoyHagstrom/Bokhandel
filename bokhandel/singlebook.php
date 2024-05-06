@@ -46,7 +46,7 @@ $other_books_result = $conn->query($other_books_sql);
 
 if(isset($_SESSION['uname'])){
     $voted = false;
-    $voteCacheFile = 'vote_cache/' . $_SESSION['uname'] . '_' . $bookID . '.txt';
+    $voteCacheFile = 'vote_cache/' . $_SESSION['uname'] . '_' . $bookID . '_' . date('YmdHis') . '.txt';
     if (file_exists($voteCacheFile)) {
         $voted = true;
     }
