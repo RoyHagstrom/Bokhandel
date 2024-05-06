@@ -178,7 +178,7 @@ $other_books_result = $conn->query($other_books_sql);
         <div class="col-md-auto col-sm-12">
             <div class="flex">
                 <?php
-                $rating = 4.95;
+                $rating = 3.95;
                 $outOf = 5;
                 $filledStars = floor($rating);
                 $emptyStars = $outOf - $filledStars;
