@@ -235,7 +235,7 @@ if(isset($_SESSION['uname'])){
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
                     <input type="hidden" name="rating" id="rating" value="<?php echo htmlspecialchars($rating); ?>">
                     <button type="submit" name="submit-rating" value="0.05" class="text-green-600 hover:text-green-800 flex items-center">
-                        <img class="w-8 h-8" src="https://www.svgrepo.com/show/506603/thumbs-up.svg"
+                        <img class="w-8 h-8" src="https://www.svgrepo.com/show/506604/thumbs-up.svg"
                             alt="Thumbs Up">
                     </button>
                 </form>
