@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    header("Location: singlebook.php?book_id=" . $bookID);
+    header("Location: singlebook.php?id=" . $bookID);
     exit();
 }
 
