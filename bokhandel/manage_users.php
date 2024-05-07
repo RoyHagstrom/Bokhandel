@@ -34,7 +34,6 @@ $result = $conn->query($sql);
                     <p class="text-gray-700 dark:text-gray-300">Email: <?php echo $row['Email']; ?></p>
                     <p class="text-gray-700 dark:text-gray-300">Role: <?php echo $row['Role']; ?></p>
                 </div>
-                <span class="self-end"><?php echo $row['UserID']; ?></span>
             </a>
         </div>
 
