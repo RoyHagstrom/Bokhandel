@@ -31,42 +31,6 @@ $result = $conn->query($sql);
                 </div>
                 <span class="self-end"><?php echo $row['UserID']; ?></span>
             </a>
-            
-            <?php
-            $stmt = $conn->prepare("SELECT BookID, Title, Price, C.Name AS Category FROM Book B JOIN categories C ON B.Category = C.ID WHERE Author = ?");
-            $stmt->bind_param("s", $row['Username']);
-            $stmt->execute();
-            $books = $stmt->get_result();
-            if ($stmt->error) {
-                echo "<p>Error: " . $stmt->error . "</p>";
-            } else {
-                if ($books->num_rows > 0) {
-                    echo '<h3 class="text-2xl font-bold mt-4 sm:mt-8 md:mt-12 text-center">' . $row['Username'] . '\'s Books:</h3>
-                    <div class="overflow-x-auto md:overflow-x-visible">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Book ID</th>
-                                <th scope="col" class="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Title</th>
-                                <th scope="col" class="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
-                                <th scope="col" class="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200">';
-                    while ($book = $books->fetch_assoc()) {
-                        echo '<tr>
-                                <td class="py-4 px-4 whitespace-nowrap"><a href="singlebook.php?id=' . $book['BookID'] . '" class="text-blue-500">' . $book['BookID'] . '</a></td>
-                                <td class="py-4 px-4 whitespace-nowrap"><a href="singlebook.php?id=' . $book['BookID'] . '" class="text-blue-500">' . $book['Title'] . '</a></td>
-                                <td class="py-4 px-4 whitespace-nowrap">' . $book['Category'] . '</td>
-                                <td class="py-4 px-4 whitespace-nowrap">' . $book['Price'] . '€</td>
-                            </tr>';
-                    }
-                    echo '</tbody></table></div>';
-                } else {
-                    echo '<p class="text-lg my-4 sm:my-8 md:my-12 italic">No books found for this user.</p>';
-                }
-            }
-            ?>
         </div>
 
     <?php endwhile; ?>
