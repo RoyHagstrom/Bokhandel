@@ -308,7 +308,7 @@ $other_books_result = $conn->query($other_books_sql);
             <div class="mb-4">
                 <div class="grid gap-2">
                     <?php foreach(["goodreads", "librarything"] as $website) { ?>
-                    <a href="https://www.<?php echo $website; ?>/search?q=<?php echo urlencode($book["Title"]); ?>" target="_blank" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-white px-2 py-2 rounded-lg"><?php echo ucwords($website); ?> reviews</a>
+                    <a href="https://www.goodreads.com/search?utf8=%E2%9C%93&query=<?php echo urlencode($book["Title"]); ?>" target="_blank" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-white px-2 py-2 rounded-lg"><?php echo ucwords($website); ?> reviews</a>
                     <?php } ?>
                 </div>
             </div>
