@@ -68,8 +68,8 @@ $rating_result = $stmt_rating->get_result();
                 $avg_rating = round($total_rating / $total_ratings, 1);
                 ?>
                 <span class="font-semibold mr-2 text-lg">
-                    Average Rating: <span class="text-lg"><?php echo $avg_rating; ?></span>
-                </span>
+                    Average Rating:</span> <span class="text-lg"><?php echo $avg_rating; ?></span>
+                
                 <?php
             }
             ?>
