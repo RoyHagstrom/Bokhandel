@@ -308,11 +308,8 @@ $other_books_result = $conn->query($other_books_sql);
             <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Reviews:</h2>
             <div class="mb-4">
                 <div class="grid gap-2">
-                    <?php 
-                    $goodreadsWebsite = "goodreads.com/search?utf8=%E2%9C%93&query=";
-                    $librarythingWebsite = "librarything.com/search.php?search="; 
-                    foreach([$goodreadsWebsite, $librarythingWebsite] as $website) { ?>
-                    <a href="https://www.<?php echo $website; ?><?php echo urlencode($book["Title"]); ?>" target="_blank" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-white px-2 py-2 rounded-lg"><?php echo ucwords(str_replace(['.com/', '.com/search?', '.php/search.php?'], '', $website)); ?> reviews</a>
+                    <?php foreach(["goodreads.com/search?utf8=%E2%9C%93&query="] as $website) { ?>
+                    <a href="https://www.<?php echo $website; ?><?php echo urlencode($book["Title"]); ?>" target="_blank" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-white px-2 py-2 rounded-lg">goodreads.com reviews</a>
                     <?php } ?>
                 </div>
             </div>
