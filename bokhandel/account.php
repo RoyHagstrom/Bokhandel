@@ -67,7 +67,7 @@ $rating_result = $stmt_rating->get_result();
             if ($total_ratings != 0) {
                 $avg_rating = round($total_rating / $total_ratings, 1);
                 ?>
-                <p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
+                <p class="font-semibold mr-2 text-lg">
                     Average Rating: <?php echo $avg_rating; ?>
                 </p>
                 <?php
