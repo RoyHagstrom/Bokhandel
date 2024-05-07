@@ -27,6 +27,12 @@ $stmt_rating->bind_param("s", $userData["Username"]);
 $stmt_rating->execute();
 $rating_result = $stmt_rating->get_result();
 
+$stmt_books = $conn->prepare("SELECT COUNT(*) AS count FROM Book WHERE Author = ?");
+$stmt_books->bind_param("s", $userData["Username"]);
+$stmt_books->execute();
+$result_books = $stmt_books->get_result();
+$row_books = $result_books->fetch_assoc();
+
 ?>
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center p-8 text-black">
@@ -51,10 +57,6 @@ $rating_result = $stmt_rating->get_result();
                 <span class="text-lg"><?= $userData['Role']; ?></span>
             </div>
             <div class="flex items-center">
-                <span class="font-semibold mr-2 text-lg">Bio:</span>
-                <span class="text-lg"><?= $userData['Bio'] ? $userData['Bio'] : 'No bio provided'; ?></span>
-            </div>
-            <div class="flex items-center">
             <?php 
             $total_rating = 0;
             $total_ratings = 0;
@@ -74,6 +76,16 @@ $rating_result = $stmt_rating->get_result();
             }
             ?>
             </div>
+            <div class="flex items-center">
+
+                <span class="font-semibold mr-2 text-lg">Number of books:</span> <span class="text-lg"><?php echo $row_books['count']; ?></span>
+            
+            </div>
+            <div class="flex items-center">
+                <span class="font-semibold mr-2 text-lg">Bio:</span>
+                <span class="text-lg"><?= $userData['Bio'] ? $userData['Bio'] : 'No bio provided'; ?></span>
+            </div>
+
             <?php if (!empty($userData['Image'])) : ?>
                 <div class="w-full mt-4">
                     <img src="<?= $userData['Image'] ?>" alt="<?= $userData['Username'] ?>'s profile picture" class="w-auto h-64 rounded-lg shadow-md m-4 rounded-full">
