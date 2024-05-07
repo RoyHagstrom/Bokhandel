@@ -36,31 +36,6 @@ $user_bio = $user_bio_result->fetch_assoc();
             <?php if (!empty($user_bio['Image'])): ?>
                 <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="mt-2 w-64 h-64 object-cover rounded-full">
             <?php endif; ?>
-
-
-            <?php 
-
-            $stmt = $conn->prepare("SELECT Rating FROM Book WHERE Author = ?");
-            $stmt->bind_param("s", $author);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $total_rating = 0;
-            $total_ratings = 0;
-            while($row = $result->fetch_assoc()){
-                $total_rating += $row['Rating'];
-                $total_ratings++;
-            }
-            if($total_ratings != 0){
-                $avg_rating = round($total_rating/$total_ratings, 1);
-                echo '<p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">Average Rating: '.$avg_rating.'</p>';
-            }
-            ?>
-            
-            
-            
-            
-            
-            
             
             <div class="mt-4 max-w-[60ch] text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
                 <?php echo $user_bio["Bio"]; ?>
@@ -88,6 +63,9 @@ $user_bio = $user_bio_result->fetch_assoc();
                 </a>
             </div>
         <?php endwhile; ?>
+    </div>
+    <div class="mt-4 flex gap-2">
+        <a href="create_book.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create Book</a>
     </div>
 </div>
 </div>
