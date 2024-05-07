@@ -25,7 +25,11 @@ $user_bio_result = $stmt_bio->get_result();
 $user_bio = $user_bio_result->fetch_assoc();
 
 
-
+$rating_sql = "SELECT Rating FROM Book WHERE Author = ?";
+$stmt_rating = $conn->prepare($rating_sql);
+$stmt_rating->bind_param("s", $author);
+$stmt_rating->execute();
+$rating_result = $stmt_rating->get_result();
 
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
@@ -46,14 +50,18 @@ $user_bio = $user_bio_result->fetch_assoc();
             $total_rating = 0;
             $total_ratings = 0;
 
-            while($row = $result->fetch_assoc()){
+            while ($row = $rating_result->fetch_assoc()) {
                 $total_rating += $row['Rating'];
                 $total_ratings++;
             }
 
-            if($total_ratings != 0){
-                $avg_rating = round($total_rating/$total_ratings, 1);
-                echo '<p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">Average Rating: '.$avg_rating.'</p>';
+            if ($total_ratings != 0) {
+                $avg_rating = round($total_rating / $total_ratings, 1);
+                ?>
+                <p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
+                    Average Rating: <?php echo $avg_rating; ?>
+                </p>
+                <?php
             }
             ?>
             
