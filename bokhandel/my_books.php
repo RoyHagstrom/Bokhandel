@@ -46,7 +46,7 @@ $user_bio = $user_bio_result->fetch_assoc();
             $total_rating = 0;
             $total_ratings = 0;
 
-            while($rating = $result->fetch_assoc()){
+            while($row = $result->fetch_assoc()){
                 $total_rating += $row['Rating'];
                 $total_ratings++;
             }
