@@ -21,6 +21,12 @@ if ($result->num_rows > 0) {
     $user->redirect("index.php");
 }
 
+$rating_sql = "SELECT Rating FROM Book WHERE Author = ?";
+$stmt_rating = $conn->prepare($rating_sql);
+$stmt_rating->bind_param("s", $author);
+$stmt_rating->execute();
+$rating_result = $stmt_rating->get_result();
+
 ?>
 
 <div class="dark min-h-screen bg-white text-gray-900 flex flex-col justify-center items-center p-8 text-black">
@@ -47,6 +53,26 @@ if ($result->num_rows > 0) {
             <div class="flex items-center">
                 <span class="font-semibold mr-2 text-lg">Bio:</span>
                 <span class="text-lg"><?= $userData['Bio'] ? $userData['Bio'] : 'No bio provided'; ?></span>
+            </div>
+            <div class="flex items-center">
+            <?php 
+            $total_rating = 0;
+            $total_ratings = 0;
+
+            while ($row = $rating_result->fetch_assoc()) {
+                $total_rating += $row['Rating'];
+                $total_ratings++;
+            }
+
+            if ($total_ratings != 0) {
+                $avg_rating = round($total_rating / $total_ratings, 1);
+                ?>
+                <p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
+                    Average Rating: <?php echo $avg_rating; ?>
+                </p>
+                <?php
+            }
+            ?>
             </div>
             <?php if (!empty($userData['Image'])) : ?>
                 <div class="w-full mt-4">
