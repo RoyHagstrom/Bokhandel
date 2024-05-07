@@ -20,7 +20,7 @@ $result = $conn->query($sql);
 
 <h2 class="text-3xl font-bold mb-4">Manage Users</h2>
 
-<div class="container mx-auto p-8 max-w-6xl grid grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="container mx-auto p-8 max-w-6xl grid grid-cols-2 lg:grid-cols-4 gap-4">
     <?php while ($row = $result->fetch_assoc()): ?>
         <div href="account.php?uid=<?php echo $row['UserID']; ?>" class="bg-white border rounded-lg shadow-md p-4 sm:p-6 lg:p-8 w-64 flex flex-col justify-between gap-4 mb-8 sm:mb-12 md:mb-16 cursor-pointer">
 
@@ -39,10 +39,11 @@ $result = $conn->query($sql);
         </div>
 
     <?php endwhile; ?>
-    <div class="mt-4 flex gap-2">
+    
+</div>
+<div class="mt-4 flex gap-2">
         <a href="register.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create User</a>
     </div>
-</div>
 </div>
 
 <?php
