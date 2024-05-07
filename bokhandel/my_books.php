@@ -29,8 +29,7 @@ $user_bio = $user_bio_result->fetch_assoc();
 $stmt_rating->bind_param("s", $author);
 $stmt_rating->execute();
 $result_rating = $stmt_rating->get_result();
-$total_rating = 0;
-$total_ratings = 0;*/
+*/
 
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
@@ -48,11 +47,14 @@ $total_ratings = 0;*/
             <?php endif; ?>
 
             <?php 
+            $total_rating = 0;
+            $total_ratings = 0;
 
             while($rating = $result->fetch_assoc()){
                 $total_rating += $rating['Rating'];
                 $total_ratings++;
             }
+
             if($total_ratings != 0){
                 $avg_rating = round($total_rating/$total_ratings, 1);
                 echo '<p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">Average Rating: '.$avg_rating.'</p>';
