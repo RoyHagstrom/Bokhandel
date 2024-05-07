@@ -21,7 +21,7 @@ $result = $conn->query($sql);
 <div class="container mx-auto p-8 max-w-6xl">
     <h2 class="text-3xl font-bold mb-4">Manage Users</h2>
     <?php while ($row = $result->fetch_assoc()): ?>
-        <div href="account.php?uid=<?php echo $row['UserID']; ?>" class="bg-white border rounded-lg shadow-md p-4 sm:p-6 lg:p-8 w-48 flex flex-col justify-between gap-4 mb-8 sm:mb-12 md:mb-16 cursor-pointer">
+        <div href="account.php?uid=<?php echo $row['UserID']; ?>" class="bg-white border rounded-lg shadow-md p-4 sm:p-6 lg:p-8 w-64 flex flex-col justify-between gap-4 mb-8 sm:mb-12 md:mb-16 cursor-pointer">
 
             <a href="account.php?uid=<?php echo $row['UserID']; ?>" class="flex flex-col sm:flex-row justify-between items-center h-full sm:h-auto">
                 <div class="mb-4 sm:mb-0 sm:mr-8">
