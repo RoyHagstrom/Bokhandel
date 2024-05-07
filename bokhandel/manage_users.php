@@ -25,8 +25,8 @@ $result = $conn->query($sql);
 
             <a href="account.php?uid=<?php echo $row['UserID']; ?>" class="flex flex-col sm:flex-row justify-between items-center h-full sm:h-auto">
                 <div class="mb-4 sm:mb-0 sm:mr-8">
-                <?php if(!empty($row['UserImage'])): ?>
-                    <img src="Uploads/<?php echo $row['UserImage']; ?>" alt="<?php echo $row['Username']; ?>" class="w-32 h-32 object-cover rounded-full mb-4 sm:mb-0">
+                <?php if(!empty($row['Image'])): ?>
+                    <img src="Uploads/<?php echo $row['Image']; ?>" alt="<?php echo $row['Username']; ?>" class="w-32 h-32 object-cover rounded-full mb-4 sm:mb-0">
                 <?php else: ?>
                     <img src="Uploads/default.png" alt="<?php echo $row['Username']; ?>" class="w-32 h-32 object-cover rounded-full mb-4 sm:mb-0">
                 <?php endif; ?>
