@@ -33,7 +33,7 @@ $result = $conn->query($sql);
                 <?php endif; ?>
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Username']; ?></h3>
                     <p class="text-gray-700 dark:text-gray-300">Email: <?php echo $row['Email']; ?></p>
-                    <p class="text-gray-700 dark:text-gray-300 <?php if($row['Role'] == "Admin"){echo "text-red-300";} ?>">Role: <?php echo $row['Role']; ?></p>
+                    <p class="text-gray-700 dark:text-gray-300 <?php if($row['Role'] == "Admin"){echo "text-red-600";} ?>">Role: <?php echo $row['Role']; ?></p>
                 </div>
             </a>
         </div>
