@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
 
 $rating_sql = "SELECT Rating FROM Book WHERE Author = ?";
 $stmt_rating = $conn->prepare($rating_sql);
-$stmt_rating->bind_param("s", $author);
+$stmt_rating->bind_param("s", $userData["Username"]);
 $stmt_rating->execute();
 $rating_result = $stmt_rating->get_result();
 
