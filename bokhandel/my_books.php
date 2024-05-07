@@ -38,11 +38,16 @@ $user_bio = $user_bio_result->fetch_assoc();
             <?php endif; ?>
             <?php 
 
+            $stmt = $conn->prepare("SELECT Rating FROM Book WHERE Author = ?");
+            $stmt->bind_param("s", $author);
+            $stmt->execute();
+            $result = $stmt->get_result();
             $total_rating = 0;
             $total_ratings = 0;
-                $total_rating += $user_bio['Rating'];
+            while($rating = $result->fetch_assoc()){
+                $total_rating += $rating['Rating'];
                 $total_ratings++;
-            
+            }
             if($total_ratings != 0){
                 $avg_rating = round($total_rating/$total_ratings, 1);
                 echo '<p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">Average Rating: '.$avg_rating.'</p>';
