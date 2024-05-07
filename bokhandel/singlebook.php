@@ -112,13 +112,13 @@ $other_books_result = $conn->query($other_books_sql);
 
                 <?php if (isset($_SESSION["uname"]) && $_SESSION["uname"] == $book['Author']){  ?>
                 <div class="mt-4 flex gap-2">
-                    <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
-                    <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
+                    <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-800 hover:bg-blue-900 text-white py-2 px-4 rounded-md">Edit Book</a>
+                    <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-800 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
                 </div>
             <?php } elseif(isset($_SESSION["uname"]) && $_SESSION["urole"] == "Admin"){ ?>
                 <div class="mt-4 flex gap-2">
-                <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Edit Book</a>
-                <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
+                <a href="edit_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-blue-800 hover:bg-blue-900 text-white py-2 px-4 rounded-md">Edit Book</a>
+                <a href="delete_book.php?bookid=<?php echo $book['BookID']; ?>" class="bg-red-800 hover:bg-red-900 text-white py-2 px-4 rounded-md">Delete Book</a>
             </div>
             <?php } ?>
 
