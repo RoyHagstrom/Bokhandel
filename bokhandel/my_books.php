@@ -17,10 +17,20 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 
-$user_bio_sql = "SELECT * FROM User WHERE Username = '{$author}'";
-$user_bio_result = $conn->query($user_bio_sql);
+$user_bio_sql = "SELECT * FROM User WHERE Username = ?";
+$stmt_bio = $conn->prepare($user_bio_sql);
+$stmt_bio->bind_param("s", $author);
+$stmt_bio->execute();
+$user_bio_result = $stmt_bio->get_result();
 $user_bio = $user_bio_result->fetch_assoc();
 
+
+$stmt_rating = $conn->prepare("SELECT Rating FROM Book WHERE Author = ?");
+$stmt_rating->bind_param("s", $author);
+$stmt_rating->execute();
+$result_rating = $stmt_rating->get_result();
+$total_rating = 0;
+$total_ratings = 0;
 
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
@@ -36,14 +46,9 @@ $user_bio = $user_bio_result->fetch_assoc();
             <?php if (!empty($user_bio['Image'])): ?>
                 <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="mt-2 w-64 h-64 object-cover rounded-full">
             <?php endif; ?>
+
             <?php 
 
-            $stmt = $conn->prepare("SELECT Rating FROM Book WHERE Author = ?");
-            $stmt->bind_param("s", $author);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $total_rating = 0;
-            $total_ratings = 0;
             while($rating = $result->fetch_assoc()){
                 $total_rating += $rating['Rating'];
                 $total_ratings++;
