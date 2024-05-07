@@ -25,12 +25,12 @@ $user_bio_result = $stmt_bio->get_result();
 $user_bio = $user_bio_result->fetch_assoc();
 
 
-$stmt_rating = $conn->prepare("SELECT Rating FROM Book WHERE Author = ?");
+/*$stmt_rating = $conn->prepare("SELECT Rating FROM Book WHERE Author = ?");
 $stmt_rating->bind_param("s", $author);
 $stmt_rating->execute();
 $result_rating = $stmt_rating->get_result();
 $total_rating = 0;
-$total_ratings = 0;
+$total_ratings = 0;*/
 
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
