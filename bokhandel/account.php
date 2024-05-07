@@ -59,6 +59,8 @@ if ($result->num_rows > 0) {
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
             <a href="create_book.php" class="btn bg-blue-500 text-white w-full sm:w-auto">Create a book</a>
             <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="btn bg-blue-700 text-white w-full sm:w-auto">View my books</a>
+
+            
             <?php if ($userData['Role'] == "Admin") : ?>
                 <a href="register.php" class="btn bg-green-500 text-white w-full sm:w-auto">Add a user</a>
                 <a href="manage_users.php" class="btn bg-green-500 text-white w-full sm:w-auto">Manage users</a>
@@ -68,7 +70,7 @@ if ($result->num_rows > 0) {
                 <a href="manage_series.php" class="btn bg-white text-gray-900 w-full sm:w-auto">Manage series</a>
                 <a href="manage_genre.php" class="btn bg-white text-gray-900 w-full sm:w-auto">Manage genre</a>
             <?php endif; ?>
-            <?php if ($_SESSION['urole'] == "Admin") : ?>
+            <?php if ($_SESSION['urole'] === "Admin" || $_SESSION["uname"] === $userData['Username'] ): ?>
                 <div class="mt-8 grid">
                     <a href="edit_user.php?userid=<?= $userData['UserID']; ?>" class="btn bg-green-500 text-white w-full sm:w-auto mb-2">Edit user</a>
                     <a href="delete_user.php?userid=<?= $userData['UserID']; ?>" class="btn bg-red-500 text-white w-full sm:w-auto mb-2" onclick="return confirm('Are you sure you want to delete this user? This action cannot be undone.')">Delete user</a>
