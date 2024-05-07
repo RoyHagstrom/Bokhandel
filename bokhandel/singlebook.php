@@ -303,6 +303,12 @@ $other_books_result = $conn->query($other_books_sql);
             <div class="book-info">
                 <p><?php echo $book['Description']; ?></p>
             </div>
+
+            <div class="mt-4">
+                <h3>Reviews:</h3>
+                <iframe src="https://www.google.com/search?q=site%3Agoodreads.com+<?php echo urlencode($book['Title']); ?>+review" width="100%" height="400" frameborder="0" style="border:0;"></iframe>
+            </div>
+
         </div>
     </div>
 </div>
