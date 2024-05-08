@@ -161,19 +161,12 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 
 
-<h1 class="text-2xl font-semibold mb-6 text-center text-black">Top Rated Authors</h1>
 <?php
-$stmt = $conn->query("SELECT User.Username AS Author, AVG(Book.Rating) AS AverageRating FROM Reviews JOIN User ON Reviews.UserID = User.UserID JOIN Book ON Reviews.BookID = Book.BookID GROUP BY User.Username ORDER BY AverageRating DESC LIMIT 3");
-while ($author = $stmt->fetch_assoc()) { ?>
-    <div class="text-center text-gray-700 dark:text-gray-300 mb-8">
-        <p><?= $author['Author'] ?> - <b><?= $author['AverageRating'] ?></b></p>
-    </div>
-<?php } if (!$stmt->num_rows) { ?>
-    <div class="text-center">
-        <p class="text-gray-700 dark:text-gray-300">No top rated authors available</p>
-    </div>
-<?php } ?>
+$stmt = $conn->query("SELECT u.Username, b.Author, b.Rating FROM User u JOIN Book b ON u.UserID = b.AuthorID ORDER BY b.Rating DESC LIMIT 5");
+while ($row = $stmt->fetch_assoc()) {
 
+}
+?>
 
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">Featured Books</h1>
