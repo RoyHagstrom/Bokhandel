@@ -20,6 +20,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 
 $highest_rated_sql = "SELECT * FROM Book ORDER BY Rating DESC LIMIT 5";
 $highest_rated_result = $conn->query($highest_rated_sql);
+
 ?>
 
 
@@ -139,6 +140,8 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 </script>
 
 
+
+
 <h1 class="text-2xl font-semibold mb-6 text-center text-black">Book Series</h1>
 <div class="container mt-8 px-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-8 place-content-center justify-center items-center self-center">
     <?php
@@ -160,14 +163,7 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 </div>
 
 
-<?php
-$stmt = $conn->query("SELECT u.Username, b.Author, b.Rating FROM User u JOIN Book b ON u.UserID = b.AuthorID ORDER BY b.Rating DESC LIMIT 5");
-$results = $stmt->fetch_all(MYSQLI_ASSOC);
-foreach ($results as $row) {
-    echo $row['Username'];
 
-}
-?>
 
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">Featured Books</h1>
