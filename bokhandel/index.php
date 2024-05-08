@@ -170,7 +170,7 @@ while ($user = $stmt->fetch_assoc()) {?>
     <div class="text-gray-700 dark:text-gray-300 mb-8 flex gap-4">
         <?php
         while ($user = $stmt->fetch_assoc()) { ?>
-        <a href="my_books?uid=<?= $user['Username'] ?>">
+        <a class="block" href="my_books?uid=<?= $user['Username'] ?>">
 <div class="border-b-2 border-gray-200 pb-4 mb-4">
 
     <img src="<?= $user['Image'] ?>" alt="<?= $user['Username'] ?>" class="rounded-full h-16 w-16 object-cover mr-4" />
