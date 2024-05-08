@@ -175,7 +175,7 @@ while ($user = $stmt->fetch_assoc()) {?>
 
     <img src="<?= $user['Image'] ?>" alt="<?= $user['Username'] ?>" class="rounded-full h-16 w-16 object-cover mr-4" />
 <h2 class="text-xl font-semibold text-black"><?= $user['Username'] ?></h2>
-    <p class="text-gray-600"><?= $user['Rating'] ?></p>
+    <p class="text-gray-600"><?= $user['Rating'] ?>/5</p>
 
 </div>
         </a>
