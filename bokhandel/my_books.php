@@ -37,7 +37,8 @@ $rating_result = $stmt_rating->get_result();
 <div class="container mx-auto sm:p-8 w-full md:max-w-6xl">
     <h2 class="text-3xl font-bold mb-4"><?php echo $author; ?>'s books</h2>
 
-    <?php if (!empty($user_bio["Bio"])): ?>
+<?php if (!empty($user_bio["Bio"]) || !empty($user_bio["Image"])): ?>
+    
     <div class="p-4 rounded-lg w-full my-4 bg-gray-100 min-h-64 shadow-md">
         <a href="my_books.php?uid=<?php echo $user_bio['Username']; ?>" class="flex flex-col items-center">
             <h1 class="mt-4 font-semibold text-3xl text-center text-black sm:mt-6"><?php echo $user_bio['Username'] ?></h1>
