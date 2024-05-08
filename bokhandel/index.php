@@ -171,7 +171,9 @@ while ($user = $stmt->fetch_assoc()) {?>
         <?php
         while ($user = $stmt->fetch_assoc()) { ?>
 <div class="border-b-2 border-gray-200 pb-4 mb-4">
-    <h2 class="text-xl font-semibold text-black"><?= $user['Name'] ?></h2>
+
+    <img src="<?= $user['Image'] ?>" alt="<?= $user['Username'] ?>" class="rounded-full h-16 w-16 object-cover mr-4" />
+<h2 class="text-xl font-semibold text-black"><?= $user['Username'] ?></h2>
     <p class="text-gray-600"><?= $user['Rating'] ?></p>
 </div>
         <?php } ?>
