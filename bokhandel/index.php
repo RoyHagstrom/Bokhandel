@@ -162,7 +162,26 @@ $highest_rated_result = $conn->query($highest_rated_sql);
     <?php } ?>
 </div>
 
-
+<?php
+$stmt = $conn->query("SELECT * FROM User ORDER BY Rating DESC LIMIT 10");
+while ($user = $stmt->fetch_assoc()) {?>
+<div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+    <h1 class="text-2xl font-semibold mb-6">Users</h1>
+    <div class="text-gray-700 dark:text-gray-300 mb-8">
+        <?php
+        $stmt = $conn->query("SELECT * FROM User ORDER BY Rating DESC LIMIT 10");
+        while ($user = $stmt->fetch_assoc()) { ?>
+            <div class="border-b-2 border-gray-200 pb-4 mb-4">
+                <h2 class="text-xl font-semibold text-black"><?= $user['Name'] ?></h2>
+                <p class="text-gray-600"><?= $user['Email'] ?></p>
+                <p class="text-gray-600"><?= $user['Rating'] ?></p>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<?php
+}
+?>
 
 
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
