@@ -166,7 +166,7 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 $stmt = $conn->query("SELECT * FROM User ORDER BY Rating DESC LIMIT 5");
 while ($user = $stmt->fetch_assoc()) {?>
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-    <h1 class="text-2xl font-semibold mb-6">Users</h1>
+    <h1 class="text-2xl font-semibold mb-6">Top Rated Authors</h1>
     <div class="text-gray-700 dark:text-gray-300 mb-8 flex gap-4">
         <?php
         while ($user = $stmt->fetch_assoc()) { ?>
