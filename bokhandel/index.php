@@ -161,11 +161,12 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 
 
 
-<?php
+<?php /*
 $stmt = $conn->query("SELECT u.Username, b.Author, b.Rating FROM User u JOIN Book b ON u.UserID = b.AuthorID ORDER BY b.Rating DESC LIMIT 5");
 while ($row = $stmt->fetch_assoc()) {
 
 }
+*/
 ?>
 
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
