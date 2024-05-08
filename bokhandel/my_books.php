@@ -57,10 +57,7 @@ $rating_result = $stmt_rating->get_result();
 
             if ($total_ratings != 0) {
                 $avg_rating = round($total_rating / $total_ratings, 1);
-$sql_update_rating = "UPDATE User SET Rating = ? WHERE Username = ?";
-$stmt_update_rating = $conn->prepare($sql_update_rating);
-$stmt_update_rating->bind_param("ds", $avg_rating, $author);
-$stmt_update_rating->execute();
+
                 ?>
                 <p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
                     Average Rating: <?php echo $avg_rating; ?>
@@ -105,5 +102,11 @@ $stmt_update_rating->execute();
 </div>
 
 <?php
+
+$sql_update_rating = "UPDATE User SET Rating = ? WHERE Username = ?";
+$stmt_update_rating = $conn->prepare($sql_update_rating);
+$stmt_update_rating->bind_param("ds", $avg_rating, $author);
+$stmt_update_rating->execute();
+
 include 'Includes/footer.php';
 ?>
