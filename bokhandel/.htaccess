@@ -11,4 +11,20 @@ RewriteRule ^(.+?)/?$ $1.php [L]
  
 ErrorDocument 404 /index.php
 
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+    ExpiresByType image/gif "access plus 2 years"
+    ExpiresByType image/jpeg "access plus 2 years"
+    ExpiresByType image/png "access plus 2 years"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/xml "access plus 1 month"
+    ExpiresByType text/xml "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 8 years"
+    ExpiresByType font/woff "access plus 8 years"
+    ExpiresByType font/otf "access plus 8 years"
+    ExpiresByType application/pdf "access plus 1 year"
+</IfModule>
 
