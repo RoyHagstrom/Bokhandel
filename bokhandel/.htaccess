@@ -28,3 +28,21 @@ ErrorDocument 404 /index.php
     ExpiresByType application/pdf "access plus 1 year"
 </IfModule>
 
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/x-httpd-php
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE application/x-font-woff
+    AddOutputFilterByType DEFLATE application/font-woff
+    AddOutputFilterByType DEFLATE application/x-font-woff2
+    AddOutputFilterByType DEFLATE application/font-woff2
+</IfModule>
