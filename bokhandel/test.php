@@ -126,6 +126,15 @@ $endTime = microtime(true);
 $executionTime = $endTime - $startTime;
 echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>";
 
+$dir = "images/";
+$images = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+
+foreach($images as $image) {
+    echo "Image File: " . basename($image) . "<br>";
+    echo "Image Type: " . mime_content_type($image) . "<br>";
+    echo "Image Size: " . filesize($image) . " bytes<br>";
+    echo "<br>";
+}
 
 phpinfo();
 
