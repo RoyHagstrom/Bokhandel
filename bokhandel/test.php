@@ -114,15 +114,17 @@ echo "PHP Version: " . phpversion() . "<br>";
 echo "PHP Memory Limit: " . ini_get('memory_limit') . "<br>";
 echo "Max Execution Time: " . ini_get('max_execution_time') . " seconds<br>";
 
-echo "Ping: " . shell_exec("ping -c 4 novatest.ddns.net");
+$pingResult = shell_exec("ping -c 4 novatest.ddns.net");
+echo "Ping: " . $pingResult;
+
+$endTime = microtime(true);
+$executionTime = $endTime - $startTime;
+echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'";
 
 
 phpinfo();
 
 
-$endTime = microtime(true);
-$executionTime = $endTime - $startTime;
-echo "<script>alert('Page generated in " . number_format($executionTime, 4) . " seconds.')</script>";
 ?>
 
 
