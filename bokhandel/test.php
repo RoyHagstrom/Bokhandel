@@ -98,5 +98,12 @@ displayIfNotEmpty('SCRIPT_NAME', 'Server request script name: ');
 displayIfNotEmpty('PHP_SELF', 'Server request php self: ');
 displayIfNotEmpty('argv', 'Server request argv: ');
 displayIfNotEmpty('argc', 'Server request argc: ');
+
+echo "<h2>Performance Information</h2>";
+echo "PHP Version: " . phpversion() . "<br>";
+echo "PHP Memory Limit: " . ini_get('memory_limit') . "<br>";
+echo "Max Execution Time: " . ini_get('max_execution_time') . " seconds<br>";
+
+
 phpinfo();
 ?>
