@@ -21,7 +21,7 @@ $featured_books_result = $conn->query($featured_books_sql);
 $highest_rated_sql = "SELECT * FROM Book ORDER BY Rating DESC LIMIT 5";
 $highest_rated_result = $conn->query($highest_rated_sql);
 
-$children_books_sql = "SELECT * FROM Book WHERE AgeRecommendation < 8 ORDER BY RAND() LIMIT 5";
+$children_books_sql = "SELECT * FROM Book WHERE AgeRecommendation <= 8 ORDER BY RAND() LIMIT 5";
 $children_books_result = $conn->query($children_books_sql);
 
 $adult_books_sql = "SELECT * FROM Book WHERE AgeRecommendation >= 12 ORDER BY RAND() LIMIT 5";
@@ -285,8 +285,6 @@ $rank++;
 
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <?php
-        $adult_books_sql = "SELECT * FROM Book WHERE AgeRecommendation >= 12 ORDER BY RAND() LIMIT 5";
-        $adult_books_result = $conn->query($adult_books_sql);
 
         if ($adult_books_result->num_rows > 0) {
             while ($row = $adult_books_result->fetch_assoc()) {
