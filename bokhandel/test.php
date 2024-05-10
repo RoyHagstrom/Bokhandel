@@ -122,8 +122,7 @@ phpinfo();
 
 $endTime = microtime(true);
 $executionTime = $endTime - $startTime;
-echo "Page generated in " . number_format($executionTime, 4) . " seconds.";
-
+echo "<script>alert('Page generated in " . number_format($executionTime, 4) . " seconds.')</script>";
 ?>
 
 
