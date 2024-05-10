@@ -52,16 +52,20 @@
             <div class="relative justify-end hidden w-full lg:flex">
                 <div class="flex justify-end inline-block p-8 pr-8 text-base leading-relaxed text-blue-400 bg-indigo-900 rounded-lg shadow-lg xl:text-lg xl:pr-16">
                     <pre><span class="text-blue-100">// Create a tenant</span>
-$tenant = Tenant::create();
-$tenant-&gt;createDomain([
-  'domain' =&gt; 'acme.com',
-]);
 
-<span class="text-blue-100">// Write your app like you're used to</span>
-Order::where('status', 'shipped')-&gt;get();
-Cache::get('order_count');
-asset('logo.png');
-dispatch(new SendOrderCreatedMail);</pre>
+                        $tenant = Tenant::create();
+                        $tenant-&gt;createDomain([
+                        'domain' =&gt; 'acme.com',
+                        ]);
+
+                        <span class="text-blue-100">// Write your app like you're used to</span>
+
+                        Order::where('status', 'shipped')-&gt;get();
+                        Cache::get('order_count');
+                        asset('logo.png');
+                        dispatch(new SendOrderCreatedMail);
+
+                    </pre>
                 </div>
             </div>
         </div>
