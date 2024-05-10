@@ -1,52 +1,7 @@
 RewriteEngine On
 
-RewriteCond %{THE_REQUEST} \s/+(.+)\.php [NC]
-RewriteRule ^ /%1 [R=301,L]
 
-RewriteCond %{THE_REQUEST} \s/index\.php[/\s] [NC]
-RewriteRule ^ / [L,R=301]
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-RewriteRule ^(.+?)/?$ /$1.php [L]
 
 ErrorDocument 404 /index.php
 
-
-
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresDefault "access plus 1 year"
-    ExpiresByType image/gif "access plus 2 years"
-    ExpiresByType image/jpeg "access plus 2 years"
-    ExpiresByType image/png "access plus 2 years"
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType text/javascript "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType application/xml "access plus 1 month"
-    ExpiresByType text/xml "access plus 1 month"
-    ExpiresByType font/woff2 "access plus 8 years"
-    ExpiresByType font/woff "access plus 8 years"
-    ExpiresByType font/otf "access plus 8 years"
-    ExpiresByType application/pdf "access plus 1 year"
-</IfModule>
-
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE application/x-httpd-php
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE text/html
-    AddOutputFilterByType DEFLATE text/plain
-    AddOutputFilterByType DEFLATE text/xml
-    AddOutputFilterByType DEFLATE text/css
-    AddOutputFilterByType DEFLATE application/json
-    AddOutputFilterByType DEFLATE application/xml
-    AddOutputFilterByType DEFLATE application/x-font-ttf
-    AddOutputFilterByType DEFLATE font/opentype
-    AddOutputFilterByType DEFLATE font/otf
-    AddOutputFilterByType DEFLATE image/svg+xml
-    AddOutputFilterByType DEFLATE application/x-font-woff
-    AddOutputFilterByType DEFLATE application/font-woff
-    AddOutputFilterByType DEFLATE application/x-font-woff2
-    AddOutputFilterByType DEFLATE application/font-woff2
-</IfModule>
 
