@@ -129,6 +129,10 @@ echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>"
 $dir = "images/";
 $images = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 
+usort($images, function($a, $b) {
+    return filesize($a) <=> filesize($b);
+});
+
 foreach($images as $image) {
     echo "<img src='" . $image . "' alt='Preview Image' style='max-width: 100px;'><br>";
     echo "Image File: " . basename($image) . "<br>";
