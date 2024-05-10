@@ -134,11 +134,12 @@ usort($images, function($a, $b) {
 });
 
 foreach($images as $image) {
+    echo "<div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;'>";
     echo "<img src='" . $image . "' alt='Preview Image' style='max-width: 100px;'><br>";
-    echo "Image File: " . basename($image) . "<br>";
-    echo "Image Type: " . mime_content_type($image) . "<br>";
-    echo "Image Size: " . filesize($image) . " bytes<br>";
-    echo "<br>";
+    echo "<strong>Image File:</strong> " . basename($image) . "<br>";
+    echo "<strong>Image Type:</strong> " . mime_content_type($image) . "<br>";
+    echo "<strong>Image Size:</strong> " . filesize($image) . " bytes<br>";
+    echo "</div>";
 }
 
 phpinfo();
