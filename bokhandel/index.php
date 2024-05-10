@@ -276,6 +276,39 @@ $rank++;
 </div>
 
 <div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
+    <h1 class="text-2xl font-semibold mb-6">Adult Books</h1>
+    <div class="text-gray-700 dark:text-gray-300 mb-8">
+        <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-4">
+            Dive into captivating stories and thought-provoking narratives with our selection of adult books.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
+        <?php
+        $adult_books_sql = "SELECT * FROM Book WHERE AgeRecommendation >= 12 ORDER BY RAND() LIMIT 5";
+        $adult_books_result = $conn->query($adult_books_sql);
+
+        if ($adult_books_result->num_rows > 0) {
+            while ($row = $adult_books_result->fetch_assoc()) {
+                echo '<a href="singlebook.php?id=' . $row['BookID'] . '" class="block bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-800 transition duration-300 relative">';
+                echo '<span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg">' . $row['Price'] . '€</span>';
+                echo '<img src="' . $row['Image'] . '" alt="' . $row['Title'] . '" class="w-30 md:w-full h-30 md:h-80 object-cover">';
+                echo '<div class="p-3 md:p-6 text-sm md:text-md">';
+                echo '<h2 class="md:text-xl font-semibold text-gray-900 dark:text-white">' . $row['Title'] . '</h2>';
+                echo '<p class="text-gray-700 dark:text-gray-300">Author: ' . $row['Author'] . '</p>';
+                echo '<p class="text-gray-700 dark:text-gray-300">' . htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 50)) . '...</p>';
+                echo '</div>';
+                echo '</a>';
+            }
+        } else {
+            echo 'No adult books available';
+        }
+        ?>
+    </div>
+</div>
+
+
+<div class="bg-white container p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
     <h1 class="text-2xl font-semibold mb-6">Children's Books</h1>
     <div class="text-gray-700 dark:text-gray-300 mb-8">
         <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-4">
