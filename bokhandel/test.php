@@ -135,7 +135,7 @@ foreach($images as $image) {
     echo "<img src='" . $image . "' alt='Preview Image' style='max-width: 100px;'><br>";
     echo "<strong>Image File:</strong> " . basename($image) . "<br>";
     echo "<strong>Image Type:</strong> " . mime_content_type($image) . "<br>";
-    echo "<strong>Image Size:</strong> " . filesize($image) . " bytes<br>";
+    echo "<strong>Image Size:</strong> " . round(filesize($image) / (1024 * 1024), 2) . " MB<br>";
     echo "</div>";
 }
 
