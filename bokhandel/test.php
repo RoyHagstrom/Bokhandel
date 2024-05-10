@@ -53,11 +53,11 @@
                 <div class="flex justify-end inline-block p-8 pr-8 text-base leading-relaxed text-blue-400 bg-indigo-900 rounded-lg shadow-lg xl:text-lg xl:pr-16">
                     <pre><span class="text-blue-100">// API</span>
 
-                    await fetch("https://api.test.com/server.url", {
-                    headers: {
-                        "Authorization": "b26dd7f8-acbb-4fab-a51f-c2c04c7b27fc" // insert your token here
-                    }
-                    }).then(res => res.json())
+                        await fetch("https://api.test.com/server.url", {
+                        headers: {
+                            "Authorization": "b26dd7f8-acbb-4fab-a51f-c2c04c7b27fc" // insert your token here
+                        }
+                        }).then(res => res.json())
 
                     </pre>
                 </div>
