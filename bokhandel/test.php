@@ -133,7 +133,7 @@ usort($images, function($a, $b) {
 foreach($images as $image) {
     echo "<div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; display: inline-block;'>";
     echo "<img src='" . $image . "' alt='Preview Image' style='max-width: 100px;'><br>";
-    echo "<strong>Image File:</strong> " . substr(basename($image), 0, 20) . "<br>";
+    echo "<strong></strong> " . substr(basename($image), 0, 20) . "<br>";
     echo "<strong>Image Type:</strong> " . mime_content_type($image) . "<br>";
     echo "<strong>Image Size:</strong> " . round(filesize($image) / (1024 * 1024), 2) . " MB<br>";
     echo "</div>";
