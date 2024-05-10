@@ -1,6 +1,9 @@
 <?php
 $startTime = microtime(true);
 
+include 'Includes/header.php'; 
+
+
 function displayIfNotEmpty($key, $label) {
     if(isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
         echo $label . $_SERVER[$key] . "<br>";
@@ -100,6 +103,7 @@ displayIfNotEmpty('SCRIPT_NAME', 'Server request script name: ');
 displayIfNotEmpty('PHP_SELF', 'Server request php self: ');
 displayIfNotEmpty('argv', 'Server request argv: ');
 displayIfNotEmpty('argc', 'Server request argc: ');
+
 
 echo "<h2>Performance Information</h2>";
 echo "PHP Version: " . phpversion() . "<br>";
