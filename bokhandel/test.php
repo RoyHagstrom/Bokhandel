@@ -122,6 +122,9 @@ $executionTime = $endTime - $startTime;
 echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>";
 
 
+$cpuUsage = shell_exec("top -bn 2 -d 0.01 | grep 'Cpu(s)' | tail -n 1 | awk '{print $2 + $4}'");
+echo "CPU Usage: " . $cpuUsage . "%<br>";
+
 phpinfo();
 
 
