@@ -122,9 +122,6 @@ echo "PHP Memory Limit: " . ini_get('memory_limit') . "<br>";
 echo "Max Execution Time: " . ini_get('max_execution_time') . " seconds<br>";
 
 
-$endTime = microtime(true);
-$executionTime = $endTime - $startTime;
-echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>";
 
 $dir = "images/";
 $images = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
@@ -134,13 +131,18 @@ usort($images, function($a, $b) {
 });
 
 foreach($images as $image) {
-    echo "<div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;'>";
+    echo "<div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; display: inline-block;'>";
     echo "<img src='" . $image . "' alt='Preview Image' style='max-width: 100px;'><br>";
     echo "<strong>Image File:</strong> " . basename($image) . "<br>";
     echo "<strong>Image Type:</strong> " . mime_content_type($image) . "<br>";
     echo "<strong>Image Size:</strong> " . filesize($image) . " bytes<br>";
     echo "</div>";
 }
+
+$endTime = microtime(true);
+$executionTime = $endTime - $startTime;
+echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>";
+
 
 phpinfo();
 
