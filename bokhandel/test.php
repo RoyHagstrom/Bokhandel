@@ -130,7 +130,7 @@ $dir = "images/";
 $images = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 
 foreach($images as $image) {
-    echo "<img src='" . $image . "' alt='Preview Image'><br>";
+    echo "<img src='" . $image . "' alt='Preview Image' style='max-width: 100px;'><br>";
     echo "Image File: " . basename($image) . "<br>";
     echo "Image Type: " . mime_content_type($image) . "<br>";
     echo "Image Size: " . filesize($image) . " bytes<br>";
