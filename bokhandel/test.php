@@ -105,5 +105,22 @@ echo "PHP Memory Limit: " . ini_get('memory_limit') . "<br>";
 echo "Max Execution Time: " . ini_get('max_execution_time') . " seconds<br>";
 
 
+displayIfNotEmpty('argc', 'Server request argc: ');
+
+echo "<h2>Performance Information</h2>";
+echo "PHP Version: " . phpversion() . "<br>";
+echo "PHP Memory Limit: " . ini_get('memory_limit') . "<br>";
+echo "Max Execution Time: " . ini_get('max_execution_time') . " seconds<br>";
+
+$startTime = microtime(true);
+
+
+$endTime = microtime(true);
+$executionTime = $endTime - $startTime;
+echo "Page generated in " . number_format($executionTime, 4) . " seconds.";
+
+phpinfo();
+?>
+
 phpinfo();
 ?>
