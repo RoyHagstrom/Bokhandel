@@ -57,7 +57,7 @@
 
 <script>
   // Set the date we're counting down to (adjust the date and time)
-  const countDownDate = new Date("Dec 30, 2025 00:00:00").getTime();
+  const countDownDate = new Date("May 24, 2024 00:00:00").getTime();
 
   // Update the countdown every 1 second
   const x = setInterval(function () {
