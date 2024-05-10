@@ -177,7 +177,7 @@ while ($user = $stmt->fetch_assoc()) {?>
     <div class="text-gray-700 dark:text-gray-300 mb-8 flex gap-4">
         <?php
         while ($user = $stmt->fetch_assoc()) { ?>
-<a class="block" href="my_books?uid=<?= $user['Username'] ?>">
+<a class="block" href="my_books.php?uid=<?= $user['Username'] ?>">
   <div class="border-b-2 border-gray-200 pb-4 mb-4">
     <img src="<?= $user['Image'] ?>" alt="<?= $user['Username'] ?>" class="rounded-full h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 object-cover mr-4 sm:mr-6 md:mr-8 lg:mr-10" />
     <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-black">#<?= $rank ?> <?= $user['Username'] ?></h2>
