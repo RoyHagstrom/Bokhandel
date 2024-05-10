@@ -6,11 +6,13 @@ RewriteRule ^ /%1 [R=301,L]
 RewriteCond %{THE_REQUEST} \s/index\.php[/\s] [NC]
 RewriteRule ^ / [L,R=301]
 
-RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ /$1.php [L]
 
 ErrorDocument 404 /index.php
+
+
 
 <IfModule mod_expires.c>
     ExpiresActive On
@@ -47,3 +49,4 @@ ErrorDocument 404 /index.php
     AddOutputFilterByType DEFLATE application/x-font-woff2
     AddOutputFilterByType DEFLATE application/font-woff2
 </IfModule>
+
