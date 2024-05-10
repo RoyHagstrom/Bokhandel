@@ -26,9 +26,9 @@ $result = $conn->query($sql);
   <div class="flex flex-col sm:flex-row justify-between items-center">
     <div class="mb-4 sm:mb-0 sm:mr-8">
       <?php if(!empty($row['Image'])): ?>
-        <img src="<?php echo $row['Image']; ?>" alt="<?php echo $row['Username']; ?>" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-cover rounded-full mb-4">
-      <?php else: ?>
-        <img src="images/default.png" alt="<?php echo $row['Username']; ?>" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-cover rounded-full mb-4">
+        <img src="<?php echo $row['Image']; ?>" alt="<?php echo $row['Username']; ?>" class="w-32 h-32 object-cover rounded-full mb-4 sm:mb-0">
+            <?php else: ?>
+        <img src="images/default.png" alt="<?php echo $row['Username']; ?>" class="w-32 h-32 object-cover rounded-full mb-4 sm:mb-0">
       <?php endif; ?>
       <div class="text-center sm:text-left">
         <h3 class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Username']; ?></h3>
