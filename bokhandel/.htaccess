@@ -10,9 +10,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f
 RewriteRule ^(.+?)/?$ /$1.php [L]
 
-RewriteCond %{QUERY_STRING} !=""
-RewriteRule ^(.*)$ /$1? [L,R]
-
 ErrorDocument 404 /index.php
 
 
