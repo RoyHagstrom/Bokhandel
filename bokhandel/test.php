@@ -1,4 +1,6 @@
 <?php
+$startTime = microtime(true);
+
 function displayIfNotEmpty($key, $label) {
     if(isset($_SERVER[$key]) && !empty($_SERVER[$key])) {
         echo $label . $_SERVER[$key] . "<br>";
@@ -112,15 +114,16 @@ echo "PHP Version: " . phpversion() . "<br>";
 echo "PHP Memory Limit: " . ini_get('memory_limit') . "<br>";
 echo "Max Execution Time: " . ini_get('max_execution_time') . " seconds<br>";
 
-$startTime = microtime(true);
+
+
+
+phpinfo();
 
 
 $endTime = microtime(true);
 $executionTime = $endTime - $startTime;
 echo "Page generated in " . number_format($executionTime, 4) . " seconds.";
 
-phpinfo();
 ?>
 
-phpinfo();
-?>
+
