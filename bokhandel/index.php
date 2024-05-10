@@ -24,6 +24,8 @@ $highest_rated_result = $conn->query($highest_rated_sql);
 $children_books_sql = "SELECT * FROM Book WHERE AgeRecommendation < 8 ORDER BY RAND() LIMIT 5";
 $children_books_result = $conn->query($children_books_sql);
 
+$adult_books_sql = "SELECT * FROM Book WHERE AgeRecommendation >= 12 ORDER BY RAND() LIMIT 5";
+$adult_books_result = $conn->query($adult_books_sql);
 ?>
 
 
