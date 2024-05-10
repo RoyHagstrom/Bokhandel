@@ -130,7 +130,7 @@ $dir = "images/";
 $images = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 
 usort($images, function($a, $b) {
-    return filesize($a) <=> filesize($b);
+    return filesize($b) <=> filesize($a);
 });
 
 foreach($images as $image) {
