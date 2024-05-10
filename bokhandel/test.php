@@ -1,7 +1,10 @@
 <?php
 $startTime = microtime(true);
 
-include 'Includes/header.php'; 
+
+include 'class.user.php';
+include 'db_connection.php';
+
 
 
 function displayIfNotEmpty($key, $label) {
