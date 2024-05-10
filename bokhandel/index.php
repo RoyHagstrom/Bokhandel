@@ -89,7 +89,7 @@ $adult_books_result = $conn->query($adult_books_sql);
     });
 
     function searchBooks(searchTerm) {
-        fetch(`Includes/search.php?term=${searchTerm}`)
+        fetch(`Includes/search?term=${searchTerm}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('');
