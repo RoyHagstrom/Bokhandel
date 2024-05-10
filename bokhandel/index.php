@@ -167,7 +167,7 @@ $stmt = $conn->query("SELECT * FROM User ORDER BY Rating DESC LIMIT 5");
 $rank = 1;
 while ($user = $stmt->fetch_assoc()) {?>
 <div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-    <h1 class="text-2xl font-semibold mb-6">Top Rated Authors</h1>
+    <h1 class="text-2xl font-semibold">Top Rated Authors</h1>
     <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-4">This is the top 5 authors based on their ratings.</p>
     <div class="text-gray-700 dark:text-gray-300 mb-8 flex gap-4">
         <?php
