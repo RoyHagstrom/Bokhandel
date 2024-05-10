@@ -1,14 +1,16 @@
 RewriteEngine On
 
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+)\.php [NC]
-RewriteRule ^/(.+?)\.php$ /$1 [R=301,L]
- 
-RewriteCond %{REQUEST_URI} ^.*index\.php(/.*)?$ [NC]
-RewriteRule ^(.*)index\.php($|/) /$1 [R=301,L]
- 
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteCond %{REQUEST_URI} ^/(.*?)/?$
+RewriteRule ^(.+?)/?$ /%1 [L,R=301]
+
+RewriteCond %{THE_REQUEST} \s/index\.php[/\s] [NC]
+RewriteRule ^ / [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.+?)/?$ $1.php [L]
- 
+
 ErrorDocument 404 /index.php
 
 <IfModule mod_expires.c>
