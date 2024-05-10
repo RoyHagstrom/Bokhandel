@@ -128,38 +128,7 @@ include 'db_connection.php';
 
 
 <body class="full bg-gray-800 dark:bg-gray-900">
-    <div id="testScreen" class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="background-color: rgba(1, 1, 1, 0.8); backdrop-filter: blur(10px); z-index: 9999; color: rgb(255, 255, 255); display: none;">
-        <p class="text-6xl font-bold">Yrkesprov: Bokhanddel</p>
-    </div>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-
-        var testScreenDisplayed = localStorage.getItem("testScreenDisplayed");
-        
-        if (!testScreenDisplayed) {
-
-            setTimeout(function() {
-
-                var testScreen = document.getElementById("testScreen");
-
-                testScreen.style.opacity = 1;
-                testScreen.style.transition = "opacity 1s ease-in-out";
-
-                setTimeout(function() {
-
-                    testScreen.style.opacity = 0;
-
-                    setTimeout(function() {
-                        testScreen.style.display = "none";
-
-                        localStorage.setItem("testScreenDisplayed", "true");
-                    }, 1000);
-                }, 1000);
-            }, 0);
-        }
-    });
-    </script>
 
 
 
