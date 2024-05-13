@@ -69,7 +69,7 @@ $user_bio = $user_bio_result->fetch_assoc();
                 <div class="p-2 sm:p-6">
                         <h2 class="sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white"><?php echo $row['Title']; ?></h2>
                         <p class="text-sm md:text-base text-gray-700 dark:text-gray-300">Author: <?php echo $row['Author']; ?></p>
-                        <p class="text-sm md:text-base text-gray-700 dark:text-gray-300"><?php echo substr($row['Description'], 0, 50) . '...'; ?></p>
+                        <p class="text-sm md:text-base text-gray-700 dark:text-gray-300"><?php echo htmlspecialchars(urldecode(substr($row['Description'], 0, 50))) . '...'; ?></p>
                     </div>
                 </a>
             </div>
