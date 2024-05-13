@@ -211,8 +211,8 @@ $other_books_result = $conn->query($other_books_sql);
             <div class="flex">
                 <?php
 
-                $rating = number_format($book['Rating'], 1);
-
+                $rating = $book['Rating'];
+                
                 
                 $outOf = 5;
                 $filledStars = floor($rating);
