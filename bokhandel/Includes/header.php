@@ -154,7 +154,7 @@ include 'db_connection.php';
                         <div tabindex="0" role="button" class="btn text-white dark:text-gray-200 hover:text-gray-300">
                             <a href="account.php?uid=<?= $_SESSION["uid"] ?>"><?= $_SESSION["uname"] ?></a>
                         </div>
-                        <?php if ($userData['Role'] == "User") : ?>
+                        <?php if ($_SESSION['urole'] == "User") : ?>
                 
                         <?php else: ?>
                 
