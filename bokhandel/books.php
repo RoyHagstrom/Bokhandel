@@ -220,6 +220,8 @@ if ($category_id) {
                                 <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300">Author: <?= htmlspecialchars($row["Author"]) ?></p>
                                 <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) ?>...</p>
                             
+                                <div class="col-md-auto col-sm-12">
+                                <div class="flex">
 
                                 <?php
 
@@ -241,6 +243,8 @@ if ($category_id) {
                                     </svg>';
                                 }
                                 ?>
+                                </div>
+                                </div>
 
 
                             </div>
