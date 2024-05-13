@@ -10,7 +10,7 @@ elseif($_SESSION["urole"] != "Admin"){
 }
 
 
-$sql = "SELECT * FROM User ORDER BY Role DESC";
+$sql = "SELECT * FROM User ORDER BY Role ASC";
 
 $result = $conn->query($sql);
 
