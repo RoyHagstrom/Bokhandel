@@ -76,7 +76,6 @@ $user_bio = $user_bio_result->fetch_assoc();
         <?php endwhile; ?>
     </div>
     <div class="mt-4 flex gap-2">
-        <a href="create_book.php" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Create Book</a>
     </div>
 </div>
 </div>
