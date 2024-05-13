@@ -233,8 +233,9 @@ $other_books_result = $conn->query($other_books_sql);
                 ?>
                 <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $book['Rating'] . ' out of ' . $outOf; ?></span>
                 
-                <?php if (!isset($_SESSION['uname'])): ?>
-                <?php else: ?>
+                <?php if (file_exists('vote_cache/' . $user->getUserIP() . '_' . $book['BookID'] . '_' .  '.txt')): ?>
+                    
+                <?php elseif(isset($_SESSION['uname'])): ?>
 
                     <form method="post" class="inline-flex items-center gap-2">
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
