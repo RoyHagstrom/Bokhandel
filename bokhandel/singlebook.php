@@ -231,7 +231,7 @@ $other_books_result = $conn->query($other_books_sql);
                     </svg>';
                 }
                 ?>
-                <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $rating . ' out of ' . $outOf; ?></span>
+                <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400"><?php echo $book['Rating'] . ' out of ' . $outOf; ?></span>
                 
                 <?php if (file_exists('vote_cache/' . $user->getUserIP() . '_' . $book['BookID'] . '_' .  '.txt')): ?>
                 <?php else: ?>
