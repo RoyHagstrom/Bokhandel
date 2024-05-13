@@ -25,12 +25,6 @@ $user_bio_result = $stmt_bio->get_result();
 $user_bio = $user_bio_result->fetch_assoc();
 
 
-$rating_sql = "SELECT Rating FROM Book WHERE Author = ?";
-$stmt_rating = $conn->prepare($rating_sql);
-$stmt_rating->bind_param("s", $author);
-$stmt_rating->execute();
-$rating_result = $stmt_rating->get_result();
-
 ?>
 <div class="bg-white text-black w-dvw min-h-screen flex flex-col justify-center items-center p-8">
 
