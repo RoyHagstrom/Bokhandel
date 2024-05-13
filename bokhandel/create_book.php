@@ -69,11 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error uploading image.");
     }
 
-$sql = "INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommendation, Category, Genre, PublicationYear, Series, Publisher, Price, Pages, Image, StatusID, Featured, Rating, AverageRating) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0)";
+$sql = "INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommendation, Category, Genre, PublicationYear, Series, Publisher, Price, Pages, Image, StatusID, Featured, Rating) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssssssssii", $title, $description, $author, $illustrator, $ageRecommendation, $categoryID, $genre, $publicationYear, $series, $publisher, $price, $pages, $targetFile, $statusID, $featured);
+$stmt->bind_param("ssssssssssssssi", $title, $description, $author, $illustrator, $ageRecommendation, $categoryID, $genre, $publicationYear, $series, $publisher, $price, $pages, $targetFile, $statusID, $featured);
+
 if ($stmt->execute()) {
         echo "Book created successfully.";
         $user->redirect("my_books.php?uid=" . $_SESSION["uname"]);
