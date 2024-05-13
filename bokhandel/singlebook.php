@@ -237,6 +237,10 @@ $other_books_result = $conn->query($other_books_sql);
                     
                 <?php elseif(isset($_SESSION['uname'])): ?>
 
+
+                    <?php if ($rating == $outOf) :?>
+
+                    <?php else: ?>
                     <form method="post" class="inline-flex items-center gap-2">
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
                     <input type="hidden" name="rating" id="rating" value="<?php echo htmlspecialchars($rating); ?>">
@@ -245,7 +249,11 @@ $other_books_result = $conn->query($other_books_sql);
                             alt="Thumbs Up">
                     </button>
                 </form>
+                <?php endif; ?>
 
+                <?php if ($rating == 0) :?>
+
+                <?php else: ?>
                 <form method="post" class="inline-flex items-center gap-2">
                     <input type="hidden" name="book" value="<?php echo htmlspecialchars($book['BookID']); ?>">
                     <input type="hidden" name="rating" id="rating" value="<?php echo htmlspecialchars($rating); ?>">
@@ -255,6 +263,7 @@ $other_books_result = $conn->query($other_books_sql);
                     </button>
                 </form>
                 
+                <?php endif; ?>
                 <?php endif; ?>
 
                 
