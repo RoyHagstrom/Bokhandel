@@ -46,27 +46,7 @@ $user_bio = $user_bio_result->fetch_assoc();
     Rating: <?php echo $user_bio["Rating"]; ?>
 </p>
 
-            <?php 
-            /*
-            $total_rating = 0;
-            $total_ratings = 0;
 
-            while ($row = $rating_result->fetch_assoc()) {
-                $total_rating += $row['Rating'];
-                $total_ratings++;
-            }
-
-            if ($total_ratings != 0) {
-                $avg_rating = round($total_rating / $total_ratings, 1);
-
-                ?>
-                <p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
-                    Average Rating: <?php echo $avg_rating; ?>
-                </p>
-                <?php
-            }
-            */
-            ?>
             
             <div class="mt-4 max-w-[60ch] text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
                 <?php echo $user_bio["Bio"]; ?>
@@ -105,10 +85,7 @@ $user_bio = $user_bio_result->fetch_assoc();
 
 <?php
 
-$sql_update_rating = "UPDATE User SET Rating = ? WHERE Username = ?";
-$stmt_update_rating = $conn->prepare($sql_update_rating);
-$stmt_update_rating->bind_param("ds", $avg_rating, $author);
-$stmt_update_rating->execute();
+
 
 include 'Includes/footer.php';
 ?>
