@@ -1,7 +1,7 @@
 <?php
 include 'Includes/header.php';
 
-if (isset($_SESSION["uid"])) {
+if (isset($_SESSION["uid"]) || $_SESSION["urole"] != "Admin") {
     $user->redirect("account.php");
 }
 
