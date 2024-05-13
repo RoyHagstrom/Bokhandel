@@ -215,12 +215,8 @@ if ($category_id) {
                         <a href="singlebook.php?id=<?= htmlspecialchars($row['BookID']) ?>" class="block">
                             <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg"><?= htmlspecialchars($row["Price"]) ?>€</span>
                             <img src="<?= htmlspecialchars($row["Image"]) ?>" alt="<?= htmlspecialchars($row["Title"]) ?>" class="w-full h-48 object-cover rounded-t-lg sm:h-64 md:h-80 lg:h-96 xl:h-112">
-                            <div class="p-2 sm:p-4 md:p-6">
-                                <h2 class="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Title"])), 0, 100)) ?></h2>
-                                <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300">Author: <?= htmlspecialchars($row["Author"]) ?></p>
-                                <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) ?>...</p>
                             
-                                <div class="col-md-auto col-sm-12">
+                            <div class="col-md-auto col-sm-12">
                                 <div class="flex">
 
                                 <?php
@@ -245,6 +241,13 @@ if ($category_id) {
                                 ?>
                                 </div>
                                 </div>
+
+                            <div class="p-2 sm:p-4 md:p-6">
+                                <h2 class="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Title"])), 0, 100)) ?></h2>
+                                <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300">Author: <?= htmlspecialchars($row["Author"]) ?></p>
+                                <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300"><?= htmlspecialchars(substr(strip_tags(html_entity_decode($row["Description"])), 0, 100)) ?>...</p>
+                            
+
 
 
                             </div>
