@@ -273,7 +273,7 @@ $other_books_result = $conn->query($other_books_sql);
                                 let currentRating = parseFloat(ratingInput.value);
                                 console.log('Current rating:', currentRating);
                                 
-                                let newRating = (value).toFixed(1); 
+                                let newRating = (value).toFixed(2); 
                                 console.log('Calculated new rating:', newRating);
                                 
                                 ratingInput.value = newRating; 
