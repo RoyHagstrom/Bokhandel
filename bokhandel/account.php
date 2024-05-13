@@ -96,11 +96,13 @@ $row_books = $result_books->fetch_assoc();
         <h3 class="text-2xl font-bold mb-2 mt-8">Actions:</h3>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
             <?php if ($userData['Role'] == "User") : ?>
-                
+
                 <?php else: ?>
             <a href="create_book.php" class="btn bg-blue-500 text-white w-full sm:w-auto">Create a book</a>
             <a href="my_books.php?uid=<?= $userData['Username'] ?>" class="btn bg-blue-700 text-white w-full sm:w-auto">View my books</a>
                 <?php endif; ?>
+
+
             
             <?php if ($userData['Role'] == "Admin") : ?>
                 <a href="register.php" class="btn bg-green-500 text-white w-full sm:w-auto">Add a user</a>
