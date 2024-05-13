@@ -71,10 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $sql = "INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommendation, Category, Genre, PublicationYear, Series, Publisher, Price, Pages, Image, StatusID, Featured, Rating) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
-
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssssssssssssi", $title, $description, $author, $illustrator, $ageRecommendation, $categoryID, $genre, $publicationYear, $series, $publisher, $price, $pages, $targetFile, $statusID, $featured);
-
 if ($stmt->execute()) {
         echo "Book created successfully.";
         $user->redirect("my_books.php?uid=" . $_SESSION["uname"]);
