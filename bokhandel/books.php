@@ -216,7 +216,7 @@ if ($category_id) {
                             <span class="absolute top-2 right-2 bg-white text-gray-900 font-semibold px-2 py-1 rounded-lg"><?= htmlspecialchars($row["Price"]) ?>€</span>
                             <img src="<?= htmlspecialchars($row["Image"]) ?>" alt="<?= htmlspecialchars($row["Title"]) ?>" class="w-full h-48 object-cover rounded-t-lg sm:h-64 md:h-80 lg:h-96 xl:h-112">
                             
-                            <div class="col-md-auto col-sm-12 mt-2">
+                            <div class="col-md-auto col-sm-12 mt-2 ml-2">
                                 <div class="flex">
 
                                 <?php
