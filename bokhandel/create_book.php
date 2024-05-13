@@ -73,8 +73,8 @@ $sql = "INSERT INTO Book (Title, Description, Author, Illustrator, AgeRecommenda
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssssssssssssi", $title, $description, $author, $illustrator, $ageRecommendation, $categoryID, $genre, $publicationYear, $series, $publisher, $price, $pages, $targetFile, $statusID, $featured);
-    if ($stmt->execute()) {
+$stmt->bind_param("ssssssssssssssi", $title, $description, $author, $illustrator, $ageRecommendation, $categoryID, $genre, $publicationYear, $series, $publisher, $price, $pages, $targetFile, $statusID, $featured);
+if ($stmt->execute()) {
         echo "Book created successfully.";
         $user->redirect("my_books.php?uid=" . $_SESSION["uname"]);
     } else {
