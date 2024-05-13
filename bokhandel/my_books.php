@@ -47,6 +47,11 @@ $rating_result = $stmt_rating->get_result();
                 <img src="<?php echo $user_bio['Image']; ?>" alt="<?php echo $user_bio['Username']; ?>" class="mt-2 w-64 h-64 object-cover rounded-full">
             <?php endif; ?>
 
+
+<p class="mt-4 text-lg text-center leading-relaxed sm:mt-6 sm:text-xl">
+    Rating: <?php echo $user_bio["Rating"]; ?>
+</p>
+
             <?php 
             /*
             $total_rating = 0;
