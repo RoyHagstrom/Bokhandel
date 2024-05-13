@@ -1,10 +1,11 @@
 <?php
 include 'Includes/header.php';
 
-if (isset($_SESSION["uid"]) || $_SESSION["urole"] != "Admin") {
+if ($_SESSION["urole"] != "Admin"){
+if (isset($_SESSION["uid"])) {
     $user->redirect("account.php");
 }
-
+}
 
 
 if (isset($_POST['register-submit'])) {
