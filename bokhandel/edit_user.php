@@ -92,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block mb-2 text-sm font-semibold" for="email">Email:</label>
                     <input type="email" id="email" name="email" class="border border-gray-400 p-2 w-full rounded-md" value="<?php echo htmlspecialchars($userInfo['Email']); ?>" required>
                 </div>
+                <?php if ($userInfo['Role'] == 'Admin'): ?>
                 <div>
                     <label class="block mb-2 text-sm font-semibold" for="role">Role:</label>
                     <select id="role" name="role" class="border border-gray-400 p-2 w-full rounded-md">
@@ -99,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="Regular" <?php echo $userInfo['Role'] == 'Regular' ? 'selected' : ''; ?>>Regular</option>
                     </select>
                 </div>
+                <?php endif ?>
                 <div>
                     <label class="block mb-2 text-sm font-semibold" for="bio">Bio:</label>
                     <textarea id="bio" name="bio" class="border border-gray-400 p-2 w-full rounded-md" rows="8" maxlength="900"><?php echo $userInfo['Bio']; ?></textarea>
