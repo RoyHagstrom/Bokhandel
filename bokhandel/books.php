@@ -227,7 +227,7 @@ if ($category_id) {
                                 <?php
 
                                 $rating = $row['Rating'];
-                                $rating.toFixed();
+                                $rating = number_format($rating, 0);
                                 $outOf = 5;
                                 $filledStars = floor($rating);
                                 $emptyStars = $outOf - $filledStars;
