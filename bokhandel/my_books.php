@@ -99,7 +99,7 @@ $user_bio = $user_bio_result->fetch_assoc();
     <form method="get" class="flex flex-col sm:flex-row items-center max-w-xl">
     <input type="hidden" name="uid" value="<?php echo htmlspecialchars($_GET['uid'] ?? '', ENT_QUOTES); ?>">
                 <div class="sm:flex sm:flex-row items-center sm:space-x-4">
-                    <div class="sm:w-1/2">
+                    <div class="sm:w-full">
                         <label for="sort-select" class="text-sm font-medium mx-2 mb-2 sm:mb-0 sm:ml-2">Sort:</label>
                         <select id="sort-select" name="sort" onchange="this.form.submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
                             <option value="">Default</option>
