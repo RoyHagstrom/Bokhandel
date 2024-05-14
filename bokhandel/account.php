@@ -4,6 +4,10 @@ if (!isset($_SESSION["uname"])) {
     $user->redirect("login.php");
 }
 
+if ($_SESSION["urole"]!= "User") {
+    $user->redirect("index.php");
+}
+
 if ($_SESSION["urole"] == "Admin") {
     $userID = isset($_GET["uid"]) ? $_GET["uid"] : $_SESSION["uid"];
 } else {
