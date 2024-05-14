@@ -69,13 +69,27 @@ else{
                 <?php endif; ?>
 
 
-                    <small class="text-gray-400 text-xs leading-3">By registering an account with Bokhandel, you expressly consent to the collection, processing, and storage of your personal information in accordance with applicable data protection laws and regulations. This includes but is not limited to the General Data Protection Regulation (GDPR) in the European Union and the California Consumer Privacy Act (CCPA) in the United States. We are committed to complying with these legal requirements and ensuring the protection of your privacy rights.
+                <button onclick="showPrivacyPolicy()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  Show Privacy Policy
+</button>
 
-You acknowledge that the information provided during registration, such as your name, email address, and contact details, is necessary for the performance of our contractual obligations and the provision of services. We may use this information for purposes such as user authentication, communication regarding account-related matters, customization of content, and improvement of our services.
+<div id="privacyPolicy" style="display: none;">
+  <small class="text-gray-400 text-xs leading-3">By registering an account with Bokhandel, you expressly consent to the collection, processing, and storage of your personal information in accordance with applicable data protection laws and regulations. This includes but is not limited to the General Data Protection Regulation (GDPR) in the European Union and the California Consumer Privacy Act (CCPA) in the United States. We are committed to complying with these legal requirements and ensuring the protection of your privacy rights.
 
-Furthermore, we will not disclose your personal information to third parties except as required by law or with your explicit consent. We may share your information with trusted service providers who assist us in operating our platform, processing transactions, or providing other support services, provided that they adhere to strict confidentiality and security measures.
+  You acknowledge that the information provided during registration, such as your name, email address, and contact details, is necessary for the performance of our contractual obligations and the provision of services. We may use this information for purposes such as user authentication, communication regarding account-related matters, customization of content, and improvement of our services.
 
-By registering an account, you affirm that you have read, understood, and accepted the terms of our Privacy Policy, which governs the collection, processing, and storage of your personal information. If you have any questions or concerns about our data practices or your privacy rights, please contact us using the information provided in the "Contact Us" section below. Your continued use of our platform constitutes ongoing consent to the handling of your personal information in accordance with this Privacy Policy and applicable laws.</small>
+  Furthermore, we will not disclose your personal information to third parties except as required by law or with your explicit consent. We may share your information with trusted service providers who assist us in operating our platform, processing transactions, or providing other support services, provided that they adhere to strict confidentiality and security measures.
+
+  By registering an account, you affirm that you have read, understood, and accepted the terms of our Privacy Policy, which governs the collection, processing, and storage of your personal information. If you have any questions or concerns about our data practices or your privacy rights, please contact us using the information provided in the "Contact Us" section below. Your continued use of our platform constitutes ongoing consent to the handling of your personal information in accordance with this Privacy Policy and applicable laws.
+  </small>
+</div>
+
+<script>
+  function showPrivacyPolicy() {
+    document.getElementById('privacyPolicy').style.display = 'block';
+  }
+</script>
+
                     <p class="bg-gray-950 text-black"><?php if(isset($registerReturn)){echo $registerReturn;} ?></p>
                     <button type="submit" name="register-submit" class="w-full text-white bg-black hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register User</button>
                 </form>
