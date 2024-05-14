@@ -56,6 +56,8 @@ $user_bio = $user_bio_result->fetch_assoc();
     </div>
     <?php endif; ?>
 
+
+    <div class="mx-auto mb-2 p-4 flex row items-center justify-center gap-4">
     <form method="get" class="flex flex-col sm:flex-row items-center max-w-xl">
                 <div class="sm:flex sm:flex-row items-center sm:space-x-4">
 
@@ -80,6 +82,7 @@ $user_bio = $user_bio_result->fetch_assoc();
                     </div>
                 </div>
             </form>
+    </div>
 
     <div class="container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4">
         <?php while ($row = $result->fetch_assoc()): ?>
