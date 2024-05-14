@@ -69,7 +69,7 @@ else{
                 <?php endif; ?>
 
 
-                <button onclick="showPrivacyPolicy()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button onclick="showPrivacyPolicy()" class="bg-blue-500 hover:bg-blue-700 text-white text-xl font-semibold py-1 px-2 rounded">
   Show Privacy Policy
 </button>
 
@@ -82,21 +82,13 @@ else{
 
   By registering an account, you affirm that you have read, understood, and accepted the terms of our Privacy Policy, which governs the collection, processing, and storage of your personal information. If you have any questions or concerns about our data practices or your privacy rights, please contact us using the information provided in the "Contact Us" section below. Your continued use of our platform constitutes ongoing consent to the handling of your personal information in accordance with this Privacy Policy and applicable laws.
   </small>
-  <button onclick="hidePrivacyPolicy()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
-    Hide Privacy Policy
-  </button>
 </div>
 
 <script>
   function showPrivacyPolicy() {
     document.getElementById('privacyPolicy').style.display = 'block';
   }
-
-  function hidePrivacyPolicy() {
-    document.getElementById('privacyPolicy').style.display = 'none';
-  }
 </script>
-
 
                     <p class="bg-gray-950 text-black"><?php if(isset($registerReturn)){echo $registerReturn;} ?></p>
                     <button type="submit" name="register-submit" class="w-full text-white bg-black hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register User</button>
