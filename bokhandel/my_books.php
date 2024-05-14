@@ -1,7 +1,9 @@
 <?php
 include 'Includes/header.php';
 
-
+if (!isset($_GET["uid"])){
+    $user->redirect("index.php");
+}
 
 
 
