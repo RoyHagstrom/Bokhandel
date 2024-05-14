@@ -69,11 +69,11 @@ else{
                 <?php endif; ?>
 
 
-                <button onclick="showPrivacyPolicy()" class="bg-gray-100 hover:bg-grey-300 text-black text-base font-semibold py-1 px-2 rounded">
+                <button onclick="togglePrivacyPolicy()" class="bg-gray-100 hover:bg-grey-300 text-black text-base font-semibold py-1 px-2 rounded">
   Show Privacy Policy
 </button>
 
-<div id="privacyPolicy" style="display: none;">
+<div id="privacyPolicy" style="display: none; transition: max-height 0.3s ease-in-out; max-height: 0;">
   <small class="text-gray-400 text-xs leading-3">By registering an account with Bokhandel, you expressly consent to the collection, processing, and storage of your personal information in accordance with applicable data protection laws and regulations. This includes but is not limited to the General Data Protection Regulation (GDPR) in the European Union and the California Consumer Privacy Act (CCPA) in the United States. We are committed to complying with these legal requirements and ensuring the protection of your privacy rights.
 
   You acknowledge that the information provided during registration, such as your name, email address, and contact details, is necessary for the performance of our contractual obligations and the provision of services. We may use this information for purposes such as user authentication, communication regarding account-related matters, customization of content, and improvement of our services.
@@ -85,10 +85,16 @@ else{
 </div>
 
 <script>
-  function showPrivacyPolicy() {
-    document.getElementById('privacyPolicy').style.display = 'block';
+  function togglePrivacyPolicy() {
+    var privacyPolicy = document.getElementById('privacyPolicy');
+    if (privacyPolicy.style.maxHeight) {
+      privacyPolicy.style.maxHeight = null;
+    } else {
+      privacyPolicy.style.maxHeight = privacyPolicy.scrollHeight + "px";
+    }
   }
 </script>
+
 
                     <p class="bg-gray-950 text-black"><?php if(isset($registerReturn)){echo $registerReturn;} ?></p>
                     <button type="submit" name="register-submit" class="w-full text-white bg-black hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register User</button>
