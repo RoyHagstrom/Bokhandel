@@ -70,22 +70,43 @@ class USER
     
     
 
-    public function register($username, $email, $password, $role = "Regular")
-    {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->conn->prepare(
-            "INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, ?)"
-        );
-        if (!$stmt) {
-            throw new RuntimeException("Registration failed. Please try again later.");
-        }
-        $stmt->bind_param('ssss', $username, $email, $hashedPassword, $role);
-        if ($stmt->execute()) {
-            return "User registered successfully";
-        } else {
-            throw new RuntimeException("Registration failed. Please try again later.");
-        }
+public function register($username, $email, $password, $role)
+{
+    if (empty($username) || empty($email) || empty($password)) {
+        throw new InvalidArgumentException("All fields are required.");
     }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        throw new InvalidArgumentException("Invalid email format.");
+    }
+
+    if (strlen($password) < 8) {
+        throw new InvalidArgumentException("Password must be at least 8 characters long.");
+    }
+
+    if (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+        throw new InvalidArgumentException("Username can only contain letters and numbers.");
+    }
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = $this->conn->prepare(
+        "INSERT INTO User (Username, Email, Password, Role) VALUES (?, ?, ?, ?)"
+    );
+
+    if (!$stmt) {
+        throw new RuntimeException("Registration failed. Please try again later.");
+    }
+
+    $stmt->bind_param('ssss', $username, $email, $hashedPassword, $role);
+
+    if ($stmt->execute()) {
+        return "User registered successfully";
+    } else {
+        throw new RuntimeException("Registration failed. Please try again later.");
+    }
+}
+
 
     public function login()
     {
