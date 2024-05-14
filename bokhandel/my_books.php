@@ -56,6 +56,43 @@ $user_bio = $user_bio_result->fetch_assoc();
     </div>
     <?php endif; ?>
 
+    <form method="get" class="flex flex-col sm:flex-row items-center max-w-xl">
+                <div class="sm:flex sm:flex-row items-center sm:space-x-4">
+                    <div class="sm:w-1/2">
+                        <label for="category-select" class="text-sm font-medium mx-2 mb-2 sm:mb-0 sm:ml-2">Category:</label>
+                        <select id="category-select" name="id" onchange="this.form.submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
+                            <option value="">All Books</option>
+                            <?php
+                            
+                            while ($category_row = $categories_result->fetch_assoc()) {
+                                $selected = $category_row['id'] == ($_GET['id'] ?? '') ? 'selected' : '';
+                                echo '<option value="' . $category_row['id'] . '" ' . $selected . '>' . htmlspecialchars($category_row['name']) . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="sm:w-1/2">
+                        <label for="sort-select" class="text-sm font-medium mx-2 mb-2 sm:mb-0 sm:ml-2">Sort:</label>
+                        <select id="sort-select" name="sort" onchange="this.form.submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
+                            <option value="">Default</option>
+                            <option value="title_asc" <?php echo ($_GET['sort'] ?? '') == 'title_asc' ? 'selected' : '' ?>>Title (A-Z)</option>
+                            <option value="title_desc" <?php echo ($_GET['sort'] ?? '') == 'title_desc' ? 'selected' : '' ?>>Title (Z-A)</option>
+                            <option value="pub_year_asc" <?php echo ($_GET['sort'] ?? '') == 'pub_year_asc' ? 'selected' : '' ?>>Publication Year (Oldest First)</option>
+                            <option value="pub_year_desc" <?php echo ($_GET['sort'] ?? '') == 'pub_year_desc' ? 'selected' : '' ?>>Publication Year (Newest First)</option>
+                            <option value="added_asc" <?php echo ($_GET['sort'] ?? '') == 'added_asc' ? 'selected' : '' ?>>Added (Oldest First)</option>
+                            <option value="added_desc" <?php echo ($_GET['sort'] ?? '') == 'added_desc' ? 'selected' : '' ?>>Added (Newest First)</option>
+                            <option value="Price_asc" <?php echo ($_GET['sort'] ?? '') == 'Price_asc' ? 'selected' : '' ?>>Price (Cheapest First)</option>
+                            <option value="Price_desc" <?php echo ($_GET['sort'] ?? '') == 'Price_desc' ? 'selected' : '' ?>>Price (Expensive First)</option>
+                            <option value="rating_asc" <?php echo ($_GET['sort'] ?? '') == 'rating_asc' ? 'selected' : '' ?>>Rating (Low to High)</option>
+                            <option value="rating_desc" <?php echo ($_GET['sort'] ?? '') == 'rating_desc' ? 'selected' : '' ?>>Rating (High to Low)</option>
+                            <option value="pages_asc" <?php echo ($_GET['sort'] ?? '') == 'pages_asc' ? 'selected' : '' ?>>Pages (Least to Most)</option>
+                            <option value="pages_desc" <?php echo ($_GET['sort'] ?? '') == 'pages_desc' ? 'selected' : '' ?>>Pages (Most to Least)</option>
+
+                        </select>
+                    </div>
+                </div>
+            </form>
+
     <div class="container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">

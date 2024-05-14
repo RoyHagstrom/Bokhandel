@@ -76,6 +76,9 @@ if ($category_id) {
     $title = '"'.urldecode($search_term).'"';
 }
 
+$categories_sql = "SELECT id, name FROM categories ORDER BY name";
+$categories_result = $conn->query($categories_sql);
+
 ?>
 
 
@@ -153,8 +156,7 @@ if ($category_id) {
                         <select id="category-select" name="id" onchange="this.form.submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
                             <option value="">All Books</option>
                             <?php
-                            $categories_sql = "SELECT id, name FROM categories ORDER BY name";
-                            $categories_result = $conn->query($categories_sql);
+                            
                             while ($category_row = $categories_result->fetch_assoc()) {
                                 $selected = $category_row['id'] == ($_GET['id'] ?? '') ? 'selected' : '';
                                 echo '<option value="' . $category_row['id'] . '" ' . $selected . '>' . htmlspecialchars($category_row['name']) . '</option>';
