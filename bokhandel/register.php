@@ -68,6 +68,8 @@ else{
                     </div>
                 <?php endif; ?>
 
+
+                    <small>By registering an account, you acknowledge and consent to the collection, processing, and storage of personal information as outlined in our Privacy Policy. This information may include but is not limited to your name, email address, contact details, and any other information provided during the registration process. You understand that this information is necessary for the provision of services and the management of your account. Furthermore, you agree that we may use this information for purposes such as user authentication, communication, customization of content, and improvement of our services. We are committed to protecting your privacy and will not disclose your information to third parties except as required by law or with your explicit consent. By registering an account, you affirm that you have read, understood, and accepted our Privacy Policy and consent to the collection, processing, and storage of your personal information in accordance with its terms.</small>
                     <p class="bg-gray-950 text-black"><?php if(isset($registerReturn)){echo $registerReturn;} ?></p>
                     <button type="submit" name="register-submit" class="w-full text-white bg-black hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register User</button>
                 </form>
