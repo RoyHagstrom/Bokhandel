@@ -13,10 +13,46 @@ if (!isset($_GET["uid"])){
 
 
 
-$stmt = $conn->prepare("SELECT * FROM Book WHERE Author = ? ORDER BY BookID DESC");
-$stmt->bind_param("s", $author);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt = $conn->prepare("SELECT * FROM Book WHERE Author = ?");
+    $stmt->bind_param("s", $author);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $defaultOrder = '`BookID` DESC';
+    
+    $orderMappings = [
+        'title_asc' => '`Title` ASC',
+        'title_desc' => '`Title` DESC',
+        'pub_year_asc' => '`PublicationYear` ASC',
+        'pub_year_desc' => '`PublicationYear` DESC',
+        'added_asc' => '`BookID` ASC',
+        'added_desc' => '`BookID` DESC',
+        'Price_asc' => '`Price` ASC',
+        'Price_desc' => '`Price` DESC',
+        'rating_asc' => '`Rating` ASC',
+        'rating_desc' => '`Rating` DESC',
+        'pages_asc' => '`Pages` ASC',
+        'pages_desc' => '`Pages` DESC',
+    ];
+    
+    $order = $_GET['sort'] ?? null;
+    
+    if ($order && array_key_exists($order, $orderMappings)) {
+        $sortingOrder = $orderMappings[$order];
+    } else {
+        $sortingOrder = $defaultOrder;
+    }
+    
+    $sql = "SELECT * FROM Book WHERE Author = ?";
+    $sql .= " ORDER BY " . $sortingOrder;
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $author);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+
+
 
 
 $user_bio_sql = "SELECT * FROM User WHERE Username = ?";
