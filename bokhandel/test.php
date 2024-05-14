@@ -144,6 +144,21 @@ $executionTime = $endTime - $startTime;
 echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>";
 
 
+
+$sql = "SELECT * FROM bokhandel";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        foreach($row as $key => $value) {
+            echo $key . ": " . $value . "<br>";
+        }
+    }
+} else {
+    echo "0 results";
+}
+
+
 phpinfo();
 
 
