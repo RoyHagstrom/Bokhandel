@@ -1,32 +1,16 @@
 RewriteEngine On
 
-RewriteCond %{HTTP_HOST} ^www\.example\.com [NC]
-RewriteRule ^(.*)$ https://example.com/$1 [L,R=301]
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^ %{REQUEST_URI}.php [L]
 
-RewriteCond %{THE_REQUEST} \s/index\.php[/\s] [NC]
+RewriteCond %{REQUEST_URI} ^/index$ [NC]
 RewriteRule ^ / [L,R=301]
 
-ErrorDocument 404 /404.html
-ErrorDocument 403 /403.html
-ErrorDocument 500 /500.html
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-
+ErrorDocument 404 /index
+ErrorDocument 403 /index
+ErrorDocument 500 /index
 
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
-    
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-</IfModule>
-
-<IfModule mod_deflate.c>
-    SetOutputFilter DEFLATE
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript
-    DeflateCompressionLevel 9
 </IfModule>
