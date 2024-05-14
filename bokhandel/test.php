@@ -143,22 +143,36 @@ foreach($images as $image) {
 
 
 
-$sql = "SELECT * FROM bokhandel";
-$result = $conn->query($sql);
+// Get all table names in the database
+$tables_result = $conn->query("SHOW TABLES");
+if ($tables_result) {
+    while ($table_row = $tables_result->fetch_row()) {
+        $table_name = $table_row[0];
+        echo "<h2>Table: $table_name</h2>";
 
-if ($result) {
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            foreach($row as $key => $value) {
-                echo htmlspecialchars($key) . ": " . htmlspecialchars($value) . "<br>";
+        // Fetch and display content of each table
+        $table_content_result = $conn->query("SELECT * FROM $table_name");
+        if ($table_content_result) {
+            if ($table_content_result->num_rows > 0) {
+                while ($row = $table_content_result->fetch_assoc()) {
+                    foreach ($row as $key => $value) {
+                        // Output escaping to prevent XSS attacks
+                        echo htmlspecialchars($key) . ": " . htmlspecialchars($value) . "<br>";
+                    }
+                }
+            } else {
+                echo "Table $table_name is empty<br>";
             }
+        } else {
+            // Error handling if query fails
+            echo "Error executing query for table $table_name: " . $conn->error . "<br>";
         }
-    } else {
-        echo "0 results";
     }
 } else {
-    echo "Error executing the query: " . $conn->error;
+    // Error handling if query fails
+    echo "Error fetching table names: " . $conn->error;
 }
+
 
 
 $endTime = microtime(true);
