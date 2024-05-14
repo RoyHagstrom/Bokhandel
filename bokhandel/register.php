@@ -69,6 +69,13 @@ else{
                 <?php endif; ?>
 
 
+
+
+
+                    <p class="bg-gray-950 text-black"><?php if(isset($registerReturn)){echo $registerReturn;} ?></p>
+                    <button type="submit" name="register-submit" class="w-full text-white bg-black hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register User</button>
+                </form>
+
                 <button onclick="togglePrivacyPolicy()" class="bg-gray-100 hover:bg-grey-300 text-black text-base font-semibold py-1 px-2 rounded">
   Show Privacy Policy
 </button>
@@ -96,9 +103,6 @@ else{
 </script>
 
 
-                    <p class="bg-gray-950 text-black"><?php if(isset($registerReturn)){echo $registerReturn;} ?></p>
-                    <button type="submit" name="register-submit" class="w-full text-white bg-black hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register User</button>
-                </form>
             </div>
         </div>
     </div>
