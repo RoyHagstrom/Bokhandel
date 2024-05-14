@@ -58,19 +58,7 @@ $user_bio = $user_bio_result->fetch_assoc();
 
     <form method="get" class="flex flex-col sm:flex-row items-center max-w-xl">
                 <div class="sm:flex sm:flex-row items-center sm:space-x-4">
-                    <div class="sm:w-1/2">
-                        <label for="category-select" class="text-sm font-medium mx-2 mb-2 sm:mb-0 sm:ml-2">Category:</label>
-                        <select id="category-select" name="id" onchange="this.form.submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
-                            <option value="">All Books</option>
-                            <?php
-                            
-                            while ($category_row = $categories_result->fetch_assoc()) {
-                                $selected = $category_row['id'] == ($_GET['id'] ?? '') ? 'selected' : '';
-                                echo '<option value="' . $category_row['id'] . '" ' . $selected . '>' . htmlspecialchars($category_row['name']) . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
+
                     <div class="sm:w-1/2">
                         <label for="sort-select" class="text-sm font-medium mx-2 mb-2 sm:mb-0 sm:ml-2">Sort:</label>
                         <select id="sort-select" name="sort" onchange="this.form.submit()" class="block border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs w-full mt-2 sm:mt-0">
