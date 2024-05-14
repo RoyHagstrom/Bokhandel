@@ -69,7 +69,7 @@ else{
                 <?php endif; ?>
 
 
-                <button onclick="showPrivacyPolicy()" class="bg-blue-500 hover:bg-blue-700 text-white text-xl font-semibold py-1 px-2 rounded">
+                <button onclick="showPrivacyPolicy()" class="bg-blue-500 hover:bg-blue-700 text-white text-base font-semibold py-1 px-2 rounded">
   Show Privacy Policy
 </button>
 
