@@ -4,7 +4,7 @@ if (!isset($_SESSION["uname"])) {
     $user->redirect("login.php");
 }
 
-if ($_SESSION["urole"]!= "User") {
+if ($_SESSION["urole"] == "User") {
     $user->redirect("index.php");
 }
 
