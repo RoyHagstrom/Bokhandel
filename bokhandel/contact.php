@@ -3,7 +3,7 @@ include 'Includes/header.php';
 ?>
 
 
-<div class="bg-white text-black px-4 py-20 flex flex-col justify-center items-center sm:px-6 lg:px-8">
+<div class="bg-white text-black min-h-screen px-4 py-20 flex flex-col justify-center items-center sm:px-6 lg:px-8">
     <h1 class="text-2xl font-bold mb-4 sm:text-3xl">Contact Us</h1>
 
     <div class="mx-auto w-full max-w-[800px] flex flex-col gap-4 sm:flex-row sm:gap-0 sm:px-8 rounded-lg">
