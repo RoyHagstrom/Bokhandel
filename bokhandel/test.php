@@ -121,7 +121,9 @@ echo "PHP Version: " . phpversion() . "<br>";
 echo "PHP Memory Limit: " . ini_get('memory_limit') . "<br>";
 echo "Max Execution Time: " . ini_get('max_execution_time') . " seconds<br>";
 
-
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 
 $dir = "images/";
 $images = glob($dir . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
