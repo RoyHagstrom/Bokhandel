@@ -238,7 +238,7 @@ $other_books_result = $conn->query($other_books_sql);
                 <?php elseif(isset($_SESSION['uname'])): ?>
 
 
-                    <?php if ($rating == $outOf) :?>
+                    <?php if ($book['Rating'] == $outOf) :?>
 
                     <?php else: ?>
                     <form method="post" class="inline-flex items-center gap-2">
@@ -251,7 +251,7 @@ $other_books_result = $conn->query($other_books_sql);
                 </form>
                 <?php endif; ?>
 
-                <?php if ($rating == 0) :?>
+                <?php if ($book['Rating'] == 0) :?>
 
                 <?php else: ?>
                 <form method="post" class="inline-flex items-center gap-2">
