@@ -146,15 +146,20 @@ foreach($images as $image) {
 $sql = "SELECT * FROM bokhandel";
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        foreach($row as $key => $value) {
-            echo $key . ": " . $value . "<br>";
+if ($result) {
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            foreach($row as $key => $value) {
+                echo htmlspecialchars($key) . ": " . htmlspecialchars($value) . "<br>";
+            }
         }
+    } else {
+        echo "0 results";
     }
 } else {
-    echo "0 results";
+    echo "Error executing the query: " . $conn->error;
 }
+
 
 $endTime = microtime(true);
 $executionTime = $endTime - $startTime;
