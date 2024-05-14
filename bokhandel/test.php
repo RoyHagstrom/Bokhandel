@@ -139,9 +139,7 @@ foreach($images as $image) {
     echo "</div>";
 }
 
-$endTime = microtime(true);
-$executionTime = $endTime - $startTime;
-echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>";
+
 
 
 
@@ -158,6 +156,9 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
+$endTime = microtime(true);
+$executionTime = $endTime - $startTime;
+echo "'Page generated in " . number_format($executionTime, 4) . " seconds.'<br>";
 
 phpinfo();
 
