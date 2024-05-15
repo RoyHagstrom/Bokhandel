@@ -141,10 +141,13 @@ include 'db_connection.php';
     preconnect.rel = 'preconnect';
     preconnect.href = 'https://cdn.gtranslate.net';
     document.head.appendChild(preconnect);
+    
     var script = document.createElement('script');
     script.async = true;
     script.src = 'https://cdn.gtranslate.net/widgets/latest/float.js';
     document.body.appendChild(script);
+    
+    preconnect.setAttribute("crossorigin", "");
   })();
 </script>
 
