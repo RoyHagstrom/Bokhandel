@@ -28,7 +28,7 @@ include 'db_connection.php';
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" integrity="sha256-bzr+qe38ORs1tU0Ry/5V7ZqWnt31cc/oBq7W7oJw4Wo= sha384-bzr+qe38ORs1tU0Ry/5V7ZqWnt31cc/oBq7W7oJw4Wo= sha512-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI=" crossorigin="anonymous" as="style" />
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.css" integrity="sha256-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha384-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI= sha512-tq2XQC7duQPnpdenPuR6Z5IE773aRSGjkcutnfUJuTI=" crossorigin="anonymous" as="style" />
 
-
+<link rel="preload" href="https://cdn.gtranslate.net/widgets/latest/float.js" as="script" importance="high">
 
 <meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate">
 
@@ -70,7 +70,7 @@ include 'db_connection.php';
     <link rel="preconnect" href="https://www.googleapis.com">
     <link rel="preconnect" href="https://www.google.com">
  
-    <link rel="preload" href="https://cdn.gtranslate.net/widgets/latest/float.js" as="script">
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -125,32 +125,8 @@ include 'db_connection.php';
 </head>
 
 <div class="gtranslate_wrapper"></div>
-<script>
-  (function() {
-    var gtranslateSettings = {
-      "default_language": "en",
-      "detect_browser_language": true,
-      "languages": ["en", "sv", "fi"],
-      "wrapper_selector": ".gtranslate_wrapper",
-      "alt_flags": {
-        "en": "usa"
-      }
-    };
-
-    var preconnect = document.createElement('link');
-    preconnect.rel = 'preconnect';
-    preconnect.href = 'https://cdn.gtranslate.net';
-    document.head.appendChild(preconnect);
-    
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://cdn.gtranslate.net/widgets/latest/float.js';
-    document.body.appendChild(script);
-    
-    preconnect.setAttribute("crossorigin", "");
-  })();
-</script>
-
+<script>window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"languages":["en","sv","fi"],"wrapper_selector":".gtranslate_wrapper","alt_flags":{"en":"usa"}}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 
 
 <body class="full bg-gray-800 dark:bg-gray-900">
