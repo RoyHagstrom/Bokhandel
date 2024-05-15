@@ -70,7 +70,7 @@ include 'db_connection.php';
     <link rel="preconnect" href="https://www.googleapis.com">
     <link rel="preconnect" href="https://www.google.com">
  
-
+    <link rel="preload" href="https://cdn.gtranslate.net/widgets/latest/float.js" as="script">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
