@@ -319,11 +319,33 @@ $other_books_result = $conn->query($other_books_sql);
 
             <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Reviews:</h2>
             <div class="mb-4">
-                <div class="grid gap-2">
-                    <?php foreach(["goodreads.com/search?utf8=%E2%9C%93&query="] as $website) { ?>
-                    <a href="https://www.<?php echo $website; ?><?php echo urlencode($book["Title"]); ?>" target="_blank" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-white px-2 py-2 rounded-lg">goodreads.com reviews</a>
-                    <?php } ?>
-                </div>
+            <div class="grid gap-2">
+                <?php
+
+$api_key = 'D2yWK2ObmYWgzoGPJMwwj3bWHbILXvUS';
+$author = $user_bio['Username'];
+$base_url = 'https://api.nytimes.com/svc/books/v3/reviews.json';
+
+$request_url = $base_url . '?author=' . urlencode($author) . '&api-key=' . $api_key;
+
+$response = file_get_contents($request_url);
+
+if ($response !== false) {
+    $reviews_data = json_decode($response, true);
+
+    if (isset($reviews_data['results'])) {
+        foreach ($reviews_data['results'] as $review) {
+            $book_title = $review['book_title'];
+            $review_snippet = $review['review_snippet'];
+        }
+    } else {
+        echo 'No reviews found for author: ' . $author;
+    }
+} else {
+    echo 'Failed to fetch book reviews. Please try again later.';
+}
+?>
+            </div>
             </div>
 
         </div>
