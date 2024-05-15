@@ -130,13 +130,8 @@ public function register($username, $email, $password, $role)
             $acceptLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
             $primaryLanguage = strtok($acceptLanguage, ',');
             $_SESSION["ulang"] = $primaryLanguage;
-            
+
             $_SESSION["user_ip"] = $this->getUserIP();
-            $_SESSION["access_logs"][] = array(
-                "timestamp" => time(),
-                "page" => $_SERVER['REQUEST_URI'],
-                "action" => "Viewed"
-            );
             
             return "success";
         } else {
