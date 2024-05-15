@@ -15,6 +15,7 @@
                 <ul class="flex space-x-6">
                     <li><a href="index.php" class="text-white dark:text-gray-200 hover:text-gray-300">Home</a></li>
                     <li><a href="books.php" class="text-white dark:text-gray-200 hover:text-gray-300">Books</a></li>
+                    <li><a href="about.php" class="text-white dark:text-gray-200 hover:text-gray-300">About us</a></li>
                     <li><a href="contact.php" class="text-white dark:text-gray-200 hover:text-gray-300">Contact</a></li>
                 </ul>
             </nav>
