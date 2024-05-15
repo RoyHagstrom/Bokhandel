@@ -126,6 +126,13 @@ public function register($username, $email, $password, $role)
             $_SESSION["uname"] = $user["Username"];
             $_SESSION["urole"] = $user["Role"];
             $_SESSION["uid"] = $user["UserID"];
+            $_SESSION["user_ip"] = $_SERVER['REMOTE_ADDR'];
+            $_SESSION["access_logs"][] = array(
+                "timestamp" => time(),
+                "page" => $_SERVER['REQUEST_URI'],
+                "action" => "Viewed"
+            );
+            
             return "success";
         } else {
             return "Incorrect password!";
