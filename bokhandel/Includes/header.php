@@ -126,7 +126,14 @@ include 'db_connection.php';
 
 <div class="gtranslate_wrapper"></div>
 <script>
-    window.addEventListener('DOMContentLoaded', function() {
+    function loadGTranslateScript() {
+        var script = document.createElement('script');
+        script.src = "https://cdn.gtranslate.net/widgets/latest/float.js";
+        script.defer = true;
+        document.body.appendChild(script);
+    }
+
+    function initializeGTranslate() {
         window.gtranslateSettings = {
             "default_language": "en",
             "detect_browser_language": true,
@@ -134,13 +141,26 @@ include 'db_connection.php';
             "wrapper_selector": ".gtranslate_wrapper",
             "alt_flags": {"en": "usa"}
         };
+    }
 
-        var script = document.createElement('script');
-        script.src = "https://cdn.gtranslate.net/widgets/latest/float.js";
-        script.defer = true;
-        document.body.appendChild(script);
+    function setLanguageFromLocalStorage() {
+        var savedLanguage = localStorage.getItem('gtranslate_language');
+        if (savedLanguage) {
+            window.gtranslateSettings.default_language = savedLanguage;
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+        initializeGTranslate();
+        setLanguageFromLocalStorage();
+        loadGTranslateScript();
+    });
+
+    window.addEventListener('gtranslate:language_changed', function(event) {
+        localStorage.setItem('gtranslate_language', event.detail.language);
     });
 </script>
+
 
 
 
