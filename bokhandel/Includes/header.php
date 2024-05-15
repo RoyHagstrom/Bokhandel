@@ -125,8 +125,23 @@ include 'db_connection.php';
 </head>
 
 <div class="gtranslate_wrapper"></div>
-<script>window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"languages":["en","sv","fi"],"wrapper_selector":".gtranslate_wrapper","alt_flags":{"en":"usa"}}</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        window.gtranslateSettings = {
+            "default_language": "en",
+            "detect_browser_language": true,
+            "languages": ["en", "sv", "fi"],
+            "wrapper_selector": ".gtranslate_wrapper",
+            "alt_flags": {"en": "usa"}
+        };
+
+        var script = document.createElement('script');
+        script.src = "https://cdn.gtranslate.net/widgets/latest/float.js";
+        script.defer = true;
+        document.body.appendChild(script);
+    });
+</script>
+
 
 
 <body class="full bg-gray-800 dark:bg-gray-900">
