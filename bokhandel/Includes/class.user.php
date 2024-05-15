@@ -126,6 +126,7 @@ public function register($username, $email, $password, $role)
             $_SESSION["uname"] = $user["Username"];
             $_SESSION["urole"] = $user["Role"];
             $_SESSION["uid"] = $user["UserID"];
+            $_SESSION["ulang"] = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
             $_SESSION["user_ip"] = $this->getUserIP();
             $_SESSION["access_logs"][] = array(
                 "timestamp" => time(),
