@@ -136,12 +136,18 @@ include 'db_connection.php';
         "en": "usa"
       }
     };
+
+    var preconnect = document.createElement('link');
+    preconnect.rel = 'preconnect';
+    preconnect.href = 'https://cdn.gtranslate.net';
+    document.head.appendChild(preconnect);
     var script = document.createElement('script');
     script.async = true;
     script.src = 'https://cdn.gtranslate.net/widgets/latest/float.js';
     document.body.appendChild(script);
   })();
 </script>
+
 
 
 <body class="full bg-gray-800 dark:bg-gray-900">
