@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label class="block mb-2 text-sm font-semibold" for="email">Email:</label>
                     <input type="email" id="email" name="email" class="border border-gray-400 p-2 w-full rounded-md" value="<?php echo htmlspecialchars($userInfo['Email']); ?>" required>
                 </div>
-                <?php if ($userInfo['Role'] == 'Admin'): ?>
+                <?php if ($_SESSION['urole'] == 'Admin'): ?>
                 <div>
                     <label class="block mb-2 text-sm font-semibold" for="role">Role:</label>
                     <select id="role" name="role" class="border border-gray-400 p-2 w-full rounded-md">
