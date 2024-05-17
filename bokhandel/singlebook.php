@@ -329,7 +329,7 @@ $base_url = 'https://api.nytimes.com/svc/books/v3/reviews.json';
 $request_url = $base_url . '?author=' . urlencode($author) . '&api-key=' . $api_key;
 
 $response = file_get_contents($request_url);
-print_r($response);
+//print_r($response);
 
 if ($response !== false) {
     $reviews_data = json_decode($response, true);
