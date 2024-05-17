@@ -178,9 +178,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-2" for="Series">Select Series (or add new):</label>
                     <select id="Series" name="SeriesID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="<?php NULL ?>">Select Series</option>
+                        <option value="">Select Series</option>
                         <?php foreach ($series as $s): ?>
-                            <option value="<?php echo $s['SeriesName']; ?>" <?php echo isset($bookData['SeriesID']) && $s['SeriesName'] == $bookData['SeriesID'] ? 'selected' : ''; ?>>
+                            <option value="<?php echo $s['SeriesName']; ?>" <?php echo isset($_POST['SeriesID']) && $_POST['SeriesID'] == $s['SeriesName'] ? 'selected' : (isset($bookData['SeriesID']) && $bookData['SeriesID'] == $s['SeriesName'] ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($s['SeriesName'], ENT_QUOTES); ?>
                             </option>
                         <?php endforeach; ?> 
