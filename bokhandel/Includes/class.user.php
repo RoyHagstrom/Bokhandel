@@ -73,19 +73,19 @@ class USER
 public function register($username, $email, $password, $role)
 {
     if (empty($username) || empty($email) || empty($password)) {
-        throw new InvalidArgumentException("All fields are required.");
+        return("All fields are required.");
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        throw new InvalidArgumentException("Invalid email format.");
+        return("Invalid email format.");
     }
 
     if (strlen($password) < 8) {
-        throw new InvalidArgumentException("Password must be at least 8 characters long.");
+        return("Password must be at least 8 characters long.");
     }
 
     if (!preg_match('/^[a-zA-Z0-9\s]+$/', $username)) {
-        throw new InvalidArgumentException("Username can only contain letters, numbers and spaces.");
+        return("Username can only contain letters, numbers and spaces.");
     }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -95,7 +95,7 @@ public function register($username, $email, $password, $role)
     );
 
     if (!$stmt) {
-        throw new RuntimeException("Registration failed. Please try again later.");
+        return("Registration failed. Please try again later.");
     }
 
     $stmt->bind_param('ssss', $username, $email, $hashedPassword, $role);
@@ -103,7 +103,7 @@ public function register($username, $email, $password, $role)
     if ($stmt->execute()) {
         return "User registered successfully";
     } else {
-        throw new RuntimeException("Registration failed. Please try again later.");
+        return("Registration failed. Please try again later.");
     }
 }
 
