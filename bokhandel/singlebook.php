@@ -320,32 +320,37 @@ $other_books_result = $conn->query($other_books_sql);
             <h2 class="font-semibold mb-3 text-center text-black sm:text-xl text-lg">Reviews:</h2>
             <div class="mb-4">
             <div class="grid gap-2">
-                <?php
+            <?php
 
 $api_key = 'D2yWK2ObmYWgzoGPJMwwj3bWHbILXvUS';
-$author = $user_bio['Username'];
+$author = $user_bio['Username']; 
 $base_url = 'https://api.nytimes.com/svc/books/v3/reviews.json';
 
 $request_url = $base_url . '?author=' . urlencode($author) . '&api-key=' . $api_key;
 
 $response = file_get_contents($request_url);
+print_r($response);
 
 if ($response !== false) {
     $reviews_data = json_decode($response, true);
 
     if (isset($reviews_data['results'])) {
         print_r($reviews_data);
+
         foreach ($reviews_data['results'] as $review) {
             $book_title = $review['book_title'];
-            $review_snippet = $review['review_snippet'];
+            $review_snippet = $review['review'];
+            echo "Title: $book_title\n";
+            echo "Review: $review_snippet\n\n";
         }
     } else {
-        echo 'No reviews found for author: ' . $author;
+        echo 'No reviews found for author: ' . htmlspecialchars($author);
     }
 } else {
     echo 'Failed to fetch book reviews. Please try again later.';
 }
 ?>
+
             </div>
             </div>
 
