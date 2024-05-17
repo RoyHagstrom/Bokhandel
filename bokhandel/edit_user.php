@@ -98,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <select id="role" name="role" class="border border-gray-400 p-2 w-full rounded-md">
                         <option value="Admin" <?php echo $userInfo['Role'] == 'Admin' ? 'selected' : ''; ?>>Admin</option>
                         <option value="Regular" <?php echo $userInfo['Role'] == 'Regular' ? 'selected' : ''; ?>>Regular</option>
+                        <option value="User" <?php echo $userInfo['Role'] == 'User' ? 'selected' : ''; ?>>User</option>
                     </select>
                 </div>
                 <?php endif ?>
