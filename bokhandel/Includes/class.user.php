@@ -84,8 +84,8 @@ public function register($username, $email, $password, $role)
         throw new InvalidArgumentException("Password must be at least 8 characters long.");
     }
 
-    if (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
-        throw new InvalidArgumentException("Username can only contain letters and numbers.");
+    if (!preg_match('/^[a-zA-Z0-9\s]+$/', $username)) {
+        throw new InvalidArgumentException("Username can only contain letters, numbers and spaces.");
     }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
