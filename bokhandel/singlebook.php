@@ -341,8 +341,8 @@ if ($response !== false) {
         foreach ($reviews_data['results'] as $review) {
             $book_title = $review['book_title'];
             $review_summary = !empty($review['summary']) ? $review['summary'] : "No summary available.";
-            echo "Title: $book_title\n";
-            echo "Review: $review_summary\n\n";
+            echo "Title: $book_title . '<br>'";
+            echo "Review: $review_summary . '<br><br>'";
         }
     } else {
         echo 'No reviews found for author: ' . htmlspecialchars($author);
