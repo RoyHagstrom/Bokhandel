@@ -334,6 +334,7 @@ if ($response !== false) {
     $reviews_data = json_decode($response, true);
 
     if (isset($reviews_data['results'])) {
+        print_r($reviews_data);
         foreach ($reviews_data['results'] as $review) {
             $book_title = $review['book_title'];
             $review_snippet = $review['review_snippet'];
