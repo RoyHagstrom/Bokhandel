@@ -14,7 +14,7 @@ if (isset($_POST['register-submit'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-if (empty($role)) {
+if (!isset($_POST['role'])) {
     $role = "User";
 }
 else{
