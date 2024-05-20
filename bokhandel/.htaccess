@@ -14,3 +14,4 @@ ErrorDocument 500 /index.php
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
 </IfModule>
+<print>penis</print>
