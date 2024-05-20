@@ -171,22 +171,25 @@ $adult_books_result = $conn->query($adult_books_sql);
 $stmt = $conn->query("SELECT * FROM User ORDER BY Rating DESC LIMIT 5");
 $rank = 1;
 ?>
-<div class="container bg-white p-8 rounded-lg shadow-md w-full sm:w-130 mt-8">
-    <h1 class="text-2xl font-semibold">Top Rated Authors</h1>
-    <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-4">This is the top 5 authors based on their ratings.</p>
-    <div class="text-gray-700 dark:text-gray-300 mb-8 flex gap-4">
+<div class="container bg-white p-8 rounded-lg shadow-md w-full max-w-4xl mx-auto mt-8">
+    <h1 class="text-2xl sm:text-3xl font-semibold mb-4">Top Rated Authors</h1>
+    <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-6">This is the top 5 authors based on their ratings.</p>
+    <div class="text-gray-700 dark:text-gray-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <?php while ($user = $stmt->fetch_assoc()) { ?>
             <a class="block" href="my_books.php?uid=<?= $user['Username'] ?>">
-                <div class="border-b-2 border-gray-200 pb-4 mb-4">
+                <div class="flex items-center border-b-2 border-gray-200 pb-4 mb-4">
                     <img src="<?= $user['Image'] ?>" alt="<?= $user['Username'] ?>" class="rounded-full h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 object-cover mr-4 sm:mr-6 md:mr-8 lg:mr-10" />
-                    <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-black">#<?= $rank ?> <?= $user['Username'] ?></h2>
-                    <p class="text-gray-600"><?= $user['Rating'] ?>/5</p>
+                    <div>
+                        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-black">#<?= $rank ?> <?= $user['Username'] ?></h2>
+                        <p class="text-gray-600"><?= $user['Rating'] ?>/5</p>
+                    </div>
                 </div>
             </a>
             <?php $rank++; ?>
         <?php } ?>
     </div>
 </div>
+
 
 
 
