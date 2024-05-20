@@ -171,7 +171,7 @@ $adult_books_result = $conn->query($adult_books_sql);
 $stmt = $conn->query("SELECT * FROM User ORDER BY Rating DESC LIMIT 5");
 $rank = 1;
 ?>
-<div class="container bg-white p-8 rounded-lg shadow-md w-full max-w-6xl mx-auto mt-8">
+<div class="container bg-white p-8 rounded-lg shadow-md w-full mx-auto mt-8">
     <h1 class="text-2xl sm:text-3xl font-semibold mb-4">Top Rated Authors</h1>
     <p class="leading-relaxed text-sm sm:text-base lg:text-lg mb-6">This is the top 5 authors based on their ratings.</p>
     <div class="text-gray-700 dark:text-gray-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
