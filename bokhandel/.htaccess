@@ -3,10 +3,6 @@ RewriteEngine On
 RewriteCond %{THE_REQUEST} \s/index\.php[\s?] [NC]
 RewriteRule ^ / [L,R=301]
 
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^/]+)/?$ $1.php [NC,L]
-
 ErrorDocument 404 /index.php
 ErrorDocument 403 /index.php
 ErrorDocument 500 /index.php
